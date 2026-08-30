@@ -2,7 +2,7 @@
 
 <img src="./docs/logo.png" alt="Munder Difflin — agent harness to run an office of your clones" width="180">
 
-# Munder Difflin
+# Multiharness Yonetim
 
 ### Agent harness to run an office of your clones
 
@@ -84,7 +84,7 @@ world** so every agent remembers what it learns and recalls it instantly.
 - **Every agent is an avatar.** Sessions appear as characters on a Pixi.js office floor — they walk
   to stations as they work, and envelopes fly desk-to-desk when they message each other.
 - **The hive coordinates them.** Agents read their memory and drain a mailbox; the router moves
-  messages between inboxes; the BOSS agent adjudicates, assigns, and escalates only when it needs you.
+  messages between inboxes; the manager agent adjudicates, assigns, and escalates only when it needs you.
 - **Memory that's instant.** A markdown-first memory layer with a semantic recall index means agents
   remember across sessions and recall in milliseconds.
 
@@ -92,7 +92,7 @@ world** so every agent remembers what it learns and recalls it instantly.
 
 ```
             you ── talk to ──►  ┌─────────────┐
-                                │  BOSS agent  │  orchestrator / supervisor
+                                │  manager agent  │  orchestrator / supervisor
                                 │ (Michael's  │  roster · routing · adjudication
                                 │   office)   │  blackboard · task ledger
                                 └──────┬──────┘
@@ -112,7 +112,7 @@ world** so every agent remembers what it learns and recalls it instantly.
 2. **Agents collaborate through the hive** — a local git repo of plain files. They write to their own
    `outbox/`; the harness's router delivers into recipients' `inbox/`. No agent ever touches git
    (single-committer design avoids `index.lock` corruption).
-3. **The BOSS agent runs the floor** — it reads every request, resolves routine ones itself (keeping
+3. **The manager agent runs the floor** — it reads every request, resolves routine ones itself (keeping
    the system fully autonomous), and only escalates *critical* items (spend, destructive ops, scope
    changes) into an approvals queue you act on.
 4. **Everything is visible** — you watch avatars move, envelopes fly, and the live terminal stream;
@@ -126,7 +126,7 @@ terminal/event plane, and [`DESIGN.md`](./DESIGN.md) for the visual system.
 **The floor**
 - **Every terminal is a real agent.** Claude Code, Antigravity (Gemini), OpenAI Codex, xAI Grok, Kimi Code, Gemini CLI, Qwen, OpenCode, Crush, pi.dev, GitHub Copilot CLI, Cursor, or a custom command — each in its own `node-pty` PTY, rendered with xterm.js.
 - **Every agent is an avatar.** A Pixi.js office floor where agents walk to stations, envelopes fly desk to desk, and avatar state reflects real work.
-- **A BOSS orchestrator you talk to.** It routes tasks, adjudicates traffic, and escalates only what needs a human. Or press **Talk** and run the floor by voice.
+- **A manager orchestrator you talk to.** It routes tasks, adjudicates traffic, and escalates only what needs a human. Or press **Talk** and run the floor by voice.
 - **Per-agent git worktrees.** Optional isolation so parallel agents never collide on branches.
 
 **Memory & coordination**
@@ -208,7 +208,7 @@ npm run dev        # launches the Electron app with hot reload
 ```
 
 On first launch you'll go through the onboarding wizard, then land on the floor. Use **Add agent** to
-spawn your first session — the BOSS agent seats itself in Michael's office automatically.
+spawn your first session — the manager agent seats itself in Michael's office automatically.
 
 ### Other scripts
 
@@ -238,7 +238,7 @@ Two data planes feed one renderer:
        ┌──────┴──────────┐        ┌──────┴─────────────┐
        │  Event Plane    │        │  Terminal Plane    │
        │  hooks / hive   │        │  node-pty PTYs     │
-       │  router + BOSS   │        │  + fs + git        │
+       │  router + manager   │        │  + fs + git        │
        └────────▲────────┘        └──────▲─────────────┘
                 │ hook payloads          │ stdin / stdout
                 └─────────┬──────────────┘
@@ -254,7 +254,7 @@ Two data planes feed one renderer:
 - **Hive / event plane.** `hive.ts` is the on-disk multi-agent layer; `hooks.ts` runs the hook
   server that provider bridges POST lifecycle payloads to (`cth-hook` for Claude Code, `agy-hook`
   for Antigravity). `memory.ts` wraps the semantic memory CLI. The router delivers messages, drains
-  provider outboxes, the BOSS agent adjudicates, and idle/inbox wakeups keep workers draining mail.
+  provider outboxes, the manager agent adjudicates, and idle/inbox wakeups keep workers draining mail.
 
 ## Project structure
 
