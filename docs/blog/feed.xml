@@ -181,7 +181,7 @@
     <id>https://munderdiffl.in/blog/how-to-talk-to-your-orchestrator/</id>
     <published>2026-07-03T00:00:00.000Z</published>
     <updated>2026-07-03T00:00:00.000Z</updated><category term="Guides" />
-    <summary>A practical guide to briefing Munder Difflin&#39;s GOD orchestrator: state the goal not the steps, set constraints and budgets, name the deliverable, and let Michael staff the floor. With bad-vs-good brief examples, mid-run steering, and Talk mode.</summary>
+    <summary>A practical guide to briefing Munder Difflin&#39;s BOSS orchestrator: state the goal not the steps, set constraints and budgets, name the deliverable, and let Michael staff the floor. With bad-vs-good brief examples, mid-run steering, and Talk mode.</summary>
   </entry>
   <entry>
     <title>How to Use the Built-in Monaco IDE</title>
@@ -277,7 +277,7 @@
     <id>https://munderdiffl.in/blog/launching-munder-difflin-v0-3-2/</id>
     <published>2026-06-27T00:00:00.000Z</published>
     <updated>2026-06-27T00:00:00.000Z</updated><category term="Story" />
-    <summary>Munder Difflin v0.3.2 adds Realtime Michael — a low-latency voice channel to the GOD orchestrator. Talk to Michael and he listens, answers, and acts: reading the hive and, behind spoken echo-back confirmation, dispatching, spawning, and steering the floor in real time.</summary>
+    <summary>Munder Difflin v0.3.2 adds Realtime Michael — a low-latency voice channel to the BOSS orchestrator. Talk to Michael and he listens, answers, and acts: reading the hive and, behind spoken echo-back confirmation, dispatching, spawning, and steering the floor in real time.</summary>
   </entry>
   <entry>
     <title>Run Munder Difflin Locally on a Mac Mini</title>
@@ -301,7 +301,7 @@
     <id>https://munderdiffl.in/blog/launching-munder-difflin-v0-3-0/</id>
     <published>2026-06-21T00:00:00.000Z</published>
     <updated>2026-06-21T00:00:00.000Z</updated><category term="Story" />
-    <summary>Munder Difflin v0.3.0 makes every hire — and Michael himself — a pluggable engine, adds an integrations registry with a write-only secret broker, and lets the god orchestrator spawn an ephemeral worker straight from Slack.</summary>
+    <summary>Munder Difflin v0.3.0 makes every hire — and Michael himself — a pluggable engine, adds an integrations registry with a write-only secret broker, and lets the boss orchestrator spawn an ephemeral worker straight from Slack.</summary>
   </entry>
   <entry>
     <title>Treating a Hire Manifest as Untrusted Input</title>
@@ -365,7 +365,7 @@
     <id>https://munderdiffl.in/blog/trigger-ai-agents-from-github-webhook/</id>
     <published>2026-06-10T00:00:00.000Z</published>
     <updated>2026-06-10T00:00:00.000Z</updated><category term="Guides" />
-    <summary>Wire a GitHub webhook to Munder Difflin: a secret-gated local endpoint turns each repo event into a task for your GOD orchestrator — POST a message, get a token, poll the result. No server to host.</summary>
+    <summary>Wire a GitHub webhook to Munder Difflin: a secret-gated local endpoint turns each repo event into a task for your BOSS orchestrator — POST a message, get a token, poll the result. No server to host.</summary>
   </entry>
   <entry>
     <title>Why CLI Agents Are So Powerful — and How Munder Difflin Spends Fewer Tokens Doing the Same Work</title>
@@ -381,7 +381,7 @@
     <id>https://munderdiffl.in/blog/launching-munder-difflin-v0-2-4/</id>
     <published>2026-06-09T00:00:00.000Z</published>
     <updated>2026-06-09T00:00:00.000Z</updated><category term="Story" />
-    <summary>Munder Difflin v0.2.4 is here: Claude Code, OpenAI Codex, and Antigravity (Gemini) agents now run as one hive with full parity — no API keys, no setup. Brief a GOD orchestrator, automate basically anything in one prompt, and close the lid while it keeps working.</summary>
+    <summary>Munder Difflin v0.2.4 is here: Claude Code, OpenAI Codex, and Antigravity (Gemini) agents now run as one hive with full parity — no API keys, no setup. Brief a BOSS orchestrator, automate basically anything in one prompt, and close the lid while it keeps working.</summary>
   </entry>
   <entry>
     <title>Munder Difflin v0.2.4 Feature Walkthrough</title>
@@ -405,7 +405,7 @@
     <id>https://munderdiffl.in/blog/one-prompt-automated-pr-review/</id>
     <published>2026-06-07T00:00:00.000Z</published>
     <updated>2026-06-07T00:00:00.000Z</updated><category term="Story" />
-    <summary>How a single prompt to the Munder Difflin god agent reviewed all open PRs and set up a recurring hourly PR reviewer — while the repo was blowing up with 400+ stars.</summary>
+    <summary>How a single prompt to the Munder Difflin boss agent reviewed all open PRs and set up a recurring hourly PR reviewer — while the repo was blowing up with 400+ stars.</summary>
   </entry>
   <entry>
     <title>Does the June 2026 Agent SDK Change Affect Munder Difflin?</title>

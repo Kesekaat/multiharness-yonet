@@ -143,7 +143,7 @@ isn't cheap on that measure at all.
 ## How Munder Difflin is built around this
 
 This isn't just a thesis — it's the architecture of the product. [Munder Difflin](https://munderdiffl.in)
-runs a virtual office where a [god orchestrator](/blog/how-the-god-orchestrator-works/) decomposes your
+runs a virtual office where a [boss orchestrator](/blog/how-the-boss-orchestrator-works/) decomposes your
 intent and delegates to Office-themed worker agents of *varying* capability. The cheap workers handle the
 routine; the orchestrator and any escalated workers handle the hard reasoning — [per-agent model
 selection](/blog/the-multi-agent-cost-playbook/) is a real setting, not advice. A shared board, inboxes,

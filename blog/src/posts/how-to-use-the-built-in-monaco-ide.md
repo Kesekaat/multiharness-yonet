@@ -19,14 +19,14 @@ faq:
   - q: "Can I edit files in the built-in IDE, not just read diffs?"
     a: "Yes. The left rail also has the workspace file tree — clicking a file there opens it in a real editable Monaco tab. Tabs show a dirty-state dot when you have unsaved edits, and Cmd/Ctrl+S saves the active tab. Saves are hardened so keystrokes typed while a save is still writing are never silently dropped."
   - q: "Which folder does the IDE open — how is the workspace root chosen?"
-    a: "The workspace root snapshots from an agent's working directory when the overlay opens: the selected agent's cwd if one is selected, otherwise the GOD agent's, otherwise the first agent's. So selecting the agent whose work you want to review before clicking IDE puts you in the right repo."
+    a: "The workspace root snapshots from an agent's working directory when the overlay opens: the selected agent's cwd if one is selected, otherwise the BOSS agent's, otherwise the first agent's. So selecting the agent whose work you want to review before clicking IDE puts you in the right repo."
   - q: "Does Monaco load from a CDN? Does the renderer touch my disk?"
     a: "No and no. Monaco — the same editor engine VS Code uses — is fully self-hosted and bundled with the app, with no CDN involved, so it works offline. And the renderer holds no filesystem or git access at all: every read, write, and diff is brokered through main-process IPC via the preload bridge."
   - q: "Why build an IDE into an agent harness instead of using VS Code?"
     a: "Because the review loop is faster when it lives where the agents live. An agent finishes, you click IDE, read the side-by-side diff vs HEAD, fix small things in place, and go approve — no context switch to another app, no hunting for the right worktree. For heavy editing sessions your regular editor is still there; the built-in IDE is optimized for reviewing agent output."
 ---
 
-<div class="callout tldr"><span class="ic">TL;DR</span><p>Munder Difflin v0.3.3 ships a <strong>built-in Monaco IDE</strong> — the VS&nbsp;Code editor engine, fully self-hosted, no CDN. A title-bar <strong>IDE</strong> button toggles a full-window overlay above the office floor: a <strong>git CHANGES rail</strong> where clicking a file opens a <strong>side-by-side diff vs HEAD</strong>, a workspace <strong>file tree</strong>, <strong>editor tabs with dirty-state dots</strong>, and <strong>Cmd/Ctrl+S</strong> save. The workspace root snapshots from the <strong>selected → god → first agent's cwd</strong>, and <strong>all fs/git access goes through main-process IPC</strong> — the renderer never touches disk. The point: <em>agent finishes → open IDE → read the diff → tweak → approve</em>, without leaving the app.</p></div>
+<div class="callout tldr"><span class="ic">TL;DR</span><p>Munder Difflin v0.3.3 ships a <strong>built-in Monaco IDE</strong> — the VS&nbsp;Code editor engine, fully self-hosted, no CDN. A title-bar <strong>IDE</strong> button toggles a full-window overlay above the office floor: a <strong>git CHANGES rail</strong> where clicking a file opens a <strong>side-by-side diff vs HEAD</strong>, a workspace <strong>file tree</strong>, <strong>editor tabs with dirty-state dots</strong>, and <strong>Cmd/Ctrl+S</strong> save. The workspace root snapshots from the <strong>selected → boss → first agent's cwd</strong>, and <strong>all fs/git access goes through main-process IPC</strong> — the renderer never touches disk. The point: <em>agent finishes → open IDE → read the diff → tweak → approve</em>, without leaving the app.</p></div>
 
 You hired a floor of agents, one of them just announced it's done, and now comes the part that actually matters: **reading what it changed before you bless it.** Until v0.3.3, that meant alt-tabbing to your editor, finding the right directory, and running `git diff` by hand. Now the review surface is built in. This is a practical walkthrough of the Monaco IDE that shipped in [v0.3.3](/blog/launching-munder-difflin-v0-3-3/) — what each piece does and the workflow it's designed around.
 
@@ -57,7 +57,7 @@ One hardening detail worth knowing because it's the kind of thing that silently 
 The IDE has to pick a repo to show, and it snapshots the workspace root from an agent's working directory when the overlay opens, in this order:
 
 1. the **selected agent's** cwd, if you have one selected;
-2. otherwise the **GOD agent's** cwd;
+2. otherwise the **BOSS agent's** cwd;
 3. otherwise the **first agent's** cwd.
 
 Practical consequence: **select the agent whose work you want to review, then click IDE.** That drops you straight into its directory — which matters on a floor where [each agent can run in its own isolated git worktree](/blog/claude-code-git-worktrees-vs-hive/), so "the repo" isn't one place.

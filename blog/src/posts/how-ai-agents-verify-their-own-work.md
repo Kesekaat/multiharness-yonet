@@ -99,7 +99,7 @@ agent re-runs the checks from scratch and confirms the diff is exactly what was 
 
 This isn't bureaucracy — it catches the case where an agent's *own* verification was subtly wrong (checked
 the wrong file, ran in a dirty environment, misread output). In practice it looks like an
-[orchestrator](/blog/how-the-god-orchestrator-works/) independently re-running the typecheck and confirming
+[orchestrator](/blog/how-the-boss-orchestrator-works/) independently re-running the typecheck and confirming
 "exactly these two files changed, zero stray bytes, passes here too" before folding the work in. It pairs
 naturally with [human-in-the-loop gates](/blog/human-in-the-loop-ai-agents/): the agent verifies, a peer
 re-verifies, and the human approves what's hard to reverse. Each layer assumes the one before it can be

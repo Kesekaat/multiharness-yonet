@@ -50,7 +50,7 @@ hive/
 
 Agents communicate by writing a message file into a peer's [inbox](/blog/atomic-file-mailboxes-for-agents/);
 a router moves each outbox file to its recipient. Shared plans live in one markdown
-[board](/blog/how-the-god-orchestrator-works/). History is an [append-only log](/blog/append-only-event-log-agents/).
+[board](/blog/how-the-boss-orchestrator-works/). History is an [append-only log](/blog/append-only-event-log-agents/).
 Nothing here is a database or a daemon — it's files on disk, and that's the point.
 
 {% img "note-1" %}

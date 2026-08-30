@@ -68,7 +68,7 @@ re-implemented rather than merged:
 - [#248](https://github.com/chaitanyagiri/munder-difflin/pull/248) [@djbiz](https://github.com/djbiz): a floor rebuild that cannot get a WebGL context retries instead of failing
 - [#270](https://github.com/chaitanyagiri/munder-difflin/pull/270) [@BUGHUNTER-SACHIN](https://github.com/BUGHUNTER-SACHIN): /compact is not enqueued for an undeliverable agent
 - [#271](https://github.com/chaitanyagiri/munder-difflin/pull/271) [@HsienW](https://github.com/HsienW): a typed hook-event payload contract
-- [#282](https://github.com/chaitanyagiri/munder-difflin/pull/282) [@savvaskoualis](https://github.com/savvaskoualis): a renamed god identity no longer reverts to "Michael"
+- [#282](https://github.com/chaitanyagiri/munder-difflin/pull/282) [@savvaskoualis](https://github.com/savvaskoualis): a renamed boss identity no longer reverts to "Michael"
 - [#284](https://github.com/chaitanyagiri/munder-difflin/pull/284) [@HundredBillion](https://github.com/HundredBillion): the Settings save button moves into the modal footer
 - [#286](https://github.com/chaitanyagiri/munder-difflin/pull/286) [@HundredBillion](https://github.com/HundredBillion): every config write is announced so Settings stops going stale
 - [#310](https://github.com/chaitanyagiri/munder-difflin/pull/310) [@LavaDMan](https://github.com/LavaDMan): the hive-hook-node test no longer races its own stdin write
@@ -157,7 +157,7 @@ All 23 of these community pull requests landed in this release:
 - [#175](https://github.com/chaitanyagiri/munder-difflin/pull/175) [@rekcilyssup](https://github.com/rekcilyssup): a main-process watchdog wakes an idle worker sitting on an undrained inbox
 - [#176](https://github.com/chaitanyagiri/munder-difflin/pull/176) [@FenjuFu](https://github.com/FenjuFu): Gemini CLI joins the engine list
 - [#177](https://github.com/chaitanyagiri/munder-difflin/pull/177) [@TTAWDTT](https://github.com/TTAWDTT): each agent's live context-window occupancy shows in the roster
-- [#178](https://github.com/chaitanyagiri/munder-difflin/pull/178) [@gpechieu](https://github.com/gpechieu): a god-hired worker gets a floor card, and it archives when the worker dies
+- [#178](https://github.com/chaitanyagiri/munder-difflin/pull/178) [@gpechieu](https://github.com/gpechieu): a boss-hired worker gets a floor card, and it archives when the worker dies
 - [#179](https://github.com/chaitanyagiri/munder-difflin/pull/179) [@kdahal7](https://github.com/kdahal7): `statAbs` expands `~`, so a path resolves the same way on every platform
 - [#181](https://github.com/chaitanyagiri/munder-difflin/pull/181) [@TTAWDTT](https://github.com/TTAWDTT): webhook dispatch goes through an atomic add, so a stale ledger cannot overwrite it
 - [#184](https://github.com/chaitanyagiri/munder-difflin/pull/184) [@TTAWDTT](https://github.com/TTAWDTT): the per-agent steer queue is capped, which bounds memory on a stalled agent
@@ -314,11 +314,11 @@ fork never sends events anywhere.
 
 **The app says what the site says.**
 munderdiffl.in describes Munder Difflin as a clone of you that works around the clock; the app
-still called it a "GOD agent." This release closes that gap. Wording only — no behaviour changes.
+still called it a "BOSS agent." This release closes that gap. Wording only — no behaviour changes.
 
 ### Changed
 - **Michael is your clone.** Onboarding refers to him as your clone throughout, and his card on
-  the floor now carries a **BOSS** tag instead of **GOD** — he's the boss of the agents, you're
+  the floor now carries a **BOSS** tag instead of **BOSS** — he's the boss of the agents, you're
   still the boss of him.
 - **Onboarding leads with the product, not the feature list.** The first screen opens on "a clone
   of you, working 24/7"; step 2 is "your clone's engine."
@@ -332,7 +332,7 @@ still called it a "GOD agent." This release closes that gap. Wording only — no
   reported v0.3.8.
 
 ### Note
-The `god` agent id, the hive folder layout, and message routing are **unchanged**. Existing hives,
+The `boss` agent id, the hive folder layout, and message routing are **unchanged**. Existing hives,
 memory, and running agents carry over as-is; there is nothing to migrate.
 
 ## [0.4.0] — 2026-08-12
@@ -516,7 +516,7 @@ long-standing office bug where the floor went blank and never came back.
   contexts and silently evicts the oldest — always the office, since it starts first,
   once enough agent terminals are open. Pixi reported nothing, so the floor simply went
   blank until you restarted the app. It now detects the loss and rebuilds the scene.
-- **God no longer messages agents that no longer exist.** A live roster of the floor is
+- **Boss no longer messages agents that no longer exist.** A live roster of the floor is
   pushed into the orchestrator's context on session start and on every prompt, instead of
   relying on it to re-read `fleet.json` — which is why it went stale across restarts.
 
@@ -586,7 +586,7 @@ auto-compact switch (default off)**.
   in this version?" finally has an answer). New voice verbs behind the same safety spine:
   **resume** (the missing undo for pause/halt), auto-delivery pause/resume, tool gating,
   delete task, archive/unarchive, **clear an agent's context** (queued through every
-  delivery gate; allowed on god behind confirm), **create schedules**, and **change
+  delivery gate; allowed on boss behind confirm), **create schedules**, and **change
   settings** from a strict main-side allowlist (secrets and dangerous keys refused
   outright; behavior-changing keys echo old→new and require the distinct confirm word).
   Model bumped to gpt-realtime-2.1.
@@ -622,13 +622,13 @@ auto-compact switch (default off)**.
   delivery, and operator gates all work. `grok [PROMPT]` takes the protocol positionally and
   `--resume` continues a session. *(gts-47)*
 - **Kimi Code engine** (`kimi`) — spawn Kimi workers with `--auto` autonomy and the K3/K2.7 model
-  aliases. No hook bridge yet, so routed mail bounces to the god rather than silently dropping. *(gts-47)*
+  aliases. No hook bridge yet, so routed mail bounces to the boss rather than silently dropping. *(gts-47)*
 - **Scheduled auto-compact switch — default OFF.** The dedicated compact-maintenance schedule (v0.3.2)
   now ships disabled: scheduled `/compact` is opt-in. Flip it in Settings → General → **Scheduled
   auto-compact** or the Schedules tab (which keeps its interval picker and its warning when off).
   Existing installs keep whatever state they already chose. Scheduled compaction is now also
   **provider-aware** — each engine gets its own compact command instead of Claude's only. *(founder decision + gts-47)*
-- **Fullscreen agent roster rail.** The horizontal tab bar ran out of room past a handful of agents and hid the operator controls; it's replaced by a left rail — `+ agent` pinned at the top, god agents ungrouped above everything, workers bucketed under repository headers, restore-team and its dismiss chips pinned at the bottom. An isolated agent's cwd is its own git worktree, so a new `mainRepoRoot` helper follows a linked worktree back to its main checkout (cached per cwd) and groups key on the absolute repo root, so two checkouts with the same name stay separate. Notes render on the row (one line per bullet) instead of behind a hover popover, the note editor becomes a textarea so Enter makes a new bullet instead of dropping every bullet but the first, pause/halt/steer come back in fullscreen, god agents render the full Command Center, and drag-to-reorder carries over (confined to an agent's own repository group). The destructive kill button is gone.
+- **Fullscreen agent roster rail.** The horizontal tab bar ran out of room past a handful of agents and hid the operator controls; it's replaced by a left rail — `+ agent` pinned at the top, boss agents ungrouped above everything, workers bucketed under repository headers, restore-team and its dismiss chips pinned at the bottom. An isolated agent's cwd is its own git worktree, so a new `mainRepoRoot` helper follows a linked worktree back to its main checkout (cached per cwd) and groups key on the absolute repo root, so two checkouts with the same name stay separate. Notes render on the row (one line per bullet) instead of behind a hover popover, the note editor becomes a textarea so Enter makes a new bullet instead of dropping every bullet but the first, pause/halt/steer come back in fullscreen, boss agents render the full Command Center, and drag-to-reorder carries over (confined to an agent's own repository group). The destructive kill button is gone.
 - **`typing` badge — see why a queue is held.** A message queue held by your own unsent text on an agent's prompt used to look identical to an idle agent with nothing to do. Agent cards and the fullscreen roster now show a **"your draft"** badge whenever you have unsubmitted text on that agent's prompt. It's derived at render from the same check the delivery gate uses, so the badge can never disagree with the reason nothing is being delivered.
 - **[`docs/message-queue.md`](./docs/message-queue.md)** — the delivery contract: who may type into an agent's terminal, when, and what automation is never allowed to do to your text.
 - **Remote Control sessions are named after the agent** ([#81](https://github.com/chaitanyagiri/munder-difflin/pull/81)). claude.ai / the mobile app now shows "Michael", "Jim", … instead of `<hostname>-<random>`, so a floor full of RC sessions is finally tellable-apart. *(gts-47)*
@@ -675,7 +675,7 @@ agent engine, the project's **first community-contributed provider**
   untouched). Left rail: a **git CHANGES list** (click a file → read-only **side-by-side diff vs
   HEAD**) plus the reused workspace **file tree** (click → edit). Right: **editor tabs** with
   dirty-state dots, save, and close; **Cmd/Ctrl+S** saves the active tab. The workspace root
-  snapshots from the selected/god/first agent cwd. Monaco is **fully self-hosted** —
+  snapshots from the selected/boss/first agent cwd. Monaco is **fully self-hosted** —
   electron-vite-safe bootstrap with bundled `?worker` imports and `loader.config({ monaco })`, no
   CDN — themed to the harness's light palette, and **all fs/git access goes through main-process
   IPC** (`git:diff` + preload bridge; the renderer holds no fs/git access)
@@ -688,7 +688,7 @@ agent engine, the project's **first community-contributed provider**
   continuity (best-effort), voice-hire (`spawn`) support, binary inference for pasted commands, and
   the official `npm install -g @github/copilot` offered by the missing-CLI installer. Non-hiveAware
   by design: print mode exits per turn and exposes no hook bridge, so `canReceiveInbox` is `false`
-  and routed mail bounces to the GOD orchestrator instead of silently dropping
+  and routed mail bounces to the BOSS orchestrator instead of silently dropping
   (`src/shared/agentProvider.ts`, PR #101 — thanks [@anxkhn](https://github.com/anxkhn)).
 - **Agent-provider registry test.** A self-contained, framework-free test
   (`node test/agent-provider.test.cjs`) transpiles the shared registry and asserts provider
@@ -701,11 +701,11 @@ agent engine, the project's **first community-contributed provider**
 ## [0.3.2] — 2026-06-27
 
 **Talk to Michael.** The headline is **Realtime Michael** — a low-latency **voice channel to the
-GOD orchestrator**, running alongside the async terminal floor. Press **Talk**, and Michael listens,
+BOSS orchestrator**, running alongside the async terminal floor. Press **Talk**, and Michael listens,
 answers, and *acts* in real time: he reads the hive (tasks, board, memory, agents, activity) and —
 behind spoken **echo-back confirmation** for anything destructive — creates and assigns work,
 dispatches agents, spawns and kills workers, and steers the floor, all attributed to a distinct
-**michael-voice** actor that pings the GOD terminal. He greets you on connect, **speaks task
+**michael-voice** actor that pings the BOSS terminal. He greets you on connect, **speaks task
 completions the moment they land** ("respond when done"), and runs under a live cost meter with a
 hard spend cap and an idle auto-disconnect. It's **bring-your-own OpenAI key**: the key is decrypted
 **main-only**, minted into short-lived ephemeral session tokens, and never reaches the renderer. Plus
@@ -720,7 +720,7 @@ metadata**.
 > access**; without one the **Talk** button stays visibly disabled with a "needs OpenAI key" cue.
 
 ### Added
-- **Realtime Michael — talk to the GOD orchestrator by voice.** A new low-latency realtime channel
+- **Realtime Michael — talk to the BOSS orchestrator by voice.** A new low-latency realtime channel
   (OpenAI Realtime API over WebRTC) sits next to the async terminal. A **Talk** toggle (on Michael's
   card and in any fullscreen terminal) opens a mic session with EC/NS/AGC, semantic-VAD turn-taking +
   barge-in, and a device picker for both microphone and speaker. Michael runs his own persona and
@@ -735,7 +735,7 @@ metadata**.
   tools (tasks / board / memory / agents / activity / cost) plus the full action set: create and
   assign tasks, dispatch agents, pause / steer / halt, spawn / hire, kill, and edit schedules. Every
   **destructive** verb is gated behind a spoken **echo-back confirmation** (a distinct confirm token,
-  never a bare "yes"), with hard refusals for killing the GOD agent or targeting all agents at once
+  never a bare "yes"), with hard refusals for killing the BOSS agent or targeting all agents at once
   (`src/renderer/src/realtime/actions.ts`, `src/main/realtimeActions.ts`).
 - **"Respond when done" completion loop.** Voice-dispatched work reports back on its own: a
   main-process completion watcher detects when a dispatched task finishes (card → done or a done
@@ -745,7 +745,7 @@ metadata**.
   tool covers the block-until-done case (`src/main/realtimeCompletionWatcher.ts`,
   `CompletionToast.tsx`).
 - **michael-voice as a distinct actor.** Actions taken by voice are attributed to a separate
-  **michael-voice** identity in messages, the board, and the activity log, and notify the GOD PTY —
+  **michael-voice** identity in messages, the board, and the activity log, and notify the BOSS PTY —
   so a voice-driven dispatch is auditable and never silently impersonates a worker.
 - **Cost guard + idle auto-disconnect for voice sessions.** A live session cost HUD by the Talk
   toggle, a configurable **spend cap** that auto-disconnects when hit, and a configurable **idle
@@ -786,7 +786,7 @@ metadata**.
 
 ### Changed
 - **"Voice" is now "Talk".** The voice feature is renamed **Talk** throughout, with a redesigned
-  navigation: the GOD card pops with a dedicated **Talk** line, and the worker nav cards are
+  navigation: the BOSS card pops with a dedicated **Talk** line, and the worker nav cards are
   compacted to make room (`src/renderer/src/components/*`).
 - **Robust voice task-matching (findCard).** Resolving a task by voice is now tolerant of
   hyphens/punctuation, phrasing, and truncation: both the spoken phrase and the stored title are
@@ -808,7 +808,7 @@ metadata**.
   **main-only**; the renderer only ever sees a **short-lived ephemeral client secret** minted per
   session. The key never crosses IPC and is never logged. The voice read-layer reports **tokens, not
   dollars** (de-monetized chrome), and every destructive voice action is held behind spoken echo-back
-  confirmation with hard refusals for killing the GOD agent or targeting all agents at once.
+  confirmation with hard refusals for killing the BOSS agent or targeting all agents at once.
 - **Slack: proactive posting off by default + explicit-thread guard.** App/voice Slack sends are now
   **off by default** behind a config flag + Settings toggle, and a request with no explicit
   channel+thread is **refused** rather than guessed — closing an unattended-broadcast path
@@ -820,7 +820,7 @@ Three more coding CLIs join the floor — **OpenCode**, **Crush**, and **pi.dev*
 worker *and* as Michael, with **bring-your-own keys + local LLMs**. Plus two reliability fixes: the
 sleep-frozen message router and Codex workers' filesystem permissions.
 
-> **Live verification note.** The three engines are wired end-to-end and selectable as god, and
+> **Live verification note.** The three engines are wired end-to-end and selectable as boss, and
 > their architecture (preset + bridge + payload contract) was reviewed line-by-line. Their bridges'
 > *runtime* behavior needs real model calls, so the following are **on-device checks pending BYOK
 > keys / a local LLM** (not runtime-proven here):
@@ -828,18 +828,18 @@ sleep-frozen message router and Codex workers' filesystem permissions.
 >    Crush's proxy-synthesized `Stop` — flipping the agent to *idle*;
 > 2. **OpenCode local-LLM** happy path: pick `local/<id>` with a base-URL set and confirm a turn
 >    completes (the injected config now registers the *selected* model id);
-> 3. **Crush** routes through the proxy on an OpenAI-wire model (the default god is now
+> 3. **Crush** routes through the proxy on an OpenAI-wire model (the default boss is now
 >    `openai/gpt-4o`) and Crush honors the partial `base_url` override;
 > 4. the **auto-mode gate** holds (no `permission:allow` / `--yolo` when the floor toggle is off).
 >
 > Crucially, mail delivery does **not** depend on those signals: a new **provider-agnostic
 > PTY-quiescence idle fallback** flips any silent-but-pinned-`working` agent to idle, so the
-> provider-agnostic idle inbox-wake nudge drains a god even if a bridge's turn-end signal never
+> provider-agnostic idle inbox-wake nudge drains a boss even if a bridge's turn-end signal never
 > fires. That backstop is the safety net under shipping all three as `canReceiveInbox:true`.
 
 ### Added
 - **Three new selectable engines: OpenCode · Crush · pi.dev.** Each lands as a declarative
-  `AgentProviderPreset` and appears automatically in the Add-Agent picker (worker) and the god
+  `AgentProviderPreset` and appears automatically in the Add-Agent picker (worker) and the boss
   engine picker (orchestrator). Each gets a **bridge** for live status + turn-end inbox-drain:
 
   | Engine | Identity | Bridge | Notes |
@@ -857,14 +857,14 @@ sleep-frozen message router and Codex workers' filesystem permissions.
   unsandboxed in auto mode (surfaced as a caveat).
 - **Provider-agnostic idle backstop (PTY-quiescence fallback).** A floor-wide check flips any agent
   pinned `working` with no terminal output for a short window back to *idle* — so the idle
-  inbox-wake nudge can always drain a non-Claude god even if its bridge's turn-end signal (Stop /
+  inbox-wake nudge can always drain a non-Claude boss even if its bridge's turn-end signal (Stop /
   `session.idle` / `agent_end`) never fires. This is the safety net under shipping all three engines
-  as god-eligible (`canReceiveInbox:true`) while their bridges await on-device verification
+  as boss-eligible (`canReceiveInbox:true`) while their bridges await on-device verification
   (`src/renderer/src/hooks/useHive.ts`).
 
 ### Fixed
 - **Codex hive workers get full filesystem + auto-approval from spawn (parity with Claude).** A Codex-engine agent in auto mode launched with `-a never -s workspace-write`, whose sandbox scopes writes to the PTY cwd (the user's project). But a hive worker must also write to its agent folder at `<harnessHome>/hive/agents/<id>/` (move `inbox/` → `.done/`, append `memory.md`, drop outbox JSON, write deliverables) — a **different path tree from cwd**, which `workspace-write` blocked. So a freshly spawned Codex worker couldn't complete HIVE PROTOCOL housekeeping and reported "it does not have permissions … grant write permission to the agent folder." Codex's auto-mode flag is now `--dangerously-bypass-approvals-and-sandbox` — the documented equivalent of Claude's `bypassPermissions` / Antigravity's `--dangerously-skip-permissions` (skip all approval prompts **and** drop the OS sandbox), so a Codex worker has the same filesystem access and auto-approval as a Claude worker from the get-go (`src/shared/agentProvider.ts`; reference/copy updated in `src/shared/codexCommands.ts`, `OnboardingWizard.tsx`, `renderer/store/config.ts`). Claude/agy/antigravity behavior is unchanged.
-- **Re-arm the hive message router on wake (god→worker delivery survives sleep).** The outbox→inbox router is a `setInterval` (`hive.routeOnce` every ~1.5s) that, like the always-on beats, freezes during true macOS system sleep. `onSystemResume()` already re-armed the mission scheduler, the fleet/breaker beats, and keep-awake on `powerMonitor` `resume`/`unlock-screen` — but it never re-armed the router. So after a long sleep (e.g. laptop closed overnight) the scheduler→god path recovered while **every agent's outbox silently stopped draining**: god→worker, worker↔worker, and broadcast mail piled up undelivered, and no `message` event was logged. The resume handler now re-arms the router (clear-then-set, idempotent) **and** immediately drains the accumulated backlog instead of waiting for the first post-wake tick; the renderer's idle inbox-wake nudge then wakes each parked recipient once its mail lands (`src/main/index.ts`). Verified by `scripts/verify-keepalive-catchup.mjs` (now also reproduces the pre-fix backlog stall and proves the re-arm + flush).
+- **Re-arm the hive message router on wake (boss→worker delivery survives sleep).** The outbox→inbox router is a `setInterval` (`hive.routeOnce` every ~1.5s) that, like the always-on beats, freezes during true macOS system sleep. `onSystemResume()` already re-armed the mission scheduler, the fleet/breaker beats, and keep-awake on `powerMonitor` `resume`/`unlock-screen` — but it never re-armed the router. So after a long sleep (e.g. laptop closed overnight) the scheduler→boss path recovered while **every agent's outbox silently stopped draining**: boss→worker, worker↔worker, and broadcast mail piled up undelivered, and no `message` event was logged. The resume handler now re-arms the router (clear-then-set, idempotent) **and** immediately drains the accumulated backlog instead of waiting for the first post-wake tick; the renderer's idle inbox-wake nudge then wakes each parked recipient once its mail lands (`src/main/index.ts`). Verified by `scripts/verify-keepalive-catchup.mjs` (now also reproduces the pre-fix backlog stall and proves the re-arm + flush).
 - **Open-source model quick-picks + local-setup guides in Add-Agent.** Hiring a worker on a local-capable CLI engine (OpenCode/Crush/pi.dev) now shows curated **OSS-model quick-picks** — a **Local** bucket (Mac-runnable Ollama tags: gpt-oss 20B/120B, Qwen3 30B-A3B/Coder, DeepSeek-R1 32B, Mistral Small, GLM-4.7-Flash, Llama 3.3 70B) and a **third-party OSS provider** bucket (BYOK: gpt-oss/Llama via Groq, DeepSeek-V4-Flash, GLM-4.6, Kimi K2.6, Qwen3-Coder via OpenRouter). Picking one fills the engine-correct slug (OpenCode `local/<tag>`, Crush/pi `ollama/<tag>`; provider slugs identical across engines) and rebuilds the command. Slugs are transcribed from a verified catalog — bleeding-edge frontier models are intentionally left out of code defaults. The Add-Agent help line and **Settings → AI Engines** local-setup area now hyperlink two how-to guides (run on open models · set up on a Mac Mini) (`src/shared/ossModels.ts`, `AddAgentModal.tsx`, `AiEnginesSettings.tsx`).
 - **Crush no longer dies with `Unknown command` on spawn (the hive protocol now reaches it).** A Crush worker was launched as `crush --model <m> --yolo "You are …(the whole hive protocol)"` — the protocol passed as a positional arg. But bare `crush` is an interactive Bubble Tea TUI on a Cobra root command, which reads the first positional as a **subcommand**, so it aborted with `unknown command "You are…"`; the protocol never reached the model, the worker never learned it was a hive agent, and the PTY died. Crush has no `--prompt` flag and `crush run` is one-shot, so the protocol is now **typed into the TUI** instead: a new preset capability `seedDelivery:'type-into-tui'` makes the spawn drop the positional (`crush [--model m] [--yolo]`) and hand the protocol back as a `seedPrompt`, which the renderer types in as the worker's first turn after a boot-grace — through the **same per-pty write-chain as the inbox-wake nudge**, so the seed and a nudge can never jam onto one line. Covers fresh Crush spawns, restores, and Crush-as-Michael (`src/shared/agentProvider.ts`, `src/main/hive.ts`, `src/main/index.ts`, `src/preload/index.ts`, `src/renderer/src/hooks/useHive.ts`, `AddAgentModal.tsx`, `AgentStrip.tsx`, `store.ts`).
 - **Auto restart-and-continue after a first-time engine-CLI install (no dead-end).** When an agent's engine binary (OpenCode/Crush/pi.dev/Codex/…) wasn't installed, the missing-CLI short-circuit ran the provider's installer in the PTY, then printed *"click restart & continue to launch the agent"* — but no such button exists for a not-yet-started agent, so the PTY just sat at `process exited (code 0)` and the agent dead-ended. Now, on a **clean install exit**, the PTY-exit handler auto restart-and-continues: it re-runs the *same* spawn into the *same* pty/window (carrying a `noAutoInstall` flag) so the freshly-installed CLI launches with no user click, and the renderer re-arms that terminal in place (clears the "process exited" line, re-enables input) via a new `pty:relaunch` signal. Provider-agnostic (every engine's installer path) and idempotent by construction — `noAutoInstall` guarantees the installer can never fire twice, and providers with no bundled installer (manual-hint-only) are never armed for relaunch. The install banner copy is now honest ("Installed — launching the agent…") (`src/main/index.ts`, `src/main/pty.ts`, `src/preload/index.ts`, `src/renderer/src/components/terminalPool.ts`).
@@ -884,9 +884,9 @@ hardening. Everything from v0.2.8 and earlier is included.
 
 ### Added
 - **Selectable agent engines + per-hire capabilities.** A new engine abstraction (`agentProvider` + an `mcpCatalog`, mirrored across a 3-file config) makes the runtime behind each agent *pluggable* — Claude Code, Antigravity, Codex, or a **local provider** (a claw/qwen backend proxy bridge with default-MCP merge). Each hire carries its own **manifest** of allowed skills + MCP servers (a default-deny allowlist over the catalog), with **bundled skills** shipped via Electron `extraResources` (`resources/skills` → `<resources>/skills`) and a **consent UI** that surfaces every skill/MCP a hire wants before it can use it — untrusted hire input is reviewed, never auto-granted.
-- **Swappable Michael (god) engine.** The orchestrator is no longer hard-wired to one CLI: `useHive` gains an engine-spawn path, Onboarding gains an **engine picker** for Michael, and a **change-engine flow** lets you re-home the god orchestrator onto a different engine without rebuilding the floor.
+- **Swappable Michael (boss) engine.** The orchestrator is no longer hard-wired to one CLI: `useHive` gains an engine-spawn path, Onboarding gains an **engine picker** for Michael, and a **change-engine flow** lets you re-home the boss orchestrator onto a different engine without rebuilding the floor.
 - **Integrations registry + loopback secret broker.** A declarative **integrations registry** (`src/shared/integrations.ts`) plus a **loopback secret broker** (`src/main/integrationBroker.ts`): secrets are **write-only** (set once, never read back into the renderer) and reached only through the broker over loopback. A **registry-driven Settings UI** (`IntegrationsRegistry`) renders each integration's config form from the spec — conformed to registry spec v1 — and a first wave of **declarative templates** (the canonical schema + initial YC-style templates) ships in the registry. The `integrations:*` surface is exposed to the renderer through a dedicated preload bridge.
-- **God-triggered ephemeral Slack worker loop.** Michael can now **spawn an isolated worker directly in response to a Slack request** — the worker does the work, posts its reply back into the thread, and is then **torn down safely**. Lifecycle hardening adds **worktree garbage collection**, **token-cap wiring** per spawned worker, and a **teardown-safety gate** that refuses to auto-discard a worker's *unintegrated* work. The `pty:spawn` IPC handler was refactored into a reusable `spawnAgentCore` that underpins worker spawning, and a new **Workers tab** surfaces live ephemeral workers in the UI.
+- **Boss-triggered ephemeral Slack worker loop.** Michael can now **spawn an isolated worker directly in response to a Slack request** — the worker does the work, posts its reply back into the thread, and is then **torn down safely**. Lifecycle hardening adds **worktree garbage collection**, **token-cap wiring** per spawned worker, and a **teardown-safety gate** that refuses to auto-discard a worker's *unintegrated* work. The `pty:spawn` IPC handler was refactored into a reusable `spawnAgentCore` that underpins worker spawning, and a new **Workers tab** surfaces live ephemeral workers in the UI.
 - **Temporal date-range skills + worker capability catalog.** A family of date-range skills (`today` / `yesterday` / `thisWeek` / `lastWeek` / `thisMonth` / `thisQuarter` / `thisYear` / `lastMonth` / `lastQuarter` / `lastYear` / `last7Days` / `last30Days` … plus an arbitrary-range `temporal` resolver backed by `temporal/when.mjs`) resolve a named window to concrete ISO dates without hand-math. A **worker capability catalog** lets each spawned worker read exactly which skills and brokered integrations it has and how to call them.
 - **Provider / Hive picker UI.** A new `HivePicker` component plus a `ProviderLogo` set (real provider logos) appear in **onboarding** and the **add-agent** flow, so choosing the engine/provider for a hire is a first-class, visual step instead of a free-text command.
 - **Agent Gallery + six off-the-shelf hires.** The community gallery is rebranded from *The Hiring Fair* to the **Agent Gallery**, and ships **six ready-made, off-the-shelf hires** you can browse, review, and spawn.
@@ -974,8 +974,8 @@ cleanup that ends the breaker inbox-flood, Slack requests that actually reply wi
 substance, a delegate toggle, six new tutorials/blogs, and an enriched landing diagram.
 
 ### Added
-- **Delegate-to-agents toggle.** A toggle switch above the Send button in the god orchestrator's composer prepends a delegation instruction so a request fans out to available agents (and is handled one-by-one if none are free). God-only, default off.
-- **AUTONOMOUS REQUEST PROTOCOL for Slack-origin requests.** Inbound Slack requests now run fully autonomously: god routes the request to the most-relevant agent, that agent does the work and **posts its substantive result back into the Slack thread itself**, then reports to god. It pauses only for high-severity actions (pushing to main, spawning infrastructure/paid services, deleting files it didn't create), and any decision it needs is asked as a numbered-options reply in the thread and correlated back by `thread_ts`.
+- **Delegate-to-agents toggle.** A toggle switch above the Send button in the boss orchestrator's composer prepends a delegation instruction so a request fans out to available agents (and is handled one-by-one if none are free). Boss-only, default off.
+- **AUTONOMOUS REQUEST PROTOCOL for Slack-origin requests.** Inbound Slack requests now run fully autonomously: boss routes the request to the most-relevant agent, that agent does the work and **posts its substantive result back into the Slack thread itself**, then reports to boss. It pauses only for high-severity actions (pushing to main, spawning infrastructure/paid services, deleting files it didn't create), and any decision it needs is asked as a numbered-options reply in the thread and correlated back by `thread_ts`.
 - **Six new tutorials & blog posts** — webhook setup, the full Slack setup, deploying an automated PR-reviewer agent, deploying a blog-writer agent, why CLI agents are so powerful (and how the hive cuts token use), and why a mixed-capability swarm beats a clone army.
 - **Enriched "how it works" landing diagram** — Slack / Webhook / Schedule triggers feeding the orchestrator, plus a band showing each agent in its own isolated local git worktree.
 
@@ -990,7 +990,7 @@ substance, a delegate toggle, six new tutorials/blogs, and an enriched landing d
 ## [0.2.4] — 2026-06-09
 
 A multi-provider patch: Codex graduates to **full hive parity** via a native
-lifecycle-hook bridge, the god orchestrator opens to its terminal by default, and a
+lifecycle-hook bridge, the boss orchestrator opens to its terminal by default, and a
 handful of resilience fixes land.
 
 ### Added
@@ -998,12 +998,12 @@ handful of resilience fixes land.
 - **Codex hook discovery via `config.toml [hooks]`.** The bridge registers through Codex's `config.toml [hooks]` surface rather than a bare `hooks.json`, matching how Codex actually discovers lifecycle hooks.
 
 ### Changed
-- **God orchestrator opens to the Terminal sidebar by default.** Selecting the god agent no longer reopens a stale "ASK ME" tab — a leftover command-center tab request is cleared on select, so the panel mounts to its terminal default. The ASK ME tab is still one click away.
+- **Boss orchestrator opens to the Terminal sidebar by default.** Selecting the boss agent no longer reopens a stale "ASK ME" tab — a leftover command-center tab request is cleared on select, so the panel mounts to its terminal default. The ASK ME tab is still one click away.
 - **Landing + blog refreshed for multi-provider.** The landing page now presents Claude Code, Antigravity (Gemini), and OpenAI Codex as equal first-class providers (with a one-line mobile-friendly badge), and a grand v0.2.4 launch post + technical walkthrough replace the v0.2.3 posts.
 
 ### Fixed
 - **Slack/webhook tunnel no longer crashes at load.** `tunnelmole` is ESM-only; a static `import` in the CommonJS-bundled Electron main process threw `ERR_REQUIRE_ESM`. It's now loaded via a dynamic `import()` inside `openTunnel()`, so the public ingress actually starts.
-- **Heartbeat re-engages the god on an unread actionable inbox** — not only when the floor is quiet — so worker/human mail is drained promptly.
+- **Heartbeat re-engages the boss on an unread actionable inbox** — not only when the floor is quiet — so worker/human mail is drained promptly.
 - **Slack done-summary stops retrying on terminal errors.** A permanently-failing post (e.g. the bot token missing `chat:write` → `missing_scope`) is now recorded and logged once instead of retrying every 5s and flooding the console; transient errors still retry.
 
 ## [0.2.3] — 2026-06-09
@@ -1015,7 +1015,7 @@ and the Slack / webhook ingress is moved off the flaky public tunnel.
 ### Added
 - **First-class Antigravity (Gemini / `agy`) provider.** A worker can now run the Antigravity CLI as a full hive participant. Because `agy` has no Claude-style `--append-system-prompt`/`--settings` hooks, the hive identity + protocol ride in as the session's initial prompt, and a native `agy-hook` bridge normalizes Antigravity's lifecycle events into the existing hook pipeline so a Gemini worker gets the same live status + inbox-drain as Claude — on the subscription, no API key. (#54)
 - **Schedules tab.** Recurring auto-dispatched missions (and the adaptive heartbeat) get their own Command-Center tab instead of an inline section. (#50)
-- **Terminal work-order handoff for hookless providers.** A provider with no inbox-drain path now receives hive mail as a `WORK ORDER FROM HIVE` typed into its terminal, falling back to a god-bounce only if the renderer is unavailable. (#53)
+- **Terminal work-order handoff for hookless providers.** A provider with no inbox-drain path now receives hive mail as a `WORK ORDER FROM HIVE` typed into its terminal, falling back to a boss-bounce only if the renderer is unavailable. (#53)
 
 ### Fixed
 - **Codex agents now follow the hive protocol and message back.** Codex spawned without the hive protocol or any hook, so it never read its inbox or wrote its outbox. Codex is now a non-hive-aware-but-inbox-capable provider: the protocol is injected as its initial (positional) prompt, its outbox is drained provider-agnostically by the router, and inbox mail reaches it via the renderer's idle inbox-wake nudge. Codex and Antigravity coexist in the provider union. (#47, #54)
@@ -1025,17 +1025,17 @@ and the Slack / webhook ingress is moved off the flaky public tunnel.
 
 A community polish release — almost entirely the work of @Gulum: a live context-window
 gauge on every agent card, sharper terminals, correct Windows metering, and dispatch that
-always routes through the god.
+always routes through the boss.
 
 ### Added
 - **Live context-window gauge on each agent card.** A Claude Code statusLine pushes the session's exact token count and real context-window size after every response, so each agent card shows a precise live fuel gauge drawn from Claude Code itself instead of a transcript estimate. The gauge also zeroes the instant you send `/clear`, rather than briefly showing the previous session's full bar until the next response. (Thanks @Gulum — #12, closes #11.)
 - **Per-session terminal theme toggle + Unicode 11 emoji widths.** Each terminal session can now switch its Claude theme independently, and emoji column widths follow Unicode 11 so wide glyphs stop nudging the cursor out of alignment. (The WebGL renderer, copy/paste, and `minimumContrastRatio` from v0.2.0 are kept as-is.) (Thanks @Gulum — #26.)
-- **All human dispatch flows through the god.** Every Command Center dispatch now mails the god (`Task from the human`) instead of writing straight into a worker's inbox; the worker dropdown becomes a **suggested owner** (Michael still decides), so nothing skips the orchestrator. (Thanks @Gulum — #45, fixes #44.)
+- **All human dispatch flows through the boss.** Every Command Center dispatch now mails the boss (`Task from the human`) instead of writing straight into a worker's inbox; the worker dropdown becomes a **suggested owner** (Michael still decides), so nothing skips the orchestrator. (Thanks @Gulum — #45, fixes #44.)
 - **Dedicated context-window row on the monitor tab.** The Floor monitor's cumulative budget bar was being misread as a per-agent context gauge; a separate `ctx` context-window row now sits alongside it, so the live context window and the cumulative budget aren't confused. (Thanks @Gulum — #46.)
 
 ### Fixed
 - **Windows usage meter no longer reads 0/0.** The transcript reconciler built the per-project directory name with the POSIX rule, but Claude Code on Windows encodes *every* non-alphanumeric character (including the drive colon), so the meter never found the transcript and always read 0 tokens / $0.00. (Thanks @Gulum — #34, fixes #10.)
-- **Send-only assistant mail no longer black-holes.** Direct mail to the send-only prep assistant landed in an inbox nothing reads; the router now bounces it to the god (subject prefixed `[bounced …]`) instead of dropping it. (Thanks @Gulum — #33, fixes #32.)
+- **Send-only assistant mail no longer black-holes.** Direct mail to the send-only prep assistant landed in an inbox nothing reads; the router now bounces it to the boss (subject prefixed `[bounced …]`) instead of dropping it. (Thanks @Gulum — #33, fixes #32.)
 - **Boot banner no longer stacks in scrollback.** `tryFit()` fired `resizePty` on every fit even when the dimensions were unchanged; redundant resizes are now skipped, so the boot banner stops re-stacking in the terminal history. (Thanks @Gulum — #8.)
 - **Visible text-select cursor on the cream theme.** The hovering I-beam (an OS cursor that CSS color hints can't touch, drawn white by several Windows schemes) is now an inked I-beam with a halo, so it stays visible over the light terminal. (Thanks @Gulum — #39.)
 
@@ -1048,7 +1048,7 @@ A small follow-up to v0.2.0 that makes the scheduler considerate of agents that 
 
 ### Changed
 - **Scheduled auto-compaction is queued, not forced.** The hourly ops-standup's terminal compaction is now enqueued per agent and delivered only when that agent is idle (deduped — at most one `/compact` pending at a time), so it compacts *between* steps instead of jamming a working terminal mid-step. The standup prompt now asks each agent to summarise its current task and next step, then resume from the same point after compacting.
-- **Heartbeat is inbox-driven.** The floor heartbeat (`reengageGod`) no longer types directly into Michael's terminal; it drops its digest in his inbox, which the busy-aware inbox-wake delivers once he's idle.
+- **Heartbeat is inbox-driven.** The floor heartbeat (`reengageBoss`) no longer types directly into Michael's terminal; it drops its digest in his inbox, which the busy-aware inbox-wake delivers once he's idle.
 
 ### Docs
 - Expanded the README roadmap (chat integrations, pluggable agent CLIs, realtime Michael).
@@ -1081,16 +1081,16 @@ The observability and control release. v0.2.0 makes the fleet visible and keeps 
 - **Live agent statuses** and **composer-draft fixes** for the message-queue composer. (Thanks @Gulum — #7, #27, #28.)
 - **Palace writer-lock serialization** and **Windows named-pipe + mempalace detection** so the hook server and semantic memory work on Windows. (Thanks @Xileck.)
 - **Per-PTY input serialization** so the boot sequence can't jam mid-spawn; restored `+x` on the `node-pty` spawn-helper so agents can spawn.
-- **GOD orchestration tabs** are now scrollable; the title-bar settings button is a clear gear chip.
+- **BOSS orchestration tabs** are now scrollable; the title-bar settings button is a clear gear chip.
 - **Global `defaultModel` wins over role tier** (an explicit per-agent pick still wins); cost-ledger row is fully snake_case for a 1:1 SQLite migration (#4).
 
 ### Acknowledgements
-Reported / requested by the community: @JLAD75 (Windows hive router / `hooks.sock` — #1), @billrehm (Windows GOD-spawn error 193 — #22), @darrensheffield (uv-not-installed assumption — #30; macOS Gatekeeper — #29), @pdurlej (first-class Codex CLI provider request — #21), @wild-gobatz (agents showing idle until clicked — #3). Maintained by @chaitanyagiri.
+Reported / requested by the community: @JLAD75 (Windows hive router / `hooks.sock` — #1), @billrehm (Windows BOSS-spawn error 193 — #22), @darrensheffield (uv-not-installed assumption — #30; macOS Gatekeeper — #29), @pdurlej (first-class Codex CLI provider request — #21), @wild-gobatz (agents showing idle until clicked — #3). Maintained by @chaitanyagiri.
 
 ## [0.1.9] — 2026-06-06
 
 ### Added
-- **Hourly ops standup.** A built-in scheduled mission (enabled by default) where the GOD orchestrator reviews every agent — who's doing what, whether tasks are on track, and whether agents are still running — and **compacts each terminal's context** on the same hourly cadence to keep agents lean. Toggle it in the Command Center; a one-time migration seeds it into existing installs (and won't re-add it once deleted).
+- **Hourly ops standup.** A built-in scheduled mission (enabled by default) where the BOSS orchestrator reviews every agent — who's doing what, whether tasks are on track, and whether agents are still running — and **compacts each terminal's context** on the same hourly cadence to keep agents lean. Toggle it in the Command Center; a one-time migration seeds it into existing installs (and won't re-add it once deleted).
 
 ### Fixed
 - **Agents exited on their own at a "Bypass Permissions mode" prompt.** Agents spawn with `--permission-mode bypassPermissions`, which on a fresh machine shows a one-time interactive "WARNING: Bypass Permissions mode … 1. No, exit / 2. Yes, I accept" prompt the terminal couldn't answer, so the agent exited code 1 within seconds. The harness now idempotently pre-accepts Claude Code's dangerous-mode warning (`skipDangerousModePermissionPrompt` / `skipAutoPermissionPrompt`) and per-folder trust before each spawn.
@@ -1185,7 +1185,7 @@ Reported / requested by the community: @JLAD75 (Windows hive router / `hooks.soc
 - **Settings panel** (title-bar gear) with a **Reset & start over** action that wipes
   Michael's memories, the entire hive (every agent, message, task, and the board), and
   the semantic-memory palace, then relaunches the app into onboarding.
-- Boot loader ("clocking in") shown while the GOD agent initializes, so returning users
+- Boot loader ("clocking in") shown while the BOSS agent initializes, so returning users
   no longer see the empty "add agent" screen during startup.
 
 ### Fixed
@@ -1222,7 +1222,7 @@ Initial working prototype.
   tool bubbles, and message envelopes.
 - The hive: on-disk multi-agent layer (`hive.ts`), hook server + `cth-hook` shim and
   `Stop`-loop (`hooks.ts`), and a semantic memory layer (`memory.ts`).
-- GOD orchestrator agent, approvals queue, and memory search panel.
+- BOSS orchestrator agent, approvals queue, and memory search panel.
 - Sandboxed file browser + CodeMirror editor and a git tab (status, log, branches,
   commit graph).
 - Onboarding wizard, safe-quit guard, and a tokenized SNES/Animal-Crossing design

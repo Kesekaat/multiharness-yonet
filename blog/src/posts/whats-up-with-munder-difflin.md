@@ -19,7 +19,7 @@ faq:
   - q: "Do I need to reinstall to get v0.3.7?"
     a: "Yes, once. Every build from v0.3.4 through v0.3.6 carries the broken updater and cannot fetch the fix that repairs it — the one bootstrap problem a self-updating app can't solve for itself. Download v0.3.7 from munderdiffl.in or the GitHub releases page. From v0.3.7 onward, updates download in the background and wait for your restart."
   - q: "How many agent CLIs does Munder Difflin support?"
-    a: "Nine: Claude Code, OpenAI Codex, Antigravity (Gemini), GitHub Copilot CLI, xAI Grok, Kimi Code, OpenCode, Crush, and pi.dev. Each gets a desk, a mailbox, and shared memory, and most can play the GOD orchestrator role themselves. You can mix engines on the same floor, and bring your own API keys or point them at local models through Ollama, LM Studio, or vLLM."
+    a: "Nine: Claude Code, OpenAI Codex, Antigravity (Gemini), GitHub Copilot CLI, xAI Grok, Kimi Code, OpenCode, Crush, and pi.dev. Each gets a desk, a mailbox, and shared memory, and most can play the BOSS orchestrator role themselves. You can mix engines on the same floor, and bring your own API keys or point them at local models through Ollama, LM Studio, or vLLM."
   - q: "Is Munder Difflin free?"
     a: "Yes. MIT-licensed, free forever, and local-first. It drives the agent CLI subscriptions you already pay for rather than adding a bill of its own, and your code never leaves your machine."
 ---

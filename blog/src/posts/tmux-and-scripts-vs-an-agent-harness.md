@@ -56,7 +56,7 @@ None of these are tmux's fault. tmux is a terminal multiplexer, and it's excelle
 
 This is the layer [Munder Difflin](/) is. Our landing page has a [full comparison table](/#compare), but it maps almost one-to-one onto the breakage list:
 
-- **Routing and orchestration.** Agents get mailboxes; a router moves messages between them; a [GOD orchestrator](/blog/how-the-god-orchestrator-works/) assigns work, adjudicates, and escalates only what genuinely needs a human. Coordination by copy-paste becomes envelopes flying between desks — literally, on the office floor.
+- **Routing and orchestration.** Agents get mailboxes; a router moves messages between them; a [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) assigns work, adjudicates, and escalates only what genuinely needs a human. Coordination by copy-paste becomes envelopes flying between desks — literally, on the office floor.
 - **Worktrees, provisioned for you.** The same git-worktree isolation you'd script by hand is a toggle: each agent gets a dedicated worktree on spawn, torn down on kill. (Deeper dive: [worktrees vs the hive](/blog/claude-code-git-worktrees-vs-hive/).)
 - **Shared long-term memory.** Markdown-first memory per agent, mined into a shared semantic index, recalled in milliseconds across sessions and restarts.
 - **Budgets and brakes.** Per-agent token budgets, real token/cost telemetry, and a circuit breaker with a steer → constrain → stop ladder for loops and runaway spend — plus human approval gates on spend, scope, and destructive ops.

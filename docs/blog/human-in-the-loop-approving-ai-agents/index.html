@@ -215,18 +215,18 @@ answers in the place the agent stopped. No panel, no mirror of state, no re-queu
 <p>There’s a second kind of human-in-the-loop, though: not “approve this tool call” but “I’m an agent and I
 genuinely need a <em>person</em> to decide something” — an ambiguity, a conflict, a scope call. Where does that
 go when there’s no human queue?</p>
-<p>To the <strong>orchestrator</strong>. In a hive, the <a href="/#how">god/orchestrator</a> (we call him Michael) is the human’s
+<p>To the <strong>orchestrator</strong>. In a hive, the <a href="/#how">boss/orchestrator</a> (we call him Michael) is the human’s
 proxy on the floor — so a message addressed to <code>&quot;human&quot;</code> is simply routed there. (Triage, delegation,
 and escalation are the orchestrator’s whole job —
-<a href="/blog/how-the-god-orchestrator-works/">how the god orchestrator works</a>.) The router does it with one
+<a href="/blog/how-the-boss-orchestrator-works/">how the boss orchestrator works</a>.) The router does it with one
 line:</p>
 <pre class="language-ts"><code class="language-ts"><span class="token comment">// src/main/hive.ts — resolve the recipient</span>
-<span class="token keyword">const</span> <span class="token function-variable function">resolveTo</span> <span class="token operator">=</span> <span class="token punctuation">(</span>to<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>to <span class="token operator">===</span> <span class="token string">'human'</span> <span class="token operator">||</span> to <span class="token operator">===</span> <span class="token string">'god'</span> <span class="token operator">?</span> godId <span class="token operator">:</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>Both <code>&quot;god&quot;</code> and <code>&quot;human&quot;</code> collapse to the orchestrator’s id. The orchestrator triages it, answers what
+<span class="token keyword">const</span> <span class="token function-variable function">resolveTo</span> <span class="token operator">=</span> <span class="token punctuation">(</span>to<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>to <span class="token operator">===</span> <span class="token string">'human'</span> <span class="token operator">||</span> to <span class="token operator">===</span> <span class="token string">'boss'</span> <span class="token operator">?</span> bossId <span class="token operator">:</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Both <code>&quot;boss&quot;</code> and <code>&quot;human&quot;</code> collapse to the orchestrator’s id. The orchestrator triages it, answers what
 it can, and escalates to the actual person — natively, in his own session — only for the genuinely
 critical calls. A <code>needsHuman</code> flag still rides along, but it’s <strong>cosmetic</strong>: it tints the message
 envelope on the office-floor visualization. As the code comments note, it’s “Cosmetic only — no queue
-behind it.” The system even guards against a <code>god → &quot;human&quot;</code> message looping back to itself. One
+behind it.” The system even guards against a <code>boss → &quot;human&quot;</code> message looping back to itself. One
 recipient, one source of truth, no parallel inbox to babysit.</p>
 <figure class="fig fig-inline"><img src="/blog/assets/media/human-in-the-loop-approving-ai-agents/note-2.png" alt="Hand-drawn sketch from “Approving AI Agents: Human-in-the-Loop Without a Queue”" loading="lazy" decoding="async" /></figure>
 <h2 id="approve-from-anywhere" tabindex="-1">Approve from anywhere <a class="anchor" href="#approve-from-anywhere" aria-hidden="true">#</a></h2>

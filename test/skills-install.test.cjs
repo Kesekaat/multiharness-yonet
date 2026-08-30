@@ -27,10 +27,10 @@ const tmpdir = (t) => {
 
 test('a GitHub tree URL is split into owner/repo/ref/path', () => {
   assert.deepEqual(
-    parseGitHubSourceUrl('https://github.com/mongodb/agent-skills/tree/main/skills/mongodb-mcp-setup'),
-    { owner: 'mongodb', repo: 'agent-skills', ref: 'main', path: 'skills/mongodb-mcp-setup' }
+    parseGitHubSourceUrl('https://github.com/monbossb/agent-skills/tree/main/skills/monbossb-mcp-setup'),
+    { owner: 'monbossb', repo: 'agent-skills', ref: 'main', path: 'skills/monbossb-mcp-setup' }
   );
-  assert.equal(parseGitHubSourceUrl('https://officialskills.sh/mongodb/skills/x'), null);
+  assert.equal(parseGitHubSourceUrl('https://officialskills.sh/monbossb/skills/x'), null);
   // A repo ROOT is also a valid source — 81 catalog entries are shaped that way.
   assert.deepEqual(parseGitHubSourceUrl('https://github.com/zarazhangrui/frontend-slides'),
     { owner: 'zarazhangrui', repo: 'frontend-slides', ref: '', path: '' });

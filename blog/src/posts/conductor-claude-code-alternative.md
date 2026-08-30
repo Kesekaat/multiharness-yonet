@@ -72,7 +72,7 @@ The word *conductor* implies coordination, so it's worth being precise about wha
 - **Adjudication + escalation.** The coordinator resolves the routine and escalates only the
   genuinely critical (spend, destructive ops, scope) for your sign-off.
 
-That's the model behind [Munder Difflin](/#what): a [GOD orchestrator](/#how) you talk to in plain
+That's the model behind [Munder Difflin](/#what): a [BOSS orchestrator](/#how) you talk to in plain
 language, shared MemPalace memory, inter-agent messaging, and a watchable office floor — open source
 (MIT) and running on macOS, Windows, and Linux.
 

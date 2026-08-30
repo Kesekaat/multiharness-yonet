@@ -1,6 +1,6 @@
 ---
 title: "One Prompt, Five PR Reviews, and an Hourly Automation — A Dogfooding Story"
-description: "How a single prompt to the Munder Difflin god agent reviewed all open PRs and set up a recurring hourly PR reviewer — while the repo was blowing up with 400+ stars."
+description: "How a single prompt to the Munder Difflin boss agent reviewed all open PRs and set up a recurring hourly PR reviewer — while the repo was blowing up with 400+ stars."
 date: 2026-06-07
 category: story
 categoryLabel: Story
@@ -13,7 +13,7 @@ author:
   initials: CG
 ---
 
-<div class="callout tldr"><span class="ic">TL;DR</span><p>Munder Difflin's GitHub repo hit <strong>400+ stars in three days</strong>. That came with a flood of incoming pull requests and zero time to review them. One prompt to the god orchestrator — "review the open PRs and set up an hourly automation to review any new ones" — did both: five PRs were reviewed in a single run, and a <strong>ScheduledMission</strong> now fires a PR reviewer agent every hour, hands-free. This is that story.</p></div>
+<div class="callout tldr"><span class="ic">TL;DR</span><p>Munder Difflin's GitHub repo hit <strong>400+ stars in three days</strong>. That came with a flood of incoming pull requests and zero time to review them. One prompt to the boss orchestrator — "review the open PRs and set up an hourly automation to review any new ones" — did both: five PRs were reviewed in a single run, and a <strong>ScheduledMission</strong> now fires a PR reviewer agent every hour, hands-free. This is that story.</p></div>
 
 Software that coordinates agents should eat its own cooking. Munder Difflin does — the hive manages its own inbox, writes its own blog posts, runs its own standups. But the test I didn't plan for came last week when the repo started moving faster than I could keep up with.
 
@@ -23,7 +23,7 @@ Three days into a sudden wave of attention on GitHub, the Munder Difflin repo cr
 
 Good problems. But still problems.
 
-I didn't reach for GitHub's notification pane or a code-review checklist. I opened Munder Difflin and typed one prompt to Michael (the god orchestrator):
+I didn't reach for GitHub's notification pane or a code-review checklist. I opened Munder Difflin and typed one prompt to Michael (the boss orchestrator):
 
 > *Review all the open PRs on the GitHub repo, and set up a recurring mission that checks for new PRs every hour and reviews them.*
 
@@ -69,13 +69,13 @@ interface ScheduledMission {
 
 Each hour, the scheduler in `src/main/index.ts` fires a `request` message from `scheduler` into the target agent's inbox — the same inbox any human or other agent would drop a message into. The target wakes up, reads the message, and acts. There's nothing special about a scheduled request once it's in the queue. It just works like any other task.
 
-God created a mission with a one-hour interval, targeting the pr-reviewer agent, with a body instructing it to check for open pull requests and review any it hadn't seen. That mission is running now. A reviewer agent already spawned ~one hour after the original run: `pr-reviewer-mq33uu9y`. The cadence is self-sustaining — it survives app restarts (overdue missions fire immediately on the next launch), and new PRs from the community will be reviewed on the next tick without me touching a keyboard.
+Boss created a mission with a one-hour interval, targeting the pr-reviewer agent, with a body instructing it to check for open pull requests and review any it hadn't seen. That mission is running now. A reviewer agent already spawned ~one hour after the original run: `pr-reviewer-mq33uu9y`. The cadence is self-sustaining — it survives app restarts (overdue missions fire immediately on the next launch), and new PRs from the community will be reviewed on the next tick without me touching a keyboard.
 
 ## What this is actually demonstrating
 
 A few things are true at once here, and they're worth separating.
 
-**First, the single-prompt routing story.** What made this possible isn't that Munder Difflin is a clever cron wrapper for GitHub API calls. It's that the [god orchestrator](/blog/how-the-god-orchestrator-works/) understood a compound intent — *do this now* AND *set up a recurring thing* — decomposed it into two tasks, executed the one-off, and created the ScheduledMission for the other. One sentence of plain language became two distinct workflows.
+**First, the single-prompt routing story.** What made this possible isn't that Munder Difflin is a clever cron wrapper for GitHub API calls. It's that the [boss orchestrator](/blog/how-the-boss-orchestrator-works/) understood a compound intent — *do this now* AND *set up a recurring thing* — decomposed it into two tasks, executed the one-off, and created the ScheduledMission for the other. One sentence of plain language became two distinct workflows.
 
 **Second, the recursive nature of this.** The agents are maintaining the open-source repo that runs the agents. The PR reviewer is a Munder Difflin agent reviewing PRs submitted to Munder Difflin. The blog post you're reading was written by a Munder Difflin agent. The hive is genuinely part of its own development loop — not as a gimmick, but because that's what a local-first coordination layer lets you do.
 
@@ -97,4 +97,4 @@ That's what an orchestrator-plus-scheduler should feel like. The prompt was the 
 
 ---
 
-Munder Difflin is free, open source, and local-first — [download it](https://munderdiffl.in/#install) and set your first ScheduledMission. The [god orchestrator](https://munderdiffl.in/#how) takes plain English; what you get back is a team that runs on it.
+Munder Difflin is free, open source, and local-first — [download it](https://munderdiffl.in/#install) and set your first ScheduledMission. The [boss orchestrator](https://munderdiffl.in/#how) takes plain English; what you get back is a team that runs on it.

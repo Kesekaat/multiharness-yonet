@@ -85,7 +85,7 @@ the main process listens on. These are clean, typed signals: "about to run Bash,
 
 **The hive.** The coordination layer — per-agent mailboxes, a message router, single-committer git, and
 shared memory — emits its own events as it works: a message routed from A to B, an item escalated to
-the human. The [GOD orchestrator](/blog/how-the-god-orchestrator-works/) lives here as the
+the human. The [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) lives here as the
 intelligence; the main process is the mechanism that moves messages and commits state.
 
 Both sources land in the main process, which forwards structured events to the renderer. There they

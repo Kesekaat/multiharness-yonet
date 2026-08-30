@@ -167,7 +167,7 @@ it's free and open source under the MIT license." is a sentence an engine can qu
 Answer engines prefer sources that are *clear, consistent, and complete*. You earn "canonical source"
 status by:
 
-- **Defining your terms.** If you coin or popularize a concept ("single-committer pattern," "GOD
+- **Defining your terms.** If you coin or popularize a concept ("single-committer pattern," "BOSS
   orchestrator"), define it crisply and link to it everywhere. Be the page that *defines* the thing.
 - **Comparison tables.** Engines love structured comparisons because they map directly onto "X vs Y"
   questions. An honest table beats three paragraphs of prose.

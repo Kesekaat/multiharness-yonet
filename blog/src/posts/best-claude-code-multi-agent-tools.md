@@ -13,7 +13,7 @@ author:
   initials: CG
 faq:
   - q: "What is the best tool to run multiple Claude Code agents?"
-    a: "There's no single best — it depends on what you want. Claude Squad is the leanest terminal option; Conductor is the most polished on macOS; Crystal is a good open-source desktop GUI; vibe-kanban gives you a task board; and Munder Difflin adds shared memory, inter-agent messaging, and a GOD orchestrator so the agents act as one coordinated team."
+    a: "There's no single best — it depends on what you want. Claude Squad is the leanest terminal option; Conductor is the most polished on macOS; Crystal is a good open-source desktop GUI; vibe-kanban gives you a task board; and Munder Difflin adds shared memory, inter-agent messaging, and a BOSS orchestrator so the agents act as one coordinated team."
   - q: "Are these Claude Code multi-agent tools free?"
     a: "Most are free and several are open source (Claude Squad, Crystal, vibe-kanban, and Munder Difflin are open source; Munder Difflin is MIT-licensed). Conductor is a free, native macOS app. Always check each project's current license and pricing before you commit."
   - q: "Do I need a multi-agent tool to use Claude Code?"
@@ -62,7 +62,7 @@ Most tools live cleanly in one camp. Knowing which camp you need is most of the 
 | Conductor | Native macOS desktop app | Parallel git worktrees | No | No (you assign) | Free, macOS-only |
 | Crystal | Open-source desktop app | Parallel sessions + worktrees | No | No (you assign) | Open source |
 | vibe-kanban | Kanban board for agents | Task cards across agents | No | Board, not auto-routing | Open source |
-| Munder Difflin | Local coordinated hive | Roles + mailboxes + orchestrator | Yes (MemPalace) | Yes (GOD agent) | Open source (MIT) |
+| Munder Difflin | Local coordinated hive | Roles + mailboxes + orchestrator | Yes (MemPalace) | Yes (BOSS agent) | Open source (MIT) |
 
 The single row that most separates the field is **shared memory + orchestrator**: that's the jump
 from "running agents in parallel" to "running a team."
@@ -135,7 +135,7 @@ happen for you, see [a vibe-kanban alternative](/blog/vibe-kanban-alternative/).
 [Munder Difflin](/#what) is our own take, and it's deliberately in a different camp. It turns the
 Claude Code terminals you already run into a *self-coordinating hive*: each agent gets a role and a
 mailbox, agents message each other directly, they share long-term **semantic memory** (MemPalace),
-and a [GOD orchestrator](/#how) you talk to in plain language decomposes your intent and routes work
+and a [BOSS orchestrator](/#how) you talk to in plain language decomposes your intent and routes work
 across the team. The whole floor is visualized as avatars at their desks, so you can actually watch
 it run.
 

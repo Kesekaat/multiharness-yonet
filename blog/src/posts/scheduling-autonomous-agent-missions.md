@@ -144,7 +144,7 @@ Scheduled missions are the alarm clock; the [autonomous
 loop](/blog/claude-code-automation-while-you-sleep/) is the engine that keeps an agent running until
 its queue is empty; the [message router](/blog/coordinating-ai-coding-agents/) is the nervous system
 that delivers each tick. Put them together and a hive becomes genuinely self-driving on the recurring
-work: it wakes up on schedule, routes the task through [the orchestrator](/blog/how-the-god-orchestrator-works/),
+work: it wakes up on schedule, routes the task through [the orchestrator](/blog/how-the-boss-orchestrator-works/),
 runs it to completion, and escalates to you only when a decision is genuinely yours to make.
 
 ## FAQ
@@ -167,6 +167,6 @@ history intact, and you can re-enable it later without rewinding the clock.
 ---
 
 Munder Difflin runs exactly this: a local hive of Claude Code agents that picks up recurring work on a
-schedule, routes it through [a GOD orchestrator](https://munderdiffl.in/#how), and pings you only for
+schedule, routes it through [a BOSS orchestrator](https://munderdiffl.in/#how), and pings you only for
 the calls that matter. [Download Munder Difflin](https://munderdiffl.in/#install) to set your first
 mission and watch the floor wake itself up; it's free and open source.

@@ -117,7 +117,7 @@ ecosystem depth and ops tooling. Pick for the orchestration model you need, not 
 
 A concrete system makes the patterns less abstract. Munder Difflin runs several at once:
 
-- **Orchestrator-worker / supervisor** — the [god orchestrator](/blog/how-the-god-orchestrator-works/)
+- **Orchestrator-worker / supervisor** — the [boss orchestrator](/blog/how-the-boss-orchestrator-works/)
   classifies intent, decomposes it, dispatches to role-specialized agents, and owns integration. That's
   the 2026 default, made local and watchable.
 - **Blackboard** — the shared board and the append-only event log are a blackboard the team reads and

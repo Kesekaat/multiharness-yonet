@@ -13,7 +13,7 @@ author:
   initials: CG
 faq:
   - q: "What's the main difference between Claude Squad and Munder Difflin?"
-    a: "Claude Squad is a lightweight terminal session manager that runs agents in parallel using tmux and git worktrees. Munder Difflin is a coordinated hive that adds shared long-term memory, inter-agent messaging, a GOD orchestrator, and a visual office floor — so the agents act as one team, not just parallel sessions."
+    a: "Claude Squad is a lightweight terminal session manager that runs agents in parallel using tmux and git worktrees. Munder Difflin is a coordinated hive that adds shared long-term memory, inter-agent messaging, a BOSS orchestrator, and a visual office floor — so the agents act as one team, not just parallel sessions."
   - q: "Is Munder Difflin heavier than Claude Squad?"
     a: "Yes. Claude Squad is a minimal terminal tool; Munder Difflin is a desktop app with a visual floor and a coordination layer. For one or two quick parallel tasks, Claude Squad is less to think about. For a real team of agents that need to coordinate, Munder Difflin's extra weight earns its keep."
   - q: "Are both free and open source?"
@@ -46,7 +46,7 @@ Everything below is detail on that distinction.
 | Parallelism | tmux sessions + git worktrees | Roles + mailboxes + orchestrator |
 | Shared long-term memory | No | Yes — semantic MemPalace |
 | Inter-agent messaging | No | Yes — mailboxes + router |
-| Orchestrator | No (you assign) | Yes — GOD agent you talk to |
+| Orchestrator | No (you assign) | Yes — BOSS agent you talk to |
 | Visibility | TUI session list | Live office floor (avatars) |
 | Footprint | Featherweight | Heavier (GUI + viz) |
 | SSH / remote | Excellent | Local desktop app |
@@ -77,7 +77,7 @@ about your workload before you reach for more.
   resetting every session.
 - **Agents need to hand work to each other.** Mailboxes + a router let agent A pass a result to agent
   B without you relaying it.
-- **You don't want to assign every task.** A [GOD orchestrator](/#how) you talk to in plain language
+- **You don't want to assign every task.** A [BOSS orchestrator](/#how) you talk to in plain language
   decomposes intent and routes work for you.
 - **Seeing the work matters.** A live office floor turns "what's everyone doing?" into a glance —
   useful for trust and for catching problems early.

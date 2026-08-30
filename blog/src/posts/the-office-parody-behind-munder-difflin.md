@@ -56,7 +56,7 @@ bunch of workers coordinate to get things done without stepping on each other?" 
 costume on top of the tech; it's a one-to-one map of it:
 
 - **A manager who routes work.** Every office has someone deciding who does what. In a hive, that's the
-  [orchestrator](/blog/how-the-god-orchestrator-works/) — and naturally, it's *Michael* running the
+  [orchestrator](/blog/how-the-boss-orchestrator-works/) — and naturally, it's *Michael* running the
   room, the control surface the whole floor reports through.
 - **Specialists at their desks.** An office is a set of people with roles. A hive is a set of agents
   with roles. "Give that to the researcher" and "give that to Dwight" are the same instruction.

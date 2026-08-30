@@ -218,7 +218,7 @@ the main process listens on. These are clean, typed signals: “about to run Bas
 <a href="/blog/claude-code-hooks-explained/">Claude Code hooks, explained</a>.)</p>
 <p><strong>The hive.</strong> The coordination layer — per-agent mailboxes, a message router, single-committer git, and
 shared memory — emits its own events as it works: a message routed from A to B, an item escalated to
-the human. The <a href="/blog/how-the-god-orchestrator-works/">GOD orchestrator</a> lives here as the
+the human. The <a href="/blog/how-the-boss-orchestrator-works/">BOSS orchestrator</a> lives here as the
 intelligence; the main process is the mechanism that moves messages and commits state.</p>
 <p>Both sources land in the main process, which forwards structured events to the renderer. There they
 drive the office floor: avatars walk to stations on tool events, envelopes fly on message events.</p>

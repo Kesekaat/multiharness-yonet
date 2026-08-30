@@ -58,7 +58,7 @@ not raw JSON, but sentences:
 Now "what's the fleet doing right now" is a glance, not an investigation. The feed is fed by
 [lifecycle hooks](/blog/the-hook-shim-pattern/): every agent's tool-use, stops, and notifications stream
 into the main process in real time, so the picture is live rather than a periodic poll. The same
-[orchestrator](/blog/how-the-god-orchestrator-works/) that routes work reads this feed to keep its
+[orchestrator](/blog/how-the-boss-orchestrator-works/) that routes work reads this feed to keep its
 situational awareness current.
 
 {% img "note-1" %}

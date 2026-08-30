@@ -52,7 +52,7 @@ A runaway loop is just a loop missing one of these — usually the first. The ag
 
 Here's the toolbox as it actually exists in [Munder Difflin](/), where the design constraint is blunt: a floor of CLI agents has to run for days without a human babysitting it, and without melting.
 
-**Stop conditions.** The naive stop condition is "the model stopped talking." The engineered one checks state: is the task's definition of done verified? In Munder Difflin, workers don't self-certify — the GOD orchestrator reads results, adjudicates, and moves the board (see [how the GOD orchestrator works](/blog/how-the-god-orchestrator-works/)).
+**Stop conditions.** The naive stop condition is "the model stopped talking." The engineered one checks state: is the task's definition of done verified? In Munder Difflin, workers don't self-certify — the BOSS orchestrator reads results, adjudicates, and moves the board (see [how the BOSS orchestrator works](/blog/how-the-boss-orchestrator-works/)).
 
 **Drain loops.** The most useful outer-loop pattern in Claude Code is built on the Stop hook: when an agent tries to end its turn, the hook checks its mailbox — and if mail is waiting, it blocks the stop and continues the session with the next message as the prompt. The agent drains its queue instead of dying with a full inbox. Claude Code's own hooks reference builds in the guardrail this pattern needs: a `stop_hook_active` flag, so a blocked stop can't recurse into an infinite forced continuation. That's loop engineering *inside* the primitive — one continuation per real stop, not a hall of mirrors.
 

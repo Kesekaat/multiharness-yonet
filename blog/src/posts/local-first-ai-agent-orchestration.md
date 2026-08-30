@@ -109,7 +109,7 @@ What keeps an agent *going* without you clicking "continue"? A local hook. When 
 turn, a Stop hook checks its inbox; if fresh messages are waiting, it tells the agent to keep working,
 and when the queue is empty it lets the agent rest. That's the [autonomous
 loop](/blog/claude-code-automation-while-you-sleep/) — and it's wired through the same local files, run
-by [the orchestrator](/blog/how-the-god-orchestrator-works/) on your machine, with no remote scheduler
+by [the orchestrator](/blog/how-the-boss-orchestrator-works/) on your machine, with no remote scheduler
 deciding when your agents wake up.
 
 ## What it costs — and what you keep
@@ -145,7 +145,7 @@ ownership.
 ---
 
 Munder Difflin is local-first orchestration you can watch: a hive of Claude Code agents coordinating
-through file mailboxes, local timers, and a git audit log — [all run by a GOD
+through file mailboxes, local timers, and a git audit log — [all run by a BOSS
 orchestrator](https://munderdiffl.in/#how) on your own machine. [Download Munder
 Difflin](https://munderdiffl.in/#install) to run a coordinated team of agents with no cloud in the
 loop; it's free and open source.

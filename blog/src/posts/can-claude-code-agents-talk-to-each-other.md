@@ -96,11 +96,11 @@ count**, so even a misbehaving thread is capped before it can run away.
 
 Peer-to-peer isn't the only direction that matters. Two special addresses round out the system.
 
-The first is the **orchestrator** (in our hive, the GOD agent). Anything ambiguous, cross-cutting, or
+The first is the **orchestrator** (in our hive, the BOSS agent). Anything ambiguous, cross-cutting, or
 needing sign-off goes to it rather than getting hashed out between peers. It hands out assignments,
 owns the shared plan, and is the one process allowed to commit — which is exactly why coordination
 stays coherent instead of fragmenting into side conversations. We cover that role in
-[how the GOD orchestrator works](/blog/how-the-god-orchestrator-works/).
+[how the BOSS orchestrator works](/blog/how-the-boss-orchestrator-works/).
 
 The second is **you**. A message addressed to a human doesn't land in an agent's inbox at all — the
 router diverts it to an approvals queue for a person to answer, and the answer comes back as a normal
@@ -148,7 +148,7 @@ reply comes back to the agent as a normal message.
 ---
 
 Munder Difflin runs exactly this system: a hive of Claude Code agents that message each other through
-atomic file mailboxes, escalate to [a GOD orchestrator](https://munderdiffl.in/#how), and ping you only
+atomic file mailboxes, escalate to [a BOSS orchestrator](https://munderdiffl.in/#how), and ping you only
 for the calls that matter — every envelope visible on a live office floor.
 [Download Munder Difflin](https://munderdiffl.in/#install) to watch your agents actually talk to each
 other; it's free and open source.

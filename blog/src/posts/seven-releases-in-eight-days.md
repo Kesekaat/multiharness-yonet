@@ -13,7 +13,7 @@ author:
   initials: CG
 faq:
   - q: "What shipped in the 0.4.x wave of Munder Difflin?"
-    a: "0.3.8 made memory condensation actually work; 0.3.9 added a check-for-updates panel; 0.4.0 rebuilt the brand and landing page with real screenshots; 0.4.1 renamed the GOD agent to your clone and named all ten engines; 0.4.2 added anonymous, opt-out telemetry with a public contract; 0.4.3 made Michael's portrait the logo; and 0.4.4 fixed agent messaging on Windows and added the skills catalog."
+    a: "0.3.8 made memory condensation actually work; 0.3.9 added a check-for-updates panel; 0.4.0 rebuilt the brand and landing page with real screenshots; 0.4.1 renamed the BOSS agent to your clone and named all ten engines; 0.4.2 added anonymous, opt-out telemetry with a public contract; 0.4.3 made Michael's portrait the logo; and 0.4.4 fixed agent messaging on Windows and added the skills catalog."
   - q: "Why release so often?"
     a: "Launch week. Thousands of new people hit the product at once and found things a small user base never would — Windows messaging, onboarding dead-ends, unreadable dark mode. When feedback arrives that fast, batching fixes into a monthly release just means people churn while the fix sits on a branch."
   - q: "Is telemetry in Munder Difflin opt-out or opt-in?"
@@ -60,8 +60,8 @@ icons can no longer drift apart, because none of them is hand-made anymore.
 
 ## 0.4.1 — the app says what the site says
 
-Small release, honest release. The site called Michael a clone of you; the app still said "GOD
-agent." Now [he's your clone everywhere](/blog/how-the-god-orchestrator-works/), his card says
+Small release, honest release. The site called Michael a clone of you; the app still said "BOSS
+agent." Now [he's your clone everywhere](/blog/how-the-boss-orchestrator-works/), his card says
 **BOSS**, and the engine card names all ten engines — it had been advertising three since before
 the other seven shipped. Words-only releases feel trivial until you count how many people meet
 your product through exactly those words.

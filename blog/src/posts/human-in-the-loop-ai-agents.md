@@ -55,7 +55,7 @@ escalates to a human; everything else the agents handle. A solid default:
 
 The power of making this *explicit* is that it becomes a control surface you can tune. Too many
 interruptions? Tighten the list. Agents doing things that scare you? Loosen what they're allowed to
-decide alone. In a hive, this policy lives in the [orchestrator's](/blog/how-the-god-orchestrator-works/)
+decide alone. In a hive, this policy lives in the [orchestrator's](/blog/how-the-boss-orchestrator-works/)
 instructions — so you adjust behavior by editing a prompt, not by shipping code.
 
 {% img "note-1" %}
@@ -136,7 +136,7 @@ tunable. If the queue is noisy, tighten the policy so more decisions are handled
 
 ---
 
-Munder Difflin ships human-in-the-loop the right way: a [GOD orchestrator](https://munderdiffl.in/#how) that resolves routine traffic
+Munder Difflin ships human-in-the-loop the right way: a [BOSS orchestrator](https://munderdiffl.in/#how) that resolves routine traffic
 itself and an approvals queue that escalates only the critical few — with your notes relayed straight
 back. [Download Munder Difflin](https://munderdiffl.in/#install) to run agents that stay autonomous
 and ask only when they should; it's free and open source.

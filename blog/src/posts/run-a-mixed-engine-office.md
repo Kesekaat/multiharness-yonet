@@ -14,23 +14,23 @@ author:
 faq:
   - q: "Which agent engines can Munder Difflin run on one floor?"
     a: "Seven CLI engines plus a local provider: Claude Code, Antigravity (Gemini), OpenAI Codex, OpenCode, Crush, pi.dev, and GitHub Copilot CLI, which joined in v0.3.3 as the first community-contributed engine. You pick the engine per hire from a visual picker in Add Agent, and they all participate in the same hive on the same office floor."
-  - q: "Can any engine be the GOD orchestrator?"
-    a: "Michael's engine is swappable from onboarding or a change-engine flow, and OpenCode, Crush, and pi.dev are god-eligible alongside Claude Code, Antigravity, and Codex. Claude Code is the strongest default because it has the native hook bridge and the deepest hive integration. Copilot CLI is a worker-only engine: its print mode exits per turn, so it can't run the floor."
+  - q: "Can any engine be the BOSS orchestrator?"
+    a: "Michael's engine is swappable from onboarding or a change-engine flow, and OpenCode, Crush, and pi.dev are boss-eligible alongside Claude Code, Antigravity, and Codex. Claude Code is the strongest default because it has the native hook bridge and the deepest hive integration. Copilot CLI is a worker-only engine: its print mode exits per turn, so it can't run the floor."
   - q: "Where do API keys and local model endpoints go?"
     a: "Settings -> AI Engines. Per-provider keys (Anthropic, OpenAI, Google, OpenRouter, Groq) are stored write-only in the encrypted secret broker — they're never read back into the renderer and are materialized main-only at spawn. The same panel holds per-engine local base-URLs for Ollama, LM Studio, or vLLM, plus default-model fields that OpenCode, Crush, and pi.dev pick up when they spawn."
   - q: "How do I run some desks on local or open-source models?"
     a: "Hire a worker on a local-capable engine — OpenCode, Crush, or pi.dev — and the Add Agent modal surfaces curated OSS-model quick-picks: a Local bucket of Mac-runnable Ollama tags (gpt-oss, Qwen3, DeepSeek-R1, Mistral Small, Llama 3.3 70B) and a BYOK bucket via Groq or OpenRouter. Clicking one fills the engine-correct model slug and rebuilds the spawn command for you."
   - q: "Why is GitHub Copilot CLI limited to dispatched tasks?"
-    a: "Copilot CLI runs in its documented non-interactive print mode (copilot -p), which exits after each turn and exposes no hook bridge. That means Copilot workers can't drain hive inbox mail — routed messages bounce to the GOD orchestrator instead of silently dropping. They're excellent for self-contained dispatched work, and they authenticate with your existing GitHub Copilot login, no new keys."
+    a: "Copilot CLI runs in its documented non-interactive print mode (copilot -p), which exits after each turn and exposes no hook bridge. That means Copilot workers can't drain hive inbox mail — routed messages bounce to the BOSS orchestrator instead of silently dropping. They're excellent for self-contained dispatched work, and they authenticate with your existing GitHub Copilot login, no new keys."
   - q: "What happens if a chosen engine's CLI isn't installed?"
     a: "The harness self-heals: it runs that engine's installer in the terminal, then automatically restarts and continues into the freshly installed binary in place. There's no dead-end and no manual step, and the flow is idempotent so the installer never fires twice."
 ---
 
-<div class="callout tldr"><span class="ic">TL;DR</span><p>You don't have to pick one agent CLI. Munder Difflin runs <strong>seven engines on one floor</strong> — Claude Code, Antigravity, Codex, OpenCode, Crush, pi.dev, and GitHub Copilot CLI — chosen <strong>per hire</strong> from a visual picker. The winning layout: <strong>Claude Code as the GOD orchestrator</strong> and hive-aware senior workers, <strong>Codex for coding bursts</strong>, <strong>Copilot for dispatched, self-contained tasks</strong>, and <strong>OpenCode / Crush / pi.dev on BYOK keys or local models</strong> for the routine majority. Keys and local endpoints live in <strong>Settings → AI Engines</strong>; OSS-model quick-picks fill the right slug for you.</p></div>
+<div class="callout tldr"><span class="ic">TL;DR</span><p>You don't have to pick one agent CLI. Munder Difflin runs <strong>seven engines on one floor</strong> — Claude Code, Antigravity, Codex, OpenCode, Crush, pi.dev, and GitHub Copilot CLI — chosen <strong>per hire</strong> from a visual picker. The winning layout: <strong>Claude Code as the BOSS orchestrator</strong> and hive-aware senior workers, <strong>Codex for coding bursts</strong>, <strong>Copilot for dispatched, self-contained tasks</strong>, and <strong>OpenCode / Crush / pi.dev on BYOK keys or local models</strong> for the routine majority. Keys and local endpoints live in <strong>Settings → AI Engines</strong>; OSS-model quick-picks fill the right slug for you.</p></div>
 
 Most multi-agent setups are a clone army: five copies of the same CLI on the same model, paying the same rate for wildly different jobs. That's like staffing an office entirely with regional managers. A real office has a manager, a couple of closers, and a lot of people doing solid routine work at a sensible salary.
 
-Munder Difflin is built for that second shape. Every hire — and Michael, the [GOD orchestrator](/blog/how-the-god-orchestrator-works/) himself — runs on a pluggable engine, picked from a visual provider picker at hire time. Here's how to lay out the floor.
+Munder Difflin is built for that second shape. Every hire — and Michael, the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) himself — runs on a pluggable engine, picked from a visual provider picker at hire time. Here's how to lay out the floor.
 
 ## The engine roster, honestly
 
@@ -48,7 +48,7 @@ One honest caveat up front: Copilot's print mode exits per turn and has no hook 
 
 ## The layout that works
 
-**Michael's office: Claude Code.** The orchestrator reads every request, adjudicates traffic, scribes the blackboard, and escalates only critical items to you. That's sustained, stateful, judgment-heavy work — give it the engine with native hooks and the tightest harness integration. (Michael's engine is swappable from onboarding or the change-engine flow if you want to experiment; OpenCode, Crush, and pi.dev are all god-eligible, backstopped by a provider-agnostic idle fallback.)
+**Michael's office: Claude Code.** The orchestrator reads every request, adjudicates traffic, scribes the blackboard, and escalates only critical items to you. That's sustained, stateful, judgment-heavy work — give it the engine with native hooks and the tightest harness integration. (Michael's engine is swappable from onboarding or the change-engine flow if you want to experiment; OpenCode, Crush, and pi.dev are all boss-eligible, backstopped by a provider-agnostic idle fallback.)
 
 **Senior desks: Claude Code or Antigravity, hive-aware.** Work that involves conversation — replying to routed messages, coordinating with other agents, long multi-step missions — needs engines that drain a mailbox. These are your closers.
 

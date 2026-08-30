@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Orchestrating Claude Code Agents: A Practical Guide — Munder Difflin Blog</title>
-<meta name="description" content="How to orchestrate Claude Code agents in practice: what orchestration means, how a GOD orchestrator routes and escalates work, and how to wire it up." />
+<meta name="description" content="How to orchestrate Claude Code agents in practice: what orchestration means, how a BOSS orchestrator routes and escalates work, and how to wire it up." />
 <link rel="canonical" href="https://munderdiffl.in/blog/claude-code-orchestration-guide/" />
 
 <link rel="icon" type="image/png" href="https://munderdiffl.in/logo.png" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Munder Difflin Blog" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Orchestrating Claude Code Agents: A Practical Guide — Munder Difflin Blog" />
-<meta property="og:description" content="How to orchestrate Claude Code agents in practice: what orchestration means, how a GOD orchestrator routes and escalates work, and how to wire it up." />
+<meta property="og:description" content="How to orchestrate Claude Code agents in practice: what orchestration means, how a BOSS orchestrator routes and escalates work, and how to wire it up." />
 <meta property="og:url" content="https://munderdiffl.in/blog/claude-code-orchestration-guide/" />
 <meta property="og:image" content="https://munderdiffl.in/media/og.png" />
 <meta property="og:locale" content="en_US" />
@@ -24,13 +24,13 @@
 <meta property="article:tag" content="Orchestration" />
 <meta property="article:tag" content="Multi-Agent" />
 <meta property="article:tag" content="Claude Code" />
-<meta property="article:tag" content="GOD" />
+<meta property="article:tag" content="BOSS" />
 
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Orchestrating Claude Code Agents: A Practical Guide — Munder Difflin Blog" />
-<meta name="twitter:description" content="How to orchestrate Claude Code agents in practice: what orchestration means, how a GOD orchestrator routes and escalates work, and how to wire it up." />
+<meta name="twitter:description" content="How to orchestrate Claude Code agents in practice: what orchestration means, how a BOSS orchestrator routes and escalates work, and how to wire it up." />
 <meta name="twitter:image" content="https://munderdiffl.in/media/og.png" />
 
 <link rel="alternate" type="application/atom+xml" title="Munder Difflin Blog" href="https://munderdiffl.in/blog/feed.xml" />
@@ -44,7 +44,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Orchestrating Claude Code Agents: A Practical Guide",
-  "description": "How to orchestrate Claude Code agents in practice: what orchestration means, how a GOD orchestrator routes and escalates work, and how to wire it up.",
+  "description": "How to orchestrate Claude Code agents in practice: what orchestration means, how a BOSS orchestrator routes and escalates work, and how to wire it up.",
   "image": ["https://munderdiffl.in/media/og.png"],
   "datePublished": "2026-05-28T00:00:00.000Z",
   "dateModified": "2026-05-28T00:00:00.000Z",
@@ -79,7 +79,7 @@
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "What does it mean to orchestrate Claude Code agents?", "acceptedAnswer": { "@type": "Answer", "text": "Orchestration is the layer that decides which agent does what: it reads your intent, decomposes it into tasks, routes each to the right agent, resolves routine questions between agents, and escalates only the decisions that genuinely need a human." } },
-    { "@type": "Question", "name": "Do I write the orchestration logic myself?", "acceptedAnswer": { "@type": "Answer", "text": "You can, but you don't have to. In Munder Difflin the orchestrator is itself a Claude agent — the GOD agent — so the routing intelligence is a prompt you tune, not code you maintain. The harness provides the mechanism (messaging, git, escalation queue); the agent provides the judgment." } },
+    { "@type": "Question", "name": "Do I write the orchestration logic myself?", "acceptedAnswer": { "@type": "Answer", "text": "You can, but you don't have to. In Munder Difflin the orchestrator is itself a Claude agent — the BOSS agent — so the routing intelligence is a prompt you tune, not code you maintain. The harness provides the mechanism (messaging, git, escalation queue); the agent provides the judgment." } },
     { "@type": "Question", "name": "How is an orchestrator different from a task queue?", "acceptedAnswer": { "@type": "Answer", "text": "A queue hands out work in order; it doesn't reason about it. An orchestrator reads each request, decides who's best suited, writes a self-contained task spec, and adapts when an agent gets blocked or two agents conflict." } }
     
   ]
@@ -150,7 +150,7 @@
       <a href="/blog/topics/orchestration/">Orchestration</a>
     </nav>
     <h1>Orchestrating Claude Code Agents: A Practical Guide</h1>
-    <p class="dek">How to orchestrate Claude Code agents in practice: what orchestration means, how a GOD orchestrator routes and escalates work, and how to wire it up.</p>
+    <p class="dek">How to orchestrate Claude Code agents in practice: what orchestration means, how a BOSS orchestrator routes and escalates work, and how to wire it up.</p>
     <div class="byline">
       <span class="av" aria-hidden="true">CG</span>
       <strong>Chaitanya Giri</strong>
@@ -170,7 +170,7 @@
 that turns "a few Claude Code agents" into "a team that finishes a goal." It reads your intent,
 <strong>decomposes</strong> it, <strong>routes</strong> each piece to the right agent, <strong>adjudicates</strong>
 the routine back-and-forth between agents, and <strong>escalates</strong> only the critical calls to
-you. In Munder Difflin that role is played by a GOD orchestrator — a Claude agent whose only job is to
+you. In Munder Difflin that role is played by a BOSS orchestrator — a Claude agent whose only job is to
 run the floor.</p></div>
 <p>Most “multi-agent” setups are really just multiple agents — several sessions running side by side
 with you in the middle, deciding who does what. The thing that makes them a <em>team</em> is orchestration.
@@ -201,11 +201,11 @@ human. It has no opinions. It must be reliable, not smart.</li>
 smart, and it’s allowed to be imperfect, because the mechanism keeps the system safe.</li>
 </ul>
 <p>In Munder Difflin the mechanism is the harness’s main process (it runs git, the message router, and
-the approvals queue) and the intelligence is the <strong>GOD agent</strong> — an ordinary <code>claude</code> process flagged
+the approvals queue) and the intelligence is the <strong>BOSS agent</strong> — an ordinary <code>claude</code> process flagged
 as the orchestrator, seated in the corner office. Because the orchestrator is a prompt, not a
 codebase, you tune <em>how</em> it routes and <em>what</em> it considers critical by editing its instructions, not
 by redeploying. That’s the practical heart of
-<a href="/blog/how-the-god-orchestrator-works/">how the GOD orchestrator works</a>.</p>
+<a href="/blog/how-the-boss-orchestrator-works/">how the BOSS orchestrator works</a>.</p>
 <figure class="fig fig-inline"><img src="/blog/assets/media/claude-code-orchestration-guide/note-1.png" alt="Hand-drawn sketch from “Orchestrating Claude Code Agents: A Practical Guide”" loading="lazy" decoding="async" /></figure>
 <h2 id="how-a-request-flows-through-the-orchestrator" tabindex="-1">How a request flows through the orchestrator <a class="anchor" href="#how-a-request-flows-through-the-orchestrator" aria-hidden="true">#</a></h2>
 <p>Here’s the path a single instruction takes, end to end:</p>
@@ -270,7 +270,7 @@ prompt, you correct the pattern by editing instructions.</p>
 <p><strong>Does orchestration add latency?</strong> A little — there’s a routing hop before work starts. In exchange
 you stop being the router yourself, which is almost always the bigger time sink.</p>
 <hr>
-<p>Munder Difflin ships this <a href="https://munderdiffl.in/#how">orchestration model</a> out of the box: a GOD agent you talk to, a reliable
+<p>Munder Difflin ships this <a href="https://munderdiffl.in/#how">orchestration model</a> out of the box: a BOSS agent you talk to, a reliable
 message router, and a human-approval queue for the critical few — all running locally.
 <a href="https://munderdiffl.in/#install">Download Munder Difflin</a> to orchestrate your own team of Claude Code
 agents; it’s free and open source.</p>
@@ -287,7 +287,7 @@ agents; it’s free and open source.</p>
         
         <div class="qa">
           <p class="q">Do I write the orchestration logic myself?</p>
-          <p class="a">You can, but you don&#39;t have to. In Munder Difflin the orchestrator is itself a Claude agent — the GOD agent — so the routing intelligence is a prompt you tune, not code you maintain. The harness provides the mechanism (messaging, git, escalation queue); the agent provides the judgment.</p>
+          <p class="a">You can, but you don&#39;t have to. In Munder Difflin the orchestrator is itself a Claude agent — the BOSS agent — so the routing intelligence is a prompt you tune, not code you maintain. The harness provides the mechanism (messaging, git, escalation queue); the agent provides the judgment.</p>
         </div>
         
         <div class="qa">
@@ -302,7 +302,7 @@ agents; it’s free and open source.</p>
       <hr />
       <div class="share">
         <span class="lbl">Tags</span>
-        <a class="tag" href="/blog/tags/orchestration/">Orchestration</a><a class="tag" href="/blog/tags/multi-agent/">Multi-Agent</a><a class="tag" href="/blog/tags/claude-code/">Claude Code</a><a class="tag" href="/blog/tags/god/">GOD</a>
+        <a class="tag" href="/blog/tags/orchestration/">Orchestration</a><a class="tag" href="/blog/tags/multi-agent/">Multi-Agent</a><a class="tag" href="/blog/tags/claude-code/">Claude Code</a><a class="tag" href="/blog/tags/boss/">BOSS</a>
       </div>
       
     </div>

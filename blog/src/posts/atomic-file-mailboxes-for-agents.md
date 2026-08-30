@@ -92,7 +92,7 @@ idea from decades of agent-communication research, the **speech act**, and drops
   "conversation":  "conv-7f3",                        // groups a thread
   "in_reply_to":   "<prev message id> | null",
   "from":          "agent.researcher",
-  "to":            "agent.coder | god | broadcast",
+  "to":            "agent.coder | boss | broadcast",
   "act":           "request | inform | propose | query | agree | refuse | done",
   "subject":       "short human-readable summary",
   "body":          "the details",
@@ -167,7 +167,7 @@ agent-to-agent and agent-to-orchestrator.
 
 ---
 
-Munder Difflin runs exactly this mailbox system inside [a hive the GOD orchestrator runs](https://munderdiffl.in/#how) — atomic
+Munder Difflin runs exactly this mailbox system inside [a hive the BOSS orchestrator runs](https://munderdiffl.in/#how) — atomic
 delivery, speech-act messages, hop caps, and a full git audit trail, all local.
 [Download Munder Difflin](https://munderdiffl.in/#install) to watch envelopes fly between agents on
 the office floor; it's free and open source.

@@ -101,7 +101,7 @@ escalate to a human queue instead of executing. A good default critical list:
 - **scope changes** (work drifting from what you asked), and
 - **conflicts** the team can't resolve.
 
-In a hive, the [orchestrator](/blog/how-the-god-orchestrator-works/) enforces this: routine decisions
+In a hive, the [orchestrator](/blog/how-the-boss-orchestrator-works/) enforces this: routine decisions
 it makes itself, critical ones it routes to an approvals queue — the
 [human-in-the-loop approvals](/blog/human-in-the-loop-ai-agents/) that keep an overnight run safe. You
 come back in the morning to a short list of "I needed your call on these," not a pile of irreversible

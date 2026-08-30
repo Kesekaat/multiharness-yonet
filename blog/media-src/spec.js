@@ -122,7 +122,7 @@ const SPEC = {
   // these entries exist only so buildNote() can draw their inline sketches.
   "why-we-built-munder-difflin": { a: "fleet", blue: "one floor, many desks", orange: "the itch that started it" },
   "your-first-hour-with-munder-difflin": { a: "terminal", blue: "first run", orange: "an office in an hour" },
-  "how-the-god-orchestrator-works": { a: "routing", blue: "michael routes the mail", orange: "one boss, many desks" },
+  "how-the-boss-orchestrator-works": { a: "routing", blue: "michael routes the mail", orange: "one boss, many desks" },
   "number-five-on-product-hunt": { a: "spotlight", blue: "first launch · self-hunted", orange: "Nº5 product of the day" },
   "what-reddit-told-us-about-munder-difflin": { a: "talk", blue: "ten subreddits", blue2: "we read every comment", orange: "the stadium had notes" },
   "launching-munder-difflin-v0-4-4": { a: "ship", blue: "v0.4.4", orange: "windows agents can finally talk" },

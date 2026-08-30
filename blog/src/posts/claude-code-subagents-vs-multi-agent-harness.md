@@ -144,7 +144,7 @@ doesn't take anything away.
 
 ---
 
-Munder Difflin is the harness layer: persistent agents, shared memory, direct messaging, and a GOD
+Munder Difflin is the harness layer: persistent agents, shared memory, direct messaging, and a BOSS
 orchestrator — wrapped around the Claude Code sessions (and subagents) you already use.
 [Download Munder Difflin](https://munderdiffl.in/#install) to turn helpers into a team; it's free and
 open source.

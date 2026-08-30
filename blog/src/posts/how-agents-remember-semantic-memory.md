@@ -134,7 +134,7 @@ A single agent with memory is useful. A *hive* with shared memory compounds:
 - A brand-new agent is useful immediately — it wakes up into the team's accumulated knowledge instead
   of a blank slate.
 
-That shared, durable recall is also what lets the [GOD orchestrator](/blog/how-the-god-orchestrator-works/)
+That shared, durable recall is also what lets the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/)
 route well: it can recall what's been tried and who knows what, instead of asking you every time.
 
 ## FAQ

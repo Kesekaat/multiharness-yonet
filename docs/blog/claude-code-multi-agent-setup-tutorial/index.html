@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Set Up a Claude Code Multi-Agent Workflow in 10 Minutes — Munder Difflin Blog</title>
-<meta name="description" content="A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the GOD orchestrator route your first task." />
+<meta name="description" content="A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the BOSS orchestrator route your first task." />
 <link rel="canonical" href="https://munderdiffl.in/blog/claude-code-multi-agent-setup-tutorial/" />
 
 <link rel="icon" type="image/png" href="https://munderdiffl.in/logo.png" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Munder Difflin Blog" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Set Up a Claude Code Multi-Agent Workflow in 10 Minutes — Munder Difflin Blog" />
-<meta property="og:description" content="A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the GOD orchestrator route your first task." />
+<meta property="og:description" content="A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the BOSS orchestrator route your first task." />
 <meta property="og:url" content="https://munderdiffl.in/blog/claude-code-multi-agent-setup-tutorial/" />
 <meta property="og:image" content="https://munderdiffl.in/media/og.png" />
 <meta property="og:locale" content="en_US" />
@@ -30,7 +30,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Set Up a Claude Code Multi-Agent Workflow in 10 Minutes — Munder Difflin Blog" />
-<meta name="twitter:description" content="A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the GOD orchestrator route your first task." />
+<meta name="twitter:description" content="A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the BOSS orchestrator route your first task." />
 <meta name="twitter:image" content="https://munderdiffl.in/media/og.png" />
 
 <link rel="alternate" type="application/atom+xml" title="Munder Difflin Blog" href="https://munderdiffl.in/blog/feed.xml" />
@@ -44,7 +44,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Set Up a Claude Code Multi-Agent Workflow in 10 Minutes",
-  "description": "A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the GOD orchestrator route your first task.",
+  "description": "A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the BOSS orchestrator route your first task.",
   "image": ["https://munderdiffl.in/media/og.png"],
   "datePublished": "2026-05-24T00:00:00.000Z",
   "dateModified": "2026-05-24T00:00:00.000Z",
@@ -150,7 +150,7 @@
       <a href="/blog/topics/guides/">Guides</a>
     </nav>
     <h1>Set Up a Claude Code Multi-Agent Workflow in 10 Minutes</h1>
-    <p class="dek">A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the GOD orchestrator route your first task.</p>
+    <p class="dek">A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the BOSS orchestrator route your first task.</p>
     <div class="byline">
       <span class="av" aria-hidden="true">CG</span>
       <strong>Chaitanya Giri</strong>
@@ -168,7 +168,7 @@
     <div class="prose">
       <div class="callout tldr"><span class="ic">TL;DR</span><p>A working
 <strong>Claude Code multi-agent setup</strong> takes about ten minutes: install Munder Difflin,
-point onboarding at a repo, let it auto-spawn a <strong>GOD orchestrator</strong>, add a couple of
+point onboarding at a repo, let it auto-spawn a <strong>BOSS orchestrator</strong>, add a couple of
 worker agents, and describe one task in plain language. The harness handles identity, messaging,
 memory, and git so the agents act like a team instead of a pile of terminal tabs.</p></div>
 <p>You can run several Claude Code sessions by hand, but the coordination — who does what, who knows
@@ -201,14 +201,14 @@ It’s the right default for a watch-it-work demo; turn it off if you want to co
 git repo, each agent’s memory, and the shared semantic memory palace. You never edit it by hand; it’s
 just where coordination lives.</p>
 <figure class="fig fig-inline"><img src="/blog/assets/media/claude-code-multi-agent-setup-tutorial/note-1.png" alt="Hand-drawn sketch from “Set Up a Claude Code Multi-Agent Workflow in 10 Minutes”" loading="lazy" decoding="async" /></figure>
-<h2 id="step-2-meet-the-god-orchestrator-1-minute" tabindex="-1">Step 2 — Meet the GOD orchestrator (1 minute) <a class="anchor" href="#step-2-meet-the-god-orchestrator-1-minute" aria-hidden="true">#</a></h2>
-<p>When the hive comes up, one agent is already there: the <strong>GOD orchestrator</strong>, seated in the corner
+<h2 id="step-2-meet-the-boss-orchestrator-1-minute" tabindex="-1">Step 2 — Meet the BOSS orchestrator (1 minute) <a class="anchor" href="#step-2-meet-the-boss-orchestrator-1-minute" aria-hidden="true">#</a></h2>
+<p>When the hive comes up, one agent is already there: the <strong>BOSS orchestrator</strong>, seated in the corner
 office. It’s an ordinary <code>claude</code> process with one extra job — it runs the floor. You talk to <em>it</em> in
 plain language, and it routes work to the other agents, answers their clarifying questions, and only
 interrupts you for genuinely critical calls (spending real money, destructive operations, scope
 changes).</p>
 <p>If you want the full mental model of what the orchestrator does under the hood, see
-<a href="/blog/how-the-god-orchestrator-works/">inside the GOD orchestrator</a>. For now, just know: it’s the
+<a href="/blog/how-the-boss-orchestrator-works/">inside the BOSS orchestrator</a>. For now, just know: it’s the
 one agent you address, and it manages the rest.</p>
 <h2 id="step-3-spawn-a-couple-of-worker-agents-2-minutes" tabindex="-1">Step 3 — Spawn a couple of worker agents (2 minutes) <a class="anchor" href="#step-3-spawn-a-couple-of-worker-agents-2-minutes" aria-hidden="true">#</a></h2>
 <p>Add two or three agents and give each a <strong>role</strong> — a name and a short description of its job:</p>
@@ -302,7 +302,7 @@ coordinated team of Claude Code agents — it’s free, local, and open source.<
     <aside class="toc-rail" aria-label="Table of contents">
       <div class="tt">On this page</div>
       <ol>
-        <li class="lvl-2"><a href="#before-you-start-2-minutes">Before you start (2 minutes)</a></li><li class="lvl-2"><a href="#step-1-finish-onboarding-2-minutes">Step 1 — Finish onboarding (2 minutes)</a></li><li class="lvl-2"><a href="#step-2-meet-the-god-orchestrator-1-minute">Step 2 — Meet the GOD orchestrator (1 minute)</a></li><li class="lvl-2"><a href="#step-3-spawn-a-couple-of-worker-agents-2-minutes">Step 3 — Spawn a couple of worker agents (2 minutes)</a></li><li class="lvl-2"><a href="#step-4-describe-one-task-and-watch-it-route-3-minutes">Step 4 — Describe one task and watch it route (3 minutes)</a></li><li class="lvl-2"><a href="#what-you-just-avoided">What you just avoided</a></li><li class="lvl-2"><a href="#faq">FAQ</a></li><li class="lvl-2"><a href="#next-steps">Next steps</a></li>
+        <li class="lvl-2"><a href="#before-you-start-2-minutes">Before you start (2 minutes)</a></li><li class="lvl-2"><a href="#step-1-finish-onboarding-2-minutes">Step 1 — Finish onboarding (2 minutes)</a></li><li class="lvl-2"><a href="#step-2-meet-the-boss-orchestrator-1-minute">Step 2 — Meet the BOSS orchestrator (1 minute)</a></li><li class="lvl-2"><a href="#step-3-spawn-a-couple-of-worker-agents-2-minutes">Step 3 — Spawn a couple of worker agents (2 minutes)</a></li><li class="lvl-2"><a href="#step-4-describe-one-task-and-watch-it-route-3-minutes">Step 4 — Describe one task and watch it route (3 minutes)</a></li><li class="lvl-2"><a href="#what-you-just-avoided">What you just avoided</a></li><li class="lvl-2"><a href="#faq">FAQ</a></li><li class="lvl-2"><a href="#next-steps">Next steps</a></li>
       </ol>
     </aside>
     

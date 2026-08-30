@@ -40,7 +40,7 @@ This guide walks through what's in it and how the pieces fit together.
 
 Six tabs, one control surface:
 
-- **Terminal** — Michael's own terminal, the [GOD orchestrator](/blog/how-the-god-orchestrator-works/) you talk to directly.
+- **Terminal** — Michael's own terminal, the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) you talk to directly.
 - **Floor** — the roster and dispatch controls: hire, dispatch work, pick a model per agent, and watch live fleet monitoring across everyone at once.
 - **Memory** — semantic search over the shared memory palace, plain text search, and a memory graph.
 - **Activity** — the append-only event log, the blackboard, real token telemetry, the observability view, and a CI watcher.

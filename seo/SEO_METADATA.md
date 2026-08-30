@@ -17,7 +17,7 @@ Confirmed against `README.md`, `docs/index.html`, `docs/DESIGN.md` on this branc
 
 | Claim in old briefs | Reality in repo (use this) |
 |---|---|
-| "macOS only" | Site copy says **macOS · Windows · Linux**; README badge still says macOS-first (just behind). **Resolution (god/Chaitanya sign-off 2026-06-03):** the live site copy is the source of truth — claim **all three: macOS, Windows, Linux** in metadata, JSON-LD `operatingSystem`, and platform wording. |
+| "macOS only" | Site copy says **macOS · Windows · Linux**; README badge still says macOS-first (just behind). **Resolution (boss/Chaitanya sign-off 2026-06-03):** the live site copy is the source of truth — claim **all three: macOS, Windows, Linux** in metadata, JSON-LD `operatingSystem`, and platform wording. |
 | "dark-minimal Inter + gold landing" | **False.** Landing is **neo-brutalist warm-paper** — Geist + JetBrains Mono, cream `#FFFDF7`, hard offset shadows, accents yellow `#FFCA54` / sky `#72C2DF` / maroon `#B23A4E`. The *app* is pixel/Animal-Crossing; the *site* is not. |
 | "memory layer = MemPalace" | Confirmed. Site calls it **MemPalace**, "a memory layer the whole office shares", "best-performing memory layer we know of." Use the MemPalace brand name in content. |
 | Theme color | Site `<meta name="theme-color">` = `#F5F2E8` (cream). Keep consistent. |
@@ -159,7 +159,7 @@ URL key: `/` = home, `#x` = home anchor, `/blog/...` = blog post (see BLOG_IDEAS
 | Default locale | `en_US` |
 | Title template | `%s — Munder Difflin` (home uses full title verbatim, no suffix) |
 | Default `<title>` (home) | `Munder Difflin — Local multi-agent harness for Claude Code` (60 chars) |
-| Default meta description | `Munder Difflin turns the Claude Code terminals you already run into a self-coordinating hive of agents — they message, route, and remember, run by a GOD orchestrator you talk to. Local, open source.` *(trim to ≤155 for tag, see §3 home)* |
+| Default meta description | `Munder Difflin turns the Claude Code terminals you already run into a self-coordinating hive of agents — they message, route, and remember, run by a BOSS orchestrator you talk to. Local, open source.` *(trim to ≤155 for tag, see §3 home)* |
 | Brand OG image | `https://munderdiffl.in/media/og.png` (2880×1640, PNG) |
 | Twitter card | `summary_large_image` |
 | Twitter handle | `‹FILL — none currently; omit twitter:site/creator until a handle exists›` |
@@ -179,10 +179,10 @@ URL key: `/` = home, `#x` = home anchor, `/blog/...` = blog post (see BLOG_IDEAS
 
 ### 3.1 Home — `https://munderdiffl.in/`
 - **title** (≤60): `Munder Difflin — Local multi-agent harness for Claude Code`
-- **description** (≤155): `Run a self-coordinating hive of Claude Code agents that message, route, and remember — orchestrated by a GOD agent you talk to. Local & open source.` *(151)*
+- **description** (≤155): `Run a self-coordinating hive of Claude Code agents that message, route, and remember — orchestrated by a BOSS agent you talk to. Local & open source.` *(151)*
 - **canonical:** `https://munderdiffl.in/`
 - **H1:** `Agents that build while you do your thing.` *(keep existing brand hero; SEO carried by title/description + section H2s)*
-- **OG:** `og:title` = `Munder Difflin — multi-agent harness for Claude Code` · `og:description` = `A local hive of Claude Code agents that message, route, and remember — coordinated by a GOD orchestrator you talk to. macOS, Windows & Linux.` · `og:type` = `website` · `og:url` = `https://munderdiffl.in/` · `og:image` = `https://munderdiffl.in/media/og.png`
+- **OG:** `og:title` = `Munder Difflin — multi-agent harness for Claude Code` · `og:description` = `A local hive of Claude Code agents that message, route, and remember — coordinated by a BOSS orchestrator you talk to. macOS, Windows & Linux.` · `og:type` = `website` · `og:url` = `https://munderdiffl.in/` · `og:image` = `https://munderdiffl.in/media/og.png`
 - **Twitter:** `twitter:card` = `summary_large_image` · `twitter:title` / `twitter:description` mirror OG · `twitter:image` = og.png
 
 > ✅ **APPLIED on `docs/index.html` (2026-06-03):** (1) trimmed the meta description to the ≤155 version above; (2) platform claim kept at all three (macOS, Windows, Linux) per sign-off; (3) added the `SoftwareApplication` + `Organization` + `WebSite` JSON-LD from §4; (4) added `twitter:title` + `twitter:description`; (5) added the blog RSS `<link rel="alternate">`. Additive head-only changes — page structure untouched.
@@ -194,12 +194,12 @@ URL key: `/` = home, `#x` = home anchor, `/blog/...` = blog post (see BLOG_IDEAS
 
 ### 3.3 "What it is" — `/#what`
 - **(if split) title:** `What is Munder Difflin? Multi-agent harness for Claude Code`
-- **description:** `Munder Difflin is an intelligent multi-agent harness for Claude Code agents that live locally in your terminal — wired into a hive mind with long-term memory and a GOD orchestrator.`
+- **description:** `Munder Difflin is an intelligent multi-agent harness for Claude Code agents that live locally in your terminal — wired into a hive mind with long-term memory and a BOSS orchestrator.`
 - **H2:** `An intelligent multi-agent harness for Claude Code`
 
 ### 3.4 "How it works" — `/#how`
 - **(if split) title:** `How Munder Difflin orchestrates Claude Code agents`
-- **description:** `See how the office floor works: many terminal agents managed and visualized, MemPalace shared memory, and a GOD agent that runs the floor through a hive mind.`
+- **description:** `See how the office floor works: many terminal agents managed and visualized, MemPalace shared memory, and a BOSS agent that runs the floor through a hive mind.`
 - **H2:** `An office you can actually see.`
 
 ### 3.5 "Claude" (integration) — `/#claude`
@@ -240,12 +240,12 @@ URL key: `/` = home, `#x` = home anchor, `/blog/...` = blog post (see BLOG_IDEAS
 
 ### 3.11 FAQ block (embeddable on home + posts)
 - Use the `FAQPage` JSON-LD in §4. Recommended seed Q&As (AEO-optimized, one-sentence answers):
-  - **What is Munder Difflin?** — "Munder Difflin is a local, open-source desktop app that turns the Claude Code terminals you already run into a self-coordinating hive of agents with shared memory, messaging, and a GOD orchestrator you talk to."
+  - **What is Munder Difflin?** — "Munder Difflin is a local, open-source desktop app that turns the Claude Code terminals you already run into a self-coordinating hive of agents with shared memory, messaging, and a BOSS orchestrator you talk to."
   - **Is Munder Difflin free?** — "Yes. Munder Difflin is free and open source under the MIT license; you can download a build or run it from source."
   - **Does it run my data in the cloud?** — "No. Munder Difflin is local-first — the harness, agents, and memory live on your own machine."
   - **What platforms does it support?** — "macOS, Windows, and Linux."
-  - **Can Claude Code agents talk to each other?** — "Yes. Each agent has a mailbox; the harness router delivers messages between agents, and a GOD orchestrator routes and adjudicates work."
-  - **How is this different from running several Claude Code terminals?** — "Munder Difflin adds coordination: shared long-term memory (MemPalace), inter-agent messaging, a GOD orchestrator, and a visual office floor — so the sessions act as one team instead of isolated windows."
+  - **Can Claude Code agents talk to each other?** — "Yes. Each agent has a mailbox; the harness router delivers messages between agents, and a BOSS orchestrator routes and adjudicates work."
+  - **How is this different from running several Claude Code terminals?** — "Munder Difflin adds coordination: shared long-term memory (MemPalace), inter-agent messaging, a BOSS orchestrator, and a visual office floor — so the sessions act as one team instead of isolated windows."
 
 ---
 
@@ -261,7 +261,7 @@ URL key: `/` = home, `#x` = home anchor, `/blog/...` = blog post (see BLOG_IDEAS
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Munder Difflin",
-  "description": "Local, open-source multi-agent harness for Claude Code. Turns the Claude Code terminals you already run into a self-coordinating hive of agents with long-term memory, inter-agent messaging, and a GOD orchestrator you talk to.",
+  "description": "Local, open-source multi-agent harness for Claude Code. Turns the Claude Code terminals you already run into a self-coordinating hive of agents with long-term memory, inter-agent messaging, and a BOSS orchestrator you talk to.",
   "url": "https://munderdiffl.in/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "macOS, Windows, Linux",
@@ -487,9 +487,9 @@ Single-page site + blog. `<lastmod>` must be updated on real changes (don't fake
 
 ### 5.5 Image `alt` guidelines
 - Describe content + function, include a keyword **only when natural**. No keyword stuffing.
-- Good (already in repo): *"Munder Difflin running a floor of Claude Code agents — avatars at their desks, the GOD orchestrator in Michael's office, and a live terminal session."*
+- Good (already in repo): *"Munder Difflin running a floor of Claude Code agents — avatars at their desks, the BOSS orchestrator in Michael's office, and a live terminal session."*
 - Decorative images (pure ornament): `alt=""`.
-- Blog hero images: `alt` = post topic in plain language, e.g. *"Diagram of a GOD orchestrator routing tasks to three Claude Code agents."*
+- Blog hero images: `alt` = post topic in plain language, e.g. *"Diagram of a BOSS orchestrator routing tasks to three Claude Code agents."*
 - Provide `width`/`height` on every `<img>` (prevents CLS — the repo already does this on the logo).
 
 ### 5.6 Heading rules
@@ -516,7 +516,7 @@ Single-page site + blog. `<lastmod>` must be updated on real changes (don't fake
 
 ### 6.1 Repo "About" description (≤350 chars; keyword-led)
 ```
-Local, open-source multi-agent harness for Claude Code. Turn the Claude Code terminals you already run into a self-coordinating hive of agents — with long-term memory, inter-agent messaging, and a GOD orchestrator you talk to. macOS, Windows & Linux. Electron · Pixi.js · xterm.js · node-pty.
+Local, open-source multi-agent harness for Claude Code. Turn the Claude Code terminals you already run into a self-coordinating hive of agents — with long-term memory, inter-agent messaging, and a BOSS orchestrator you talk to. macOS, Windows & Linux. Electron · Pixi.js · xterm.js · node-pty.
 ```
 
 ### 6.2 Repo website field
@@ -535,7 +535,7 @@ ai-orchestration · agent-memory · local-first · developer-tools · hive · mc
 ```markdown
 **Munder Difflin is a local, open-source multi-agent harness for [Claude Code](https://claude.com/claude-code).**
 It turns the Claude Code terminal sessions you already run into a self-coordinating **hive of
-autonomous agents** — each with long-term memory and a mailbox — coordinated by a **GOD orchestrator
+autonomous agents** — each with long-term memory and a mailbox — coordinated by a **BOSS orchestrator
 agent you talk to**, and visualized as avatars working a shared office floor. Run a whole office of
 Claude Code agents locally on macOS or Windows, message and route work between them, and let them
 build while you do your thing.
@@ -647,4 +647,4 @@ winnability).
 
 ---
 
-*End of SEO_METADATA.md — questions or domain/handle decisions go to god (conversation: munder-blog-seo).*
+*End of SEO_METADATA.md — questions or domain/handle decisions go to boss (conversation: munder-blog-seo).*

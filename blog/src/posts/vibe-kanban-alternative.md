@@ -66,7 +66,7 @@ one agent to hand a finding directly to another.
 The alternative flips the model: instead of *you* working a board, you describe intent and the system
 routes the work.
 
-- **An orchestrator decomposes and assigns.** A [GOD agent](/#how) you talk to in plain language
+- **An orchestrator decomposes and assigns.** A [BOSS agent](/#how) you talk to in plain language
   breaks your goal into tasks and routes them to the right agents — the board management happens for
   you.
 - **Shared memory.** Every agent reads and writes a [semantic memory layer](/#how) (MemPalace), so

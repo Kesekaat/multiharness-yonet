@@ -60,7 +60,7 @@ AutoGen).** A harness wraps agents you have; a framework is how you'd build one.
 
 ### Orchestrator
 **An orchestrator is the coordinator that decomposes your intent and routes work to the right
-agents,** escalating only the critical decisions. In Munder Difflin it's the [GOD agent](/#how) you
+agents,** escalating only the critical decisions. In Munder Difflin it's the [BOSS agent](/#how) you
 talk to in plain language.
 
 ### Hive

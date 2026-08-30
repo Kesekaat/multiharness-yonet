@@ -154,7 +154,7 @@ The abstract benefit is "agents remember." The concrete one shows up in your hab
 
 That's the quiet superpower of a memory layer: it makes a [coordinated team](/blog/coordinating-ai-coding-agents/)
 get better over time instead of starting cold every run. It's also what lets the
-[GOD orchestrator](/blog/how-the-god-orchestrator-works/) route well — it can recall what's been tried
+[BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) route well — it can recall what's been tried
 and who knows what.
 
 ## FAQ

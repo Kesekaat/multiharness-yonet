@@ -87,6 +87,6 @@ sane to leave running: it's your machine, your files, your rules.
 
 ---
 
-Munder Difflin is exactly this office — roles, shared memory, messaging, a GOD orchestrator, and a
+Munder Difflin is exactly this office — roles, shared memory, messaging, a BOSS orchestrator, and a
 floor you can watch, all local. [Download Munder Difflin](/#install) and staff your own; it's free and
 open source.

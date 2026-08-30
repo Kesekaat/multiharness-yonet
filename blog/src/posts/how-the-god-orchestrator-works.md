@@ -1,18 +1,18 @@
 ---
-title: "Inside the GOD Orchestrator: Routing, Adjudication, Escalation"
-description: "A deep dive into the Claude Code orchestrator: how a GOD agent reads requests, routes work, adjudicates routine traffic, and escalates the critical few."
+title: "Inside the BOSS Orchestrator: Routing, Adjudication, Escalation"
+description: "A deep dive into the Claude Code orchestrator: how a BOSS agent reads requests, routes work, adjudicates routine traffic, and escalates the critical few."
 date: 2026-05-30
 category: orchestration
 categoryLabel: Orchestration
 type: Technical
 primaryKeyword: "claude code orchestrator"
 secondaryKeywords: ["ai orchestrator", "agent routing", "supervisor agent"]
-tags: ["Orchestration", "GOD", "Multi-Agent", "Internals"]
+tags: ["Orchestration", "BOSS", "Multi-Agent", "Internals"]
 author:
   name: Chaitanya Giri
   initials: CG
 faq:
-  - q: "Is the GOD orchestrator a special kind of model?"
+  - q: "Is the BOSS orchestrator a special kind of model?"
     a: "No. It's an ordinary Claude Code process with a flag marking it as the orchestrator and a system prompt that defines its job. The intelligence is a normal agent; the harness around it provides the mechanism — routing, git, and the human-approval queue."
   - q: "What does the orchestrator escalate to a human?"
     a: "Only genuinely critical items: destructive operations, spending real money, scope changes, and conflicts it can't resolve. Everything else — clarifications, data asks, small plan tweaks — it resolves itself so the team stays autonomous."
@@ -20,7 +20,7 @@ faq:
     a: "Messages carry a hop count that increments on each reply; past a cap the item is escalated instead of bouncing forever. Only requests, queries, and proposals obligate a reply — pure informational messages are terminal."
 ---
 
-<div class="callout tldr"><span class="ic">TL;DR</span><p>The <strong>GOD orchestrator</strong> is the
+<div class="callout tldr"><span class="ic">TL;DR</span><p>The <strong>BOSS orchestrator</strong> is the
 supervisor agent that runs a hive of Claude Code agents. It's a normal Claude process — the
 <em>intelligence</em> — wrapped by a harness that provides the <em>mechanism</em> (a message router,
 single-committer git, and a human-approval queue). Its four jobs: keep the <strong>roster</strong>,
@@ -28,7 +28,7 @@ single-committer git, and a human-approval queue). Its four jobs: keep the <stro
 <strong>escalate</strong> only the critical few to you.</p></div>
 
 Every multi-agent system eventually needs one agent in charge — not to do the work, but to decide who
-does. In Munder Difflin that's the **GOD orchestrator**. This is a deep dive into how it actually
+does. In Munder Difflin that's the **BOSS orchestrator**. This is a deep dive into how it actually
 works: the split between intelligence and mechanism, the four jobs it owns, and the rules that keep it
 from looping or going rogue.
 
@@ -43,7 +43,7 @@ Instead, the orchestrator is split in two:
 - **The mechanism** lives in the harness's main process. It runs git (single committer), the message
   router that moves messages between agents, the append-only event log, and the approvals queue that
   holds items waiting on a human. The mechanism has no judgment. It's reliable plumbing.
-- **The intelligence** is the GOD agent itself — an ordinary `claude` process, flagged as the
+- **The intelligence** is the BOSS agent itself — an ordinary `claude` process, flagged as the
   orchestrator, that reads requests and decides what to do with them. Its routing and escalation
   *policy* live in its system prompt.
 
@@ -179,7 +179,7 @@ the harness simply gives him better tools.
 ## FAQ
 
 **Can I run without an orchestrator?** You can run agents without one, but then you're the
-orchestrator — assigning work and relaying messages by hand. The GOD agent exists to take that role
+orchestrator — assigning work and relaying messages by hand. The BOSS agent exists to take that role
 off your plate.
 
 **Where does the orchestrator "live"?** It's a fixed, always-on agent in the corner office (Michael's
@@ -188,6 +188,6 @@ another `claude` process — a special one.
 
 ---
 
-Munder Difflin's [GOD orchestrator](https://munderdiffl.in/#how) routes, adjudicates, and escalates for a whole hive of Claude Code
+Munder Difflin's [BOSS orchestrator](https://munderdiffl.in/#how) routes, adjudicates, and escalates for a whole hive of Claude Code
 agents — on your own machine, with a full audit trail. [Download Munder Difflin](https://munderdiffl.in/#install)
 to put one in charge of your floor; it's free and open source.

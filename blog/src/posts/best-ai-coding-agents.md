@@ -91,7 +91,7 @@ human-approves-each-step philosophy. Best if your team already lives in GitHub.
 
 All five tools above are essentially *one agent* helping you (or one autonomous agent on a task). A
 **multi-agent hive** is a different category: it coordinates *several* agents as a team — roles, a
-[GOD orchestrator](/blog/how-the-god-orchestrator-works/) that routes and escalates, shared
+[BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) that routes and escalates, shared
 [long-term memory](/blog/semantic-memory-for-ai-agents/), and a way to *watch* the work. That's the lane
 [Munder Difflin](/#what) is built for: a local-first hive over the Claude Code sessions you already run.
 

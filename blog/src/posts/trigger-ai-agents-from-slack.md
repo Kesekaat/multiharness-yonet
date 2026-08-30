@@ -36,7 +36,7 @@ to a local-first design.
 ## What "trigger from Slack" actually does
 
 The flow is one sentence: a message in a Slack channel you've connected becomes an item in
-[the orchestrator's](/blog/how-the-god-orchestrator-works/) queue, exactly like a task you'd type
+[the orchestrator's](/blog/how-the-boss-orchestrator-works/) queue, exactly like a task you'd type
 yourself. The orchestrator then triages and routes it to the right agent like any other piece of work.
 
 It's worth naming the direction. This is **inbound** — the outside world asking your hive to *do*
@@ -129,6 +129,6 @@ to reach it — nothing to host, and the local handler runs even if the tunnel d
 ---
 
 Munder Difflin turns a Slack channel into a remote control for a hive that still lives entirely on your
-machine — [orchestrated by GOD](https://munderdiffl.in/#how), verified at the edge, queued like any
+machine — [orchestrated by BOSS](https://munderdiffl.in/#how), verified at the edge, queued like any
 other task. [Download Munder Difflin](https://munderdiffl.in/#install) to drive your agents from chat;
 it's free and open source.

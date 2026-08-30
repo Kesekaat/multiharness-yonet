@@ -57,7 +57,7 @@ don't require re-reading anything. Then the orchestrator synthesized the four in
 The naive version of this is pasting comments into one chat session until it fills up. The
 problem isn't just context size — it's that a model skimming its 400th comment gets exactly as
 lazy as a human does. One agent per channel keeps each report grounded in a full, careful read,
-and the [orchestrator](/blog/how-the-god-orchestrator-works/) works from four distilled reports
+and the [orchestrator](/blog/how-the-boss-orchestrator-works/) works from four distilled reports
 instead of raw sludge. Fan out, then synthesize. It's the same
 [pattern](/blog/multi-agent-orchestration-patterns/) that works for code.
 

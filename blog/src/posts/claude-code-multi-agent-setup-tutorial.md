@@ -1,6 +1,6 @@
 ---
 title: "Set Up a Claude Code Multi-Agent Workflow in 10 Minutes"
-description: "A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the GOD orchestrator route your first task."
+description: "A from-zero Claude Code multi-agent setup: install Munder Difflin, onboard, spawn a few agents, and watch the BOSS orchestrator route your first task."
 date: 2026-05-24
 category: guides
 categoryLabel: Guides
@@ -22,7 +22,7 @@ faq:
 
 <div class="callout tldr"><span class="ic">TL;DR</span><p>A working
 <strong>Claude Code multi-agent setup</strong> takes about ten minutes: install Munder Difflin,
-point onboarding at a repo, let it auto-spawn a <strong>GOD orchestrator</strong>, add a couple of
+point onboarding at a repo, let it auto-spawn a <strong>BOSS orchestrator</strong>, add a couple of
 worker agents, and describe one task in plain language. The harness handles identity, messaging,
 memory, and git so the agents act like a team instead of a pile of terminal tabs.</p></div>
 
@@ -62,16 +62,16 @@ just where coordination lives.
 
 {% img "note-1" %}
 
-## Step 2 — Meet the GOD orchestrator (1 minute)
+## Step 2 — Meet the BOSS orchestrator (1 minute)
 
-When the hive comes up, one agent is already there: the **GOD orchestrator**, seated in the corner
+When the hive comes up, one agent is already there: the **BOSS orchestrator**, seated in the corner
 office. It's an ordinary `claude` process with one extra job — it runs the floor. You talk to *it* in
 plain language, and it routes work to the other agents, answers their clarifying questions, and only
 interrupts you for genuinely critical calls (spending real money, destructive operations, scope
 changes).
 
 If you want the full mental model of what the orchestrator does under the hood, see
-[inside the GOD orchestrator](/blog/how-the-god-orchestrator-works/). For now, just know: it's the
+[inside the BOSS orchestrator](/blog/how-the-boss-orchestrator-works/). For now, just know: it's the
 one agent you address, and it manages the rest.
 
 ## Step 3 — Spawn a couple of worker agents (2 minutes)

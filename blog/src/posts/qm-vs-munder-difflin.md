@@ -54,7 +54,7 @@ security posture — **Strict** (approval-gated), **Auto** (default screening), 
 **Munder Difflin answers it desk-first.** A desktop app on your machine where every agent
 is a **real CLI process in a real terminal** — Claude Code, Codex, Antigravity, Copilot,
 Grok, Kimi, and more, riding the subscriptions you already pay for. The floor is visual
-(yes, it looks like The Office), a GOD orchestrator routes work, agents share long-term
+(yes, it looks like The Office), a BOSS orchestrator routes work, agents share long-term
 memory, and background work runs as **scheduled missions** with Slack and webhook triggers.
 
 If you map the concepts across, most of qm's vocabulary has a Munder Difflin counterpart:

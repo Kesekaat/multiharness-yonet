@@ -110,7 +110,7 @@ until its drawings land, so nothing is ever broken.
 This is the one stage that is **not** automated, by design. The build output under `docs/blog` is served by
 GitHub Pages at **munderdiffl.in/blog**. Before that goes live, a person reviews the diff and approves the
 deploy. The orchestrator [escalates exactly this kind of "publish to the world"
-action](/blog/how-the-god-orchestrator-works/) to the human-approval queue rather than shipping it itself.
+action](/blog/how-the-boss-orchestrator-works/) to the human-approval queue rather than shipping it itself.
 
 The split is the lesson: **drafting and integration are autonomous; publishing is human-gated.** You get the
 throughput of an agent and the safety of a final human read. Nobody wants a hallucinated claim on their

@@ -72,7 +72,7 @@ just what falls out of matching price to need.
 
 In a single-agent setup, routing is a manual choice you make per session. In a hive, you can do better,
 because there's already a component that sees every task before it's handed out: the
-[orchestrator](/blog/how-the-god-orchestrator-works/). It's the natural place to decide which model each
+[orchestrator](/blog/how-the-boss-orchestrator-works/). It's the natural place to decide which model each
 task deserves.
 
 A simple, durable policy:

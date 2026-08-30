@@ -50,7 +50,7 @@ issues and sending pull requests. We'll credit every one of them by name at the 
 The Command Center — Michael's control surface — got the biggest single overhaul of the release. It's now the
 place you actually run the floor from, not just glance at it. The roster, dispatch, schedules, memory, and
 activity views were reworked to carry the new live signals (budgets, telemetry, breaker state) without turning
-into a wall of numbers. Small but real: the title-bar settings control is now a clear gear chip, the GOD
+into a wall of numbers. Small but real: the title-bar settings control is now a clear gear chip, the BOSS
 orchestration tabs scroll properly when there are a lot of them, and per-PTY input is serialized so the boot
 sequence can't jam mid-spawn.
 
@@ -147,7 +147,7 @@ and pull requests turned into features. Thank you, sincerely, to everyone below.
 
 - **@JLAD75** — the Windows hive router / `hooks.sock` report (#1).
 - **@albozes** — Michael cancelling his own bypass-permissions prompt (#2).
-- **@billrehm** — the Windows GOD-spawn error 193 (#22).
+- **@billrehm** — the Windows BOSS-spawn error 193 (#22).
 - **@darrensheffield** — the uv-not-installed assumption (#30) and macOS Gatekeeper (#29).
 - **@pdurlej** — the first-class Codex CLI provider request (#21).
 - **@wild-gobatz** — agents showing idle until clicked (#3).

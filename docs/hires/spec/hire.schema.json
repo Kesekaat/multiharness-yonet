@@ -62,7 +62,7 @@
       "type": "array",
       "maxItems": 12,
       "items": { "type": "string", "maxLength": 40 },
-      "description": "Capability tags written to the hive registry (routing hints for the GOD orchestrator)."
+      "description": "Capability tags written to the hive registry (routing hints for the BOSS orchestrator)."
     },
     "isolate": {
       "type": "boolean",

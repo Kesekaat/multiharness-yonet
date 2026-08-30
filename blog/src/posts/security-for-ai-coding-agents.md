@@ -83,7 +83,7 @@ untrusted content shouldn't be the path that *executes* privileged actions on it
   your gates (next section).
 - Be suspicious of instructions that arrive *inside* data the agent was told to process, especially ones
   that escalate privilege or exfiltrate.
-- Route messages between agents through an [orchestrator](/blog/how-the-god-orchestrator-works/) that can
+- Route messages between agents through an [orchestrator](/blog/how-the-boss-orchestrator-works/) that can
   apply policy, rather than letting any agent directly command another.
 
 You can't sanitize natural language perfectly. So you don't rely on detecting the attack — you rely on the

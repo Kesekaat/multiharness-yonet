@@ -19,7 +19,7 @@ faq:
   - q: "How does GitHub Copilot CLI work as an agent engine?"
     a: "Copilot runs in its documented non-interactive print mode: the harness spawns `copilot -p \"<prompt>\" -s --allow-all-tools --no-ask-user`, optionally with `--model` (Claude Sonnet 4.5 by default, GPT-5.4, or auto) and `--resume` for session continuity. Auto-approval flags are gated behind the same floor-wide auto-mode toggle as every other engine. It authenticates through your existing GitHub Copilot login — no new API key."
   - q: "Can a Copilot agent receive hive mail like Claude Code agents do?"
-    a: "Not yet, and we'd rather be honest about it: Copilot's print mode exits after each turn and has no hook bridge, so a Copilot worker can't be woken to drain an inbox. Mail routed to it bounces back to the GOD orchestrator, which re-routes or handles it. Copilot workers are great for dispatched, self-contained tasks; hive-aware engines like Claude Code remain the best orchestrators."
+    a: "Not yet, and we'd rather be honest about it: Copilot's print mode exits after each turn and has no hook bridge, so a Copilot worker can't be woken to drain an inbox. Mail routed to it bounces back to the BOSS orchestrator, which re-routes or handles it. Copilot workers are great for dispatched, self-contained tasks; hive-aware engines like Claude Code remain the best orchestrators."
   - q: "Do I need a new API key for Copilot?"
     a: "No. Munder Difflin drives the `copilot` CLI you already log into with your GitHub account — same as it drives your existing Claude Code, Codex, or Antigravity subscriptions. If the CLI isn't installed, the harness offers the official installer (npm install -g @github/copilot)."
   - q: "Do I still get everything from v0.3.2 and earlier?"
@@ -78,7 +78,7 @@ copilot -p "<your brief>" -s --allow-all-tools --no-ask-user [--model claude-son
 
 One honest caveat, by design: Copilot's print mode **exits after each turn** and exposes no hook
 bridge, so a Copilot worker can't be woken up to drain hive mail — anything routed to it bounces
-back to the GOD orchestrator for re-routing. Copilot agents shine on dispatched, self-contained
+back to the BOSS orchestrator for re-routing. Copilot agents shine on dispatched, self-contained
 tasks; hive-aware engines remain the best orchestrators. We'd rather ship the integration that's
 true than claim a drain path that isn't there yet.
 

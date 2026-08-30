@@ -83,22 +83,22 @@ There's a second kind of human-in-the-loop, though: not "approve this tool call"
 genuinely need a *person* to decide something" — an ambiguity, a conflict, a scope call. Where does that
 go when there's no human queue?
 
-To the **orchestrator**. In a hive, the [god/orchestrator](/#how) (we call him Michael) is the human's
+To the **orchestrator**. In a hive, the [boss/orchestrator](/#how) (we call him Michael) is the human's
 proxy on the floor — so a message addressed to `"human"` is simply routed there. (Triage, delegation,
 and escalation are the orchestrator's whole job —
-[how the god orchestrator works](/blog/how-the-god-orchestrator-works/).) The router does it with one
+[how the boss orchestrator works](/blog/how-the-boss-orchestrator-works/).) The router does it with one
 line:
 
 ```ts
 // src/main/hive.ts — resolve the recipient
-const resolveTo = (to) => (to === 'human' || to === 'god' ? godId : to);
+const resolveTo = (to) => (to === 'human' || to === 'boss' ? bossId : to);
 ```
 
-Both `"god"` and `"human"` collapse to the orchestrator's id. The orchestrator triages it, answers what
+Both `"boss"` and `"human"` collapse to the orchestrator's id. The orchestrator triages it, answers what
 it can, and escalates to the actual person — natively, in his own session — only for the genuinely
 critical calls. A `needsHuman` flag still rides along, but it's **cosmetic**: it tints the message
 envelope on the office-floor visualization. As the code comments note, it's "Cosmetic only — no queue
-behind it." The system even guards against a `god → "human"` message looping back to itself. One
+behind it." The system even guards against a `boss → "human"` message looping back to itself. One
 recipient, one source of truth, no parallel inbox to babysit.
 
 {% img "note-2" %}

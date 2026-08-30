@@ -187,7 +187,7 @@ append-only log tells you the <em>story</em> — how you got to the current stat
 a system where many agents act concurrently, the story is what you need.</p>
 <h2 id="one-json-object-per-line" tabindex="-1">One JSON object per line <a class="anchor" href="#one-json-object-per-line" aria-hidden="true">#</a></h2>
 <p>The format that makes this practical is <strong>JSONL</strong> — one JSON object per line:</p>
-<pre class="language-jsonl"><code class="language-jsonl">{"ts":1717286400123,"kind":"spawn","agentId":"researcher","name":"Researcher","isGod":false}
+<pre class="language-jsonl"><code class="language-jsonl">{"ts":1717286400123,"kind":"spawn","agentId":"researcher","name":"Researcher","isBoss":false}
 {"ts":1717286400456,"kind":"message","from":"researcher","to":"coder","act":"request","subject":"Need the schema","id":"…-a1b2"}
 {"ts":1717286401789,"kind":"drain","agentId":"coder","count":1}
 {"ts":1717286402111,"kind":"escalate","from":"coder","to":"human","subject":"Drop the users table?","id":"…-c3d4"}

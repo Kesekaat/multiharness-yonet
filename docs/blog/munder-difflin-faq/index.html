@@ -78,14 +78,14 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "What is Munder Difflin?", "acceptedAnswer": { "@type": "Answer", "text": "Munder Difflin is a local, open-source desktop app that turns the Claude Code terminals you already run into a self-coordinating hive of agents — with shared long-term memory, inter-agent messaging, and a GOD orchestrator you talk to." } },
+    { "@type": "Question", "name": "What is Munder Difflin?", "acceptedAnswer": { "@type": "Answer", "text": "Munder Difflin is a local, open-source desktop app that turns the Claude Code terminals you already run into a self-coordinating hive of agents — with shared long-term memory, inter-agent messaging, and a BOSS orchestrator you talk to." } },
     { "@type": "Question", "name": "Is Munder Difflin free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Munder Difflin is free and open source under the MIT license. You can download a build or run it from source — there's no paid tier to unlock the core." } },
     { "@type": "Question", "name": "Does it run my data or code in the cloud?", "acceptedAnswer": { "@type": "Answer", "text": "No. Munder Difflin is local-first — the harness, agents, and memory all live on your own machine. Your Claude Code sessions talk to Anthropic the same way they already do; Munder Difflin itself doesn't ship your code anywhere." } },
     { "@type": "Question", "name": "What platforms does Munder Difflin support?", "acceptedAnswer": { "@type": "Answer", "text": "macOS, Windows, and Linux. You can download a build or build it from source in a couple of commands." } },
-    { "@type": "Question", "name": "How is this different from running several Claude Code terminals myself?", "acceptedAnswer": { "@type": "Answer", "text": "Munder Difflin adds the coordination that loose terminals lack: shared long-term memory (MemPalace), inter-agent messaging, a GOD orchestrator that routes work, and a visual office floor — so the sessions act as one team instead of isolated windows that collide and forget, plus a task kanban board, scheduled recurring missions, real spend telemetry, GitHub issue ingestion, CI status watching, and desktop notifications — a full coordination layer rather than just a pretty face." } },
-    { "@type": "Question", "name": "Do I need to know how to code to use it?", "acceptedAnswer": { "@type": "Answer", "text": "You should be comfortable with Claude Code and a terminal, since Munder Difflin coordinates Claude Code agents. But you steer the team in plain language by talking to the GOD orchestrator — you don't script the coordination yourself." } },
+    { "@type": "Question", "name": "How is this different from running several Claude Code terminals myself?", "acceptedAnswer": { "@type": "Answer", "text": "Munder Difflin adds the coordination that loose terminals lack: shared long-term memory (MemPalace), inter-agent messaging, a BOSS orchestrator that routes work, and a visual office floor — so the sessions act as one team instead of isolated windows that collide and forget, plus a task kanban board, scheduled recurring missions, real spend telemetry, GitHub issue ingestion, CI status watching, and desktop notifications — a full coordination layer rather than just a pretty face." } },
+    { "@type": "Question", "name": "Do I need to know how to code to use it?", "acceptedAnswer": { "@type": "Answer", "text": "You should be comfortable with Claude Code and a terminal, since Munder Difflin coordinates Claude Code agents. But you steer the team in plain language by talking to the BOSS orchestrator — you don't script the coordination yourself." } },
     { "@type": "Question", "name": "What is MemPalace?", "acceptedAnswer": { "@type": "Answer", "text": "MemPalace is Munder Difflin's shared memory layer — a semantic store the whole hive reads and writes, mined automatically from each agent's plain-markdown notes, so agents recall relevant knowledge across sessions." } },
-    { "@type": "Question", "name": "What is the GOD orchestrator?", "acceptedAnswer": { "@type": "Answer", "text": "The GOD orchestrator is a coordinating agent you talk to in plain language. It decomposes your intent, routes work to the right agents, adjudicates routine decisions, and escalates only the genuinely critical ones to you." } },
+    { "@type": "Question", "name": "What is the BOSS orchestrator?", "acceptedAnswer": { "@type": "Answer", "text": "The BOSS orchestrator is a coordinating agent you talk to in plain language. It decomposes your intent, routes work to the right agents, adjudicates routine decisions, and escalates only the genuinely critical ones to you." } },
     { "@type": "Question", "name": "Can the agents talk to each other?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Each agent has a mailbox and a router delivers messages between them, so one agent can hand work or findings to another directly — without you relaying it." } },
     { "@type": "Question", "name": "Does Munder Difflin work with my existing Claude Code setup, MCP servers, and skills?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It coordinates the Claude Code you already run, including your tools, MCP servers, and skills — it adds a coordination layer rather than replacing your setup." } },
     { "@type": "Question", "name": "Is Munder Difflin affiliated with Dunder Mifflin or The Office?", "acceptedAnswer": { "@type": "Answer", "text": "No. The name is an affectionate parody — 'the world's best agents, the world's worst paper company.' It's an independent open-source project, not affiliated with NBC or The Office." } },
@@ -179,7 +179,7 @@
     <div class="prose">
       <div class="callout tldr"><span class="ic">TL;DR</span><p><strong>Munder Difflin</strong> is a free,
 open-source (MIT), local-first desktop app that turns the Claude Code terminals you already run into a
-coordinated hive — shared memory, messaging, and a <a href="/#how">GOD orchestrator</a> you talk to — on macOS,
+coordinated hive — shared memory, messaging, and a <a href="/#how">BOSS orchestrator</a> you talk to — on macOS,
 Windows, and Linux. The full answers to the questions people ask most are below.</p></div>
 <p>This page answers the questions we hear most about Munder Difflin, kept short and direct. If your
 question isn’t here, the <a href="https://github.com/chaitanyagiri/munder-difflin">GitHub repo</a> and the rest
@@ -210,7 +210,7 @@ free, open source, and local-first.</p>
         
         <div class="qa">
           <p class="q">What is Munder Difflin?</p>
-          <p class="a">Munder Difflin is a local, open-source desktop app that turns the Claude Code terminals you already run into a self-coordinating hive of agents — with shared long-term memory, inter-agent messaging, and a GOD orchestrator you talk to.</p>
+          <p class="a">Munder Difflin is a local, open-source desktop app that turns the Claude Code terminals you already run into a self-coordinating hive of agents — with shared long-term memory, inter-agent messaging, and a BOSS orchestrator you talk to.</p>
         </div>
         
         <div class="qa">
@@ -230,12 +230,12 @@ free, open source, and local-first.</p>
         
         <div class="qa">
           <p class="q">How is this different from running several Claude Code terminals myself?</p>
-          <p class="a">Munder Difflin adds the coordination that loose terminals lack: shared long-term memory (MemPalace), inter-agent messaging, a GOD orchestrator that routes work, and a visual office floor — so the sessions act as one team instead of isolated windows that collide and forget, plus a task kanban board, scheduled recurring missions, real spend telemetry, GitHub issue ingestion, CI status watching, and desktop notifications — a full coordination layer rather than just a pretty face.</p>
+          <p class="a">Munder Difflin adds the coordination that loose terminals lack: shared long-term memory (MemPalace), inter-agent messaging, a BOSS orchestrator that routes work, and a visual office floor — so the sessions act as one team instead of isolated windows that collide and forget, plus a task kanban board, scheduled recurring missions, real spend telemetry, GitHub issue ingestion, CI status watching, and desktop notifications — a full coordination layer rather than just a pretty face.</p>
         </div>
         
         <div class="qa">
           <p class="q">Do I need to know how to code to use it?</p>
-          <p class="a">You should be comfortable with Claude Code and a terminal, since Munder Difflin coordinates Claude Code agents. But you steer the team in plain language by talking to the GOD orchestrator — you don&#39;t script the coordination yourself.</p>
+          <p class="a">You should be comfortable with Claude Code and a terminal, since Munder Difflin coordinates Claude Code agents. But you steer the team in plain language by talking to the BOSS orchestrator — you don&#39;t script the coordination yourself.</p>
         </div>
         
         <div class="qa">
@@ -244,8 +244,8 @@ free, open source, and local-first.</p>
         </div>
         
         <div class="qa">
-          <p class="q">What is the GOD orchestrator?</p>
-          <p class="a">The GOD orchestrator is a coordinating agent you talk to in plain language. It decomposes your intent, routes work to the right agents, adjudicates routine decisions, and escalates only the genuinely critical ones to you.</p>
+          <p class="q">What is the BOSS orchestrator?</p>
+          <p class="a">The BOSS orchestrator is a coordinating agent you talk to in plain language. It decomposes your intent, routes work to the right agents, adjudicates routine decisions, and escalates only the genuinely critical ones to you.</p>
         </div>
         
         <div class="qa">

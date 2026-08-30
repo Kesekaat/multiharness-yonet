@@ -48,7 +48,7 @@ body:
       options:
         - Office floor / avatars
         - Terminals / PTY
-        - The hive (memory, routing, GOD agent)
+        - The hive (memory, routing, BOSS agent)
         - Files / git
         - Onboarding / config
         - Updates / releases

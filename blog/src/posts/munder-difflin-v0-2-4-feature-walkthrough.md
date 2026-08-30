@@ -17,12 +17,12 @@ faq:
   - q: "How does Codex achieve full hive parity in v0.2.4?"
     a: "v0.2.4 gives Codex a full lifecycle-hook bridge — the same integration Antigravity has had since v0.2.3. Both CLIs now go through one unified dispatch path: live status, inbox drain, and outbox routing work identically for Codex, Antigravity, and Claude Code."
   - q: "What is the WORK ORDER FROM HIVE terminal handoff?"
-    a: "When an agent's CLI has no inbox-drain path (no hook bridge, no idle-wake nudge), the hive types a structured WORK ORDER FROM HIVE message directly into the terminal. If the renderer is unavailable, the message bounces to the GOD agent instead of being dropped."
+    a: "When an agent's CLI has no inbox-drain path (no hook bridge, no idle-wake nudge), the hive types a structured WORK ORDER FROM HIVE message directly into the terminal. If the renderer is unavailable, the message bounces to the BOSS agent instead of being dropped."
   - q: "Why did localtunnel stop working for Slack and webhooks?"
     a: "loca.lt began serving a browser interstitial on all requests. That interstitial causes Slack's url_verification POST to fail and breaks saved webhook URLs silently. tunnelmole (MIT) passes POSTs straight through and is now used in both slack.ts and webhook.ts."
 ---
 
-<div class="callout tldr"><span class="ic">TL;DR</span><p><strong>v0.2.4</strong> completes the multi-provider story. This walkthrough covers every change in detail: the <strong>Codex lifecycle-hook bridge</strong> that brings Codex to full hive parity, the <strong>Antigravity agy-hook bridge</strong>, the <strong>terminal WORK ORDER handoff</strong> pattern, the new <strong>Schedules tab</strong>, the <strong>tunnelmole</strong> ingress switch, plus smaller fixes including the heartbeat re-engage fix, god's Terminal sidebar default, Windows spawn, and the task-board dismiss button.</p></div>
+<div class="callout tldr"><span class="ic">TL;DR</span><p><strong>v0.2.4</strong> completes the multi-provider story. This walkthrough covers every change in detail: the <strong>Codex lifecycle-hook bridge</strong> that brings Codex to full hive parity, the <strong>Antigravity agy-hook bridge</strong>, the <strong>terminal WORK ORDER handoff</strong> pattern, the new <strong>Schedules tab</strong>, the <strong>tunnelmole</strong> ingress switch, plus smaller fixes including the heartbeat re-engage fix, boss's Terminal sidebar default, Windows spawn, and the task-board dismiss button.</p></div>
 
 The [launch post for v0.2.4](/blog/launching-munder-difflin-v0-2-4/) covers what changed and why it matters. This post covers *how* it works — the mechanics behind each feature, what the code actually does, and what it means to use each one in practice.
 
@@ -68,7 +68,7 @@ Codex is no longer the third provider with an asterisk. It's a full hive partici
 
 Both Antigravity and Codex now have full hook bridges. But the multi-provider work raised a broader question: what should happen when a future provider has *no* inbox-drain path at all — no hook bridge, no idle-wake nudge — and you still need to get hive mail to it?
 
-The answer is a structured fallback: the hive types a `WORK ORDER FROM HIVE` message directly into the agent's terminal. The message is clearly labeled, delivered as terminal input, and actionable by any CLI that can read what's in its terminal. If the renderer is unavailable at the time mail arrives, the router bounces the message to the GOD agent rather than dropping it silently.
+The answer is a structured fallback: the hive types a `WORK ORDER FROM HIVE` message directly into the agent's terminal. The message is clearly labeled, delivered as terminal input, and actionable by any CLI that can read what's in its terminal. If the renderer is unavailable at the time mail arrives, the router bounces the message to the BOSS agent rather than dropping it silently.
 
 This pattern is honest about what the provider can and cannot do. If a CLI doesn't expose a mailbox path, typing into the terminal is exactly what a human operator would do. The work-order pattern makes that systematic and auditable instead of ad-hoc. It remains the fallback for any provider that doesn't have a hook bridge yet.
 
@@ -86,13 +86,13 @@ The underlying `ScheduledMission` data structure and scheduler logic are unchang
 
 ## Heartbeat re-engage fix
 
-The GOD orchestrator's adaptive heartbeat now re-engages when it has unread actionable inbox items. Previously, the heartbeat fired on schedule but could miss the case where god had mail waiting and nothing had triggered re-engagement — leaving actionable items sitting unread until the next scheduled tick.
+The BOSS orchestrator's adaptive heartbeat now re-engages when it has unread actionable inbox items. Previously, the heartbeat fired on schedule but could miss the case where boss had mail waiting and nothing had triggered re-engagement — leaving actionable items sitting unread until the next scheduled tick.
 
-The fix is straightforward: the heartbeat checks for unread actionable inbox items before cycling, and re-engages if it finds any. GOD no longer needs an external trigger to notice mail that arrived between heartbeat cycles.
+The fix is straightforward: the heartbeat checks for unread actionable inbox items before cycling, and re-engages if it finds any. BOSS no longer needs an external trigger to notice mail that arrived between heartbeat cycles.
 
 ## Terminal sidebar open by default
 
-The GOD orchestrator now opens with the Terminal sidebar visible from the start. You've always been able to open it — now you don't have to remember to. For most workflows, seeing god's terminal output immediately is the right default.
+The BOSS orchestrator now opens with the Terminal sidebar visible from the start. You've always been able to open it — now you don't have to remember to. For most workflows, seeing boss's terminal output immediately is the right default.
 
 {% img "note-2" %}
 
@@ -111,7 +111,7 @@ If you had a saved Slack webhook URL pointing at a loca.lt address, update it to
 
 ## Windows spawn fix
 
-Windows agent spawn has been iteratively improved across the v0.1.x and v0.2.x releases — from the original ENOENT binary-resolution fix in v0.1.8 to the lock-screen freeze fix in v0.2.0. A further Windows spawn fix (#22) addresses a specific spawn failure path for GOD orchestrator startup on Windows. If you were seeing GOD fail to initialize on Windows in previous builds, this release resolves it.
+Windows agent spawn has been iteratively improved across the v0.1.x and v0.2.x releases — from the original ENOENT binary-resolution fix in v0.1.8 to the lock-screen freeze fix in v0.2.0. A further Windows spawn fix (#22) addresses a specific spawn failure path for BOSS orchestrator startup on Windows. If you were seeing BOSS fail to initialize on Windows in previous builds, this release resolves it.
 
 ## Dismiss (✕) on task-board cards
 
@@ -119,7 +119,7 @@ The task kanban board (Command Center → Tasks) now has a dismiss button on eac
 
 ## What ships with v0.2.4
 
-Everything from v0.2.0 (observability, circuit breaker, fleet monitoring, persistence), v0.2.1 (queue-aware compaction, inbox-driven heartbeat), v0.2.2 (context gauges, all-human-dispatch-through-god, community fixes), and v0.2.3 (multi-provider foundation, Schedules tab, tunnelmole) is included. The full log is in the [CHANGELOG](https://github.com/chaitanyagiri/munder-difflin/blob/main/CHANGELOG.md).
+Everything from v0.2.0 (observability, circuit breaker, fleet monitoring, persistence), v0.2.1 (queue-aware compaction, inbox-driven heartbeat), v0.2.2 (context gauges, all-human-dispatch-through-boss, community fixes), and v0.2.3 (multi-provider foundation, Schedules tab, tunnelmole) is included. The full log is in the [CHANGELOG](https://github.com/chaitanyagiri/munder-difflin/blob/main/CHANGELOG.md).
 
 To use the new providers: install the relevant CLIs (`agy` for Antigravity, `codex` for OpenAI Codex) and put them on your `PATH`. When you add a worker in the Add Agent dialog, select the provider. The hive handles the rest.
 

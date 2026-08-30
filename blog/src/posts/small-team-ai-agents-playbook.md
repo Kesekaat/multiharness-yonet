@@ -39,7 +39,7 @@ Treat your agents like a small team with a lead, not a pile of interchangeable w
 
 Start with **one orchestrator** — the agent that holds the plan, breaks work into tasks, assigns them, and
 decides what's ready to integrate. Everything routes through it, so there's a single place that knows the
-state of the world. (This is the role the [GOD orchestrator](/blog/how-the-god-orchestrator-works/) plays
+state of the world. (This is the role the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) plays
 in a hive — the human's proxy on the floor.)
 
 Around it, run **two or three specialists**: maybe one for a feature area, one for review and verification,

@@ -48,7 +48,7 @@ loops and adds the parts a lone agent doesn't have:
 - **Messaging.** Agents pass information to each other directly, rather than through you.
 - **Shared memory.** Durable, cross-session knowledge so agent B can use what agent A learned.
 - **Orchestration.** A coordinator that decomposes your intent and assigns work — in Munder Difflin
-  that's the [GOD orchestrator](https://munderdiffl.in/#how), an agent you talk to in plain language.
+  that's the [BOSS orchestrator](https://munderdiffl.in/#how), an agent you talk to in plain language.
 - **Visibility.** A way to *see* what the team is doing, so it's not a black box.
 
 {% img "note-2" %}

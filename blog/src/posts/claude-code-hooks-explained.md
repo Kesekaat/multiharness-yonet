@@ -155,7 +155,7 @@ Two guards keep this safe:
 
 The result is an agent that drains its work queue on its own and only goes quiet when there's genuinely
 nothing left — the foundation of [letting agents build while you sleep](/blog/claude-code-automation-while-you-sleep/).
-It's also how the [GOD orchestrator](/blog/how-the-god-orchestrator-works/) keeps the whole floor
+It's also how the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) keeps the whole floor
 moving: route a task into an agent's inbox, and its next Stop hook picks it up automatically.
 
 {% img "note-2" %}

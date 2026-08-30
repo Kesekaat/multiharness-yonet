@@ -74,7 +74,7 @@ Getting started:
 - https://munderdiffl.in/blog/how-to-hire-from-the-agent-gallery/
 
 Orchestration:
-- https://munderdiffl.in/blog/how-the-god-orchestrator-works/
+- https://munderdiffl.in/blog/how-the-boss-orchestrator-works/
 - https://munderdiffl.in/blog/claude-code-orchestration-guide/
 - https://munderdiffl.in/blog/how-to-run-multiple-claude-code-agents/
 - https://munderdiffl.in/blog/run-a-mixed-engine-office/

@@ -30,7 +30,7 @@
 - [How to install and use Munder Difflin](https://munderdiffl.in/blog/how-to-install-and-use-munder-difflin/)
 - [Your first hour with Munder Difflin](https://munderdiffl.in/blog/your-first-hour-with-munder-difflin/)
 - [Frequently asked questions](https://munderdiffl.in/blog/munder-difflin-faq/)
-- [How the GOD orchestrator works](https://munderdiffl.in/blog/how-the-god-orchestrator-works/)
+- [How the BOSS orchestrator works](https://munderdiffl.in/blog/how-the-boss-orchestrator-works/)
 - [How to talk to your orchestrator (voice)](https://munderdiffl.in/blog/how-to-talk-to-your-orchestrator/)
 - [How to use the built-in Monaco IDE](https://munderdiffl.in/blog/how-to-use-the-built-in-monaco-ide/)
 

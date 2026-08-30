@@ -225,7 +225,7 @@ problem it was meant to remove. Show the problem gone, with evidence.</p>
 agent re-runs the checks from scratch and confirms the diff is exactly what was claimed.</p>
 <p>This isn’t bureaucracy — it catches the case where an agent’s <em>own</em> verification was subtly wrong (checked
 the wrong file, ran in a dirty environment, misread output). In practice it looks like an
-<a href="/blog/how-the-god-orchestrator-works/">orchestrator</a> independently re-running the typecheck and confirming
+<a href="/blog/how-the-boss-orchestrator-works/">orchestrator</a> independently re-running the typecheck and confirming
 “exactly these two files changed, zero stray bytes, passes here too” before folding the work in. It pairs
 naturally with <a href="/blog/human-in-the-loop-ai-agents/">human-in-the-loop gates</a>: the agent verifies, a peer
 re-verifies, and the human approves what’s hard to reverse. Each layer assumes the one before it can be

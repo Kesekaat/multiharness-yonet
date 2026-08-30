@@ -114,7 +114,7 @@ The main process can answer. That's what turns observation into control.
 The clearest example is the autonomous loop. When an agent hits `Stop`, the main process checks that
 agent's [inbox](/blog/atomic-file-mailboxes-for-agents/). If a message is waiting, it replies with
 `{"decision":"block","reason":"<the message>"}` — and Claude Code keeps the agent working to handle it
-instead of going idle. An agent that another agent (or the [orchestrator](/blog/how-the-god-orchestrator-works/))
+instead of going idle. An agent that another agent (or the [orchestrator](/blog/how-the-boss-orchestrator-works/))
 just messaged picks the work up on its own.
 
 The danger with any "keep going" mechanism is an infinite loop, so the payload carries a `stop_hook_active`

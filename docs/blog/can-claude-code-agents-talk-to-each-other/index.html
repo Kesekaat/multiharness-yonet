@@ -228,11 +228,11 @@ welcome!”-ing each other into an infinite loop. As a backstop, every message a
 count</strong>, so even a misbehaving thread is capped before it can run away.</p>
 <h2 id="talking-to-the-orchestrator-and-to-you" tabindex="-1">Talking to the orchestrator — and to you <a class="anchor" href="#talking-to-the-orchestrator-and-to-you" aria-hidden="true">#</a></h2>
 <p>Peer-to-peer isn’t the only direction that matters. Two special addresses round out the system.</p>
-<p>The first is the <strong>orchestrator</strong> (in our hive, the GOD agent). Anything ambiguous, cross-cutting, or
+<p>The first is the <strong>orchestrator</strong> (in our hive, the BOSS agent). Anything ambiguous, cross-cutting, or
 needing sign-off goes to it rather than getting hashed out between peers. It hands out assignments,
 owns the shared plan, and is the one process allowed to commit — which is exactly why coordination
 stays coherent instead of fragmenting into side conversations. We cover that role in
-<a href="/blog/how-the-god-orchestrator-works/">how the GOD orchestrator works</a>.</p>
+<a href="/blog/how-the-boss-orchestrator-works/">how the BOSS orchestrator works</a>.</p>
 <p>The second is <strong>you</strong>. A message addressed to a human doesn’t land in an agent’s inbox at all — the
 router diverts it to an approvals queue for a person to answer, and the answer comes back as a normal
 message. That’s how an agent reaches a human for the genuinely critical calls without anyone having to
@@ -267,7 +267,7 @@ human). The router diverts it to an approvals queue instead of an inbox, a perso
 reply comes back to the agent as a normal message.</p>
 <hr>
 <p>Munder Difflin runs exactly this system: a hive of Claude Code agents that message each other through
-atomic file mailboxes, escalate to <a href="https://munderdiffl.in/#how">a GOD orchestrator</a>, and ping you only
+atomic file mailboxes, escalate to <a href="https://munderdiffl.in/#how">a BOSS orchestrator</a>, and ping you only
 for the calls that matter — every envelope visible on a live office floor.
 <a href="https://munderdiffl.in/#install">Download Munder Difflin</a> to watch your agents actually talk to each
 other; it’s free and open source.</p>

@@ -42,8 +42,8 @@ agents from chat in about ten minutes.
 ## What you're building
 
 A message that @mentions your bot in a connected Slack channel becomes a task in
-[the orchestrator's](/blog/how-the-god-orchestrator-works/) queue — exactly like a task you'd type into
-the app yourself. GOD then triages it and routes it to the right agent. Two things make this feel
+[the orchestrator's](/blog/how-the-boss-orchestrator-works/) queue — exactly like a task you'd type into
+the app yourself. BOSS then triages it and routes it to the right agent. Two things make this feel
 conversational rather than fire-and-forget:
 
 - **Thread activation.** The first @mention in a thread "activates" it. After that, you can keep replying
@@ -147,7 +147,7 @@ In a channel where the bot is a member, type something like:
 
 > @YourBot summarize the open PRs in the api repo and flag anything stale
 
-The message lands in the queue, GOD routes it, and an agent picks it up. Keep the conversation going by
+The message lands in the queue, BOSS routes it, and an agent picks it up. Keep the conversation going by
 replying in that same thread — the hive is still listening. When the task is done, a summary appears
 right there in the thread.
 
@@ -201,6 +201,6 @@ Relaunch the app, copy the new URL, and re-paste it into Event Subscriptions.
 ---
 
 Munder Difflin turns a Slack thread into a remote control for an AI office that still lives entirely on
-your machine — [orchestrated by GOD](https://munderdiffl.in/#how), verified at the edge, and queued like
+your machine — [orchestrated by BOSS](https://munderdiffl.in/#how), verified at the edge, and queued like
 any other task. [Download Munder Difflin](https://munderdiffl.in/#install) to run your hive from chat;
 it's free and open source.

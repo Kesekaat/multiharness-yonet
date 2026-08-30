@@ -71,7 +71,7 @@ Adding a shared brain to a team of agents is a bigger shift than it sounds:
 - **Work compounds.** Agent B builds on what agent A learned an hour — or a week — ago.
 
 Layer messaging and an orchestrator on top of that memory and you've crossed from "parallel sessions"
-to a [multi-agent harness](/#what): agents with roles and mailboxes, a [GOD orchestrator](/#how) that
+to a [multi-agent harness](/#what): agents with roles and mailboxes, a [BOSS orchestrator](/#how) that
 routes work, and a visual office floor. That's [Munder Difflin](/#what) — open source (MIT), local-first,
 on macOS, Windows, and Linux.
 

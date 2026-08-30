@@ -46,7 +46,7 @@ It's widely described as a Cursor-equivalent experience *inside* VS Code with br
 
 **Munder Difflin** is not an editor or an extension — it's a **local multi-agent orchestration harness**
 that wraps the Claude Code agents you already run and coordinates them into a team. The orchestration,
-the files, and the [memory](/blog/semantic-memory-for-ai-agents/) all run on your machine; a GOD
+the files, and the [memory](/blog/semantic-memory-for-ai-agents/) all run on your machine; a BOSS
 orchestrator routes work, agents message each other through files, and you watch the whole thing on a
 visual office floor. It's MIT-licensed and [local-first by design](/blog/why-local-first-matters-for-ai-agents/).
 
@@ -82,7 +82,7 @@ would be overkill.
 ## Where Munder Difflin wins
 
 - **Coordinating many agents, not driving one.** Munder Difflin is built for a *team*: roles, a
-  [GOD orchestrator](/blog/how-the-god-orchestrator-works/) that routes and escalates, and
+  [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) that routes and escalates, and
   [file-based messaging](/blog/atomic-file-mailboxes-for-agents/) between agents. Cline's parallel
   terminal agents are a step toward this, but Munder Difflin makes coordination the whole product.
 - **Shared long-term memory.** A hive that [remembers across sessions](/blog/how-agents-remember-semantic-memory/)

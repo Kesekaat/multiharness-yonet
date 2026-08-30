@@ -203,4 +203,4 @@ Mirrors the MemPalace / Slack wiring 1:1 so it composes with existing code and o
 - ✅ v1 vertical slice behind `knowledgeGraph.enabled` (default off): **ingest → store → agent-retrieval** for **text/markdown + images**, with the `kg` CLI taught to agents via the injected prompt.
 - ✅ `npm run typecheck` clean; `node test/kg-core.test.cjs` green.
 - ✅ Remaining modalities/work listed above as follow-up, not half-implemented.
-- ✅ Done report to god (god QAs + merges to local main; this branch is not pushed/merged by me).
+- ✅ Done report to boss (boss QAs + merges to local main; this branch is not pushed/merged by me).

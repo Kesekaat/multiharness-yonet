@@ -17,7 +17,7 @@ faq:
   - q: "What models can a Copilot CLI agent use?"
     a: "The Add Agent flow includes a model picker for the Copilot engine with three options: Claude Sonnet 4.5 (the default), GPT-5.4, and auto, which lets Copilot choose. Your selection is passed to the CLI via the --model flag on every turn."
   - q: "Why does my Copilot agent's inbox mail go to the orchestrator instead?"
-    a: "By design. Copilot CLI runs in non-interactive print mode, which exits after each turn and exposes no hook bridge, so a Copilot worker cannot sit idle and drain a mailbox. Rather than letting routed mail silently drop, the harness bounces it to the GOD orchestrator, which handles or re-routes it. Use Copilot workers for dispatched, self-contained tasks and they work great."
+    a: "By design. Copilot CLI runs in non-interactive print mode, which exits after each turn and exposes no hook bridge, so a Copilot worker cannot sit idle and drain a mailbox. Rather than letting routed mail silently drop, the harness bounces it to the BOSS orchestrator, which handles or re-routes it. Use Copilot workers for dispatched, self-contained tasks and they work great."
   - q: "What does the auto-mode toggle change for Copilot agents?"
     a: "In auto mode the harness adds Copilot's auto-approval flags (-s --allow-all-tools --no-ask-user) so the agent can use tools without stopping to ask. With auto mode off, those flags are omitted and Copilot runs more conservatively — the same gating every other engine on the floor gets."
   - q: "Does a Copilot agent keep context between turns if print mode exits every time?"
@@ -90,7 +90,7 @@ Session continuity is handled with `--resume` (best-effort): print mode exits af
 
 This is the part worth reading twice. Print mode **exits per turn and exposes no hook bridge**, which means a Copilot worker can't do the thing hive-aware engines do: sit idle, notice mail in its inbox, and drain it. The engine is registered as non-hive-aware (`canReceiveInbox: false`) on purpose.
 
-So what happens when another agent routes a message to your Copilot worker? It **bounces to the GOD orchestrator** instead of silently dropping. Michael sees the bounced mail and handles or re-routes it — the message survives, it just doesn't land in a mailbox nobody is checking. (If you're new to how Michael adjudicates traffic, [the GOD orchestrator post](/blog/how-the-god-orchestrator-works/) explains the routing model.)
+So what happens when another agent routes a message to your Copilot worker? It **bounces to the BOSS orchestrator** instead of silently dropping. Michael sees the bounced mail and handles or re-routes it — the message survives, it just doesn't land in a mailbox nobody is checking. (If you're new to how Michael adjudicates traffic, [the BOSS orchestrator post](/blog/how-the-boss-orchestrator-works/) explains the routing model.)
 
 The practical rule: **use Copilot workers for dispatched, self-contained tasks.** "Take this issue, fix it, report back" is their sweet spot. Long-running conversational back-and-forth between agents is not — hand that to a hive-aware engine. Shipping the limitation honestly, with a bounce path instead of a black hole, was a deliberate design call in PR #101, and it's the right one.
 

@@ -76,7 +76,7 @@ routine, so this alone typically cuts spend by more than half without hurting qu
 
 This is a concrete feature in Munder Difflin, not just advice: the harness's per-agent model selection
 (`HarnessConfig.defaultModel` in `src/main/config.ts`) lets you assign a Haiku-class model to worker
-agents and an Opus-class model to the GOD orchestrator **today** — the cheap-workers/premium-lead pattern
+agents and an Opus-class model to the BOSS orchestrator **today** — the cheap-workers/premium-lead pattern
 configured directly.
 
 ## Lever 4 — Context discipline: don't pay to re-read everything, N times

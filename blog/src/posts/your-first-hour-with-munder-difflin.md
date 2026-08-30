@@ -60,7 +60,7 @@ Finish the wizard and you land on the floor: a pixel-art office, empty except fo
 
 You don't manage the workers. You talk to your clone, and he runs the floor. Click into Michael's terminal and type a brief the way you'd brief a colleague: what you want, which repo, what "done" looks like. Prefer talking? His voice mode opens with a live snapshot of the floor and can run nearly the whole app.
 
-Michael adjudicates. He creates tasks on the kanban, assigns them, and routes messages between agent inboxes. Workers you hire via **Add agent** each get a real CLI process in its own pseudo-terminal and, with the git-isolation toggle, their own worktree — so nobody collides on branches. How he decides what to route, resolve, or escalate is its own post: [how the orchestrator works](/blog/how-the-god-orchestrator-works/).
+Michael adjudicates. He creates tasks on the kanban, assigns them, and routes messages between agent inboxes. Workers you hire via **Add agent** each get a real CLI process in its own pseudo-terminal and, with the git-isolation toggle, their own worktree — so nobody collides on branches. How he decides what to route, resolve, or escalate is its own post: [how the orchestrator works](/blog/how-the-boss-orchestrator-works/).
 
 A good first brief is small and self-contained: "read this repo and write a REPORT.md summarizing the architecture" beats "refactor everything" for hour one.
 

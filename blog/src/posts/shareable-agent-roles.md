@@ -111,7 +111,7 @@ One honest scope note: **today, curation is a maintainer commit.** There is deli
 
 Here's the thesis. Once a role is a portable artifact, something compounding happens — a **community growth loop**. The best-tuned roles can be shared, then forked, then improved, then shared again. The person who finally nails the "security auditor" prompt doesn't keep that win to themselves and doesn't bury it in a blog post; they export a hire, and everyone downstream starts from their best version instead of from a blank box. Good configuration stops being a thing each person rediscovers and becomes a thing the community *accumulates*.
 
-This is the same move package registries made for code. Before npm or PyPI, reusing a library meant copying files and re-reading install instructions; the registry turned "here's how you set it up" into "here's the artifact, take it." Shareable Hires does that for agent *roles*. "Hire Pam" becomes the easy on-ramp that "write a system prompt" never was — and the floor that the [GOD orchestrator](/blog/how-the-god-orchestrator-works/) coordinates can fill up with proven coworkers instead of guesses.
+This is the same move package registries made for code. Before npm or PyPI, reusing a library meant copying files and re-reading install instructions; the registry turned "here's how you set it up" into "here's the artifact, take it." Shareable Hires does that for agent *roles*. "Hire Pam" becomes the easy on-ramp that "write a system prompt" never was — and the floor that the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) coordinates can fill up with proven coworkers instead of guesses.
 
 It also fits the broader bet behind Munder Difflin: **local-first, open-source, you own your floor.** The roles are MIT, the gallery has no login or trackers, the binary that runs an agent is always your own, and the human is always the one who hits spawn. Portability here doesn't mean handing control to a cloud — it means handing a *file* to a person, who stays in charge of what they do with it. (For why we [built it this way](/blog/why-we-built-munder-difflin/) in the first place, the origin story has the rest.)
 
@@ -121,7 +121,7 @@ The fastest way to feel the idea is to use it. Open [The Hiring Fair](https://mu
 
 - [Launching Munder Difflin v0.2.8: Shareable Hires](/blog/launching-munder-difflin-v0-2-8/) — the release.
 - [The hire manifest as untrusted input](/blog/hire-manifest-untrusted-input/) — the security deep-dive on the trust model.
-- [Inside the GOD orchestrator](/blog/how-the-god-orchestrator-works/) — who coordinates the roles you hire.
+- [Inside the BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) — who coordinates the roles you hire.
 - [The clone army trap](/blog/the-clone-army-trap-mixed-swarm-vs-identical-agents/) — why a *mix* of well-chosen roles beats ten identical agents.
 - [Why we built Munder Difflin](/blog/why-we-built-munder-difflin/) — the origin story.
 - [CHANGELOG](https://github.com/chaitanyagiri/munder-difflin/blob/main/CHANGELOG.md) — everything that shipped.

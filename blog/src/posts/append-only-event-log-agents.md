@@ -49,7 +49,7 @@ a system where many agents act concurrently, the story is what you need.
 The format that makes this practical is **JSONL** — one JSON object per line:
 
 ```jsonl
-{"ts":1717286400123,"kind":"spawn","agentId":"researcher","name":"Researcher","isGod":false}
+{"ts":1717286400123,"kind":"spawn","agentId":"researcher","name":"Researcher","isBoss":false}
 {"ts":1717286400456,"kind":"message","from":"researcher","to":"coder","act":"request","subject":"Need the schema","id":"…-a1b2"}
 {"ts":1717286401789,"kind":"drain","agentId":"coder","count":1}
 {"ts":1717286402111,"kind":"escalate","from":"coder","to":"human","subject":"Drop the users table?","id":"…-c3d4"}

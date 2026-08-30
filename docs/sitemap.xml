@@ -747,7 +747,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://munderdiffl.in/blog/how-the-god-orchestrator-works/</loc>
+    <loc>https://munderdiffl.in/blog/how-the-boss-orchestrator-works/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -855,7 +855,7 @@
   <url><loc>https://munderdiffl.in/blog/tags/seo/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://munderdiffl.in/blog/tags/engines/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://munderdiffl.in/blog/tags/launch/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/god/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://munderdiffl.in/blog/tags/boss/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://munderdiffl.in/blog/tags/messaging/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://munderdiffl.in/blog/tags/faq/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://munderdiffl.in/blog/tags/concurrency/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>

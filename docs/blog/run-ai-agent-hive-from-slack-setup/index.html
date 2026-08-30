@@ -185,8 +185,8 @@ a summary posts straight back into the same thread.</p>
 agents from chat in about ten minutes.</p>
 <h2 id="what-youre-building" tabindex="-1">What you’re building <a class="anchor" href="#what-youre-building" aria-hidden="true">#</a></h2>
 <p>A message that @mentions your bot in a connected Slack channel becomes a task in
-<a href="/blog/how-the-god-orchestrator-works/">the orchestrator’s</a> queue — exactly like a task you’d type into
-the app yourself. GOD then triages it and routes it to the right agent. Two things make this feel
+<a href="/blog/how-the-boss-orchestrator-works/">the orchestrator’s</a> queue — exactly like a task you’d type into
+the app yourself. BOSS then triages it and routes it to the right agent. Two things make this feel
 conversational rather than fire-and-forget:</p>
 <ul>
 <li><strong>Thread activation.</strong> The first @mention in a thread “activates” it. After that, you can keep replying
@@ -270,7 +270,7 @@ subtype — so it never talks to itself and never reacts to channel noise.</p>
 <blockquote>
 <p>@YourBot summarize the open PRs in the api repo and flag anything stale</p>
 </blockquote>
-<p>The message lands in the queue, GOD routes it, and an agent picks it up. Keep the conversation going by
+<p>The message lands in the queue, BOSS routes it, and an agent picks it up. Keep the conversation going by
 replying in that same thread — the hive is still listening. When the task is done, a summary appears
 right there in the thread.</p>
 <figure class="fig fig-inline"><img src="/blog/assets/media/run-ai-agent-hive-from-slack-setup/note-2.png" alt="Hand-drawn sketch from “Run Your AI Agent Hive from Slack: The Complete Setup”" loading="lazy" decoding="async" /></figure>
@@ -311,7 +311,7 @@ listens to.</p>
 Relaunch the app, copy the new URL, and re-paste it into Event Subscriptions.</p>
 <hr>
 <p>Munder Difflin turns a Slack thread into a remote control for an AI office that still lives entirely on
-your machine — <a href="https://munderdiffl.in/#how">orchestrated by GOD</a>, verified at the edge, and queued like
+your machine — <a href="https://munderdiffl.in/#how">orchestrated by BOSS</a>, verified at the edge, and queued like
 any other task. <a href="https://munderdiffl.in/#install">Download Munder Difflin</a> to run your hive from chat;
 it’s free and open source.</p>
 

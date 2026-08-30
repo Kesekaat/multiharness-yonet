@@ -15,7 +15,7 @@ faq:
   - q: "What is Orca (onorca.dev)?"
     a: "Orca is a free, MIT-licensed Agent Development Environment (ADE) from the YC-backed team at Stably AI. It's a cross-platform desktop IDE built for running coding agent CLIs — Claude Code, Codex, OpenCode, Gemini, Copilot, and dozens more — side by side, each in its own isolated git worktree, with Ghostty-inspired terminals, a VS Code-based editor, an embedded browser with Design Mode, GitHub and Linear integration, and iOS/Android companion apps."
   - q: "How is Munder Difflin different from Orca?"
-    a: "They sit at different altitudes. Orca is an IDE you sit in: you send prompts, compare agents, annotate diffs, and steer. Munder Difflin is an office that runs itself: a GOD orchestrator routes work between agents, agents share long-term memory and mailboxes, and work arrives via Slack, webhooks, schedules, or voice — with approval gates, budgets, and a circuit breaker so it can run for days without you watching."
+    a: "They sit at different altitudes. Orca is an IDE you sit in: you send prompts, compare agents, annotate diffs, and steer. Munder Difflin is an office that runs itself: a BOSS orchestrator routes work between agents, agents share long-term memory and mailboxes, and work arrives via Slack, webhooks, schedules, or voice — with approval gates, budgets, and a circuit breaker so it can run for days without you watching."
   - q: "Is Orca better than Munder Difflin?"
     a: "For interactive, editor-centric work, honestly, often yes. Orca's editing, diff-annotation, per-worktree browser preview, and mobile companion are more polished for hands-on driving. Munder Difflin wins when you want autonomy: orchestration, shared memory, external triggers, scheduling, and guardrails that let a team of agents work while you're away. They solve different problems."
   - q: "Can I use Orca and Munder Difflin together?"
@@ -26,7 +26,7 @@ faq:
     a: "Yes. Both are MIT-licensed, free, local-first desktop apps for macOS, Windows, and Linux, and both are bring-your-own-subscription — they wrap the agent CLIs and accounts you already have rather than reselling model access."
 ---
 
-<div class="callout tldr"><span class="ic">TL;DR</span><p><strong>Orca is an Agent IDE; Munder Difflin is an agent office.</strong> Orca (from YC-backed Stably AI) is the polished cockpit for <strong>driving coding agents interactively</strong> — parallel worktrees, great terminals, a VS Code editor, diff annotation, and a genuinely useful mobile companion. Munder Difflin is the layer above the cockpit: a <strong>GOD orchestrator</strong> that routes work, <strong>shared long-term memory</strong>, triggers from <strong>Slack, webhooks, schedules, and voice</strong>, and guardrails (approvals, budgets, circuit breaker) that make <strong>days-long autonomy</strong> safe. Both are free, MIT-licensed, local-first, BYO-subscription. Pick Orca to <em>sit and steer</em>; pick Munder Difflin to <em>delegate and walk away</em>. They coexist fine.</p></div>
+<div class="callout tldr"><span class="ic">TL;DR</span><p><strong>Orca is an Agent IDE; Munder Difflin is an agent office.</strong> Orca (from YC-backed Stably AI) is the polished cockpit for <strong>driving coding agents interactively</strong> — parallel worktrees, great terminals, a VS Code editor, diff annotation, and a genuinely useful mobile companion. Munder Difflin is the layer above the cockpit: a <strong>BOSS orchestrator</strong> that routes work, <strong>shared long-term memory</strong>, triggers from <strong>Slack, webhooks, schedules, and voice</strong>, and guardrails (approvals, budgets, circuit breaker) that make <strong>days-long autonomy</strong> safe. Both are free, MIT-licensed, local-first, BYO-subscription. Pick Orca to <em>sit and steer</em>; pick Munder Difflin to <em>delegate and walk away</em>. They coexist fine.</p></div>
 
 If you're evaluating tools for running multiple coding agents, Orca and Munder Difflin will both show up in your search — and on paper they rhyme. Both are free, MIT-licensed desktop apps. Both run on macOS, Windows, and Linux. Both wrap the agent CLIs you already pay for — Claude Code, Codex, OpenCode, and more — instead of reselling model access. Both isolate agents in git worktrees so parallel work doesn't collide.
 
@@ -56,7 +56,7 @@ Munder Difflin starts from the opposite question: what if you *don't* sit there?
 
 It's a local-first Electron app that turns the same agent CLIs — Claude Code, Codex, Antigravity, OpenCode, Crush, pi.dev, and GitHub Copilot CLI — into a **coordinated office**. Each agent is a real CLI process in its own pseudo-terminal and isolated worktree (same isolation idea as Orca — we've written about [how worktrees and the hive fit together](/blog/claude-code-git-worktrees-vs-hive/)), visualized as an affectionate parody of The Office cast on a pixel-art floor. The differences stack up above that:
 
-- A **GOD orchestrator** ("Michael") is the one agent you talk to. It routes tasks between workers, adjudicates their messages, resolves routine questions itself, and escalates only critical items to you. ([How the GOD orchestrator works.](/blog/how-the-god-orchestrator-works/))
+- A **BOSS orchestrator** ("Michael") is the one agent you talk to. It routes tasks between workers, adjudicates their messages, resolves routine questions itself, and escalates only critical items to you. ([How the BOSS orchestrator works.](/blog/how-the-boss-orchestrator-works/))
 - Agents share **long-term memory** — markdown-first, with a semantic recall index — so what one agent learns, the office remembers across sessions.
 - Work arrives without you: **Slack messages** ([which can spawn ephemeral workers that reply in-thread](/blog/trigger-ai-agents-from-slack/)), **webhooks**, **scheduled missions** with a heartbeat that re-engages a quiet floor, GitHub issue ingestion, and **voice** — Talk mode connects you to Michael over the OpenAI Realtime API.
 - Autonomy is bounded by **guardrails**: [human approval gates](/blog/human-in-the-loop-approving-ai-agents/) on spend, scope, and destructive operations; per-agent token budgets; a cost/runaway circuit breaker; and OpenTelemetry observability with real per-agent cost attribution.
@@ -71,7 +71,7 @@ v0.3.3 did add a built-in Monaco IDE — file tree, tabs, side-by-side diffs vs 
 |---|---|---|
 | Category | Agent IDE / ADE | Autonomous agent office |
 | You are the… | Driver | Manager |
-| Coordination | You, interactively | GOD orchestrator routes work |
+| Coordination | You, interactively | BOSS orchestrator routes work |
 | Memory | Per-session | Shared long-term + semantic recall |
 | Triggers | You send prompts | Typing, Slack, webhooks, schedules, voice |
 | Away-from-desk | Mobile app (monitor + steer) | Runs autonomously with approval gates |

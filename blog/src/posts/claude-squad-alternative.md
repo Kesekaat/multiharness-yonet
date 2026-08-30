@@ -72,7 +72,7 @@ that wraps the agents you already run and adds the coordination layer on top.
   compounds instead of evaporating at the end of each session.
 - **Inter-agent messaging.** Each agent has a mailbox; a router delivers messages between them, so
   agent A hands work to agent B directly — no human courier.
-- **An orchestrator.** A [GOD agent](/#how) you talk to in plain language decomposes your intent and
+- **An orchestrator.** A [BOSS agent](/#how) you talk to in plain language decomposes your intent and
   routes work across the team, so you stop hand-assigning everything.
 - **Visibility.** The whole floor is rendered as avatars at their desks, so "what's everyone doing?"
   has an answer at a glance.
