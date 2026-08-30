@@ -11,7 +11,7 @@ import {
   classifyEngineAvailability, engineAvailabilityBadge, engineAvailabilityMessage, engineBlocksOnboarding
 } from '@shared/engineAvailability';
 import type { ToolStatus } from '@shared/toolCatalog';
-import { useResolvedGodName } from '@/hooks/useResolvedGodName';
+import { useResolvedManagerName } from '@/hooks/useResolvedManagerName';
 
 export interface OnboardingWizardProps {
   onComplete: (config: HarnessConfig) => void;
@@ -89,8 +89,8 @@ const PROVIDER_BLURB_KEYS: Partial<Record<AgentProvider, string>> = {
 
 export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
   const { t } = useTranslation();
-  // Onboarding runs before god exists in the store, so read the persisted name.
-  const godName = useResolvedGodName();
+  // Onboarding runs before manager exists in the store, so read the persisted name.
+  const managerName = useResolvedManagerName();
   const [step, setStep] = useState<Step>('persona');
   // Self-identified audience (item 1). Undefined until chosen on the first screen;
   // the rest of the wizard reads `plain` to swap copy registers.
@@ -103,8 +103,8 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
   // Anonymous usage stats (TELEMETRY.md). Default ON (opt-out); persisted by
   // finish() so unchecking before finishing means nothing is ever sent.
   const [shareStats, setShareStats] = useState<boolean>(true);
-  const [godProvider, setGodProvider] = useState<AgentProvider>('claude');
-  const [godModel, setGodModel] = useState<string | undefined>(
+  const [managerProvider, setManagerProvider] = useState<AgentProvider>('claude');
+  const [managerModel, setManagerModel] = useState<string | undefined>(
     providerPreset('claude').recommendedOrchestratorModel
   );
   const [error, setError] = useState<string | undefined>();
@@ -124,7 +124,7 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
     finally { setProbing(false); }
   };
   useEffect(() => { void probeEngines(); }, []);
-  const selectedEngine = classifyEngineAvailability(engines, godProvider);
+  const selectedEngine = classifyEngineAvailability(engines, managerProvider);
   const engineBlocked = engineBlocksOnboarding(selectedEngine);
 
   // Permissions & reliability toggles. These apply IMMEDIATELY on change (their
@@ -193,9 +193,9 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
     if (!harnessHome) { setError(t('onboarding.errPickHome')); setBusy(false); setStep('home'); return; }
     // The orchestrator step already refuses to advance on this, but a late probe
     // result can change the answer after the user has moved on. Never write a
-    // godProvider that is known to be unable to boot.
+    // managerProvider that is known to be unable to boot.
     if (engineBlocked) {
-      setError(t('onboarding.errEngineNotInstalled', { label: providerPreset(godProvider).label }));
+      setError(t('onboarding.errEngineNotInstalled', { label: providerPreset(managerProvider).label }));
       setBusy(false); setStep('orchestrator'); return;
     }
     const ensure = await window.cth.ensureHarnessHome(harnessHome);
@@ -210,8 +210,8 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
       harnessHome, // the same trimmed value we just mkdir'd, not the raw field
       registeredRepos: repos,
       autoMode,
-      godProvider,
-      godModel,
+      managerProvider,
+      managerModel,
       telemetryEnabled: shareStats
     });
     setBusy(false);
@@ -341,7 +341,7 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
                           fontSize: 10, lineHeight: '14px', marginBottom: 3
                           // These labels are literal caps to match their siblings, so
                           // the orchestrator's name has to arrive upper-cased too.
-                        }}>{t(f.labelKey, { godName: godName.toUpperCase() })}</div>
+                        }}>{t(f.labelKey, { managerName: managerName.toUpperCase() })}</div>
                         <div style={{ fontSize: 12, lineHeight: '16px', color: 'var(--cth-ink-700)' }}>
                           {plain ? t(f.descPlainKey) : t(f.descKey)}
                         </div>
@@ -414,7 +414,7 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {AGENT_PROVIDER_PRESETS.filter((p) => canReceiveInbox(p.id)).map((p) => {
-                    const sel = godProvider === p.id;
+                    const sel = managerProvider === p.id;
                     return (
                       <label key={p.id} style={{
                         display: 'flex', alignItems: 'center', gap: 10,
@@ -425,14 +425,14 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
                       }}>
                         <input
                           type="radio"
-                          name="godProvider"
+                          name="managerProvider"
                           value={p.id}
                           checked={sel}
                           onChange={() => {
-                            setGodProvider(p.id);
+                            setManagerProvider(p.id);
                             // Reset the model to the new provider's recommended pick so the
                             // dropdown below always shows a valid model for the chosen engine.
-                            setGodModel(p.recommendedOrchestratorModel);
+                            setManagerModel(p.recommendedOrchestratorModel);
                           }}
                           style={{ width: 16, height: 16, flexShrink: 0 }}
                         />
@@ -485,7 +485,7 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
                     background: 'var(--cth-paper-100)', boxShadow: 'inset 0 0 0 2px var(--cth-ink-900)',
                     fontSize: 12, lineHeight: '17px', color: 'var(--cth-ink-900)'
                   }}>
-                    <span>{engineAvailabilityMessage(selectedEngine, providerPreset(godProvider).label)}</span>
+                    <span>{engineAvailabilityMessage(selectedEngine, providerPreset(managerProvider).label)}</span>
                     <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                       <PixelButton variant="secondary" size="sm" onClick={() => { void probeEngines(); }} disabled={probing}>
                         {probing ? 'checking...' : 'check again'}
@@ -501,11 +501,11 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                   <div style={{ fontSize: 12, color: 'var(--cth-ink-500)' }}>{t('onboarding.orchestrator.model')}</div>
                   <select
-                    value={godModel ?? ''}
-                    onChange={(e) => setGodModel(e.target.value || undefined)}
+                    value={managerModel ?? ''}
+                    onChange={(e) => setManagerModel(e.target.value || undefined)}
                     style={inputStyle}
                   >
-                    {modelsForProvider(godProvider).map((m) => (
+                    {modelsForProvider(managerProvider).map((m) => (
                       <option key={m.label} value={m.id ?? ''}>{m.label}</option>
                     ))}
                   </select>
@@ -724,7 +724,7 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
                       // screen, instead of letting a pick that cannot boot through
                       // to a Michael that never starts.
                       if (step === 'orchestrator' && engineBlocked) {
-                        setError(`${providerPreset(godProvider).label} is not installed. Install it and press "check again", or pick another engine.`);
+                        setError(`${providerPreset(managerProvider).label} is not installed. Install it and press "check again", or pick another engine.`);
                         return;
                       }
                       setError(undefined);

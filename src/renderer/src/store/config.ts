@@ -70,10 +70,10 @@ export interface HarnessConfig {
   defaultCommand: string;
   /** Default model for newly spawned agents (e.g. 'claude-sonnet-4-6[1m]'); unset = CLI default. */
   defaultModel?: string;
-  /** Which provider+model powers the GOD orchestrator ("Michael"). Default
+  /** Which provider+model powers the MANAGER orchestrator ("Michael"). Default
    *  'claude' / 'claude-opus-4-8'. Mirrors src/main/config.ts. */
-  godProvider?: AgentProvider;
-  godModel?: string;
+  managerProvider?: AgentProvider;
+  managerModel?: string;
   /** Per-server consent for the default MCP bundle, keyed by catalog id (mirrors
    *  src/main/config.ts; seeded from MCP_CATALOG). */
   mcpDefaults?: { [id: string]: { enabled: boolean } };
@@ -297,11 +297,11 @@ export function modelsForProvider(provider: AgentProvider): ModelOption[] {
 export const AGENT_MODELS: ModelOption[] = modelsForProvider('claude');
 
 /** Providers shown in the Command Center's cross-provider model picker.
- *  God must remain on a provider with a working inbox drain; otherwise switching
+ *  Manager must remain on a provider with a working inbox drain; otherwise switching
  *  to a terminal-only provider would silently disable orchestration. */
-export function modelProvidersForAgent(isGod = false) {
+export function modelProvidersForAgent(isManager = false) {
   return AGENT_PROVIDER_PRESETS.filter((preset) =>
-    preset.supportsModel && (!isGod || preset.canReceiveInbox)
+    preset.supportsModel && (!isManager || preset.canReceiveInbox)
   );
 }
 

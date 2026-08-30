@@ -43,19 +43,19 @@ export interface Tile { x: number; y: number; }
 export type Facing = 'up' | 'down' | 'left' | 'right';
 
 /** Kinds of small idle errands around the office (incl. plant watering).
- *  'smoke' is the boss special: cigar at the open window, god only. */
+ *  'smoke' is the boss special: cigar at the open window, manager only. */
 export type ErrandKind =
   | 'water' | 'window' | 'dispenser' | 'fridge' | 'shelf' | 'bin' | 'smoke';
 
 /** One idle-errand anchor: a stand tile + facing, an `fx` tile for the ambient
- *  animation, a duration, and an optional god-only restriction. */
+ *  animation, a duration, and an optional manager-only restriction. */
 export interface ErrandSpot {
   kind: ErrandKind;
   stand: Tile;
   facing: Facing;
   fx: Tile;
   duration: number;
-  godOnly?: boolean;
+  managerOnly?: boolean;
 }
 
 /** One tileset atlas + its placement in the global gid space. `embedded` marks
@@ -125,7 +125,7 @@ export interface ThemeConfig {
   /** Ordered atlases — order matches both the texture load order and the map's
    *  tileset array (texture[i] ↔ tilesets[i]). */
   tilesets: TilesetEntry[];
-  /** Desk-claim order, by spawn-point name (seat 0 = god / desk-ceo). */
+  /** Desk-claim order, by spawn-point name (seat 0 = manager / desk-ceo). */
   primarySeatNames: string[];
   /** Paired café table seats, in order. */
   cafeSeatNames: string[];
@@ -180,10 +180,10 @@ export const OFFICE_THEME: ThemeConfig = {
     { kind: 'water', stand: { x: 2, y: 20 }, facing: 'left', fx: { x: 1, y: 20 }, duration: 4.5 },
     { kind: 'water', stand: { x: 22, y: 20 }, facing: 'right', fx: { x: 23, y: 20 }, duration: 4.5 },
     { kind: 'water', stand: { x: 30, y: 20 }, facing: 'right', fx: { x: 31, y: 20 }, duration: 4.5 },
-    // the CEO office is the god's domain: its plant, window, cigar. Workers
+    // the CEO office is the manager's domain: its plant, window, cigar. Workers
     // never set foot in there for errands.
-    { kind: 'water', stand: { x: 6, y: 4 }, facing: 'up', fx: { x: 6, y: 3 }, duration: 4.5, godOnly: true },
-    { kind: 'smoke', stand: { x: 2, y: 3 }, facing: 'up', fx: { x: 2, y: 1 }, duration: 18, godOnly: true },
+    { kind: 'water', stand: { x: 6, y: 4 }, facing: 'up', fx: { x: 6, y: 3 }, duration: 4.5, managerOnly: true },
+    { kind: 'smoke', stand: { x: 2, y: 3 }, facing: 'up', fx: { x: 2, y: 1 }, duration: 18, managerOnly: true },
     { kind: 'water', stand: { x: 17, y: 4 }, facing: 'up', fx: { x: 17, y: 3 }, duration: 4.5 },
     // the two public wall windows — wind streaks drift into the room
     { kind: 'window', stand: { x: 10, y: 3 }, facing: 'up', fx: { x: 10, y: 1 }, duration: 5 },
@@ -255,16 +255,16 @@ export const BROOKLYN99_THEME: ThemeConfig = {
     clock: { x: 1, y: 1 },      // top-left corner → CLOSING TIME
   },
   // Placeholder errand anchors authored to brooklyn99.tmj's open floor (verified
-  // walkable against the map's collision layer + desk stamps). The godOnly spots
+  // walkable against the map's collision layer + desk stamps). The managerOnly spots
   // sit inside Holt's glass office.
   errandSpots: [
     // public plants around the bullpen
     { kind: 'water', stand: { x: 2, y: 13 }, facing: 'left', fx: { x: 1, y: 13 }, duration: 4.5 },
     { kind: 'water', stand: { x: 24, y: 15 }, facing: 'right', fx: { x: 25, y: 15 }, duration: 4.5 },
     { kind: 'water', stand: { x: 13, y: 15 }, facing: 'down', fx: { x: 13, y: 16 }, duration: 4.5 },
-    // Captain Holt's glass office — god's domain (plant + cigar at the window)
-    { kind: 'water', stand: { x: 28, y: 6 }, facing: 'up', fx: { x: 28, y: 5 }, duration: 4.5, godOnly: true },
-    { kind: 'smoke', stand: { x: 34, y: 2 }, facing: 'up', fx: { x: 34, y: 0 }, duration: 18, godOnly: true },
+    // Captain Holt's glass office — manager's domain (plant + cigar at the window)
+    { kind: 'water', stand: { x: 28, y: 6 }, facing: 'up', fx: { x: 28, y: 5 }, duration: 4.5, managerOnly: true },
+    { kind: 'smoke', stand: { x: 34, y: 2 }, facing: 'up', fx: { x: 34, y: 0 }, duration: 18, managerOnly: true },
     // public windows on the north wall — wind streaks drift in
     { kind: 'window', stand: { x: 14, y: 1 }, facing: 'up', fx: { x: 14, y: 0 }, duration: 5 },
     { kind: 'window', stand: { x: 22, y: 1 }, facing: 'up', fx: { x: 22, y: 0 }, duration: 5 },

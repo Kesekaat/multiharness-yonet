@@ -11,7 +11,7 @@ complete before you render anything.
 |---|---|---|
 | `HowAgents` | `docs/media/how-agents.{webm,mp4}` | Multiple terminal agents managed & visualized in the office simulation |
 | `HowMemPalace` | `docs/media/how-mempalace.{webm,mp4}` | The shared MemPalace memory layer + millisecond recall |
-| `HowGodHive` | `docs/media/how-god-hive.{webm,mp4}` | The GOD agent orchestrating every agent through the hive |
+| `HowManagerHive` | `docs/media/how-manager-hive.{webm,mp4}` | The MANAGER agent orchestrating every agent through the hive |
 | `HeroFallback` | `docs/media/hero.{webm,mp4}` | *Optional* synthetic hero — use only if you have no real screen recording yet |
 
 ## Preview live
@@ -32,7 +32,7 @@ npm run render:all          # all three HOW clips (webm + mp4)
 
 # or one at a time
 npm run render:agents:webm
-npm run render:godhive:mp4
+npm run render:managerhive:mp4
 # optional synthetic hero:
 npm run render:hero:webm && npm run render:hero:mp4
 ```

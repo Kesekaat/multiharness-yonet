@@ -257,16 +257,16 @@ export class HookServer {
       steer = this.control.takeSteer(agentId) ?? null;
     }
 
-    // Keep god's roster CURRENT. fleet.json is always fresh on disk, but god's
+    // Keep manager's roster CURRENT. fleet.json is always fresh on disk, but manager's
     // context is not: after a restart it resumes a transcript describing the old
     // floor and messages agents that are long gone. Push the live roster in as
-    // additionalContext at the start of each session and on every prompt, so god
+    // additionalContext at the start of each session and on every prompt, so manager
     // knows the floor all the time instead of only when it remembers to Read.
-    // God-only and one line — every other agent is unaffected.
+    // Manager-only and one line — every other agent is unaffected.
     const wantsRoster = (event === 'SessionStart' || event === 'UserPromptSubmit')
-      && !!agentId && this.hive.isGod(agentId);
+      && !!agentId && this.hive.isManager(agentId);
     // Hand the roster the LIVE context-window occupancy (contextById) so each
-    // agent line can carry a `ctx NN%` — god then sees whose context is nearly
+    // agent line can carry a `ctx NN%` — manager then sees whose context is nearly
     // full when it routes work, instead of guessing from cumulative token spend.
     const roster = wantsRoster
       ? this.hive.rosterContext((id) => this.contextFor(id))

@@ -6,7 +6,7 @@
  * These are THIN — every tool just forwards a {verb, ...args} to the main process
  * (src/main/realtimeActions.ts), which owns the entire safety spine: the soft-vs-
  * destructive tiering, the two-step verbal echo-back confirm, the distinct-token
- * rule, the hard allowlist (kill-god / mass-ops forbidden), and the michael-voice
+ * rule, the hard allowlist (kill-manager / mass-ops forbidden), and the michael-voice
  * attribution. The renderer is the untrusted side, so it holds NO policy — it only
  * speaks back what main returns (`res.spoken`).
  *
@@ -200,7 +200,7 @@ export function realtimeActionTools(): ReturnType<typeof tool>[] {
     tool({
       name: 'kill_agent',
       description:
-        'Terminate a running agent (closes its terminal, archives it). DESTRUCTIVE — does NOT run immediately; returns an echo-back and asks for verbal confirmation. After the user confirms, call confirm_action. Killing the god orchestrator or all agents at once is forbidden.',
+        'Terminate a running agent (closes its terminal, archives it). DESTRUCTIVE — does NOT run immediately; returns an echo-back and asks for verbal confirmation. After the user confirms, call confirm_action. Killing the manager orchestrator or all agents at once is forbidden.',
       parameters: {
         type: 'object',
         properties: { agentId: { type: 'string', description: 'Agent name or id to kill.' } },
@@ -319,7 +319,7 @@ export function realtimeActionTools(): ReturnType<typeof tool>[] {
     tool({
       name: 'clear_agent_context',
       description:
-        "Queue a context clear (/clear) for one agent — wipes its working memory of the current conversation; delivery waits until the agent is idle. DESTRUCTIVE — returns an echo-back and asks for verbal confirmation ('clear' or 'confirm'). After the user confirms, call confirm_action. Allowed on the god orchestrator too (it can resume its session).",
+        "Queue a context clear (/clear) for one agent — wipes its working memory of the current conversation; delivery waits until the agent is idle. DESTRUCTIVE — returns an echo-back and asks for verbal confirmation ('clear' or 'confirm'). After the user confirms, call confirm_action. Allowed on the manager orchestrator too (it can resume its session).",
       parameters: {
         type: 'object',
         properties: { agentId: { type: 'string', description: 'Agent name or id whose context to clear.' } },
@@ -350,7 +350,7 @@ export function realtimeActionTools(): ReturnType<typeof tool>[] {
           label: { type: 'string', description: 'Short name for the schedule.' },
           prompt: { type: 'string', description: 'The message the agent receives each time it fires.' },
           intervalMinutes: { type: 'number', description: 'How often it fires, in minutes (min 5). Default 60.' },
-          to: { type: 'string', description: 'Target agent name or id. Default: the god orchestrator.' }
+          to: { type: 'string', description: 'Target agent name or id. Default: the manager orchestrator.' }
         },
         required: ['label', 'prompt'],
         additionalProperties: false
@@ -360,7 +360,7 @@ export function realtimeActionTools(): ReturnType<typeof tool>[] {
     tool({
       name: 'update_setting',
       description:
-        "Change one app setting from the voice-allowed list. Cosmetic/low-risk keys (notifications, officeTheme, terminalTheme, freeflowEnabled, strongKeepalive, autoUpdate, tvShowOffices, realtimeIdleDisconnectMs) apply immediately; behavior-changing keys (autoMode, defaultModel, godProvider, godModel, maxConcurrentWorkers, costCapTokens, maxTurns, slackEnabled, webhookEnabled, semanticMemory, multiWindow) return an echo-back with old→new and need verbal confirmation ('setting' or 'confirm') — then call confirm_action. Secrets, folders and anything not listed are refused.",
+        "Change one app setting from the voice-allowed list. Cosmetic/low-risk keys (notifications, officeTheme, terminalTheme, freeflowEnabled, strongKeepalive, autoUpdate, tvShowOffices, realtimeIdleDisconnectMs) apply immediately; behavior-changing keys (autoMode, defaultModel, managerProvider, managerModel, maxConcurrentWorkers, costCapTokens, maxTurns, slackEnabled, webhookEnabled, semanticMemory, multiWindow) return an echo-back with old→new and need verbal confirmation ('setting' or 'confirm') — then call confirm_action. Secrets, folders and anything not listed are refused.",
       parameters: {
         type: 'object',
         properties: {

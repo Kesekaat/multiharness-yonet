@@ -17,7 +17,7 @@
  */
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { DEFAULT_GOD_NAME } from '@shared/godIdentity';
+import { DEFAULT_MANAGER_NAME } from '@shared/managerIdentity';
 import en from './locales/en.json';
 import zhCN from './locales/zh-CN.json';
 import ar from './locales/ar.json';
@@ -70,20 +70,20 @@ const SUPPORTED: readonly string[] = LANGUAGES.map((l) => l.code);
 /**
  * The orchestrator's display name, for every string that talks about it.
  *
- * The user can rename the god, and roughly forty strings mention it. Baking
+ * The user can rename the manager, and roughly forty strings mention it. Baking
  * "Michael" into the locale files would silently undo that rename everywhere at
  * once — a bug this codebase has already fixed three times in the spawn path.
- * So the locales say `{{godName}}` and the live name is supplied here as an
+ * So the locales say `{{managerName}}` and the live name is supplied here as an
  * i18next DEFAULT VARIABLE, which means no call site has to pass it. A call site
  * that needs a variant (an upper-cased title, say) still overrides it by passing
- * `godName` explicitly.
+ * `managerName` explicitly.
  */
-export function setGodName(name: string | undefined | null): void {
-  const next = name?.trim() || DEFAULT_GOD_NAME;
+export function setManagerName(name: string | undefined | null): void {
+  const next = name?.trim() || DEFAULT_MANAGER_NAME;
   const interpolation = i18n.options.interpolation ?? (i18n.options.interpolation = {});
   const vars = interpolation.defaultVariables ?? (interpolation.defaultVariables = {});
-  if (vars.godName === next) return;
-  vars.godName = next;
+  if (vars.managerName === next) return;
+  vars.managerName = next;
   // react-i18next re-renders on this event. Without it a rename would only
   // reach strings that happened to re-render for some other reason.
   i18n.emit('languageChanged', i18n.language);
@@ -119,9 +119,9 @@ void i18n
     // there at init time. Keeping this false lets every component call
     // useTranslation() without wrapping the tree in <Suspense>.
     react: { useSuspense: false },
-    // `defaultVariables` is what lets every {{godName}} string resolve without
-    // its call site knowing god's name. setGodName() keeps it current.
-    interpolation: { escapeValue: false, defaultVariables: { godName: DEFAULT_GOD_NAME } },
+    // `defaultVariables` is what lets every {{managerName}} string resolve without
+    // its call site knowing manager's name. setManagerName() keeps it current.
+    interpolation: { escapeValue: false, defaultVariables: { managerName: DEFAULT_MANAGER_NAME } },
     returnNull: false
   });
 

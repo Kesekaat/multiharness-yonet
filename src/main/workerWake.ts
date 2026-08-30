@@ -5,7 +5,7 @@
  * path for a worker that has gone quiet at its prompt: it polls on a setInterval
  * in the renderer, so a throttled/occluded window (Chromium suspends background
  * setInterval timers) can miss the moment mail lands and the worker then sits on
- * an undrained inbox forever — the orchestrator ("god") never has this problem
+ * an undrained inbox forever — the orchestrator ("manager") never has this problem
  * because the main process re-engages it on its own heartbeat cadence.
  *
  * This watchdog is the worker-side counterpart: on a cadence it finds live
@@ -32,7 +32,7 @@
 
 /** The exact nudge the renderer's inbox-wake loop would have typed. */
 export const WORKER_WAKE_NUDGE =
-  'You have new hive inbox message(s) — read your inbox, act on them now, and move handled ones to inbox/.done/. Act autonomously; only message god if you genuinely need a decision.';
+  'You have new hive inbox message(s) — read your inbox, act on them now, and move handled ones to inbox/.done/. Act autonomously; only message manager if you genuinely need a decision.';
 
 /** No PTY output for this long = genuinely idle (renderer QUIESCE_IDLE_MS). */
 export const WORKER_WAKE_IDLE_MS = 12_000;
@@ -67,10 +67,10 @@ export function classifyHook(event: string | undefined, message: string | undefi
 
 /** One worker's live facts, gathered by the caller each beat. */
 export interface WorkerWakeFacts {
-  /** Worker agent id (god is never a candidate). */
+  /** Worker agent id (manager is never a candidate). */
   agentId: string;
-  /** True when this agent is the orchestrator — god is never nudged. */
-  isGod?: boolean;
+  /** True when this agent is the orchestrator — manager is never nudged. */
+  isManager?: boolean;
   /** Live PTY id, or undefined when the agent has no terminal. */
   ptyId?: string;
   /** Timestamp of the PTY's last output (0 = never output). */
@@ -114,7 +114,7 @@ export class WorkerWakeWatchdog {
   decide(facts: readonly WorkerWakeFacts[], now = Date.now()): string[] {
     const out: string[] = [];
     for (const f of facts) {
-      if (f.isGod || f.inboxCount <= 0 || !f.ptyId) continue;
+      if (f.isManager || f.inboxCount <= 0 || !f.ptyId) continue;
       if (f.autoDeliveryPaused || f.paused || f.halted) continue;
       if (f.lastOutputAt <= 0) continue; // never produced output → still booting
       if (now - f.lastOutputAt < WORKER_WAKE_IDLE_MS) continue; // mid-turn

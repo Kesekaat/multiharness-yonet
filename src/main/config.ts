@@ -50,7 +50,7 @@ export interface ScheduledMission {
   lastFiredAt?: number;
   /** Mission flavor. Absent ⇒ 'dispatch' (the classic interval-dispatch mission,
    *  e.g. the ops standup). 'heartbeat' (Lane A #1) is a context-aware beat: it
-   *  observes live floor state, re-engages a quiet god, and ticks the circuit
+   *  observes live floor state, re-engages a quiet manager, and ticks the circuit
    *  breaker — armed with an adaptive cadence, not a fixed setInterval. */
   kind?: 'dispatch' | 'heartbeat' | 'compact';
   /** Heartbeat only: a floor is "quiet" when no tracked signal (log.jsonl mtime,
@@ -59,14 +59,14 @@ export interface ScheduledMission {
   quietThresholdMs?: number;
 }
 
-/** The built-in hourly ops standup: god reviews who's doing what + whether tasks
+/** The built-in hourly ops standup: manager reviews who's doing what + whether tasks
  *  are on track and agents are running, and every terminal's context is compacted.
  *  Shipped enabled by default; users can toggle it off in the Command Center. */
 export const OPS_STANDUP_MISSION: ScheduledMission = {
   id: 'ops-standup',
   label: 'Hourly ops standup',
   intervalMs: 3_600_000,
-  to: 'god',
+  to: 'manager',
   body:
     'Hourly ops standup. Review every agent: who is doing what, and confirm each ' +
     'is still running (not stalled or idle-stale). Check the task board — are ' +
@@ -87,11 +87,11 @@ export const OPS_STANDUP_MISSION: ScheduledMission = {
 
 /** The built-in heartbeat (Lane A #1). A context-aware beat that, each tick,
  *  observes live floor state and — only when the floor has gone quiet — drops a
- *  digest into god's inbox and (if god's PTY is genuinely idle) nudges it to
+ *  digest into manager's inbox and (if manager's PTY is genuinely idle) nudges it to
  *  re-engage anyone stalled. The same beat ticks the circuit breaker.
  *
  *  Shipped DISABLED by default (opt-in): unlike the standup, which only sends a
- *  hive message, the heartbeat types into god's PTY, so the user turns it on
+ *  hive message, the heartbeat types into manager's PTY, so the user turns it on
  *  explicitly in the Command Center once they want active re-engagement.
  *  `intervalMs` is the normal-cadence base; the scheduler derives a tighter beat
  *  when an agent looks stuck and a slower one right after a re-engage. */
@@ -99,7 +99,7 @@ export const HEARTBEAT_MISSION: ScheduledMission = {
   id: 'heartbeat',
   label: 'Floor heartbeat',
   intervalMs: 120_000,
-  to: 'god',
+  to: 'manager',
   body:
     'Floor heartbeat: the team has gone quiet. Review the digest in your inbox, ' +
     're-engage anyone stalled or blocked, and keep the board accurate — or rest ' +
@@ -204,13 +204,13 @@ export interface HarnessConfig {
   defaultCommand: string;
   /** Default model for newly spawned agents (e.g. 'claude-sonnet-4-6[1m]'); unset = CLI default. */
   defaultModel?: string;
-  /** Which provider powers the GOD orchestrator ("Michael"). The persona is
+  /** Which provider powers the MANAGER orchestrator ("Michael"). The persona is
    *  constant; only its engine is selectable. Default 'claude'. Eligible providers
    *  are those that can receive inbox (claude/codex/antigravity/qwen). */
-  godProvider?: AgentProvider;
-  /** The model GOD runs on. Unset falls back to the provider preset's
-   *  `recommendedOrchestratorModel`, then MODEL_GOD. Default 'claude-opus-4-8'. */
-  godModel?: string;
+  managerProvider?: AgentProvider;
+  /** The model MANAGER runs on. Unset falls back to the provider preset's
+   *  `recommendedOrchestratorModel`, then MODEL_MANAGER. Default 'claude-opus-4-8'. */
+  managerModel?: string;
   /** Per-server consent state for the default MCP bundle, keyed by catalog id.
    *  Seeded from MCP_CATALOG (safe-readonly ON, write/secret OFF); the user flips
    *  these in Settings. A server is wired into an agent only when enabled here. */
@@ -252,7 +252,7 @@ export interface HarnessConfig {
   /** Passed to every spawned agent as `--max-turns <n>` when set; unset = no cap
    *  (Claude Code's default). A coarse runaway guard independent of the breaker. */
   maxTurns?: number;
-  /** Max concurrent god-triggered ephemeral Slack workers; extra spawn-requests
+  /** Max concurrent manager-triggered ephemeral Slack workers; extra spawn-requests
    *  wait in the queue (natural backpressure, a resource backstop). Default 4. */
   maxConcurrentWorkers?: number;
   /** Minutes an ephemeral worker may produce NO output before the reaper kills it
@@ -265,9 +265,9 @@ export interface HarnessConfig {
    *  Electron safeStorage — see src/main/integrations.ts). Default []. */
   integrations?: IntegrationRecord[];
   /** Default per-worker TOTAL-token cap (input+output+cache) applied to every
-   *  god-triggered ephemeral worker; a worker's own spawn-request `tokenCap`
+   *  manager-triggered ephemeral worker; a worker's own spawn-request `tokenCap`
    *  overrides it. When the effective cap is exceeded the worker is reaped (its
-   *  committed work preserved) and god is informed. This is PLUMBING for a later
+   *  committed work preserved) and manager is informed. This is PLUMBING for a later
    *  budget feature: per the human directive there is NO per-worker cap today, so
    *  the default is 0 = UNLIMITED — the mechanism is wired but never throttles
    *  unless someone explicitly sets a positive cap (per request or here). */
@@ -296,7 +296,7 @@ export interface HarnessConfig {
    *  and comment disagreed; the shipped behavior — enabled — wins) —
    *  the window/PTY-ownership plumbing is always active and single-window-safe,
    *  but the New Floor entry points (app menu item + IPC) only appear when on.
-   *  The on-disk hive (god orchestration under harnessHome) stays process-global;
+   *  The on-disk hive (manager orchestration under harnessHome) stays process-global;
    *  floors share it. */
   multiWindow?: boolean;
   /** Terminal theme — mirrored into each agent's per-session Claude settings
@@ -425,11 +425,11 @@ const DEFAULTS: HarnessConfig = {
   autoMode: true,
   orchestratorMaySpawn: false,
   defaultCommand: 'claude',
-  godProvider: 'claude',
-  godModel: 'claude-opus-4-8',
+  managerProvider: 'claude',
+  managerModel: 'claude-opus-4-8',
   // Global default model for every agent that hasn't picked one explicitly — wins
   // over the role-based tiers (modelForRole) in the spawn handler, so all agents
-  // (incl. god) default to Fable 5. A per-agent model choice still overrides it.
+  // (incl. manager) default to Fable 5. A per-agent model choice still overrides it.
   defaultModel: 'claude-fable-5',
   // Seeded from the MCP catalog so the consent defaults never drift from it
   // (safe-readonly ON, write/secret OFF).
@@ -471,7 +471,7 @@ const DEFAULTS: HarnessConfig = {
   triggersMigratedV1: false,
   // Memory reflection — preventive; nobody is over threshold today, so it sits
   // dark until an agent's memory crosses one of these (the verify gate is the
-  // safety for the LLM step). Thresholds DECIDED by god 2026-06-06.
+  // safety for the LLM step). Thresholds DECIDED by manager 2026-06-06.
   reflectEnabled: true,
   reflectIntervalMs: 1_800_000,
   reflectByteTriggerPct: 50,
@@ -727,32 +727,32 @@ export function resetConfig(): HarnessConfig {
 
 /** Model ids by tier (Lane A #6.4). Kept in sync with AGENT_MODELS in
  *  src/renderer/src/store/config.ts. */
-const MODEL_GOD = 'claude-opus-4-8';                  // orchestration — highest capability
+const MODEL_MANAGER = 'claude-opus-4-8';                  // orchestration — highest capability
 const MODEL_WORKER = 'claude-sonnet-4-6';             // general execution
 const MODEL_HELPER = 'claude-haiku-4-5-20251001';     // narrow, cheap helpers
 
 /** Minimal structural shape for tiering — a subset of AgentMeta so config.ts
  *  stays free of a hive.ts import. */
 export interface RoleHint {
-  isGod?: boolean;
+  isManager?: boolean;
   role?: string;
   capabilities?: string[];
 }
 
-/** Default model for an agent given its role (Lane A #6.4): Opus for the god,
+/** Default model for an agent given its role (Lane A #6.4): Opus for the manager,
  *  Haiku for narrow helpers (triage / routing / verification / formatting),
  *  Sonnet for general workers. Returns a model id (matching AGENT_MODELS) or
  *  undefined to fall back to the CLI default. This is only a DEFAULT — an
  *  explicit per-agent model selection always wins. */
 export function modelForRole(
   meta: RoleHint,
-  config?: Pick<HarnessConfig, 'godProvider' | 'godModel'>
+  config?: Pick<HarnessConfig, 'managerProvider' | 'managerModel'>
 ): string | undefined {
-  if (meta.isGod) {
-    // GOD engine is selectable: an explicit godModel wins, else the chosen
+  if (meta.isManager) {
+    // MANAGER engine is selectable: an explicit managerModel wins, else the chosen
     // provider's recommended orchestrator model, else the legacy Opus default.
-    const preset = providerPreset(config?.godProvider ?? 'claude');
-    return config?.godModel ?? preset.recommendedOrchestratorModel ?? MODEL_GOD;
+    const preset = providerPreset(config?.managerProvider ?? 'claude');
+    return config?.managerModel ?? preset.recommendedOrchestratorModel ?? MODEL_MANAGER;
   }
   const hay = `${meta.role ?? ''} ${(meta.capabilities ?? []).join(' ')}`.toLowerCase();
   if (/\b(triage|rout|verif|lint|format|summar|classif|label)/.test(hay)) return MODEL_HELPER;

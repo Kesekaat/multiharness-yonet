@@ -31,7 +31,7 @@ export interface HiveTask {
   dependsOn: string[];
   priority: number;
   createdAt: string;
-  /** First-class human feedback: the god appends {q} when a card needs the
+  /** First-class human feedback: the manager appends {q} when a card needs the
    *  human; the ASK ME view fills in {a}. Full history stays on the card. */
   humanQA?: HumanQA[];
 }
@@ -73,7 +73,7 @@ function stableId(seed: string): string {
   return `t-${(h >>> 0).toString(36)}`;
 }
 
-/** Normalize whatever hive:tasks returns into a typed task array. The god
+/** Normalize whatever hive:tasks returns into a typed task array. The manager
  *  writes this file by hand — every field except the shape itself is optional
  *  in practice, so EVERY consumer must go through this (exported for the
  *  detail overlay; a raw card without dependsOn once crashed it). */
@@ -113,9 +113,9 @@ export function parseTasks(raw: unknown): HiveTask[] {
 
 /**
  * Task kanban over hive/tasks.json — a READ surface. Polls every 5s; cards
- * carry just the title and open the app-wide detail overlay on click. The god
+ * carry just the title and open the app-wide detail overlay on click. The manager
  * is the ledger's writer: new work enters via the dispatch box (mailed to the
- * god), never by the human inserting cards the orchestrator never heard about.
+ * manager), never by the human inserting cards the orchestrator never heard about.
  */
 export function TasksKanban() {
   const { t } = useTranslation();
@@ -133,9 +133,9 @@ export function TasksKanban() {
   }, []);
 
   // Dismiss a card off the board (human-initiated). The kanban is otherwise the
-  // god's to write, but a person can clear a card they no longer want tracked.
+  // manager's to write, but a person can clear a card they no longer want tracked.
   // Main removes the named id from its latest on-disk ledger, so a webhook or
-  // god card added since this renderer's last poll cannot be lost.
+  // manager card added since this renderer's last poll cannot be lost.
   const dismissTask = useCallback(async (id: string) => {
     setTasks((prev) => prev.filter((t) => t.id !== id)); // optimistic
     try {
@@ -163,8 +163,8 @@ export function TasksKanban() {
 
   return (
     <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', background: 'var(--cth-paper-200)', position: 'relative' }}>
-      {/* Toolbar — read-only: the god is the ledger's writer. New work enters
-          through the dispatch box (which mails the god), not by the human
+      {/* Toolbar — read-only: the manager is the ledger's writer. New work enters
+          through the dispatch box (which mails the manager), not by the human
           inserting cards the orchestrator never heard about. */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px', flexShrink: 0,
@@ -288,7 +288,7 @@ function TaskCard({ task, accent, assigneeName, onOpen, onDismiss }: {
 
 // ─── Detail view ─────────────────────────────────────────────────────────────
 // The full breakdown of one task: status, assignee, priority, the complete
-// description (the god writes 4-part dispatch contracts in there — preserved
+// description (the manager writes 4-part dispatch contracts in there — preserved
 // line by line), dependencies resolved to their titles, the human Q&A trail,
 // and the move/assign controls that used to crowd every card. Rendered as an
 // APP-WIDE overlay (over the office floor) — this content grows, so it gets
