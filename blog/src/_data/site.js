@@ -1,5 +1,5 @@
 // Global site config — single source of truth for SEO defaults.
-// Kevin's SEO_METADATA.md flows in here (site-level) and into each post's
+// Kartal's SEO_METADATA.md flows in here (site-level) and into each post's
 // frontmatter (per-page). Keep absolute origin in one place.
 export default {
   name: "Munder Difflin",
@@ -7,7 +7,7 @@ export default {
   // Origin with no trailing slash; pathPrefix (/blog/) is applied by Eleventy.
   origin: "https://munderdiffl.in",
   baseUrl: "https://munderdiffl.in/blog/",
-  // Blog-index description (Kevin's SEO_METADATA.md §3.9).
+  // Blog-index description (Kartal's SEO_METADATA.md §3.9).
   description:
     "Guides, deep dives, and comparisons on running multi-agent Claude Code: orchestration, agent memory, automation, and the tooling landscape.",
   tagline: "Notes from the office floor.",
@@ -34,7 +34,7 @@ export default {
   // Default OG image (absolute). Per-post `ogImage` overrides this.
   defaultOgImage: "https://munderdiffl.in/media/og.png",
   themeColor: "#F5F2E8",
-  // Topic clusters (categories), aligned to Kevin's keyword taxonomy + the
+  // Topic clusters (categories), aligned to Kartal's keyword taxonomy + the
   // technical/non-technical split in BLOG_IDEAS.md. A post's `category` field
   // picks one of these; the index/topics pages derive the live list from posts.
   clusters: [

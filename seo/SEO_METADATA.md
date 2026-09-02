@@ -1,6 +1,6 @@
 # Munder Difflin — SEO & AEO Metadata (Single Source of Truth)
 
-> **Author:** Kevin (SEO strategist) · **Status:** v1 · **Scope:** marketing site
+> **Author:** Kartal (SEO strategist) · **Status:** v1 · **Scope:** marketing site
 > (`https://munderdiffl.in/`) **and** the blog (`https://munderdiffl.in/blog/`, GitHub Pages).
 > **Repo:** `https://github.com/chaitanyagiri/munder-difflin`
 >
@@ -175,7 +175,7 @@ URL key: `/` = home, `#x` = home anchor, `/blog/...` = blog post (see BLOG_IDEAS
 > The marketing site is currently **one HTML document**. The home `<title>`/description below is
 > what ships on `docs/index.html`. The remaining blocks are the canonical specs to use **if** a
 > section is ever split into its own page, and they double as the recommended in-page H1/H2 and the
-> anchor descriptions for sitemap/snippet purposes. The blog blocks are live specs for Angela.
+> anchor descriptions for sitemap/snippet purposes. The blog blocks are live specs for Deniz.
 
 ### 3.1 Home — `https://munderdiffl.in/`
 - **title** (≤60): `Munder Difflin — Local multi-agent harness for Claude Code`
@@ -467,7 +467,7 @@ Single-page site + blog. `<lastmod>` must be updated on real changes (don't fake
 ```
 > **GitHub Pages note:** the site is built from `docs/`. Both `robots.txt` and `sitemap.xml` go in
 > `docs/`. Because there is no Jekyll plugin pipeline assumed here (the site is hand-authored HTML),
-> generate/maintain `sitemap.xml` manually or via Angela's blog build step. If the blog ends up
+> generate/maintain `sitemap.xml` manually or via Deniz's blog build step. If the blog ends up
 > using Jekyll, add `jekyll-sitemap` + `jekyll-seo-tag` to `_config.yml` instead and let it emit
 > these automatically.
 
@@ -483,11 +483,11 @@ Single-page site + blog. `<lastmod>` must be updated on real changes (don't fake
 - Link it from `<head>` on every page:
   `<link rel="alternate" type="application/rss+xml" title="Munder Difflin Blog" href="https://munderdiffl.in/blog/feed.xml">`
 - Include full or generous-excerpt content, `<pubDate>`, `<guid isPermaLink="true">` = post URL.
-- If Jekyll: add `jekyll-feed` (emits `/feed.xml`). Otherwise Angela's build emits it.
+- If Jekyll: add `jekyll-feed` (emits `/feed.xml`). Otherwise Deniz's build emits it.
 
 ### 5.5 Image `alt` guidelines
 - Describe content + function, include a keyword **only when natural**. No keyword stuffing.
-- Good (already in repo): *"Munder Difflin running a floor of Claude Code agents — avatars at their desks, the BOSS orchestrator in Michael's office, and a live terminal session."*
+- Good (already in repo): *"Munder Difflin running a floor of Claude Code agents — avatars at their desks, the BOSS orchestrator in Hakan's office, and a live terminal session."*
 - Decorative images (pure ornament): `alt=""`.
 - Blog hero images: `alt` = post topic in plain language, e.g. *"Diagram of a BOSS orchestrator routing tasks to three Claude Code agents."*
 - Provide `width`/`height` on every `<img>` (prevents CLS — the repo already does this on the logo).
@@ -599,7 +599,7 @@ build while you do your thing.
 
 ## 9. FOR ANGELA — exactly what the blog must implement
 
-> Angela, this is the contract. Build the blog (GitHub Pages, at `https://munderdiffl.in/blog/`) so
+> Deniz, this is the contract. Build the blog (GitHub Pages, at `https://munderdiffl.in/blog/`) so
 > each post can declare the following. Everything is templated above; this is the checklist.
 
 **Per-post front-matter the templates must support** (whatever your generator uses — Jekyll

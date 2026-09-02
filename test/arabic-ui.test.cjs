@@ -140,7 +140,7 @@ test('content direction in components is gated, never content-sniffed', () => {
 });
 
 test('the markdown auto-direction plugin only runs for an RTL language', () => {
-  // The one piece Kevin held explicitly, because it is content-driven by design:
+  // The one piece Kartal held explicitly, because it is content-driven by design:
   // an English user reading a document that happens to contain Arabic would
   // have had blocks of it mirrored.
   const src = read('src/renderer/src/markdown/MarkdownPreview.tsx');

@@ -6,7 +6,7 @@
  * WHY: the roster surfaces tokens / cost / breaker / status, but not a reliable,
  * validated view of WHERE each agent runs (its cwd) or its session identity. To
  * respawn a worker next to a peer (e.g. put a new agent in the same checkout as
- * Oscar) the orchestrator needs a known-good ABSOLUTE cwd; a bad relative path
+ * Bora) the orchestrator needs a known-good ABSOLUTE cwd; a bad relative path
  * like "ClaudeTerminalHarness" spawns into a nonexistent dir and fails. This reads
  * the canonical hive state and emits a clean, NON-SENSITIVE record per agent,
  * flagging whether each cwd is actually usable (absolute + exists on disk).

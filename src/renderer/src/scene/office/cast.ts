@@ -25,21 +25,21 @@ export interface CastMember {
 
 /** Selectable roster, in display order. */
 export const OFFICE_CAST: CastMember[] = [
-  { name: 'michael',  displayName: 'Michael',  shirt: '#5a6b8c', blurb: "World's best boss" },
-  { name: 'jim',      displayName: 'Jim',      shirt: '#6fa8dc', blurb: 'Salesman, prankster' },
-  { name: 'pam',      displayName: 'Pam',      shirt: '#9caf88', blurb: 'Receptionist, artist' },
-  { name: 'dwight',   displayName: 'Dwight',   shirt: '#b89b3e', blurb: 'Assistant (to the) RM' },
-  { name: 'kevin',    displayName: 'Kevin',    shirt: '#4a7ab5', blurb: 'Accounting' },
-  { name: 'angela',   displayName: 'Angela',   shirt: '#8a86a6', blurb: 'Head of accounting' },
-  { name: 'oscar',    displayName: 'Oscar',    shirt: '#7a4b6b', blurb: 'Accountant' },
-  { name: 'stanley',  displayName: 'Stanley',  shirt: '#8c5a4b', blurb: 'Sales, crossword' },
-  { name: 'phyllis',  displayName: 'Phyllis',  shirt: '#b08bbf', blurb: 'Sales' },
-  { name: 'andy',     displayName: 'Andy',     shirt: '#6fae6f', blurb: 'Cornell, a cappella' },
-  { name: 'kelly',    displayName: 'Kelly',    shirt: '#d16ba5', blurb: 'Customer service' },
-  { name: 'ryan',     displayName: 'Ryan',     shirt: '#3a3a44', blurb: 'The temp' },
-  { name: 'toby',     displayName: 'Toby',     shirt: '#9a8c5a', blurb: 'Human resources' },
-  { name: 'creed',    displayName: 'Creed',    shirt: '#6b7a4b', blurb: 'Quality assurance' },
-  { name: 'meredith', displayName: 'Meredith', shirt: '#b5544a', blurb: 'Supplier relations' },
+  { name: 'michael',  displayName: 'Hakan',  shirt: '#5a6b8c', blurb: "World's best boss" },
+  { name: 'jim',      displayName: 'Caner',      shirt: '#6fa8dc', blurb: 'Salesman, prankster' },
+  { name: 'pam',      displayName: 'Selin',      shirt: '#9caf88', blurb: 'Receptionist, artist' },
+  { name: 'dwight',   displayName: 'Batur',   shirt: '#b89b3e', blurb: 'Assistant (to the) RM' },
+  { name: 'kevin',    displayName: 'Kartal',    shirt: '#4a7ab5', blurb: 'Accounting' },
+  { name: 'angela',   displayName: 'Deniz',   shirt: '#8a86a6', blurb: 'Head of accounting' },
+  { name: 'oscar',    displayName: 'Bora',    shirt: '#7a4b6b', blurb: 'Accountant' },
+  { name: 'stanley',  displayName: 'Polat',  shirt: '#8c5a4b', blurb: 'Sales, crossword' },
+  { name: 'phyllis',  displayName: 'Soner',  shirt: '#b08bbf', blurb: 'Sales' },
+  { name: 'andy',     displayName: 'Timur',     shirt: '#6fae6f', blurb: 'Cornell, a cappella' },
+  { name: 'kelly',    displayName: 'Pelin',    shirt: '#d16ba5', blurb: 'Customer service' },
+  { name: 'ryan',     displayName: 'Yaman',     shirt: '#3a3a44', blurb: 'The temp' },
+  { name: 'toby',     displayName: 'Berkin',     shirt: '#9a8c5a', blurb: 'Human resources' },
+  { name: 'creed',    displayName: 'Ertan',    shirt: '#6b7a4b', blurb: 'Quality assurance' },
+  { name: 'meredith', displayName: 'Ayman', shirt: '#b5544a', blurb: 'Supplier relations' },
 ];
 
 export const CAST_BY_NAME: Record<OfficeCharacterName, CastMember> =

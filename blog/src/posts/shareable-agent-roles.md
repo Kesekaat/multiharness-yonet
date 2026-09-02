@@ -21,7 +21,7 @@ faq:
   - q: "How is a role manifest different from just sharing a prompt?"
     a: "A prompt is one ingredient. A hire manifest is the whole recipe: which provider runs it, the model, the command flags, the goal, the capability tags, and the budget — mapped 1:1 onto the fields the app's Add-Agent flow already uses. It's the difference between a sentence in a README and a job description you can hand to anyone's office."
   - q: "What is The Hiring Fair?"
-    a: "A static community gallery at munderdiffl.in/hires — no login, no trackers, MIT-licensed. It's stocked with ready-made roles from the cast: Pam writes docs, Dwight enforces QA, Jim reviews PRs, Creed audits security, Angela audits the office's own token spend, Stanley does the migrations nobody wants. Each card has a Claude Code / Antigravity / Codex toggle and function filters. Browse, hire, review, spawn."
+    a: "A static community gallery at munderdiffl.in/hires — no login, no trackers, MIT-licensed. It's stocked with ready-made roles from the cast: Selin writes docs, Batur enforces QA, Caner reviews PRs, Ertan audits security, Deniz audits the office's own token spend, Polat does the migrations nobody wants. Each card has a Claude Code / Antigravity / Codex toggle and function filters. Browse, hire, review, spawn."
   - q: "Can I submit my own roles to The Hiring Fair today?"
     a: "Not yet. Today, curation is a maintainer commit — there is deliberately no public write or submission pipeline. A community submission queue needs its own review-and-trust design, so we scoped it out of this first release rather than ship it half-built."
 ---
@@ -60,7 +60,7 @@ Here's an *illustrative* manifest (realistic fields, but don't copy-paste it as 
 ```json
 {
   "format": "munder-difflin/hire@1",
-  "name": "Jim",
+  "name": "Caner",
   "sprite": "jim",
   "provider": "claude-code",
   "model": "claude-sonnet",
@@ -71,7 +71,7 @@ Here's an *illustrative* manifest (realistic fields, but don't copy-paste it as 
 }
 ```
 
-Read it top to bottom and it tells you everything: *who* (Jim, the PR reviewer), *what runs it* (Claude Code on a mid-tier model), *how it behaves* (plan mode, so it proposes before acting), *what it's for* (the goal), *what it's good at* (the tags), and *how much it's allowed to spend* (the budget). That's the entire role, and it fits in a screenshot. The point of the format is exactly that legibility: a role you can read, diff, and reason about — not a black box.
+Read it top to bottom and it tells you everything: *who* (Caner, the PR reviewer), *what runs it* (Claude Code on a mid-tier model), *how it behaves* (plan mode, so it proposes before acting), *what it's for* (the goal), *what it's good at* (the tags), and *how much it's allowed to spend* (the budget). That's the entire role, and it fits in a screenshot. The point of the format is exactly that legibility: a role you can read, diff, and reason about — not a black box.
 
 {% img "note-1" %}
 
@@ -96,12 +96,12 @@ A few properties make that guarantee real rather than aspirational: there's **no
 
 Portable roles are more fun when there's somewhere to get them. **The Hiring Fair** is a static community gallery at [munderdiffl.in/hires](https://munderdiffl.in/hires/) — no login, no trackers, MIT-licensed — stocked with roles from the cast:
 
-- **Pam** writes docs.
-- **Dwight** enforces QA (relentlessly).
-- **Jim** reviews PRs.
-- **Creed** audits security.
-- **Angela** audits the office's *own* token spend — the accountant for your agents.
-- **Stanley** does the migrations nobody wants to touch.
+- **Selin** writes docs.
+- **Batur** enforces QA (relentlessly).
+- **Caner** reviews PRs.
+- **Ertan** audits security.
+- **Deniz** audits the office's *own* token spend — the accountant for your agents.
+- **Polat** does the migrations nobody wants to touch.
 
 Each card carries one **base manifest per role**, with **per-provider variants generated** so you can flip a Claude Code / Antigravity / Codex toggle and get the same role configured for whichever CLI you run. **Function filters** let you find roles by what they do — review, docs, security, ops — instead of scrolling. Browse, hit ⚡hire, land in the pre-filled modal, review, spawn.
 
@@ -111,7 +111,7 @@ One honest scope note: **today, curation is a maintainer commit.** There is deli
 
 Here's the thesis. Once a role is a portable artifact, something compounding happens — a **community growth loop**. The best-tuned roles can be shared, then forked, then improved, then shared again. The person who finally nails the "security auditor" prompt doesn't keep that win to themselves and doesn't bury it in a blog post; they export a hire, and everyone downstream starts from their best version instead of from a blank box. Good configuration stops being a thing each person rediscovers and becomes a thing the community *accumulates*.
 
-This is the same move package registries made for code. Before npm or PyPI, reusing a library meant copying files and re-reading install instructions; the registry turned "here's how you set it up" into "here's the artifact, take it." Shareable Hires does that for agent *roles*. "Hire Pam" becomes the easy on-ramp that "write a system prompt" never was — and the floor that the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) coordinates can fill up with proven coworkers instead of guesses.
+This is the same move package registries made for code. Before npm or PyPI, reusing a library meant copying files and re-reading install instructions; the registry turned "here's how you set it up" into "here's the artifact, take it." Shareable Hires does that for agent *roles*. "Hire Selin" becomes the easy on-ramp that "write a system prompt" never was — and the floor that the [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) coordinates can fill up with proven coworkers instead of guesses.
 
 It also fits the broader bet behind Munder Difflin: **local-first, open-source, you own your floor.** The roles are MIT, the gallery has no login or trackers, the binary that runs an agent is always your own, and the human is always the one who hits spawn. Portability here doesn't mean handing control to a cloud — it means handing a *file* to a person, who stays in charge of what they do with it. (For why we [built it this way](/blog/why-we-built-munder-difflin/) in the first place, the origin story has the rest.)
 

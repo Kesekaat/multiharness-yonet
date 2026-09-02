@@ -1,5 +1,5 @@
 /**
- * Realtime Michael — read-tools (rt-4, Realtime Michael Phase 1).
+ * Realtime Hakan — read-tools (rt-4, Realtime Hakan Phase 1).
  *
  * The real function-tools that replace rt-2's placeholder no-op. Each one is a
  * thin, READ-ONLY wrapper over a window.cth bridge that already powers the office
@@ -14,7 +14,7 @@
  * (groqApiKey, slack/webhook tokens); we surface a hand-picked, non-sensitive
  * allowlist only.
  *
- * INTEGRATION (rt-2's src/renderer/src/realtime/session.ts — Jim's file):
+ * INTEGRATION (rt-2's src/renderer/src/realtime/session.ts — Caner's file):
  *   import { realtimeReadTools, realtimeSessionSummary } from './tools';
  *   ...
  *   tools: realtimeReadTools()            // swap for placeholderTools() at the `tools:` field
@@ -468,7 +468,7 @@ export function realtimeReadTools(): ReturnType<typeof tool>[] {
       parameters: {
         type: 'object',
         properties: {
-          agentId: { type: 'string', description: 'The agent id or friendly name to look up (e.g. "kevin-mqpbq43v" or "Kevin").' }
+          agentId: { type: 'string', description: 'The agent id or friendly name to look up (e.g. "kevin-mqpbq43v" or "Kartal").' }
         },
         required: ['agentId'],
         additionalProperties: false
@@ -615,7 +615,7 @@ export function realtimeReadTools(): ReturnType<typeof tool>[] {
 }
 
 /**
- * A short, preloaded orientation Michael can open the session with — the hive
+ * A short, preloaded orientation Hakan can open the session with — the hive
  * size, who manager is, and how many tasks are in flight — so the first answer is
  * grounded without a tool round-trip. Best-effort: returns '' if reads fail, so
  * the caller can safely concatenate it onto the agent instructions.

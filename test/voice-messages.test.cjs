@@ -192,7 +192,7 @@ const SECRETS = [
   ['password assignment', 'login password: hunter2password now', 'hunter2password'],
   ['signing_secret assignment', 'slack signing_secret = 8f9a0b1c2d3e4f5a6b7c done', '8f9a0b1c2d3e4f5a6b7c'],
   ['bot_token assignment', 'env bot_token="xoxb-keepme-but-strip" set', 'xoxb-keepme-but-strip'],
-  // Pam hardening: a LABELED aws secret access key — the AKIA id half is caught
+  // Selin hardening: a LABELED aws secret access key — the AKIA id half is caught
   // by rule 3, but the 40-char SECRET value has no prefix shape and sits behind a
   // namespace prefix (aws_), so it must be caught by the rule-5 key=value path.
   ['aws_secret_access_key (namespaced label)', 'creds aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY here', 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'],
@@ -228,7 +228,7 @@ const BENIGN = [
   '/Users/chaitanya/Documents/Personal/cth-voice-msg-access is the worktree',
   'The token cap is 1.2 million tokens this session.',
   'Tasks: 3 todo, 1 doing, 0 blocked, 12 done.',
-  'Pam approved 8 of 8 dimensions, no must-fix.'
+  'Selin approved 8 of 8 dimensions, no must-fix.'
 ];
 for (const b of BENIGN) {
   test(`benign preserved: "${b.slice(0, 40)}..."`, () => {

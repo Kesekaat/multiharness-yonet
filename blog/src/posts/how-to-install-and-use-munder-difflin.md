@@ -368,7 +368,7 @@ date inside the document, not the filename. Tell me about anything you cannot re
 Your clone will decide it needs a worker, hire one, and hand the job over. You will see a new
 character appear at a desk.
 
-{% img "shot-floor", "The office floor on a fresh setup. Michael, your clone, is the only one here yet. The Command Center on the right is where work gets dispatched." %}
+{% img "shot-floor", "The office floor on a fresh setup. Hakan, your clone, is the only one here yet. The Command Center on the right is where work gets dispatched." %}
 
 Click any agent to open its terminal and watch it work in real time.
 

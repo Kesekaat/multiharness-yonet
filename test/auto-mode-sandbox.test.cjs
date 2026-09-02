@@ -38,7 +38,7 @@ test('a Claude agent gets a native sandbox that still allows its agent dir and t
   const hive = new HiveManager(() => home);
   const palace = path.join(home, 'palace');
   const inj = await hive.ensureAgent(
-    { id: 'jim-1', name: 'Jim', provider: 'claude', cwd: home },
+    { id: 'jim-1', name: 'Caner', provider: 'claude', cwd: home },
     { extraWritableDirs: [palace] }
   );
   const i = inj.args.indexOf('--settings');

@@ -11,7 +11,7 @@ and imported into anyone's office with one click.
 ```json
 {
   "spec": "munder-difflin/hire@1",
-  "name": "Pam",
+  "name": "Selin",
   "description": "Documentation writer",
   "goal": "Keep the project's docs accurate. When a feature merges, update README and docs/, and flag stale pages to the orchestrator.",
   "character": "pam",

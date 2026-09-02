@@ -252,7 +252,7 @@ const telemetry = new TelemetryCollector({
   // summing every transcript in a (routinely shared) cwd.
   resolveSessionId: (agentId) => hive.lastSession(agentId)
 });
-// Usage provider (Seam 1) — the INTEGRATION swap: Oscar's telemetry collector (#7)
+// Usage provider (Seam 1) — the INTEGRATION swap: Bora's telemetry collector (#7)
 // IS the provider, replacing Lane A's interim StubUsageProvider. Same
 // getAgentUsage(agentId) pull seam, so the breaker + cost ledger consumers are
 // untouched; telemetry has a transcript fallback built in, so it works before any
@@ -266,12 +266,12 @@ const breaker = new CircuitBreaker(() => {
   return { ...(c.circuitBreaker ?? {}), costCapUsd: c.costCapUsd, costCapTokens: c.costCapTokens, agentTokenCaps: c.agentTokenCaps };
 });
 // Always-on beats (decoupled from the optional heartbeat): the live fleet snapshot
-// Michael reads + the breaker beat, so guardrails + monitoring work even when the
+// Hakan reads + the breaker beat, so guardrails + monitoring work even when the
 // heartbeat mission is disabled (it ships off).
 let fleetTimer: ReturnType<typeof setInterval> | null = null;
 let breakerBeatTimer: ReturnType<typeof setInterval> | null = null;
-// Feed the breaker's api_error-storm trip from Oscar's OTel api_error spans —
-// Jim's one breaker input with no on-branch source (telemetry.onApiError seam).
+// Feed the breaker's api_error-storm trip from Bora's OTel api_error spans —
+// Caner's one breaker input with no on-branch source (telemetry.onApiError seam).
 telemetry.onApiError((agentId) => breaker.recordError(agentId));
 // Shared roster on disk — created early so HookServer can re-read standing goals
 // on every UserPromptSubmit (Edit Agent saves land here via persistAgents).
@@ -292,8 +292,8 @@ function standingGoalFromRoster(agentId: string): string | null {
 // background window can't leave a worker parked on an unread inbox forever).
 // HookServer feeds it the hook stream so a permission/HITL prompt blocks nudges.
 const workerWake = new WorkerWakeWatchdog();
-// HookServer needs BOTH: Oscar's control registry (HITL pause/gate/steer/halt via
-// hook returns) AND Jim's breaker (feed recordToolUse on each PostToolUse).
+// HookServer needs BOTH: Bora's control registry (HITL pause/gate/steer/halt via
+// hook returns) AND Caner's breaker (feed recordToolUse on each PostToolUse).
 const hookServer = new HookServer(
   hive,
   () => liveWebContents(),
@@ -687,7 +687,7 @@ function syncMissions(): void {
         // no dispatch body/target, so skip the hive.send and just fire auto-compact.
         // Gate on `kind!=='compact'` ALONE — that already excludes the compact mission;
         // we deliberately do NOT add `&& m.body`, so other (dispatch) missions keep
-        // their prior behaviour, including the historical empty-body send (Pam N1).
+        // their prior behaviour, including the historical empty-body send (Selin N1).
         if (m.kind !== 'compact' && hive.enabled()) {
           hive.send({ to: m.to, act: 'request', subject: m.label, body: m.body }, 'scheduler');
         }
@@ -866,7 +866,7 @@ function syncContextTriggers(): void {
  *  but has NO live PTY. This runs in bootstrapHiveServices, BEFORE the renderer can
  *  respawn anything, so at this point NO agent owns a PTY — every `archived:false`
  *  entry is therefore a stale carry-over from a prior session that quit/crashed
- *  WITHOUT archiving (e.g. the pre-acc13a3 'assistant' Dwight entry). Left as-is
+ *  WITHOUT archiving (e.g. the pre-acc13a3 'assistant' Batur entry). Left as-is
  *  they have no live PTY, so the breaker beat steers them and the steer bounces to
  *  MANAGER as a requires_reply MANAGER can't clear → inbox flood.
  *
@@ -1135,7 +1135,7 @@ function runBreakerBeat(progressWindowMs: number): void {
     if (a.archived) continue;
     // #57/#58: skip assistant + orphaned shells. The breaker must only evaluate
     // live, real agents. An assistant entry (e.g. the pre-acc13a3 headless
-    // 'Dwight') or any orphaned entry left archived:false with NO live PTY would
+    // 'Batur') or any orphaned entry left archived:false with NO live PTY would
     // otherwise be steered, and that steer bounces to MANAGER as a requires_reply MANAGER
     // can't clear → inbox flood. ptyForAgent(id) === undefined means no live PTY.
     // Manager is exempt from this orphan check (it keeps its own flow + the managerId skip
@@ -1201,7 +1201,7 @@ function runBreakerBeat(progressWindowMs: number): void {
  *  it cannot answer "what has this agent cost us". See costLifetime.ts. */
 const costTotals = new CostLedgerTotals();
 
-/** Build + write the live fleet snapshot Michael reads (`<hive>/fleet.json`).
+/** Build + write the live fleet snapshot Hakan reads (`<hive>/fleet.json`).
  *  Always-on (independent of the heartbeat) since `claude agents` can't see the
  *  hive's sibling sessions. PII-free; never throws (called from a timer). */
 function writeFleetSnapshot(): void {
@@ -1298,7 +1298,7 @@ function liveWebContents(): Electron.WebContents | null {
   return null;
 }
 
-// ─── Slack webhook server (Slack message → Michael's queue) ──────────────────
+// ─── Slack webhook server (Slack message → Hakan's queue) ──────────────────
 /** The running Slack ingestion server, or null when disabled/stopped. */
 let slackServer: SlackWebhookServer | null = null;
 /** The loopback-only reply endpoint (lets the bundled helper post back to Slack
@@ -1320,11 +1320,11 @@ let lastSlackUrl: string | undefined;
  *  reads naturally after it. */
 function buildAutonomousRequestProtocol(channel: string, threadTs: string, helperPath: string): string {
   return `[AUTONOMOUS REQUEST PROTOCOL — this request arrived via Slack; no interactive human is watching] Handle it under this protocol:
-1. ROUTE FAST — triage and hand this to the single most-relevant agent right away. CHECK THE LIVE ROSTER FIRST (active agents in registry.json + their state in fleet.json) and prefer an EXISTING agent that fits — especially when the request names one ("ask Pam…", "have Jim…"): route to that agent and only spawn a new one if none is a sensible fit. Decompose only if it genuinely needs several. Don't sit on it.
+1. ROUTE FAST — triage and hand this to the single most-relevant agent right away. CHECK THE LIVE ROSTER FIRST (active agents in registry.json + their state in fleet.json) and prefer an EXISTING agent that fits — especially when the request names one ("ask Selin…", "have Caner…"): route to that agent and only spawn a new one if none is a sensible fit. Decompose only if it genuinely needs several. Don't sit on it.
 2. DELEGATE WITH THE REPLY HANDLE — tell that agent to do the work autonomously AND to post its result back to THIS Slack thread itself when done, using exactly: "${hive.nodeCommand()}" "${helperPath}" --channel ${channel} --thread ${threadTs} --text "<substantive result>" (that first path is the harness's bundled Node, already resolved for this machine — pass it verbatim; bare "node" is not on the hook/agent PATH on many machines.)
 3. AUTONOMOUS EXECUTION — no interactive questions. PAUSE/ask ONLY for high-severity actions: pushing to main or any remote; buying or spawning infrastructure or paid services; deleting an existing repo, file, or folder it did not create. Stay READ-ONLY at critical infrastructure and git-push-type changes unless explicitly approved.
 4. DIRECT, SUBSTANTIVE REPLY — the agent posts a real Slack-mrkdwn answer (short *bold* headline + the actual outcome/specifics/links), NEVER a bare "done"/":white_check_mark:".
-5. REPORT TO MANAGER — the agent then tells you (Michael) what it did.
+5. REPORT TO MANAGER — the agent then tells you (Hakan) what it did.
 6. ASYNC QUESTIONS — if a decision is genuinely needed, don't block: post the question + numbered OPTIONS to the thread via that reply command, and record {q, options, askedAt (ISO + day & time), thread_ts ${threadTs}} so the threaded human reply correlates back and resumes.
 The user's message starts now: `;
 }
@@ -1359,7 +1359,7 @@ function slackReplyScriptPath(): string {
 
 /** W3 — the bundled read-only `skills/` source dir copied into each agent's
  *  `.claude/skills/` at spawn. Same packaged/dev resolution as the helpers above.
- *  Tolerated-missing until lp-manifest (Kevin) populates it (the hive copy is a
+ *  Tolerated-missing until lp-manifest (Kartal) populates it (the hive copy is a
  *  no-op on an absent dir). */
 function skillsResourceDir(): string {
   return app.isPackaged
@@ -2264,7 +2264,7 @@ function createWindow(opts: { floor?: boolean } = {}): BrowserWindow {
   // Permission gate for the renderer (our own trusted, local content). The only
   // permission we constrain is microphone capture: it's allowed ONLY while a mic
   // feature is actually live — Free Flow dictation (`freeflowEnabled`) OR a
-  // Realtime Michael voice session (`realtimeVoiceEnabled`, flipped on by the
+  // Realtime Hakan voice session (`realtimeVoiceEnabled`, flipped on by the
   // session at start() before getUserMedia, off at stop()). With both flags off,
   // there's zero mic access even at the Electron layer. We deliberately do NOT
   // gate on OpenAI-key presence: that key (`apikey:openai`) is shared with the CLI
@@ -2754,7 +2754,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
         : cfg.defaultModel ?? modelForRole(opts.hive, cfg);
       if (m) args.push('--model', m);
     }
-    // Name the Remote Control session after the agent (Michael, Jim, Dev1…) so it
+    // Name the Remote Control session after the agent (Hakan, Caner, Dev1…) so it
     // is identifiable in claude.ai / the mobile app. Otherwise Claude defaults the
     // prefix to the machine hostname (e.g. "vyapaks-macbook-pro-…"), which is
     // opaque when several agents run at once — especially with remoteControlAtStartup
@@ -2873,11 +2873,11 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
   // OpenCode / Crush / pi / qwen read BYOK API keys from standard env vars and, for
   // the local-LLM path, a per-provider base URL. Keys are write-only in the broker
   // (read MAIN-ONLY here, never logged); base URLs ride HarnessConfig. Claude/codex
-  // use their own login, so they skip this. Pam guardrails #3/#4/#5.
+  // use their own login, so they skip this. Selin guardrails #3/#4/#5.
   if (opts.hive && (provider === 'opencode' || provider === 'crush' || provider === 'pi' || provider === 'qwen')) {
     const cfg = readConfig();
     const extra: Record<string, string> = {};
-    // 1) BYOK keys — LEAST-PRIVILEGE (Pam/Jim NIT-2): inject ONLY the key for the
+    // 1) BYOK keys — LEAST-PRIVILEGE (Selin/Caner NIT-2): inject ONLY the key for the
     //    spawned model's provider prefix when we can identify it; fall back to all
     //    stored keys when the model/prefix is unknown (default model, qwen slugs,
     //    custom). Reduces the blast radius vs handing every CLI all keys.
@@ -2894,7 +2894,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
       if (!key) continue;
       extra[BACKEND_KEY_ENV[backend]] = key;
       // OpenCode/AI-SDK's Google provider reads GOOGLE_GENERATIVE_AI_API_KEY, not
-      // GEMINI_API_KEY — inject both so google/* authenticates (Jim NIT #1).
+      // GEMINI_API_KEY — inject both so google/* authenticates (Caner NIT #1).
       if (backend === 'google') extra.GOOGLE_GENERATIVE_AI_API_KEY = key;
     }
     // 2) Floor auto-state for pi's bundled extension auto-allow (guardrail #5): it
@@ -2910,7 +2910,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
         // Register the model id the user actually selects (the part after 'local/')
         // so `--model local/<id>` resolves; default to 'local'. Without this the
         // dropdown's `local/llama3` failed against a config that only declared model
-        // 'local' (Jim verify-opencode MUST-FIX #2).
+        // 'local' (Caner verify-opencode MUST-FIX #2).
         const localModel = (prefix === 'local' && modelSlug.slice(6)) || 'local';
         oc.provider = {
           local: { npm: '@ai-sdk/openai-compatible', name: 'Local (self-hosted)', options: { baseURL: baseUrl }, models: { [localModel]: { name: localModel } } }
@@ -3040,7 +3040,7 @@ ipcMain.handle('terminal:openAtFolder', async (_evt, cwd: unknown) => {
   });
 });
 
-// ─── IPC: integrations (Phase 2 registry — backend for Ryan's Settings UI) ────
+// ─── IPC: integrations (Phase 2 registry — backend for Yaman's Settings UI) ────
 // Records are metadata only (config-backed); secrets are encrypted at rest and NEVER
 // returned over IPC. `list` redacts secretRef to a `hasSecret` boolean.
 ipcMain.handle('integrations:list', () => integrations.listRecordsRedacted());
@@ -3752,7 +3752,7 @@ ipcMain.handle('app:resetAll', () => {
   try { persist.close(); } catch (e) { console.error("[reset] persist.close:", e); }
   try { ptyManager.killAll(); } catch (e) { console.error("[reset] killAll:", e); }
   try { hive.removeExposedCodexData(); } catch (e) { console.error("[reset],ExposedCodexData'yı kaldır:", e); }
-  // Erase the hive (Michael's + every agent's memory, inboxes, tasks, board,
+  // Erase the hive (Hakan's + every agent's memory, inboxes, tasks, board,
   // git history) and the semantic-memory palace. Only these harness-created
   // subdirs are removed — never the user's whole harnessHome folder.
   for (const dir of [hive.root(), memory.palacePath()]) {
@@ -3791,12 +3791,12 @@ ipcMain.handle('hive:agentContext', (_evt, agentId: unknown) => {
 });
 
 // A consolidated, NON-SENSITIVE per-agent directory for the voice read-layer
-// (Realtime Michael's get_agent_detail / list_agents). One read that joins
+// (Realtime Hakan's get_agent_detail / list_agents). One read that joins
 // everything the office-floor sidebar + telemetry know per agent: the registry
 // record (name/role/provider/cwd/status/archived/isManager/isAssistant/sessionId/
 // cwdValid), live token + breaker + last-tool telemetry, and the current context
 // window fill. Includes ARCHIVED agents (unlike the heartbeat's fleet.json, which
-// is live-only) so Michael can speak to inactive agents — their cwd and memory
+// is live-only) so Hakan can speak to inactive agents — their cwd and memory
 // stay reachable. PII-free: no secrets, env, or API keys ever leave main; cost is
 // carried as tokens (+ a usd field the voice layer deliberately never speaks).
 ipcMain.handle('hive:agentDirectory', () => {
@@ -3851,7 +3851,7 @@ ipcMain.handle('telemetry:snapshot', () => telemetry.snapshot());
 // Lane A's breaker calls this with a BreakerState; we fan it out to the renderer
 // on `control:breakerState`, where the avatar adapter gives it precedence over
 // hook-derived status (#5C looping/zombie). Defined here so the channel exists
-// before Jim's policy lands; he produces, this lane consumes.
+// before Caner's policy lands; he produces, this lane consumes.
 ipcMain.handle('control:setBreakerState', (_evt, state: unknown) => {
   try { liveWebContents()?.send('control:breakerState', state); } catch { /* window tore down */ }
   return { ok: true };
@@ -4308,23 +4308,23 @@ ipcMain.handle('freeflow:transcribe', async (_evt, arg: unknown) => {
   return out;
 });
 
-// ─── IPC: Realtime Michael (voice orchestrator — ephemeral token mint, rt-1) ──
+// ─── IPC: Realtime Hakan (voice orchestrator — ephemeral token mint, rt-1) ──
 // MAIN owns the BYOK OpenAI key (encrypted broker, apikey:openai) and mints a
 // short-lived EPHEMERAL client secret; the real key never crosses IPC. All wiring
 // lives in ./realtime so this stays a single registration line.
 registerRealtimeIpc();
 
-// ─── IPC: Realtime Michael voice ACTIONS (rt-5, Phase 2) ─────────────────────
+// ─── IPC: Realtime Hakan voice ACTIONS (rt-5, Phase 2) ─────────────────────
 // Thin adapters over the SAME main fns the manager PTY already uses. ALL of the safety
 // spine — soft-vs-destructive tiering, the two-step verbal echo-back confirm, the
 // distinct-token rule, the hard allowlist (kill-manager / mass-ops forbidden), and the
 // michael-voice attribution — lives in ./realtimeActions. This site only injects
 // the existing functions; it adds NO new orchestration logic.
-// ─── IPC: Realtime Michael completion watcher (rt-12, Phase 2) ───────────────
-// Jim's net-new engine (realtimeCompletionWatcher.ts) detects a voice-dispatched
+// ─── IPC: Realtime Hakan completion watcher (rt-12, Phase 2) ───────────────
+// Caner's net-new engine (realtimeCompletionWatcher.ts) detects a voice-dispatched
 // task finishing (card→done OR a done-reply in michael-voice's inbox) and EMITS it;
 // I own the seam — inject the hive read deps, push completions to the live session
-// (so Michael speaks them unprompted), and bridge waitFor / queue-drain over IPC.
+// (so Hakan speaks them unprompted), and bridge waitFor / queue-drain over IPC.
 const completionWatcher = initCompletionWatcher({
   readTasks: () => { const t = hive.tasks() as { tasks?: TaskCard[] }; return Array.isArray(t?.tasks) ? t.tasks : []; },
   // Voice dispatches go out as from:michael-voice, so assignee done-replies land here.
@@ -5075,7 +5075,7 @@ function runWorkerWakeBeat(): void {
 }
 
 /** (Re)arm the always-on beats (decoupled from the optional heartbeat): the live
- *  fleet snapshot Michael reads (~8s) + the breaker/cost-ledger beat (~30s).
+ *  fleet snapshot Hakan reads (~8s) + the breaker/cost-ledger beat (~30s).
  *  Guarded (clear-then-set) so a re-bootstrap (changeHome recovery) OR a
  *  powerMonitor resume can't stack duplicate timers — these are setInterval
  *  handles that freeze during true system sleep and must be re-armed on wake. */
@@ -5172,7 +5172,7 @@ function onSystemResume(reason: string): void {
 }
 
 app.whenReady().then(() => {
-  // Realtime Michael mic-gate hygiene (rt-8 / Pam rt-10 nit): the voice session
+  // Realtime Hakan mic-gate hygiene (rt-8 / Selin rt-10 nit): the voice session
   // opens the mic permission gate by persisting realtimeVoiceEnabled=true and
   // closes it on disconnect — but a hard crash/reload mid-session skips that
   // teardown, leaving the flag stuck true so the gate would boot PRE-OPEN with no

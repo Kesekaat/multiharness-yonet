@@ -7394,7 +7394,7 @@ function preferredAgentRole(candidate, fallback2, isBoss = false) {
 function roleForHiveSpawn(agent) {
   if (agent.isBoss) return preferredAgentRole(agent.description, "orchestrator (boss)", true);
   if (agent.isAssistant) {
-    return preferredAgentRole(agent.description, "Michael's prep assistant");
+    return preferredAgentRole(agent.description, "Hakan's prep assistant");
   }
   const role = agent.description?.trim();
   return role && isDurableRole(role) ? role : void 0;
@@ -35920,7 +35920,7 @@ class ThoughtBubble {
   // never renders below its designed 1:1 screen size; at zoom ≥ 1 it keeps
   // scaling with the world as before.
   zoom = 1;
-  // World bounds (map size in px). An avatar near the map edge — Michael's CEO
+  // World bounds (map size in px). An avatar near the map edge — Hakan's CEO
   // room sits in the top-left corner — would otherwise push its cloud out of
   // the visible world. setPosition clamps the rect back inside, tooltip-style.
   boundsW = 0;
@@ -37673,21 +37673,21 @@ function paintPortrait(ctx, name2, scale = 2) {
   ctx.drawImage(stage, 0, 0, PORTRAIT_W, PORTRAIT_H, 0, 0, PORTRAIT_W * scale, PORTRAIT_H * scale);
 }
 const OFFICE_CAST = [
-  { name: "michael", displayName: "Michael", shirt: "#5a6b8c", blurb: "World's best boss" },
-  { name: "jim", displayName: "Jim", shirt: "#6fa8dc", blurb: "Salesman, prankster" },
-  { name: "pam", displayName: "Pam", shirt: "#9caf88", blurb: "Receptionist, artist" },
-  { name: "dwight", displayName: "Dwight", shirt: "#b89b3e", blurb: "Assistant (to the) RM" },
-  { name: "kevin", displayName: "Kevin", shirt: "#4a7ab5", blurb: "Accounting" },
-  { name: "angela", displayName: "Angela", shirt: "#8a86a6", blurb: "Head of accounting" },
-  { name: "oscar", displayName: "Oscar", shirt: "#7a4b6b", blurb: "Accountant" },
-  { name: "stanley", displayName: "Stanley", shirt: "#8c5a4b", blurb: "Sales, crossword" },
-  { name: "phyllis", displayName: "Phyllis", shirt: "#b08bbf", blurb: "Sales" },
-  { name: "andy", displayName: "Andy", shirt: "#6fae6f", blurb: "Cornell, a cappella" },
-  { name: "kelly", displayName: "Kelly", shirt: "#d16ba5", blurb: "Customer service" },
-  { name: "ryan", displayName: "Ryan", shirt: "#3a3a44", blurb: "The temp" },
-  { name: "toby", displayName: "Toby", shirt: "#9a8c5a", blurb: "Human resources" },
-  { name: "creed", displayName: "Creed", shirt: "#6b7a4b", blurb: "Quality assurance" },
-  { name: "meredith", displayName: "Meredith", shirt: "#b5544a", blurb: "Supplier relations" }
+  { name: "michael", displayName: "Hakan", shirt: "#5a6b8c", blurb: "World's best boss" },
+  { name: "jim", displayName: "Caner", shirt: "#6fa8dc", blurb: "Salesman, prankster" },
+  { name: "pam", displayName: "Selin", shirt: "#9caf88", blurb: "Receptionist, artist" },
+  { name: "dwight", displayName: "Batur", shirt: "#b89b3e", blurb: "Assistant (to the) RM" },
+  { name: "kevin", displayName: "Kartal", shirt: "#4a7ab5", blurb: "Accounting" },
+  { name: "angela", displayName: "Deniz", shirt: "#8a86a6", blurb: "Head of accounting" },
+  { name: "oscar", displayName: "Bora", shirt: "#7a4b6b", blurb: "Accountant" },
+  { name: "stanley", displayName: "Polat", shirt: "#8c5a4b", blurb: "Sales, crossword" },
+  { name: "phyllis", displayName: "Soner", shirt: "#b08bbf", blurb: "Sales" },
+  { name: "andy", displayName: "Timur", shirt: "#6fae6f", blurb: "Cornell, a cappella" },
+  { name: "kelly", displayName: "Pelin", shirt: "#d16ba5", blurb: "Customer service" },
+  { name: "ryan", displayName: "Yaman", shirt: "#3a3a44", blurb: "The temp" },
+  { name: "toby", displayName: "Berkin", shirt: "#9a8c5a", blurb: "Human resources" },
+  { name: "creed", displayName: "Ertan", shirt: "#6b7a4b", blurb: "Quality assurance" },
+  { name: "meredith", displayName: "Ayman", shirt: "#b5544a", blurb: "Supplier relations" }
 ];
 const CAST_BY_NAME = Object.fromEntries(OFFICE_CAST.map((c2) => [c2.name, c2]));
 const DEFAULT_CHARACTER = "jim";
@@ -37753,7 +37753,7 @@ const TABLE = [
   "did you see the standup notes?",
   "pretending to read my notes",
   "I needed this break, honestly",
-  "do NOT tell Michael I’m in here"
+  "do NOT tell Hakan I’m in here"
 ];
 const SPOT_POOL = {
   coffee: COFFEE,
@@ -37764,8 +37764,8 @@ const SPOT_POOL = {
 const BY_CHARACTER = {
   michael: ["I DECLARE… BANKRUPTCY!", "that's what she said", "I'm not superstitious. just a little stitious.", "no meetings before coffee. that’s the rule."],
   dwight: ["FALSE.", "identity theft is not a joke", "that mug is regulation", "this fridge needs a beet drawer", "Schrute Farms has better coffee"],
-  jim: ["...that's what she said", "bears. beets. Battlestar Galactica.", "I moved Dwight’s stapler again", "just here for the gossip"],
-  pam: ["Dunder Mifflin, this is Pam", "sketching the vending machine", "the watercolor of the break room"],
+  jim: ["...that's what she said", "bears. beets. Battlestar Galactica.", "I moved Batur’s stapler again", "just here for the gossip"],
+  pam: ["Dunder Mifflin, this is Selin", "sketching the vending machine", "the watercolor of the break room"],
   kevin: ["the chili is NOT ready", "why waste time say lot word", "me want snack", "cookie? cookie."],
   angela: ["this break room is filthy", "party planning committee, 3pm", "I’m judging the fridge"],
   oscar: ["actually, it’s “espresso”", "well, actually…", "the budget for snacks is concerning"],
@@ -37794,7 +37794,7 @@ const EXCHANGES = [
   ["what’s Schrute Farms smell like?", "victory. and beets."],
   ["did you just throw your phone?", "didn’t like what it said.", "cool."],
   ["is a hot dog a sandwich?", "it is.", "I know, right?"],
-  ["three-hole-punch Jim returns.", "never gets old."],
+  ["three-hole-punch Caner returns.", "never gets old."],
   ["why few word when lot word?", "...genuinely profound.", "I know."],
   ["I am not a bad person.", "...", "not a great person either.", "there it is."],
   ["I love my cats more than people.", "including us?", "especially you."],
@@ -37824,7 +37824,7 @@ const EXCHANGES = [
   ["that’s what she said.", "...every time.", "come on."],
   ["I started the fire.", "no you didn’t.", "in our hearts, I did."],
   ["is today a day ending in Y?", "yes.", "then no."],
-  ["Bob Vance.", "Phyllis Vance.", "Vance Refrigeration."],
+  ["Bob Vance.", "Soner Vance.", "Vance Refrigeration."],
   ["you look beautiful today.", "...I know."],
   ["I’m better than you in every way.", "probably.", "definitely.", "sure."],
   ["I’m a nice guy.", "you’re okay.", "nicest thing you’ve said."],
@@ -37865,8 +37865,8 @@ const TWSS_EXCHANGES = [
   ["I can hold it a really long time.", "that’s what she said.", "my breath!", "still."],
   ["why is it taking so long?", "that’s what she said.", "I hate you.", "then why set me up?"],
   ["I can’t do it with people watching.", "that’s what she said.", "the presentation!", "sure."],
-  ["it’s deeper than it looks.", "that’s what she said.", "the pothole, Michael!", "doesn’t matter."],
-  ["so much longer than last time.", "that’s what she said.", "the report, Michael.", "right, right."],
+  ["it’s deeper than it looks.", "that’s what she said.", "the pothole, Hakan!", "doesn’t matter."],
+  ["so much longer than last time.", "that’s what she said.", "the report, Hakan.", "right, right."],
   ["oh my boss, it went on FOREVER.", "that’s what she said.", "the Twilight movie!", "classic."],
   ["can’t believe how thick this is.", "that’s what she said.", "the folder. *stares*"],
   ["I fit all THAT in one day?", "that’s what she said.", "that’s actually what I said!", "meta."],
@@ -37874,12 +37874,12 @@ const TWSS_EXCHANGES = [
   ["someone help me finish this off.", "that’s what she said.", "the leftover cake!", "still works."],
   ["get in, do my thing, get out.", "that’s what she said.", "*doesn’t look up from crossword*"],
   ["can’t believe it took this long.", "that’s what she said.", "the raise. eight years.", "that one’s on me."],
-  ["do it slower, it’ll hurt less.", "that’s what she said.", "for the quarterly review.", "sure, Oscar."],
+  ["do it slower, it’ll hurt less.", "that’s what she said.", "for the quarterly review.", "sure, Bora."],
   ["didn’t realize how big it’d be.", "that’s what she said.", "the calzone, it’s enormous!", "I love this office."],
   ["*to no one* that’s what she said.", "nobody said anything.", "just thinking about earlier."],
   ["*on the phone* that’s what she said.", "who was that?", "my mother. about a sandwich."],
   ["too hot in here! that’s what she said.", "you said both parts.", "I contain multitudes."],
-  ["*at the TV* that’s what she said.", "you’re alone, Michael.", "she doesn’t know that."],
+  ["*at the TV* that’s what she said.", "you’re alone, Hakan.", "she doesn’t know that."],
   ["you need to be more professional.", "that’s what she said.", "I am she.", "...that’s what she said."],
   ["stop. just stop. every time—", "that’s what she said.", "*leaves the room*", "*whispers* that’s what she said."],
   ["as you can see, it’s going up.", "that’s what she said.", "*everyone groans*", "set that one up myself."],
@@ -37890,13 +37890,13 @@ const TWSS_EXCHANGES = [
 const PAIR_POOL = [...EXCHANGES, ...TWSS_EXCHANGES];
 const KEYED_EXCHANGES = {
   michael: ["that’s what she said.", "...there it is."],
-  dwight: ["identity theft is not a joke.", "nobody touched your stapler, Dwight."],
-  kevin: ["why few word when lot word?", "...just use the words, Kevin."],
+  dwight: ["identity theft is not a joke.", "nobody touched your stapler, Batur."],
+  kevin: ["why few word when lot word?", "...just use the words, Kartal."],
   kelly: ["okay don’t freak out, but—", "I’m already freaking out."],
   oscar: ["well, actually—", "...here we go."],
-  angela: ["this table is filthy.", "it’s a break room, Angela."],
+  angela: ["this table is filthy.", "it’s a break room, Deniz."],
   creed: ["which one are you again?", "...we sit next to each other."],
-  stanley: ["is it Pretzel Day?", "no, Stanley.", "...did I stutter?"],
+  stanley: ["is it Pretzel Day?", "no, Polat.", "...did I stutter?"],
   andy: ["I went to Cornell.", "nobody cares.", "...I went to Cornell."],
   jim: ["question.", "yes.", "nothing. just checking."]
 };
@@ -38067,7 +38067,7 @@ const BROOKLYN99_THEME = {
   ],
   // PLACEHOLDER: brooklyn99.tmj paints the office desk stamp (monitor gid 365).
   monitor: OFFICE_THEME.monitor,
-  // PLACEHOLDER: office palette + cast until Pam's B99 art (§C/§D) lands.
+  // PLACEHOLDER: office palette + cast until Selin's B99 art (§C/§D) lands.
   palette: OFFICE_THEME.palette,
   cast: OFFICE_THEME.cast
 };
@@ -38149,11 +38149,11 @@ const ERRAND_THOUGHTS = {
   smoke: ["the floor runs itself 🚬", "boss break.", "thinking big thoughts 🚬", "I DECLARE… a break"]
 };
 const SUCK_UP_LINES = [
-  "already shipped {done} tasks, Michael. raise? 🥺",
+  "already shipped {done} tasks, Hakan. raise? 🥺",
   "{done} tasks done this week, boss!",
   "great vision as always, boss!",
   "I was JUST about to do exactly that!",
-  "love the tie today, Michael",
+  "love the tie today, Hakan",
   "working hard, boss! 💪",
   "best boss ever. genuinely."
 ];
@@ -39562,7 +39562,7 @@ const COMMAND_GROUPS = [
       { cmd: "/model", kind: "slash", desc: "Switch the model for this session (saved as default); arrows tune effort.", usage: "/model opus" },
       { cmd: "/effort", kind: "slash", desc: "Set reasoning effort: low / medium / high / xhigh / max.", usage: "/effort high" },
       { cmd: "/fast", kind: "slash", desc: "Toggle fast mode — Opus with faster output, no model downgrade." },
-      { cmd: "claude --model claude-sonnet-4-6[1m]", kind: "cli", desc: "Launch on a specific model. The [1m] suffix selects the 1M-token window (Dwight)." },
+      { cmd: "claude --model claude-sonnet-4-6[1m]", kind: "cli", desc: "Launch on a specific model. The [1m] suffix selects the 1M-token window (Batur)." },
       { cmd: "claude --fallback-model sonnet", kind: "cli", desc: "Auto-fall back to another model when the primary is unavailable." }
     ]
   },
@@ -39753,7 +39753,7 @@ const AGENT_PROVIDER_PRESETS = [
     autoFlag: "--permission-mode bypassPermissions",
     hiveAware: true,
     canReceiveInbox: true,
-    // Longest-context Claude variant — matches the "give Michael a bigger model"
+    // Longest-context Claude variant — matches the "give Hakan a bigger model"
     // advisory and the Recommended tag on the orchestrator picker.
     recommendedOrchestratorModel: "claude-opus-4-8[1m]",
     resumeFlag: "--resume",
@@ -39931,7 +39931,7 @@ const AGENT_PROVIDER_PRESETS = [
     commandGroups: [],
     // OpenCode's TUI exposes no skip-permissions FLAG; headless auto-approve is a
     // config concern (permission:allow). To keep auto-mode gated behind the floor
-    // `config.autoMode` toggle (Pam guardrail #2), the permission JSON is NOT a
+    // `config.autoMode` toggle (Selin guardrail #2), the permission JSON is NOT a
     // static nonInteractiveEnv — spawnAgentCore builds OPENCODE_CONFIG_CONTENT
     // dynamically (permission:allow only when autoMode is on; + a local provider
     // block when a base-URL is set). So no auto flag is spliced onto the command.
@@ -40023,7 +40023,7 @@ const AGENT_PROVIDER_PRESETS = [
     bridge: { kind: "proxy", api: "openai", baseUrlEnv: "CRUSH_PROXY_BASE_URL", inboxDelivery: "terminal" },
     // OpenAI-WIRE default so the out-of-box Crush boss routes through the proxy
     // cleanly (the proxy serves one wire-shape; an anthropic/* default would route to
-    // the wrong upstream — Dwight verify-crush MF1). Advisory/editable; non-OpenAI-wire
+    // the wrong upstream — Batur verify-crush MF1). Advisory/editable; non-OpenAI-wire
     // Crush-via-proxy is on-device live-verify. // exact long-context id humanQA
     recommendedOrchestratorModel: "openai/gpt-4o",
     // boss-eligible via the proxy bridge (terminal inbox delivery on synthesized idle).
@@ -40056,7 +40056,7 @@ const AGENT_PROVIDER_PRESETS = [
     // pi has NO yolo flag. `--approve` is per-run PROJECT trust (accept the cwd so pi
     // doesn't prompt to trust the folder); the actual tool auto-allow lives INSIDE the
     // bridge extension's tool_call handler, which respects the floor auto-state via
-    // HIVE_AUTO_APPROVE env (Pam guardrail #5). Gated by config.autoMode like the rest.
+    // HIVE_AUTO_APPROVE env (Selin guardrail #5). Gated by config.autoMode like the rest.
     autoModeFlag: "--approve",
     autoFlag: "--approve",
     // Suppress first-run version-check / telemetry chatter in the PTY. // humanQA exact names
@@ -40122,7 +40122,7 @@ const AGENT_PROVIDER_PRESETS = [
     // TUI by default (no `-p`), so the session stays alive for hive mail via the
     // renderer idle / work-order path — same class as Crush. Print mode (`-p`) is
     // available for scripts but exits per turn; this preset intentionally does
-    // NOT use `-p` so Michael and workers remain boss-eligible / inbox-capable.
+    // NOT use `-p` so Hakan and workers remain boss-eligible / inbox-capable.
     // Models (including cheap gpt-5.6-luna-*) bill against Cursor credits via the
     // logged-in CLI — there is no separate "plain OpenAI API" path for Luna.
     id: "cursor",
@@ -40294,7 +40294,7 @@ const CRUSH_MODELS = [
   { id: "openrouter/auto", label: "OpenRouter (auto)" },
   // OpenAI-wire local slug so traffic routes through the proxy (the harness overrides
   // the `openai` provider's base_url → loopback → your configured Crush base-URL).
-  // An `ollama/*` slug would bypass the proxy (Dwight verify-crush NIT-2).
+  // An `ollama/*` slug would bypass the proxy (Batur verify-crush NIT-2).
   { id: "openai/local", label: "Local · OpenAI-compatible (set base-URL)" }
 ];
 const PI_MODELS = [
@@ -50711,7 +50711,7 @@ ${goal}
 ${text2}`;
 }
 const INITIAL_BOSS_PROMPT = [
-  "You're online as Michael, the orchestrator of the hive. Get oriented, then start running the floor:",
+  "You're online as Hakan, the orchestrator of the hive. Get oriented, then start running the floor:",
   "1. Read your memory.md and drain every message in your inbox.",
   "2. Review board.md + tasks.json and the current roster of agents (active vs archived).",
   "3. Check fleet health: read fleet.json in the hive root for every agent's live tokens, cost, status, breaker level, and inbox backlog (`claude agents` will NOT show your hive's agents). Flag anyone stalled, over-budget, or breaker-armed.",
@@ -50863,13 +50863,13 @@ function useHive(config2) {
         args,
         cols: 100,
         rows: 30,
-        // Restore Michael's prior conversation across an app restart. His session
+        // Restore Hakan's prior conversation across an app restart. His session
         // id lives in the hive registry (recorded from his hooks), so the main
         // process attaches `--resume <id>`; a missing transcript falls back to a
         // fresh session. Without this the most important context on the floor —
         // the orchestrator's — was lost on every restart.
         resume: true,
-        hive: { id: BOSS_ID, name: "Michael", provider: bossProvider, cwd: config2.harnessHome, isBoss: true, role: "orchestrator (boss)" }
+        hive: { id: BOSS_ID, name: "Hakan", provider: bossProvider, cwd: config2.harnessHome, isBoss: true, role: "orchestrator (boss)" }
       });
       if (cancelled) {
         bossSpawning.current = false;
@@ -50882,7 +50882,7 @@ function useHive(config2) {
       }
       const boss = {
         id: BOSS_ID,
-        name: "Michael",
+        name: "Hakan",
         character: "michael",
         accent: "lemon",
         description: "boss — runs the floor, triages requests, escalates only critical calls to you",
@@ -50906,7 +50906,7 @@ function useHive(config2) {
       bootGraceUntil.current[BOSS_ID] = Date.now() + BOOT_GRACE_MS;
       void (async () => {
         try {
-          const remoteCommand = remoteControlCommandForProvider(bossProvider, "Michael");
+          const remoteCommand = remoteControlCommandForProvider(bossProvider, "Hakan");
           if (remoteCommand) {
             await submitToPty(BOSS_PTY, remoteCommand, bossProvider, REMOTE_CONTROL_SETTLE_MS);
           }
@@ -53209,7 +53209,7 @@ function TasksKanban() {
         " task",
         tasks.length === 1 ? "" : "s"
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { marginLeft: "auto", fontSize: 11, color: "var(--cth-ink-300)" }, children: "new work? dispatch it to Michael (monitor tab)" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { marginLeft: "auto", fontSize: 11, color: "var(--cth-ink-300)" }, children: "new work? dispatch it to Hakan (monitor tab)" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
       flex: 1,
@@ -54157,7 +54157,7 @@ function SchedulesSection({ onSummary }) {
     setMBody("");
     setAdding(false);
   };
-  const targetName = (to) => to === "broadcast" ? "everyone" : to === "boss" ? "Michael" : agents.find((a2) => a2.id === to)?.name ?? to;
+  const targetName = (to) => to === "broadcast" ? "everyone" : to === "boss" ? "Hakan" : agents.find((a2) => a2.id === to)?.name ?? to;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     missions.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Muted$2, { children: "Nothing is scheduled yet." }),
     missions.map((m2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54185,7 +54185,7 @@ function SchedulesSection({ onSummary }) {
       ) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "GOES TO", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Select$1, { value: mTo, onChange: setMTo, style: { width: "100%" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "broadcast", children: "everyone" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "boss", children: "Michael" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "boss", children: "Hakan" }),
         agents.filter((a2) => !a2.isBoss).map((a2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: a2.id, children: a2.name }, a2.id))
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "EVERY", children: /* @__PURE__ */ jsxRuntimeExports.jsx(IntervalPicker, { value: mInterval, onChange: setMInterval }) }),
@@ -54274,7 +54274,7 @@ function MissionRow({ mission, targetName, agents, onPatch, onDelete }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "LABEL", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: label, onChange: (e2) => setLabel(e2.target.value), style: inputStyle$5 }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "GOES TO", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Select$1, { value: to, onChange: setTo, style: { width: "100%" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "broadcast", children: "everyone" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "boss", children: "Michael" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "boss", children: "Hakan" }),
         agents.filter((a2) => !a2.isBoss).map((a2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: a2.id, children: a2.name }, a2.id))
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Field, { label: "EVERY", children: [
@@ -80587,7 +80587,7 @@ function ExchangeCard({
   const tail3 = (() => {
     if (pending || ex.answered) return null;
     if (decision === "rejected") return "You turned this down. Nothing was sent to the hive.";
-    return "No reply yet. Michael has this one.";
+    return "No reply yet. Hakan has this one.";
   })();
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: pending ? pendingCardStyle : cardStyle, children: [
     pending && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -80624,7 +80624,7 @@ function ExchangeCard({
       m2.id
     )),
     pending && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { ...uiText, fontSize: 11, lineHeight: "16px", color: "var(--cth-ink-700)" }, children: pending.kind === "directive" ? "Approve and this goes to Michael, who will put the hive to work on it. Reject and it is dropped — nothing runs." : "Approve and Michael reads this. Reject and it is dropped — nothing runs." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { ...uiText, fontSize: 11, lineHeight: "16px", color: "var(--cth-ink-700)" }, children: pending.kind === "directive" ? "Approve and this goes to Hakan, who will put the hive to work on it. Reject and it is dropped — nothing runs." : "Approve and Hakan reads this. Reject and it is dropped — nothing runs." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: 6 }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           PixelButton,
@@ -80633,7 +80633,7 @@ function ExchangeCard({
             size: "sm",
             disabled: !!busy[pending.id],
             onClick: () => onDecide(pending.id, "approved"),
-            title: "Send this message through to Michael",
+            title: "Send this message through to Hakan",
             children: busy[pending.id] ? "one sec…" : "approve"
           }
         ),
@@ -80667,12 +80667,12 @@ const SECTIONS$2 = [
   {
     key: "webhook",
     label: "Webhooks",
-    blurb: "Everything posted to your webhook endpoints, next to what Michael sent back."
+    blurb: "Everything posted to your webhook endpoints, next to what Hakan sent back."
   },
   {
     key: "org",
     label: "Organization",
-    blurb: "Messages from your teammates’ clone nodes, next to what Michael sent back."
+    blurb: "Messages from your teammates’ clone nodes, next to what Hakan sent back."
   }
 ];
 function TriggerHistoryTab() {
@@ -80837,7 +80837,7 @@ function TriggerHistoryTab() {
         EmptyState,
         {
           title: "No webhook messages yet.",
-          body: "When something posts to one of your endpoints, it lands here with Michael’s reply underneath. Nothing has called in so far. Add an endpoint under Webhooks to get a URL you can hand out."
+          body: "When something posts to one of your endpoints, it lands here with Hakan’s reply underneath. Nothing has called in so far. Add an endpoint under Webhooks to get a URL you can hand out."
         }
       ) : exchanges.map((ex) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         ExchangeCard,
@@ -80960,7 +80960,7 @@ function WorkersTab() {
           max
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { style: { fontFamily: "var(--cth-font-ui)", fontSize: 11, color: "var(--cth-ink-700)", margin: "2px 0 8px" }, children: "Isolated workers Michael spins up to handle Slack messages — they run to completion, reply in-thread, then tear down." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { style: { fontFamily: "var(--cth-font-ui)", fontSize: 11, color: "var(--cth-ink-700)", margin: "2px 0 8px" }, children: "Isolated workers Hakan spins up to handle Slack messages — they run to completion, reply in-thread, then tear down." }),
       live.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { ...card, color: "var(--cth-ink-700)", fontFamily: "var(--cth-font-ui)", fontSize: 12 }, children: "No workers running right now." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { display: "flex", flexDirection: "column", gap: 8 }, children: live.map((w2) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: card, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 8, justifyContent: "space-between" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 8, minWidth: 0 }, children: [
@@ -82532,7 +82532,7 @@ function CommandCenterPanel({ agent, fullscreen = false }) {
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis"
-              }, children: "Michael runs the floor" })
+              }, children: "Hakan runs the floor" })
             ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: 6, alignItems: "center", flexShrink: 0 }, children: [
@@ -82637,7 +82637,7 @@ function CommandCenterPanel({ agent, fullscreen = false }) {
               terminalInstanceKey(agent.ptyId, agent.terminalGeneration)
             ) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(MessageQueueComposer, { agent })
-          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Centered$2, { children: "Michael has no live terminal." })),
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Centered$2, { children: "Hakan has no live terminal." })),
           tab2 === "floor" && /* @__PURE__ */ jsxRuntimeExports.jsx(FloorTab, { seed: dispatchSeed }),
           tab2 === "tasks" && /* @__PURE__ */ jsxRuntimeExports.jsx(TasksKanban, {}),
           tab2 === "human" && /* @__PURE__ */ jsxRuntimeExports.jsx(AskMeTab, {}),
@@ -82813,7 +82813,7 @@ function FloorTab({ seed: seed2 }) {
       "human"
     );
     setDispatchText("");
-    setDispatchMsg(res.ok ? `sent to Michael${suggested ? ` (suggesting ${suggested.name})` : ""}` : `failed: ${res.error ?? "?"}`);
+    setDispatchMsg(res.ok ? `sent to Hakan${suggested ? ` (suggesting ${suggested.name})` : ""}` : `failed: ${res.error ?? "?"}`);
     setTimeout(() => setDispatchMsg(null), 4e3);
   };
   const fetchIssues = async () => {
@@ -82881,7 +82881,7 @@ URL: ${issue2.url}`);
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontFamily: "var(--cth-font-display)", fontSize: 8, color: "var(--cth-ink-500)", flexShrink: 0 }, children: "SUGGESTED OWNER" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Select, { value: dispatchTo, onChange: setDispatchTo, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Michael decides" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Hakan decides" }),
           agents.filter((a2) => !a2.isBoss).map((a2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: a2.id, children: a2.name }, a2.id))
         ] })
       ] }),
@@ -82891,7 +82891,7 @@ URL: ${issue2.url}`);
           value: dispatchText,
           onChange: (e2) => setDispatchText(e2.target.value),
           rows: 2,
-          placeholder: "Describe the task… (Michael decomposes, writes the card, and assigns)",
+          placeholder: "Describe the task… (Hakan decomposes, writes the card, and assigns)",
           style: textareaStyle
         }
       ),
@@ -83109,7 +83109,7 @@ URL: ${issue2.url}`);
                 onClick: async () => {
                   const currentProvider = inferAgentProvider(a2.command, a2.provider);
                   if (engineProvider !== currentProvider) {
-                    if (!window.confirm("This restarts Michael; a conversation on a different engine can't be resumed.")) return;
+                    if (!window.confirm("This restarts Hakan; a conversation on a different engine can't be resumed.")) return;
                   }
                   await window.cth.updateConfig({ bossProvider: engineProvider, bossModel: engineModel });
                   await restartWithModel(a2, engineModel, { provider: engineProvider, resume: false });
@@ -83124,7 +83124,7 @@ URL: ${issue2.url}`);
                 size: "sm",
                 disabled: restarting === a2.id,
                 onClick: () => restartWithModel(a2, a2.model, { resume: true }),
-                children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "Kill and respawn Michael, resuming the current conversation — fixes a corrupted/garbled terminal without losing context", children: "restart & continue" })
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "Kill and respawn Hakan, resuming the current conversation — fixes a corrupted/garbled terminal without losing context", children: "restart & continue" })
               }
             )
           ] })
@@ -84090,7 +84090,7 @@ function EditAgentModal({ agent, onClose }) {
             {
               value: name2,
               onChange: (e2) => setName(e2.target.value),
-              placeholder: "Stanley",
+              placeholder: "Polat",
               style: inputStyle$4,
               autoFocus: true
             }
@@ -115469,7 +115469,7 @@ function realtimeReadTools() {
       parameters: {
         type: "object",
         properties: {
-          agentId: { type: "string", description: 'The agent id or friendly name to look up (e.g. "kevin-mqpbq43v" or "Kevin").' }
+          agentId: { type: "string", description: 'The agent id or friendly name to look up (e.g. "kevin-mqpbq43v" or "Kartal").' }
         },
         required: ["agentId"],
         additionalProperties: false
@@ -115635,7 +115635,7 @@ function realtimeActionTools() {
     // ── soft writes (execute immediately) ─────────────────────────────────
     tool({
       name: "ping_agent",
-      description: 'Send a short message to one agent (a nudge or note). Soft action — runs immediately, no confirm. Use for "tell Oscar X" or "check in with Jim".',
+      description: 'Send a short message to one agent (a nudge or note). Soft action — runs immediately, no confirm. Use for "tell Bora X" or "check in with Caner".',
       parameters: {
         type: "object",
         properties: {
@@ -115649,7 +115649,7 @@ function realtimeActionTools() {
     }),
     tool({
       name: "dispatch_agent",
-      description: 'Give an agent a task as a structured 4-part work order (objective, context, constraints, done-when) delivered to their inbox. Soft action — runs immediately. Use for "have Jim build X" or "ask Oscar to investigate Y".',
+      description: 'Give an agent a task as a structured 4-part work order (objective, context, constraints, done-when) delivered to their inbox. Soft action — runs immediately. Use for "have Caner build X" or "ask Bora to investigate Y".',
       parameters: {
         type: "object",
         properties: {
@@ -115666,7 +115666,7 @@ function realtimeActionTools() {
     }),
     tool({
       name: "steer_agent",
-      description: 'Inject live guidance into a running agent to redirect it without stopping it. Soft action — runs immediately. This is the priority verb: "tell Jim to focus on the bug first", "steer Oscar away from that approach".',
+      description: 'Inject live guidance into a running agent to redirect it without stopping it. Soft action — runs immediately. This is the priority verb: "tell Caner to focus on the bug first", "steer Bora away from that approach".',
       parameters: {
         type: "object",
         properties: {
@@ -115847,7 +115847,7 @@ function realtimeActionTools() {
     }),
     tool({
       name: "gate_tool",
-      description: "Block (gate) or unblock one named tool for one agent — e.g. gate Bash for Jim. Soft action — runs immediately.",
+      description: "Block (gate) or unblock one named tool for one agent — e.g. gate Bash for Caner. Soft action — runs immediately.",
       parameters: {
         type: "object",
         properties: {
@@ -116066,13 +116066,13 @@ const GREETINGS = [
   "Hi, what's up?",
   "Hey, how's it going?",
   "Hello, how can I help you?",
-  "Hey there, Michael here — what can I do for you?",
+  "Hey there, Hakan here — what can I do for you?",
   "Hi! What are we working on today?",
   "Hey, good to hear you. What's on your mind?",
   "Hello! What do you need?",
   "Hey, I'm all ears — what's going on?"
 ];
-const MICHAEL_PERSONA = `You are Michael — the voice of the orchestrator ("boss") of a hive of autonomous Claude coding agents. The person you're talking to is the human who runs the hive; treat them as the boss you're briefing.
+const MICHAEL_PERSONA = `You are Hakan — the voice of the orchestrator ("boss") of a hive of autonomous Claude coding agents. The person you're talking to is the human who runs the hive; treat them as the boss you're briefing.
 
 VOICE & STYLE. You speak out loud over a live connection. Be concise and natural — like a sharp, calm chief of staff giving a verbal briefing. Lead with the answer in one sentence, then add detail only if it helps. Never read markdown, file paths, or code aloud unless asked. Use plain spoken numbers and names. Brevity is fine; the human can always ask for more.
 
@@ -116093,7 +116093,7 @@ WHAT YOU CAN LOOK UP. You have live awareness of the WHOLE hive: a floor snapsho
 
 NEVER say "I can't access that", "the tool doesn't allow that", or "I don't have that" BEFORE you have actually CALLED a tool. You CAN read any agent's memory (active OR archived), any agent's working directory, full per-agent status, token usage, context-window fill, schedules, configuration, and the board. When a question is about the hive, call the matching tool FIRST and answer with specific facts — real names, real statuses, real numbers — never a vague guess. Only if a tool genuinely returns nothing do you say so, plainly and briefly.
 
-HIVE VOCABULARY. Agents have an id like "creed-mqp3l5wn" and a friendly name like "Creed"; refer to them by name. "boss" is the orchestrator whose voice you are. A card's status is todo, doing, blocked, or done. The circuit breaker is healthy, or steering an agent that's looping or idle. Blocked usually means waiting on the human.
+HIVE VOCABULARY. Agents have an id like "creed-mqp3l5wn" and a friendly name like "Ertan"; refer to them by name. "boss" is the orchestrator whose voice you are. A card's status is todo, doing, blocked, or done. The circuit breaker is healthy, or steering an agent that's looping or idle. Blocked usually means waiting on the human.
 
 WHAT YOU CAN DO. Beyond reporting, you can ACT on the hive by voice: ping an agent, dispatch a task as a 4-part work order, steer a running agent, create / assign / update / delete task cards, hire a new agent, pause / RESUME / halt / kill agents, pause or resume an agent's message delivery, gate a tool for an agent, archive or unarchive an agent, clear an agent's context, create or edit schedules, and change app settings from the allowed list. Soft actions — ping, dispatch, steer, task edits, resume, delivery pause/resume, tool gating, unarchive, and cosmetic settings — happen immediately. Destructive or expensive ones — hire, kill, pause, halt, archive, clear context, schedule changes, and behavior-changing settings — are NEVER done silently: you read the action back and wait for the human to confirm out loud.
 
@@ -116194,7 +116194,7 @@ function teardownMedia() {
 function micFriendly(msg) {
   const m2 = msg.toLowerCase();
   if (m2.includes("permission") || m2.includes("notallowed") || m2.includes("denied"))
-    return "microphone permission denied — allow mic access to talk to Michael";
+    return "microphone permission denied — allow mic access to talk to Hakan";
   if (m2.includes("notfound") || m2.includes("device"))
     return "no microphone found — check your input device";
   return msg;
@@ -116246,7 +116246,7 @@ Completions since you last spoke: ${lines} Mention these to the user when it's n
     } catch {
     }
     const agent = new RealtimeAgent({
-      name: "Michael",
+      name: "Hakan",
       instructions: MICHAEL_PERSONA,
       tools: [...realtimeReadTools(), ...realtimeActionTools()]
     });
@@ -116385,21 +116385,21 @@ const STATE_VIEW = {
     variant: "secondary",
     label: "talk",
     dot: "var(--cth-ink-300)",
-    help: "Talk to Michael — start the voice session"
+    help: "Talk to Hakan — start the voice session"
   },
   connecting: {
     variant: "secondary",
     label: "…",
     dot: "var(--cth-lemon)",
     anim: "cth-blink 700ms steps(2, end) infinite",
-    help: "Connecting to Michael…"
+    help: "Connecting to Hakan…"
   },
   listening: {
     variant: "primary",
     label: "listening",
     dot: "var(--cth-mint)",
     anim: "cth-pulse 1000ms steps(2, end) infinite",
-    help: "Listening — Michael is hearing you (click to stop)",
+    help: "Listening — Hakan is hearing you (click to stop)",
     activeBg: "var(--cth-mint)"
   },
   responding: {
@@ -116407,7 +116407,7 @@ const STATE_VIEW = {
     label: "speaking",
     dot: "var(--cth-sky)",
     anim: "cth-pulse 600ms steps(2, end) infinite",
-    help: "Michael is speaking (click to stop)",
+    help: "Hakan is speaking (click to stop)",
     activeBg: "var(--cth-sky)"
   },
   working: {
@@ -116415,7 +116415,7 @@ const STATE_VIEW = {
     label: "working",
     dot: "var(--cth-coral)",
     anim: "cth-blink 500ms steps(2, end) infinite",
-    help: "Michael is running a tool — mic muted (click to stop)"
+    help: "Hakan is running a tool — mic muted (click to stop)"
   }
 };
 function RealtimeMichaelToggle({ compact = false }) {
@@ -117695,7 +117695,7 @@ Return EXACTLY this shape (omit optional fields you don't need; keep the spec st
 
 {
   "spec": "munder-difflin/hire@1",
-  "name": "Jim",
+  "name": "Caner",
   "description": "one-line role — what this agent is for",
   "goal": "standing directive injected on every prompt — specific and outcome-oriented",
   "provider": "claude",
@@ -117750,7 +117750,7 @@ function AddAgentModal({ onClose, config: config2, onConfigChange }) {
   };
   const initialProvider = inferAgentProvider(config2.defaultCommand);
   const initialModel = isClaudeProvider(initialProvider) ? config2.defaultModel : void 0;
-  const [name2, setName] = reactExports.useState(pendingHire?.name ?? "Jim");
+  const [name2, setName] = reactExports.useState(pendingHire?.name ?? "Caner");
   const [character, setCharacter] = reactExports.useState(knownCharacter(pendingHire?.character));
   const [accent, setAccent] = reactExports.useState(knownAccent(pendingHire?.accent));
   const [cwd2, setCwd] = reactExports.useState(config2.registeredRepos[0] ?? "");
@@ -118712,7 +118712,7 @@ function MichaelBooting() {
       lineHeight: "20px",
       textAlign: "center",
       color: "var(--cth-ink-700)"
-    }, children: "Michael is settling into the corner office and getting the floor ready. Hang tight…" })
+    }, children: "Hakan is settling into the corner office and getting the floor ready. Hang tight…" })
   ] }) }) }) });
 }
 function classifyEngineAvailability(statuses, provider) {
@@ -118744,7 +118744,7 @@ function engineAvailabilityBadge(a2) {
 }
 function engineAvailabilityMessage(a2, label) {
   if (a2.state !== "not-installable") return null;
-  return `${label} is not installed on this computer and the app has no installer for it, so Michael could not start. Install it first, then press "check again". Or pick Claude Code, which installs itself on first run.`;
+  return `${label} is not installed on this computer and the app has no installer for it, so Hakan could not start. Install it first, then press "check again". Or pick Claude Code, which installs itself on first run.`;
 }
 const FEATURES = [
   {
@@ -118759,7 +118759,7 @@ const FEATURES = [
     icon: "gear",
     label: "MICHAEL IS YOUR CLONE",
     desc: "Your clone runs the floor — triages requests, routes tasks, and escalates only what needs you.",
-    descPlain: "Your clone, Michael, takes your requests, hands work to the right agent, and only interrupts you when it matters.",
+    descPlain: "Your clone, Hakan, takes your requests, hands work to the right agent, and only interrupts you when it matters.",
     tint: "var(--cth-sky-light)",
     edge: "var(--cth-sky)"
   },
@@ -119072,10 +119072,10 @@ function OnboardingWizard({ onComplete }) {
         ] }),
         step === "orchestrator" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { style: { margin: 0, lineHeight: "22px" }, children: plain ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Michael is your clone" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Hakan is your clone" }),
             " — he reads your requests, breaks them into tasks, and hands them to the right agent. He's the boss of the floor; you're still the boss of him. Choose which AI engine powers him."
           ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Michael is your clone" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Hakan is your clone" }),
             " — the boss of the floor you just met. He triages your requests, assigns tasks, and manages the team, while escalating anything that genuinely needs you. Pick the engine and model that power him; give him a longer-context, higher-capability model."
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
@@ -119099,9 +119099,9 @@ function OnboardingWizard({ onComplete }) {
             ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
               "Each option is a ",
               /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "CLI engine" }),
-              " (Claude Code, Codex, Antigravity/Gemini, or a local proxy like Qwen). Engines marked INSTALLED are already on this machine; INSTALLS ON FIRST RUN means the app sets it up when Michael first starts.",
+              " (Claude Code, Codex, Antigravity/Gemini, or a local proxy like Qwen). Engines marked INSTALLED are already on this machine; INSTALLS ON FIRST RUN means the app sets it up when Hakan first starts.",
               /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: " Your clone" }),
-              " (Michael) is the engine that orchestrates the whole hive. Recommended: Claude Code · Opus 4.8 · 1M. Other providers can be wired per agent later."
+              " (Hakan) is the engine that orchestrates the whole hive. Recommended: Claude Code · Opus 4.8 · 1M. Other providers can be wired per agent later."
             ] }) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: AGENT_PROVIDER_PRESETS.filter((p2) => canReceiveInbox(p2.id)).map((p2) => {
@@ -119201,7 +119201,7 @@ function OnboardingWizard({ onComplete }) {
                 children: modelsForProvider(bossProvider).map((m2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: m2.id ?? "", children: m2.label }, m2.label))
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "var(--cth-ink-500)" }, children: "This only sets Michael's engine. You can run other providers per agent later." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "var(--cth-ink-500)" }, children: "This only sets Hakan's engine. You can run other providers per agent later." })
           ] })
         ] }),
         step === "repos" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -119855,7 +119855,7 @@ function CompletionToast() {
                 },
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "bell" }),
-                  " Michael · completed",
+                  " Hakan · completed",
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "button",
                     {
@@ -121163,7 +121163,7 @@ function SetupPanel({ onDone } = {}) {
       boxShadow: "inset 0 0 0 1px var(--cth-ink-300)"
     }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1, minWidth: 220, fontSize: 12, color: "var(--cth-ink-700)", lineHeight: 1.5 }, children: missingEssential.length ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "Michael can install the ",
+        "Hakan can install the ",
         missingEssential.length,
         " missing recommended ",
         missingEssential.length === 1 ? "tool" : "tools",
@@ -121178,7 +121178,7 @@ function SetupPanel({ onDone } = {}) {
           disabled: missingEssential.length === 0,
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { style: { display: "inline-flex", gap: 4, alignItems: "center" }, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "sparkle" }),
-            " ask Michael to set up everything"
+            " ask Hakan to set up everything"
           ] })
         }
       )
@@ -121598,7 +121598,7 @@ const INTEGRATION_TEMPLATES = [
     secretHelp: "Point baseUrl at any REST API. Choose how its credential is sent: Bearer token, a custom header, or none.",
     idSuggestion: "my-api"
   },
-  // ─── First-wave YC tools (Dwight, P2) ───────────────────────────────────────
+  // ─── First-wave YC tools (Batur, P2) ───────────────────────────────────────
   // Per-tool auth model + high-value endpoint catalog: hive/docs/integration-templates.md.
   // Gmail / Google Calendar / Salesforce are intentionally NOT registered yet: they
   // authenticate via OAuth, and IntegrationAuthType has no `oauth2` (OAuth refresh is a
@@ -122475,7 +122475,7 @@ function RealtimeDevicePicker() {
         }
       )
     ] }),
-    !labelled && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Device names appear after you first start a voice session and grant mic access. The microphone choice applies the next time Michael connects; the speaker switches live." })
+    !labelled && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Device names appear after you first start a voice session and grant mic access. The microphone choice applies the next time Hakan connects; the speaker switches live." })
   ] });
 }
 const triggersApi = () => window.cth;
@@ -122553,7 +122553,7 @@ token you were handed still reads that task once it is routed. The secret
 authorizes new work, the token only reads one task's status. Keep both private.
 
 Each webhook checks bodies against its own JSON schema — edit that in the
-Triggers tab of Michael's Command Center.`;
+Triggers tab of Hakan's Command Center.`;
 function clearLocalState() {
   try {
     const keys2 = [];
@@ -123188,7 +123188,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                     justifyContent: "center",
                     flexShrink: 0
                   }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "bell" }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1, fontSize: 15, lineHeight: "22px", color: "var(--cth-ink-700)" }, children: "This permanently erases all of Michael's memories and the entire hive, and cannot be undone. Any running sessions will be terminated and the app will relaunch into onboarding. Are you sure?" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1, fontSize: 15, lineHeight: "22px", color: "var(--cth-ink-700)" }, children: "This permanently erases all of Hakan's memories and the entire hive, and cannot be undone. Any running sessions will be terminated and the app will relaunch into onboarding. Are you sure?" })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", justifyContent: "flex-end", gap: 8 }, children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(PixelButton, { variant: "secondary", size: "md", onClick: () => setConfirming(false), disabled: busy, children: "cancel" }),
@@ -123391,7 +123391,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                           marginBottom: 10
                         }, children: "Default agent model" }),
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Every newly spawned Claude agent (Michael included) starts on this model unless picked per-agent. Marked “· default” in the model pickers." }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Every newly spawned Claude agent (Hakan included) starts on this model unless picked per-agent. Marked “· default” in the model pickers." }),
                           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { display: "flex", gap: 6, flexWrap: "wrap" }, children: AGENT_MODELS.map((m2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
                             "button",
                             {
@@ -123467,8 +123467,8 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { height: 1, background: "var(--cth-ink-300)", margin: "12px 0" } }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }, children: [
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 2 }, children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 13, lineHeight: "20px", color: "var(--cth-ink-900)" }, children: orchSpawnOn ? "Michael may hire agents on his own" : "Only you hire agents" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Every agent Michael starts spends tokens you did not approve, so this is off unless you turn it on. Requests he makes while it is off wait in the queue rather than failing." })
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 13, lineHeight: "20px", color: "var(--cth-ink-900)" }, children: orchSpawnOn ? "Hakan may hire agents on his own" : "Only you hire agents" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Every agent Hakan starts spends tokens you did not approve, so this is off unless you turn it on. Requests he makes while it is off wait in the queue rather than failing." })
                         ] }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx(PixelButton, { variant: orchSpawnOn ? "primary" : "secondary", size: "sm", onClick: toggleOrchSpawn, children: orchSpawnOn ? "allowed" : "off" })
                       ] }) }),
@@ -123690,7 +123690,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                                 }
                               )
                             ] }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Pipe a Slack channel's messages straight into Michael's queue." })
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Pipe a Slack channel's messages straight into Hakan's queue." })
                           ] }),
                           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 8 }, children: [
                             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
@@ -124038,7 +124038,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                           "Callers POST to a webhook's URL with its secret in the",
                           " ",
                           /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "x-md-webhook-secret" }),
-                          " header. Each one checks bodies against its own JSON schema — edit that in the Triggers tab of Michael's Command Center, where the history of everything that arrived lives too."
+                          " header. Each one checks bodies against its own JSON schema — edit that in the Triggers tab of Hakan's Command Center, where the history of everything that arrived lives too."
                         ] }),
                         webhookNote && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, color: "var(--cth-ink-500)" }, children: webhookNote })
                       ] }),
@@ -124203,10 +124203,10 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                           color: "var(--cth-ink-500)",
                           textTransform: "uppercase",
                           marginBottom: 2
-                        }, children: "Realtime Michael" }),
+                        }, children: "Realtime Hakan" }),
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 2 }, children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 13, lineHeight: "20px", color: "var(--cth-ink-900)" }, children: "Voice chat with Michael" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Talk to the orchestrator in real time. Toggle it on from Michael's tab; choose which microphone and speaker the voice loop uses here." })
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 13, lineHeight: "20px", color: "var(--cth-ink-900)" }, children: "Voice chat with Hakan" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 12, lineHeight: "16px", color: "var(--cth-ink-500)" }, children: "Talk to the orchestrator in real time. Toggle it on from Hakan's tab; choose which microphone and speaker the voice loop uses here." })
                         ] }),
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
                           display: "flex",
@@ -124224,7 +124224,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                             textTransform: "uppercase"
                           }, children: "OpenAI API key · voice" }),
                           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { style: { fontSize: 12, lineHeight: "17px", color: "var(--cth-ink-700)" }, children: [
-                            "Talking to Michael runs on OpenAI’s Realtime API — speech in, speech out, over a live connection to ",
+                            "Talking to Hakan runs on OpenAI’s Realtime API — speech in, speech out, over a live connection to ",
                             /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { style: { fontFamily: "var(--cth-font-mono)" }, children: REALTIME_MODEL }),
                             ". That is a different service from the Claude subscription your agents run on, so it needs its own ",
                             /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "OpenAI API key" }),
@@ -124275,7 +124275,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                               background: hasOpenAiKey ? "var(--cth-mint)" : "var(--cth-ink-300)",
                               boxShadow: "inset 0 0 0 1px var(--cth-ink-300)"
                             } }),
-                            openAiVoiceNote || (hasOpenAiKey ? "Key saved — Talk is ready. Start it from Michael’s card." : "No key yet — Talk stays disabled until one is saved.")
+                            openAiVoiceNote || (hasOpenAiKey ? "Key saved — Talk is ready. Start it from Hakan’s card." : "No key yet — Talk stays disabled until one is saved.")
                           ] })
                         ] }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx(RealtimeDevicePicker, {}),
@@ -124314,7 +124314,7 @@ function SettingsModal({ config: config2, onClose, initialSection }) {
                         lineHeight: "14px",
                         color: "#6E1423"
                       }, children: "DANGER ZONE" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { style: { margin: 0, fontSize: 13, lineHeight: "20px", color: "var(--cth-ink-700)" }, children: "Reset wipes Michael's memories, the entire hive (every agent, message, task, and the board), the semantic-memory palace, and all settings - then takes you back to onboarding." }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { style: { margin: 0, fontSize: 13, lineHeight: "20px", color: "var(--cth-ink-700)" }, children: "Reset wipes Hakan's memories, the entire hive (every agent, message, task, and the board), the semantic-memory palace, and all settings - then takes you back to onboarding." }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(PixelButton, { variant: "destructive", size: "md", onClick: () => setConfirming(true), children: "reset & start over" }) })
                     ] })
                   ] })
@@ -124917,7 +124917,7 @@ function FullscreenTerminal({ config: config2 }) {
         padding: 12,
         gap: 10
       }, children: agent.isBoss ? (
-        // Michael runs the floor from the command center — its tabs (tasks,
+        // Hakan runs the floor from the command center — its tabs (tasks,
         // ask me, triggers, memory, graph…) are the whole point of selecting
         // him, and fullscreen used to drop them for a bare terminal.
         // Column so the panel's `height: 100%` resolves against a definite
@@ -314577,7 +314577,7 @@ function App() {
           color: "var(--cth-ink-500)"
         }, children: "WAKING THE FLOOR" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { style: { margin: 0, fontSize: 13, textAlign: "center", color: "var(--cth-ink-700)" }, children: [
-          "Michael is clocking in.",
+          "Hakan is clocking in.",
           /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
           "The terminal will land here once he's seated."
         ] })

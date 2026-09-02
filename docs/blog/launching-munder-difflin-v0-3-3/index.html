@@ -85,7 +85,7 @@
     { "@type": "Question", "name": "How does GitHub Copilot CLI work as an agent engine?", "acceptedAnswer": { "@type": "Answer", "text": "Copilot runs in its documented non-interactive print mode: the harness spawns `copilot -p \"<prompt>\" -s --allow-all-tools --no-ask-user`, optionally with `--model` (Claude Sonnet 4.5 by default, GPT-5.4, or auto) and `--resume` for session continuity. Auto-approval flags are gated behind the same floor-wide auto-mode toggle as every other engine. It authenticates through your existing GitHub Copilot login — no new API key." } },
     { "@type": "Question", "name": "Can a Copilot agent receive hive mail like Claude Code agents do?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet, and we'd rather be honest about it: Copilot's print mode exits after each turn and has no hook bridge, so a Copilot worker can't be woken to drain an inbox. Mail routed to it bounces back to the BOSS orchestrator, which re-routes or handles it. Copilot workers are great for dispatched, self-contained tasks; hive-aware engines like Claude Code remain the best orchestrators." } },
     { "@type": "Question", "name": "Do I need a new API key for Copilot?", "acceptedAnswer": { "@type": "Answer", "text": "No. Munder Difflin drives the `copilot` CLI you already log into with your GitHub account — same as it drives your existing Claude Code, Codex, or Antigravity subscriptions. If the CLI isn't installed, the harness offers the official installer (npm install -g @github/copilot)." } },
-    { "@type": "Question", "name": "Do I still get everything from v0.3.2 and earlier?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — v0.3.3 is additive. Realtime Michael (Talk mode), the three v0.3.1 engines (OpenCode, Crush, pi.dev) with BYOK keys and local LLMs, selectable engines, the integrations registry and secret broker, Slack-spawned workers, the Agent Gallery, MemPalace shared memory, the Command Center, schedules, observability, and the circuit breaker all remain functional and shipping." } }
+    { "@type": "Question", "name": "Do I still get everything from v0.3.2 and earlier?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — v0.3.3 is additive. Realtime Hakan (Talk mode), the three v0.3.1 engines (OpenCode, Crush, pi.dev) with BYOK keys and local LLMs, selectable engines, the integrations registry and secret broker, Slack-spawned workers, the Agent Gallery, MemPalace shared memory, the Command Center, schedules, observability, and the circuit breaker all remain functional and shipping." } }
     
   ]
 }
@@ -181,7 +181,7 @@ or voice changes underneath.</p>
 <p>It’s built on <strong>Monaco</strong>, the editor engine that powers VS Code, and it’s the real thing:</p>
 <ul>
 <li><strong>A git CHANGES rail.</strong> The left side lists every file your agents have touched. Click one and you
-get a <strong>read-only, side-by-side diff against HEAD</strong> — the fastest way to answer “what did Jim
+get a <strong>read-only, side-by-side diff against HEAD</strong> — the fastest way to answer “what did Caner
 actually change?” before you bless it.</li>
 <li><strong>A file tree + editor tabs.</strong> Browse the workspace, open files in tabs with dirty-state dots,
 edit with full syntax highlighting, and save with <strong>Cmd/Ctrl+S</strong>. A late fix in this release also
@@ -198,7 +198,7 @@ exactly where the work is happening.</p>
 <p>The engine roster grows to <strong>seven</strong>: Claude Code, OpenAI Codex, Antigravity (Gemini), OpenCode,
 Crush, pi.dev — and now <strong>GitHub Copilot CLI</strong>.</p>
 <p>Hire a Copilot agent the way you’d hire any other: pick <strong>Copilot</strong> in the Add Agent picker (or say
-it to Michael in Talk mode). Under the hood the harness drives Copilot’s documented non-interactive
+it to Hakan in Talk mode). Under the hood the harness drives Copilot’s documented non-interactive
 print mode:</p>
 <pre><code>copilot -p &quot;&lt;your brief&gt;&quot; -s --allow-all-tools --no-ask-user [--model claude-sonnet-4.5]
 </code></pre>
@@ -264,7 +264,7 @@ help it reach more people.</p>
         
         <div class="qa">
           <p class="q">Do I still get everything from v0.3.2 and earlier?</p>
-          <p class="a">Yes — v0.3.3 is additive. Realtime Michael (Talk mode), the three v0.3.1 engines (OpenCode, Crush, pi.dev) with BYOK keys and local LLMs, selectable engines, the integrations registry and secret broker, Slack-spawned workers, the Agent Gallery, MemPalace shared memory, the Command Center, schedules, observability, and the circuit breaker all remain functional and shipping.</p>
+          <p class="a">Yes — v0.3.3 is additive. Realtime Hakan (Talk mode), the three v0.3.1 engines (OpenCode, Crush, pi.dev) with BYOK keys and local LLMs, selectable engines, the integrations registry and secret broker, Slack-spawned workers, the Agent Gallery, MemPalace shared memory, the Command Center, schedules, observability, and the circuit breaker all remain functional and shipping.</p>
         </div>
         
       </section>

@@ -42,7 +42,7 @@ test('a roster round-trips through the file', () => {
   const store = storeAt(home);
   assert.equal(store.read(), null); // nothing written yet
 
-  assert.equal(store.write(snapshot([{ id: 'a', name: 'Dwight', note: 'beets' }])).ok, true);
+  assert.equal(store.write(snapshot([{ id: 'a', name: 'Batur', note: 'beets' }])).ok, true);
 
   const back = store.read();
   assert.equal(back.agents.length, 1);
@@ -55,7 +55,7 @@ test('an empty first write cannot wipe a roster that is already on disk', () => 
   // Its localStorage is a different origin, so the store boots with zero agents
   // and its first mirror write would otherwise flatten the real roster.
   const home = tmpHome();
-  storeAt(home).write(snapshot([{ id: 'a', name: 'Dwight' }]));
+  storeAt(home).write(snapshot([{ id: 'a', name: 'Batur' }]));
 
   const nextRun = storeAt(home);
   const res = nextRun.write(snapshot([]));
@@ -69,7 +69,7 @@ test('emptying the roster is allowed once the run has written normally', () => {
   // run is suspect; refusing later ones would make deletion impossible.
   const home = tmpHome();
   const store = storeAt(home);
-  store.write(snapshot([{ id: 'a', name: 'Dwight' }]));
+  store.write(snapshot([{ id: 'a', name: 'Batur' }]));
   assert.equal(store.write(snapshot([])).ok, true);
   assert.equal(store.read().agents.length, 0);
 });
@@ -104,7 +104,7 @@ test('a refusal does not disarm the guard: repeated empty writes stay refused', 
   // same empty snapshot, the second write went through and flattened the file.
   // The guard must hold until a NON-empty write proves the renderer has a roster.
   const home = tmpHome();
-  storeAt(home).write(snapshot([{ id: 'a', name: 'Dwight' }]));
+  storeAt(home).write(snapshot([{ id: 'a', name: 'Batur' }]));
 
   const nextRun = storeAt(home);
   assert.equal(nextRun.write(snapshot([])).skipped, 'empty-first-write');
@@ -114,7 +114,7 @@ test('a refusal does not disarm the guard: repeated empty writes stay refused', 
   assert.equal(nextRun.read().agents.length, 1, 'the roster on disk survived both');
 
   // A non-empty write disarms it; a later empty write is then a real deletion.
-  assert.equal(nextRun.write(snapshot([{ id: 'a', name: 'Dwight' }])).ok, true);
+  assert.equal(nextRun.write(snapshot([{ id: 'a', name: 'Batur' }])).ok, true);
   assert.equal(nextRun.write(snapshot([])).ok, true);
   assert.equal(nextRun.read().agents.length, 0);
 });
@@ -164,7 +164,7 @@ test('worktree paths and notes survive the round trip verbatim', () => {
   const home = tmpHome();
   const agent = {
     id: 'w1',
-    name: 'Jim',
+    name: 'Caner',
     cwd: '/Users/x/HarnessAgents/worktrees/w1',
     worktreePath: '/Users/x/HarnessAgents/worktrees/w1',
     note: '- shipping the queue fix\n- then the roster'

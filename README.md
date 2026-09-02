@@ -21,7 +21,7 @@ coordinates a whole office of agents on your own machine.
 Wraps [Claude Code](https://claude.com/claude-code), Antigravity (Gemini), OpenAI Codex,
 **xAI Grok**, **Kimi Code**, **Gemini CLI**, **Qwen**, **OpenCode**, **Crush**,
 **pi.dev**, **GitHub Copilot CLI**, and **Cursor** — with bring-your-own keys and local LLMs.
-Agents that message, route, and remember, coordinated by **your clone** (Michael) and
+Agents that message, route, and remember, coordinated by **your clone** (Hakan) and
 visualized as avatars at work on a shared office floor.
 
 <p>
@@ -54,7 +54,7 @@ visualized as avatars at work on a shared office floor.
 > Munder Difflin takes the terminal-agent CLIs you already run — `claude`, `agy`, `codex`, `grok`,
 > `kimi`, `qwen`, `opencode`, `crush`, `pi`, and `copilot` — and turns them
 > into a self-coordinating team: each agent gets long-term memory, a mailbox, and a desk on a 2D
-> office floor — and **your clone** (Michael) routes work between them while you watch. He's the
+> office floor — and **your clone** (Hakan) routes work between them while you watch. He's the
 > boss of the floor; you're still the boss of him.
 
 ## Contents
@@ -75,7 +75,7 @@ visualized as avatars at work on a shared office floor.
 ## What it is
 
 Munder Difflin is a desktop app that wraps **real terminal-agent CLIs** as fully-capable agents,
-wires them into a **hive mind**, and puts **your clone** in charge — Michael, the one agent *you*
+wires them into a **hive mind**, and puts **your clone** in charge — Hakan, the one agent *you*
 talk to in order to get things done. Under the hood it runs the **fastest memory layer in the
 world** so every agent remembers what it learns and recalls it instantly.
 
@@ -93,7 +93,7 @@ world** so every agent remembers what it learns and recalls it instantly.
 ```
             you ── talk to ──►  ┌─────────────┐
                                 │  manager agent  │  orchestrator / supervisor
-                                │ (Michael's  │  roster · routing · adjudication
+                                │ (Hakan's  │  roster · routing · adjudication
                                 │   office)   │  blackboard · task ledger
                                 └──────┬──────┘
                                        │ assigns · routes · escalates
@@ -145,12 +145,12 @@ terminal/event plane, and [`DESIGN.md`](./DESIGN.md) for the visual system.
 - **Built-in Monaco IDE** — file tree, editor tabs, save, plus CHANGES · HISTORY · COMPARE git rails with commit graph, diffs, branch compare, and guarded checkout. All fs/git access brokered through main.
 
 **Getting work in and out**
-- **Slack & webhooks** — message a channel or POST a webhook; Michael can spawn an ephemeral worker, reply in-thread, and tear it down.
+- **Slack & webhooks** — message a channel or POST a webhook; Hakan can spawn an ephemeral worker, reply in-thread, and tear it down.
 - **Shareable hires + Agent Gallery** — import a role from a `munderdifflin://hire` link; import only pre-fills the form, a human still spawns it. Browse roles at the [Agent Gallery](https://munderdiffl.in/hires/).
 - **BYOK keys + local LLMs** — per-provider keys in a write-only secret broker, plus Ollama / LM Studio / vLLM base URLs. Guides: [open models](https://munderdiffl.in/blog/run-munder-difflin-on-open-models/) · [Mac Mini](https://munderdiffl.in/blog/run-munder-difflin-on-a-mac-mini/).
 - **Updates in one click**: the title-bar badge runs the real update. It downloads the build for your machine, then restarts and installs it, and it reads `latest` once a check confirms you are current. A manual download is the fallback for when the updater cannot fetch the build itself. The first run afterwards opens that release's notes as a designed page rather than a version number.
 - **Your language**: English, Simplified Chinese and Arabic, with right to left layout for Arabic. English is the default and nothing changes until you pick another one in Settings. The app does not read your OS locale. All three app fonts ship inside the bundle, so nothing is fetched at boot.
-- **Prerequisites** — one Settings page showing which supporting tools (uv, git, Node, MemPalace, each agent CLI) you have, what each is for, and a button that asks Michael to install what is missing.
+- **Prerequisites** — one Settings page showing which supporting tools (uv, git, Node, MemPalace, each agent CLI) you have, what each is for, and a button that asks Hakan to install what is missing.
 
 > [!NOTE]
 > **Status: v0.4.6, the release where the app stops assuming everyone reads English left to right.**
@@ -208,7 +208,7 @@ npm run dev        # launches the Electron app with hot reload
 ```
 
 On first launch you'll go through the onboarding wizard, then land on the floor. Use **Add agent** to
-spawn your first session — the manager agent seats itself in Michael's office automatically.
+spawn your first session — the manager agent seats itself in Hakan's office automatically.
 
 ### Other scripts
 
@@ -281,7 +281,7 @@ src/
     App.tsx                  top-level layout + wiring
     design/                  tokens.css / tokens.ts / global.css (design source of truth)
     components/              PixelPanel, AgentDetailPanel, CommandBar, ApprovalsPanel, MemoryPanel, …
-    CommandCenterPanel,      Michael's control surface (Terminal/Floor/Memory/Activity/Tasks/Triggers/Handbook tabs)
+    CommandCenterPanel,      Hakan's control surface (Terminal/Floor/Memory/Activity/Tasks/Triggers/Handbook tabs)
     ToolWaterfall,           per-agent tool-span waterfall for the observability view
     TasksKanban,             dependency-aware kanban board (Tasks tab)
     ThreadsPanel,            hive message conversation viewer (Messages tab)
@@ -319,7 +319,7 @@ Full history in [`CHANGELOG.md`](./CHANGELOG.md).
 
 Next up:
 
-- [ ] **More chat integrations** — Telegram and richer chat bridges that pipe a channel into Michael's queue and route replies back out.
+- [ ] **More chat integrations** — Telegram and richer chat bridges that pipe a channel into Hakan's queue and route replies back out.
 - [ ] **More engines & integration templates** — keep growing the engine roster and the integrations registry.
 - [ ] **Fuller avatar coverage** — drive the remaining station visits and tool-bubbles entirely from real hook events.
 - [ ] **Durable layout & command history** — extend persistence to agent layout and per-session history.

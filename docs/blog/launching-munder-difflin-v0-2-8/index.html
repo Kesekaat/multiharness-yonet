@@ -82,7 +82,7 @@
     { "@type": "Question", "name": "What's new in Munder Difflin v0.2.8?", "acceptedAnswer": { "@type": "Answer", "text": "The headline is Shareable Hires. A hire is a portable JSON manifest (format id munder-difflin/hire@1) that captures a fully role-configured agent — name, avatar, provider, model, command flags, a goal, capability tags, and a token budget. You can share it as a link or a file, and the recipient gets the Add-Agent modal pre-filled, ready to review and spawn. It ships alongside a community gallery called The Hiring Fair at munderdiffl.in/hires." } },
     { "@type": "Question", "name": "What exactly is a 'hire'?", "acceptedAnswer": { "@type": "Answer", "text": "Think of it as a job description for an AI coworker. It's a single JSON manifest that describes a role-configured agent: which provider runs it (Claude Code, Antigravity, or Codex), the model, the command flags, a goal/role description, capability tags, and a token budget. Hand it to anyone's office and they can spin up that exact role." } },
     { "@type": "Question", "name": "Does importing a hire automatically run an agent?", "acceptedAnswer": { "@type": "Answer", "text": "No — and this is the whole point. Importing a hire (by link or by file) only pre-fills the Add-Agent modal, with an explicit 'imported' banner. Nothing spawns until you review every field and click spawn yourself. A hire you got from the internet can't run itself. The human is always the trigger." } },
-    { "@type": "Question", "name": "What is The Hiring Fair?", "acceptedAnswer": { "@type": "Answer", "text": "It's a community gallery at munderdiffl.in/hires — static, no login. It's full of ready-made roles from the cast: Pam writes docs, Dwight enforces QA, Jim reviews PRs, Creed audits security, Angela audits the office's own token spend, and Stanley does the migrations nobody wants. Each card has a Claude Code / Antigravity / Codex toggle and function filters. Browse, click the ⚡hire button, review, spawn." } },
+    { "@type": "Question", "name": "What is The Hiring Fair?", "acceptedAnswer": { "@type": "Answer", "text": "It's a community gallery at munderdiffl.in/hires — static, no login. It's full of ready-made roles from the cast: Selin writes docs, Batur enforces QA, Caner reviews PRs, Ertan audits security, Deniz audits the office's own token spend, and Polat does the migrations nobody wants. Each card has a Claude Code / Antigravity / Codex toggle and function filters. Browse, click the ⚡hire button, review, spawn." } },
     { "@type": "Question", "name": "How are the two ways to hire different?", "acceptedAnswer": { "@type": "Answer", "text": "There are two front doors, one pipeline. A deep link (munderdifflin://hire?src=<https-url>) makes the app fetch and validate a manifest, then open the Add-Agent modal pre-filled — that's what the gallery's ⚡hire button uses. A file import is the 'import hire…' button in the Add-Agent modal, which reads a local .hire.json file. Both end at the same review-and-spawn step." } },
     { "@type": "Question", "name": "Is it safe to import a hire from someone else?", "acceptedAnswer": { "@type": "Answer", "text": "A manifest is treated as untrusted input: there's no executable field, no auto-spawn, and the fetch is validated and bounded. It can only pre-fill a form you review by hand. We go deep on the trust model in a separate post — see the hire manifest security deep-dive." } },
     { "@type": "Question", "name": "Do I still get everything from v0.2.7?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. v0.2.8 includes everything from v0.2.7 (voice dictation, the Knowledge Graph, multi-window floors, the rich composer, session resume) and earlier. Shareable Hires is purely additive." } }
@@ -171,8 +171,8 @@
 
   <div class="post-wrap wrap">
     <div class="prose">
-      <div class="callout tldr"><span class="ic">TL;DR</span><p><strong>Munder Difflin v0.2.8</strong> ships <strong>Shareable Hires</strong>. A <strong>hire</strong> is a portable JSON manifest — a job description for an AI coworker (provider, model, flags, goal, capability tags, token budget) — that you can share as a <strong>link</strong> or a <strong>file</strong>. Click a hire, and the Add-Agent modal opens <em>pre-filled</em>. It never spawns anything on its own: <strong>you</strong> review every field and hit spawn. Plus <strong>The Hiring Fair</strong> at <a href="https://munderdiffl.in/hires">munderdiffl.in/hires</a> — a no-login gallery of ready-made roles (Pam writes docs, Dwight does QA, Creed audits security…). Browse → ⚡hire → review → spawn. Free, open source, local-first.</p></div>
-<p>ok so picture this. you’ve got a whole floor of pixel coworkers — Claude Code agents, Antigravity (Gemini) workers, Codex CLIs — all run by Michael, the BOSS orchestrator who routes work like a slightly unhinged regional manager. it’s great. but here’s the part nobody tells you about a fresh, empty office:</p>
+      <div class="callout tldr"><span class="ic">TL;DR</span><p><strong>Munder Difflin v0.2.8</strong> ships <strong>Shareable Hires</strong>. A <strong>hire</strong> is a portable JSON manifest — a job description for an AI coworker (provider, model, flags, goal, capability tags, token budget) — that you can share as a <strong>link</strong> or a <strong>file</strong>. Click a hire, and the Add-Agent modal opens <em>pre-filled</em>. It never spawns anything on its own: <strong>you</strong> review every field and hit spawn. Plus <strong>The Hiring Fair</strong> at <a href="https://munderdiffl.in/hires">munderdiffl.in/hires</a> — a no-login gallery of ready-made roles (Selin writes docs, Batur does QA, Ertan audits security…). Browse → ⚡hire → review → spawn. Free, open source, local-first.</p></div>
+<p>ok so picture this. you’ve got a whole floor of pixel coworkers — Claude Code agents, Antigravity (Gemini) workers, Codex CLIs — all run by Hakan, the BOSS orchestrator who routes work like a slightly unhinged regional manager. it’s great. but here’s the part nobody tells you about a fresh, empty office:</p>
 <p><strong>the first hire is the hard one.</strong></p>
 <p>a blank floor is intimidating. what model? what provider? what flags? what should this thing’s <em>job</em> even be? for a newcomer, that’s a lot of staring at an empty Add-Agent dialog before anything fun happens. you basically have to know how to write an orchestrator brief before you can watch a single agent do a single thing.</p>
 <p><strong>v0.2.8 fixes the cold start.</strong> meet <strong>Shareable Hires</strong>.</p>
@@ -187,7 +187,7 @@
 <li>📊 a <strong>token budget</strong> — so it can’t quietly torch your bill</li>
 </ul>
 <p>think of it as a <strong>job description you can hand to anyone’s office</strong>. someone figured out a great “PR reviewer” setup once? they export it as a hire, you drop it into your floor, and now you’ve got that exact coworker — without reverse-engineering anyone’s prompt.</p>
-<p>the neat trick: a manifest maps <strong>1:1</strong> onto what the Add-Agent modal already sends. it’s not a new system bolted on the side — it’s just a portable snapshot of the per-agent config you’ve always had. “hire Pam” is a <em>way</em> easier first step than writing an orchestrator prompt from a cold start.</p>
+<p>the neat trick: a manifest maps <strong>1:1</strong> onto what the Add-Agent modal already sends. it’s not a new system bolted on the side — it’s just a portable snapshot of the per-agent config you’ve always had. “hire Selin” is a <em>way</em> easier first step than writing an orchestrator prompt from a cold start.</p>
 <h2 id="two-ways-to-hire-one-pipeline" tabindex="-1">two ways to hire, one pipeline <a class="anchor" href="#two-ways-to-hire-one-pipeline" aria-hidden="true">#</a></h2>
 <p>there are two front doors, but they both end at the same place: a modal you review and a spawn button <strong>you</strong> press.</p>
 <h3 id="-the-deep-link" tabindex="-1">🔗 the deep link <a class="anchor" href="#-the-deep-link" aria-hidden="true">#</a></h3>
@@ -208,19 +208,19 @@
 <p>ok, the fun part. all of this would be a neat plumbing feature with nothing to plug into — so we built the thing to plug into.</p>
 <p><strong>The Hiring Fair</strong> is a community gallery at <strong><a href="https://munderdiffl.in/hires">munderdiffl.in/hires</a></strong>. static, no login, no account. just a wall of ready-made coworkers you can hire in one click. and because the floor looks like <em>The Office</em>, of course the cast showed up to apply:</p>
 <ul>
-<li>📝 <strong>Pam</strong> writes the docs (the README nobody wants to write? Pam wants to write it.)</li>
-<li>🥋 <strong>Dwight</strong> enforces QA. Dwight does not negotiate with bugs. <em>FACT.</em></li>
-<li>🔍 <strong>Jim</strong> reviews your PRs (calm, reasonable, occasionally pranks the diff)</li>
-<li>🕵️ <strong>Creed</strong> audits security (look, who <em>better</em> to think like an attacker)</li>
-<li>💰 <strong>Angela</strong> audits the office’s <strong>own</strong> token spend — she runs the numbers on your other agents and judges them for it. perfect casting.</li>
-<li>🗄️ <strong>Stanley</strong> does the migrations nobody else will touch. he’s not thrilled. he does them anyway.</li>
+<li>📝 <strong>Selin</strong> writes the docs (the README nobody wants to write? Selin wants to write it.)</li>
+<li>🥋 <strong>Batur</strong> enforces QA. Batur does not negotiate with bugs. <em>FACT.</em></li>
+<li>🔍 <strong>Caner</strong> reviews your PRs (calm, reasonable, occasionally pranks the diff)</li>
+<li>🕵️ <strong>Ertan</strong> audits security (look, who <em>better</em> to think like an attacker)</li>
+<li>💰 <strong>Deniz</strong> audits the office’s <strong>own</strong> token spend — she runs the numbers on your other agents and judges them for it. perfect casting.</li>
+<li>🗄️ <strong>Polat</strong> does the migrations nobody else will touch. he’s not thrilled. he does them anyway.</li>
 </ul>
 <p>each card has a <strong>Claude Code / Antigravity / Codex</strong> toggle and <strong>function filters</strong> — the same ones from the main landing page, so it all feels like one place. pick the provider you actually have installed, filter by what you need, then hit the <strong>⚡hire</strong> button.</p>
 <p>the loop is dead simple:</p>
 <blockquote>
 <p><strong>browse → click ⚡hire → review → spawn.</strong></p>
 </blockquote>
-<p>that’s it. that’s the whole onboarding. instead of “here’s an empty floor, good luck,” it’s “here’s Pam, want her to write your docs? yes? she’s at her desk now.”</p>
+<p>that’s it. that’s the whole onboarding. instead of “here’s an empty floor, good luck,” it’s “here’s Selin, want her to write your docs? yes? she’s at her desk now.”</p>
 <figure class="fig fig-inline"><img src="/blog/assets/media/launching-munder-difflin-v0-2-8/note-2.png" alt="Hand-drawn sketch from “Launching Munder Difflin v0.2.8: Shareable Hires”" loading="lazy" decoding="async" /></figure>
 <h2 id="why-this-is-secretly-a-growth-thing" tabindex="-1">why this is secretly a growth thing <a class="anchor" href="#why-this-is-secretly-a-growth-thing" aria-hidden="true">#</a></h2>
 <p>here’s the bit we’re genuinely excited about. the hardest moment in any tool like this is the <strong>first five minutes</strong>. an empty office asks too much of a newcomer.</p>
@@ -238,10 +238,10 @@
 <p>plus the multi-provider parity (Claude Code + Antigravity + Codex, no second-class citizens), shared memory, the inbox/outbox mailbox, schedules, token budgets, close-the-lid overnight runs, and Slack/webhook triggers. the floor you already love, now with a front door for new coworkers.</p>
 <h2 id="get-v028" tabindex="-1">get v0.2.8 <a class="anchor" href="#get-v028" aria-hidden="true">#</a></h2>
 <p>Munder Difflin is <strong>free, open source, and local-first</strong> on macOS, Windows, and Linux. no account, no cloud — your machine, your subscriptions, your floor.</p>
-<p><a href="https://github.com/chaitanyagiri/munder-difflin/releases/latest"><strong>Download v0.2.8</strong></a>, then head over to <a href="https://munderdiffl.in/hires"><strong>The Hiring Fair</strong></a>, find a coworker, and hit ⚡hire. review the modal. spawn it. watch Pam get to work.</p>
-<p>want the why-it’s-built-this-way story? read the concept companion on <a href="/blog/shareable-agent-roles/">shareable agent roles</a>. want the trust model and threat surface in detail? that’s the <a href="/blog/hire-manifest-untrusted-input/">hire manifest security deep-dive</a>. curious how we even ended up with a Dwight in the first place? the <a href="/blog/the-office-parody-behind-munder-difflin/">Office parody behind Munder Difflin</a> explains the casting. and if you missed the multi-provider launch, <a href="/blog/launching-munder-difflin-v0-2-4/">v0.2.4 is right here</a>.</p>
+<p><a href="https://github.com/chaitanyagiri/munder-difflin/releases/latest"><strong>Download v0.2.8</strong></a>, then head over to <a href="https://munderdiffl.in/hires"><strong>The Hiring Fair</strong></a>, find a coworker, and hit ⚡hire. review the modal. spawn it. watch Selin get to work.</p>
+<p>want the why-it’s-built-this-way story? read the concept companion on <a href="/blog/shareable-agent-roles/">shareable agent roles</a>. want the trust model and threat surface in detail? that’s the <a href="/blog/hire-manifest-untrusted-input/">hire manifest security deep-dive</a>. curious how we even ended up with a Batur in the first place? the <a href="/blog/the-office-parody-behind-munder-difflin/">Office parody behind Munder Difflin</a> explains the casting. and if you missed the multi-provider launch, <a href="/blog/launching-munder-difflin-v0-2-4/">v0.2.4 is right here</a>.</p>
 <p>full release notes live in the <a href="https://github.com/chaitanyagiri/munder-difflin/blob/main/CHANGELOG.md">CHANGELOG</a>.</p>
-<p>that’s it. go hire someone. (Dwight is already volunteering.)</p>
+<p>that’s it. go hire someone. (Batur is already volunteering.)</p>
 
 
       
@@ -265,7 +265,7 @@
         
         <div class="qa">
           <p class="q">What is The Hiring Fair?</p>
-          <p class="a">It&#39;s a community gallery at munderdiffl.in/hires — static, no login. It&#39;s full of ready-made roles from the cast: Pam writes docs, Dwight enforces QA, Jim reviews PRs, Creed audits security, Angela audits the office&#39;s own token spend, and Stanley does the migrations nobody wants. Each card has a Claude Code / Antigravity / Codex toggle and function filters. Browse, click the ⚡hire button, review, spawn.</p>
+          <p class="a">It&#39;s a community gallery at munderdiffl.in/hires — static, no login. It&#39;s full of ready-made roles from the cast: Selin writes docs, Batur enforces QA, Caner reviews PRs, Ertan audits security, Deniz audits the office&#39;s own token spend, and Polat does the migrations nobody wants. Each card has a Claude Code / Antigravity / Codex toggle and function filters. Browse, click the ⚡hire button, review, spawn.</p>
         </div>
         
         <div class="qa">

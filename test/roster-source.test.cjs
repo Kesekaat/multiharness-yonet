@@ -12,7 +12,7 @@ const HIVE_B = '/hives/b';
 const file = (counts = {}) => ({
   agents: [], archived: [], restorable: [], ...counts
 });
-const someone = { id: 'agent-1', name: 'Dwight', cwd: HIVE_A };
+const someone = { id: 'agent-1', name: 'Batur', cwd: HIVE_A };
 
 // --- the file wins whenever it has a roster --------------------------------
 

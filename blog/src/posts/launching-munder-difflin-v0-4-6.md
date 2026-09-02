@@ -196,7 +196,7 @@ and it is short on purpose.
 - **Settings stops showing stale values.** The interface loaded the config once at startup and
   nothing told it when a write landed, so reopening Settings showed you the value from before
   your last change. Every write is announced now.
-- **Renaming the orchestrator sticks.** If you renamed Michael, the rename was saved correctly and
+- **Renaming the orchestrator sticks.** If you renamed Hakan, the rename was saved correctly and
   then thrown away on the next restart, because his identity was rebuilt from scratch with the name
   hardcoded in three places. It reads the saved name now, everywhere.
 - **The ASK ME card renders markdown.** Questions with emphasis, bullets, `code`, tables and links

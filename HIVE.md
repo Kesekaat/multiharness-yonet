@@ -43,7 +43,7 @@ stream, retrieval, reflection, and planning.
    (main process) moving messages from a sender's `outbox/` into a recipient's
    `inbox/`. No file is ever written by two processes.
 3. **Boss-mode autonomy, native HITL.** A privileged **boss agent** (lives in
-   Michael's room) adjudicates cross-agent traffic. Routine requests
+   Hakan's room) adjudicates cross-agent traffic. Routine requests
    (clarifications, data asks, plan tweaks) it resolves itself and the system
    keeps running fully autonomously. **Critical** items (destructive ops, spend,
    scope changes, unresolvable conflicts) route to the boss, who surfaces them to
@@ -148,7 +148,7 @@ an agent to the right station (replacing today's `mockEvents.ts` / PTY-scraping)
 
 ## 6. The boss agent (orchestrator)
 
-A fixed, always-on agent seated at `desk-ceo` (Michael's room), `character:
+A fixed, always-on agent seated at `desk-ceo` (Hakan's room), `character:
 michael`, flagged `isBoss`. It is an ordinary `claude` process — the *intelligence*
 — while the main process is the *mechanism* (git, sockets, routing). It owns:
 
@@ -175,7 +175,7 @@ is the primary control surface — tune the prompt, not the code.
   agent via `--settings`) + `Stop`-loop so agents drain their inbox automatically
   and keep running (guarded by `stop_hook_active` + cursor); hook events stream to
   the renderer to drive avatars.
-- **Phase 2 — Boss mode** ✅: the boss agent auto-spawns into Michael's room
+- **Phase 2 — Boss mode** ✅: the boss agent auto-spawns into Hakan's room
   (`desk-ceo` reserved) and, on a fresh spawn, is started with `/remote-control`
   (best-effort) plus an orientation prompt so it begins running the floor on its
   own. The router routes `to:"human"` traffic to the boss (the human's proxy);

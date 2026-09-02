@@ -50,9 +50,9 @@ The backbone is a single [append-only event log](/blog/append-only-event-log-age
 message, inbox drain, and escalation gets one line. A dashboard renders that log as a human-readable feed —
 not raw JSON, but sentences:
 
-- `spawned Pam`
-- `Jim → Stanley: Task from you`
-- `Stanley drained 2 msg(s)`
+- `spawned Selin`
+- `Caner → Polat: Task from you`
+- `Polat drained 2 msg(s)`
 - `escalated to human: merge approval`
 
 Now "what's the fleet doing right now" is a glance, not an investigation. The feed is fed by

@@ -5,7 +5,7 @@
 > OpenAI Codex, Antigravity (Gemini), GitHub Copilot CLI, xAI Grok, Kimi Code, Qwen, OpenCode,
 > Crush, Gemini CLI, Cursor Agent, and pi.dev into a coordinated "office" of agents on
 > your own computer — each agent a real CLI process in a real terminal, with shared
-> long-term memory, inter-agent messaging, your clone ("Michael") orchestrating, scheduled missions, Slack
+> long-term memory, inter-agent messaging, your clone ("Hakan") orchestrating, scheduled missions, Slack
 > and webhook triggers, realtime voice orchestration, a built-in Monaco IDE with git
 > history and branch compare, markdown previews, and auto-update. The interface runs in
 > English, Simplified Chinese and Arabic, with right to left layout when Arabic is chosen,

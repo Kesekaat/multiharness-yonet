@@ -7,7 +7,7 @@
  * corner (desk-ceo), a briefing room (boardroom zone), and a break room
  * (cafeteria zone) with the coffee economy. PLACEHOLDER ART: it reuses the
  * office tileset gids (floor/wall/desk/monitor) so the STRUCTURE + switch flow
- * are provable; Pam's license-clean B99 tileset + cast likenesses drop into the
+ * are provable; Selin's license-clean B99 tileset + cast likenesses drop into the
  * theme.tilesets / theme.cast seams later. Re-run after a layout tweak:
  *   node tools/gen-b99-map.cjs
  *

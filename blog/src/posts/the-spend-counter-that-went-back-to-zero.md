@@ -31,7 +31,7 @@ cumulative counter cannot break: it only goes up.</p></div>
 
 You can build an agent harness that does everything right and still hand people a number that
 lies. Ours did. Every agent card on the floor carried a dollar figure, `fleet.json` carried it
-for Michael, and the LIVE ROSTER line every agent reads carried it too. It was the number you
+for Hakan, and the LIVE ROSTER line every agent reads carried it too. It was the number you
 would look at to decide whether to hire another worker or send everyone home.
 
 It was under reporting by more than half.

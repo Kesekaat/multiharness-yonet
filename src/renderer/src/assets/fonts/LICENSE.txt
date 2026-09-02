@@ -11,13 +11,28 @@ below. The OFL requires this notice to travel with every copy of the software.
     Copyright (c) 2012, Cody "CodeMan38" Boisclair (cody@zone38.net)
     https://fonts.google.com/specimen/Press+Start+2P
 
+  press-start-2p-latin-ext-400.woff2
+    Press Start 2P (latin-ext subset, weight 400)
+    Copyright (c) 2012, Cody "CodeMan38" Boisclair (cody@zone38.net)
+    https://fonts.google.com/specimen/Press+Start+2P
+
   inter-latin-var.woff2
     Inter (latin subset, variable, weights 400 to 700)
     Copyright (c) 2016 The Inter Project Authors
     https://github.com/rsms/inter
 
+  inter-latin-ext-var.woff2
+    Inter (latin-ext subset, variable, weights 400 to 700)
+    Copyright (c) 2016 The Inter Project Authors
+    https://github.com/rsms/inter
+
   jetbrains-mono-latin-var.woff2
     JetBrains Mono (latin subset, variable, weights 400 to 700)
+    Copyright 2020 The JetBrains Mono Project Authors
+    https://github.com/JetBrains/JetBrainsMono
+
+  jetbrains-mono-latin-ext-var.woff2
+    JetBrains Mono (latin-ext subset, variable, weights 400 to 700)
     Copyright 2020 The JetBrains Mono Project Authors
     https://github.com/JetBrains/JetBrainsMono
 

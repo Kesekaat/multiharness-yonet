@@ -2,7 +2,7 @@
 /**
  * Product Hunt thumbnail generator — 240x240 animated GIF.
  *
- * Michael alone, avatar-style, on a light brand ground, glancing around and
+ * Hakan alone, avatar-style, on a light brand ground, glancing around and
  * blinking. Renders the REAL sprite (src/renderer/src/scene/office/portraitArt.ts
  * is procedural pixel art with no DOM dependency outside its paint helper, so it
  * runs straight in Node), then patches the eye pixels per frame.

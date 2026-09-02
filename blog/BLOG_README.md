@@ -121,9 +121,9 @@ posts, so adding a post with a new `category` "just works."
 
 ---
 
-## How Kevin's SEO files flow in
+## How Kartal's SEO files flow in
 
-The SEO expert (Kevin) ships two files:
+The SEO expert (Kartal) ships two files:
 
 - **`SEO_METADATA.md`** — keyword strategy + per-page metadata (titles, descriptions, OG/Twitter,
   canonicals), JSON-LD plan, sitemap/robots/RSS plan.
@@ -132,7 +132,7 @@ The SEO expert (Kevin) ships two files:
 
 They map onto this blog as follows:
 
-| Kevin's input | Where it lands |
+| Kartal's input | Where it lands |
 |---|---|
 | Site-level title/description/OG defaults | `src/_data/site.js` |
 | Keyword **clusters** + technical/non-technical split | `site.js` `clusters` + each post's `category` |
@@ -142,7 +142,7 @@ They map onto this blog as follows:
 | Post backlog (`BLOG_IDEAS.md`) | becomes new `.md` files in `src/posts/` |
 
 > The three seeded posts are real, on-brand examples. When `BLOG_IDEAS.md` lands, reconcile the
-> `category` slugs in `site.js` with Kevin's exact cluster names and start turning backlog rows into
+> `category` slugs in `site.js` with Kartal's exact cluster names and start turning backlog rows into
 > posts.
 
 ---
@@ -197,7 +197,7 @@ blog/
   scripts/postbuild.mjs  # moves the generated sitemap to docs/sitemap.xml (root)
   src/
     _data/
-      site.js            # site-level SEO + cluster config (Kevin's site-level inputs)
+      site.js            # site-level SEO + cluster config (Kartal's site-level inputs)
       build.js           # build timestamp / year
     _includes/
       base.njk           # <head> (SEO, OG, fonts), nav, footer shell

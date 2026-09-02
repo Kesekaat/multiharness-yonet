@@ -120,10 +120,10 @@ test('every provider preset has a considered context-command entry', () => {
 });
 
 test('Claude alone receives a remote-control slash command', () => {
-  assert.equal(remoteControlCommandForProvider('claude', 'Michael'), '/remote-control Michael');
-  assert.equal(remoteControlCommandForProvider('codex', 'Jim'), null);
+  assert.equal(remoteControlCommandForProvider('claude', 'Hakan'), '/remote-control Hakan');
+  assert.equal(remoteControlCommandForProvider('codex', 'Caner'), null);
   assert.equal(remoteControlCommandForProvider('grok', 'Grok'), null);
-  assert.equal(remoteControlCommandForProvider('kimi', 'Pam'), null);
+  assert.equal(remoteControlCommandForProvider('kimi', 'Selin'), null);
 });
 
 test('provider readiness policies allow each TUI to settle', () => {

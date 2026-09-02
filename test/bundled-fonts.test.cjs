@@ -1,6 +1,6 @@
 'use strict';
 
-// The app used to <link> its three faces from fonts.googleapis.com. That host and
+// The app used to <link> its three families from fonts.googleapis.com. That host and
 // fonts.gstatic.com are blocked in mainland China, so the app booted there with
 // every face falling back and the UI looked broken. These tests hold the fix in
 // place: the files ship in the bundle, nothing reaches for Google at runtime, and
@@ -17,11 +17,14 @@ const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const FONT_DIR = 'src/renderer/src/assets/fonts';
 const FILES = [
   'press-start-2p-latin-400.woff2',
+  'press-start-2p-latin-ext-400.woff2',
   'inter-latin-var.woff2',
-  'jetbrains-mono-latin-var.woff2'
+  'inter-latin-ext-var.woff2',
+  'jetbrains-mono-latin-var.woff2',
+  'jetbrains-mono-latin-ext-var.woff2'
 ];
 
-test('the three faces are real woff2 files inside the repo', () => {
+test('the three font families and their Latin Extended subsets are real woff2 files', () => {
   for (const f of FILES) {
     const buf = fs.readFileSync(path.join(root, FONT_DIR, f));
     // 'wOF2' — a truncated or HTML-error-page download would not carry it.
@@ -47,7 +50,7 @@ test('the OFL license and attribution ship with the fonts', () => {
 
 test('@font-face points at the bundled files, not a URL', () => {
   const css = read('src/renderer/src/design/fonts.css');
-  assert.equal((css.match(/@font-face/g) || []).length, 3);
+  assert.equal((css.match(/@font-face/g) || []).length, 6);
   for (const f of FILES) assert.ok(css.includes(f), `fonts.css does not reference ${f}`);
   assert.doesNotMatch(css.replace(/\/\*[\s\S]*?\*\//g, ''), /https?:/);
 });

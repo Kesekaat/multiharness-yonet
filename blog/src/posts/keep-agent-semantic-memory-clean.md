@@ -52,7 +52,7 @@ One morning the digest looked like this:
   - {   "hooks": {     "Stop": [       {         "hooks": [           { "type": "command",
         "command": "node \"/.../cth-hook.cjs\"" ...   (settings.json)
   - ]       }     ],     "PostToolUse": [       {         "matcher": "*", ...   (settings.json)
-  - # Memory — Kelly  _Append durable facts, decisions, and context below._   (memory.md)
+  - # Memory — Pelin  _Append durable facts, decisions, and context below._   (memory.md)
   - {   "hooks": {     "Stop": [ ...   (settings.json)
 ```
 

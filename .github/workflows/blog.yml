@@ -40,7 +40,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # docs/blog = the built site; docs/sitemap.xml = root sitemap the
-          # build regenerates (owned by this build, per the Kevin handoff).
+          # build regenerates (owned by this build, per the Kartal handoff).
           if [ -n "$(git status --porcelain docs/blog docs/sitemap.xml)" ]; then
             git add docs/blog docs/sitemap.xml
             git commit -m "chore(blog): rebuild static output [skip ci]"

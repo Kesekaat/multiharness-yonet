@@ -91,7 +91,7 @@ Return EXACTLY this shape (omit optional fields you don't need; keep the spec st
 
 {
   "spec": "munder-difflin/hire@1",
-  "name": "Jim",
+  "name": "Caner",
   "description": "one-line role — what this agent is for",
   "goal": "standing directive injected on every prompt — specific and outcome-oriented",
   "provider": "claude",
@@ -160,11 +160,11 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
     (ACCENTS.includes(a as AccentColorName) ? (a as AccentColorName) : 'sky');
   /** The cast member a typed name refers to, if any.
    *
-   *  The character tiles already set the name (clicking Meredith names the agent
-   *  Meredith), but the coupling ran ONE WAY, so typing "Meredith" left the
-   *  avatar on whatever was selected, in practice the Jim default. Same missing
+   *  The character tiles already set the name (clicking Ayman names the agent
+   *  Ayman), but the coupling ran ONE WAY, so typing "Ayman" left the
+   *  avatar on whatever was selected, in practice the Caner default. Same missing
    *  default as issue #191 from the other direction, where a manifest that omits
-   *  `character` always lands on Jim.
+   *  `character` always lands on Caner.
    *
    *  Returns null on no match, and the caller leaves the avatar alone, so a
    *  deliberate pick is never overwritten by continuing to type. */
@@ -188,7 +188,7 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
   const initialProvider = inferAgentProvider(config.defaultCommand);
   const initialModel = isClaudeProvider(initialProvider) ? config.defaultModel : undefined;
 
-  const [name, setName] = useState(pendingHire?.name ?? 'Jim');
+  const [name, setName] = useState(pendingHire?.name ?? 'Caner');
   const [character, setCharacter] = useState<OfficeCharacterName>(knownCharacter(pendingHire?.character));
   const [accent, setAccent] = useState<AccentColorName>(knownAccent(pendingHire?.accent));
   const [cwd, setCwd] = useState<string>(config.registeredRepos[0] ?? '');
@@ -219,7 +219,7 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
     setProvider(id);
     // Seed the model: Claude from the global defaultModel; other engines from the
     // per-engine default set in Settings → AI Engines (providerDefaultModels), else
-    // the CLI default. This is what makes that Settings field live (Dwight NIT-1).
+    // the CLI default. This is what makes that Settings field live (Batur NIT-1).
     const nextModel = isClaudeProvider(id) ? config.defaultModel : config.providerDefaultModels?.[id];
     setModel(nextModel);
     const nextPreset = providerPreset(id);
@@ -339,7 +339,7 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
     setHireMeta(m);
     setName(m.name);
     // A manifest that names an agent but omits `character` should get the
-    // matching avatar rather than the Jim default (issue #191).
+    // matching avatar rather than the Caner default (issue #191).
     setCharacter(m.character ? knownCharacter(m.character) : (characterForName(m.name ?? '') ?? knownCharacter(undefined)));
     setAccent(knownAccent(m.accent));
     setProvider(m.provider ?? initialProvider);

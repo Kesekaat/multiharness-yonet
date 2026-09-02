@@ -1,11 +1,11 @@
 # Munder Difflin — Blog Idea Backlog (52 posts)
 
-> **Author:** Kevin (SEO strategist) · Pairs with `SEO_METADATA.md`.
+> **Author:** Kartal (SEO strategist) · Pairs with `SEO_METADATA.md`.
 > Every idea maps to the keyword taxonomy and ladders up to a home pillar (`#what` = "what is a
 > harness", `#how` = orchestration, MemPalace = memory). Slugs match the keyword→URL map in
 > `SEO_METADATA.md` §1.2 — **keep the slug** so internal links and the sitemap line up.
 
-## Format note for Angela
+## Format note for Deniz
 
 The two tables below are the backlog. Schema for each row:
 

@@ -15,9 +15,9 @@ faq:
   - q: "Why is voice bad for writing code but good for orchestrating agents?"
     a: "Because the bandwidth is mismatched in one direction and matched in the other. Code is dense, precise, and positional — dictating a diff by voice is slower and more error-prone than typing it. Orchestration commands are the opposite: short, intent-shaped utterances like assign this, what's the status, kill that worker. A sentence of intent fans out into minutes of agent work, so voice carries the command and the agents carry the density."
   - q: "What can you actually do by voice in Munder Difflin's Talk mode?"
-    a: "Press Talk and you get a low-latency voice channel to the BOSS orchestrator over the OpenAI Realtime API. Michael reads the hive — tasks, board, memory, agents, activity, cost — and can create and assign tasks, dispatch agents, pause, steer, halt, spawn or hire workers, kill them, and edit schedules. Destructive verbs are gated behind spoken echo-back confirmation, and completions are spoken back the moment they land."
+    a: "Press Talk and you get a low-latency voice channel to the BOSS orchestrator over the OpenAI Realtime API. Hakan reads the hive — tasks, board, memory, agents, activity, cost — and can create and assign tasks, dispatch agents, pause, steer, halt, spawn or hire workers, kill them, and edit schedules. Destructive verbs are gated behind spoken echo-back confirmation, and completions are spoken back the moment they land."
   - q: "How does Talk mode prevent a misheard command from killing the wrong agent?"
-    a: "Every destructive verb is held behind a spoken echo-back confirmation: Michael repeats the exact action back and requires a distinct confirm token, never a bare yes. There are also hard refusals — he will not kill the BOSS agent or target all agents at once, no matter what he heard. Task matching by voice is normalized and scored, and close matches trigger a spoken which-one disambiguation instead of silently mutating the wrong card."
+    a: "Every destructive verb is held behind a spoken echo-back confirmation: Hakan repeats the exact action back and requires a distinct confirm token, never a bare yes. There are also hard refusals — he will not kill the BOSS agent or target all agents at once, no matter what he heard. Task matching by voice is normalized and scored, and close matches trigger a spoken which-one disambiguation instead of silently mutating the wrong card."
   - q: "Can a forgotten-open voice session run up a bill?"
     a: "No — that failure mode is engineered out. Voice sessions run under a live cost meter with a hard spend cap that auto-disconnects when hit, plus a configurable idle auto-disconnect (default 3 minutes) so an open mic in an empty room shuts itself off. Realtime voice is metered, so both guards exist precisely because the channel costs money while it is open."
   - q: "Are voice-issued actions auditable?"
@@ -39,7 +39,7 @@ Code is a high-bandwidth, high-precision payload. It's dense with symbols, white
 But **orchestration is a different payload entirely.** When you're running a fleet of agents, the things *you* actually emit are tiny:
 
 - **Delegation** — "have someone fix the flaky auth test."
-- **Status** — "what's Dwight working on? what's on the board?"
+- **Status** — "what's Batur working on? what's on the board?"
 - **Approvals** — "yes, kill it" / "no, hold that."
 
 Each of these is a sentence. Each fans out into minutes or hours of high-bandwidth work that the *agents* perform — reading files, running builds, writing diffs. That's the asymmetry that makes voice fit: **low-bandwidth commands over high-bandwidth work.** You supply intent; the fleet supplies density. It's the same division of labor a [BOSS orchestrator](/blog/how-the-boss-orchestrator-works/) already imposes on typed input — voice just removes the keyboard from the loop when the keyboard was barely being used anyway.
@@ -50,11 +50,11 @@ The other half of the fit: orchestration is naturally *ambient*. You're across t
 
 ## Case study: Talk mode
 
-Munder Difflin shipped this thesis as a feature in v0.3.2 (the [launch post](/blog/launching-munder-difflin-v0-3-2/) has the full tour). Press **Talk** and you get a low-latency voice channel — OpenAI Realtime API over WebRTC, bring-your-own key — to Michael, the BOSS orchestrator, running *alongside* the async terminal floor, not replacing it.
+Munder Difflin shipped this thesis as a feature in v0.3.2 (the [launch post](/blog/launching-munder-difflin-v0-3-2/) has the full tour). Press **Talk** and you get a low-latency voice channel — OpenAI Realtime API over WebRTC, bring-your-own key — to Hakan, the BOSS orchestrator, running *alongside* the async terminal floor, not replacing it.
 
-Michael listens, answers, and acts. The read side covers the hive: tasks, board, memory, agents, activity, cost. The action side is the full orchestration verb set: create and assign tasks, dispatch agents, pause / steer / halt, spawn and hire workers, kill them, edit schedules. Notice what's *not* in that list: writing code. The voice channel never touches an editor. It only moves work around — exactly the payload the channel can carry.
+Hakan listens, answers, and acts. The read side covers the hive: tasks, board, memory, agents, activity, cost. The action side is the full orchestration verb set: create and assign tasks, dispatch agents, pause / steer / halt, spawn and hire workers, kill them, edit schedules. Notice what's *not* in that list: writing code. The voice channel never touches an editor. It only moves work around — exactly the payload the channel can carry.
 
-And the loop closes in both directions. Voice-dispatched work reports back on its own: a completion watcher detects when a task lands and pushes the event into the live session so **Michael speaks it unprompted** — "respond when done" as a first-class behavior, with an on-screen toast, and a queue-to-notification path if the session is already closed. That's the ambient half delivered: you delegated by sentence, and the result comes back as a sentence.
+And the loop closes in both directions. Voice-dispatched work reports back on its own: a completion watcher detects when a task lands and pushes the event into the live session so **Hakan speaks it unprompted** — "respond when done" as a first-class behavior, with an on-screen toast, and a queue-to-notification path if the session is already closed. That's the ambient half delivered: you delegated by sentence, and the result comes back as a sentence.
 
 {% img "note-2" %}
 
@@ -62,7 +62,7 @@ And the loop closes in both directions. Voice-dispatched work reports back on it
 
 Here's where "control plane" stops being a metaphor and starts being an engineering standard. A microphone is a noisy, spoofable, mishearable input device wired to verbs like *kill*. If you treat that casually, you've built a gimmick with a blast radius. Talk mode's guardrails are the interesting part:
 
-**Echo-back confirmation for destructive verbs.** Every destructive action is gated behind a *spoken* echo-back: Michael repeats exactly what he's about to do and requires a distinct confirm token — never a bare "yes," which a stray utterance could trip. On top of that sit hard refusals: he will not kill the BOSS agent, and he will not target all agents at once, period. Even task *matching* is defensive — spoken phrases are normalized and scored against stored titles, and a close call triggers a spoken "which one?" instead of silently mutating the wrong card. This is the same discipline as any [human-in-the-loop approval gate](/blog/human-in-the-loop-approving-ai-agents/), adapted to a channel where the human's "click" is a phrase.
+**Echo-back confirmation for destructive verbs.** Every destructive action is gated behind a *spoken* echo-back: Hakan repeats exactly what he's about to do and requires a distinct confirm token — never a bare "yes," which a stray utterance could trip. On top of that sit hard refusals: he will not kill the BOSS agent, and he will not target all agents at once, period. Even task *matching* is defensive — spoken phrases are normalized and scored against stored titles, and a close call triggers a spoken "which one?" instead of silently mutating the wrong card. This is the same discipline as any [human-in-the-loop approval gate](/blog/human-in-the-loop-approving-ai-agents/), adapted to a channel where the human's "click" is a phrase.
 
 **michael-voice as a distinct actor.** Everything done by voice is attributed to a separate **michael-voice** identity in messages, the board, and the activity log, and it pings the BOSS terminal. A voice dispatch is auditable and never impersonates a worker — which matters enormously when you're later reconstructing *why* the floor did something (the case for that paper trail is the whole [observability argument](/blog/observability-for-agent-fleets/)).
 

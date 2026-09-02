@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate a Dunder Mifflin (The Office) styled office.tmj — iconic zones:
-Michael's corner office, conference room, the open bullpen with desk pods,
+Hakan's corner office, conference room, the open bullpen with desk pods,
 accounting nook, the annex, reception, kitchen/break area, warehouse corner.
 
 Furniture is composed by copying multi-tile "stamps" out of the original
@@ -119,7 +119,7 @@ def place(stamp, gx, gy):
     return None
 
 # ══ ROOMS ════════════════════════════════════════════════════════════════════
-# Michael's office (top-left). Interior cols 1-6 rows 3-7.
+# Hakan's office (top-left). Interior cols 1-6 rows 3-7.
 vwall(7, 3, 10, doors=(5,))
 hwall(8, 1, 7, doors=(5,))                       # south door into the floor
 michael = place(EXEC, 2, 4)                     # boss desk, faces room (down)
@@ -133,7 +133,7 @@ hwall(8, 8, 18, doors=(13,))
 place(CONF, 10, 3)
 place(WINDOW, 10, 1); place(WINDOW, 14, 1)
 
-# Annex (top-right). Interior cols 26-32 rows 3-8. Ryan / Kelly / Toby.
+# Annex (top-right). Interior cols 26-32 rows 3-8. Yaman / Pelin / Berkin.
 # Door is on the SOUTH wall so the front-bay desks can't block its approach.
 vwall(25, 3, 11)
 hwall(9, 25, 32, doors=(26,))

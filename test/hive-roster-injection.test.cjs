@@ -40,8 +40,8 @@ async function floor(t, { steer } = {}) {
   const home = tmpHome();
   t.after(() => fs.rmSync(home, { recursive: true, force: true }));
   const hive = new HiveManager(() => home);
-  await hive.ensureAgent({ id: 'boss-1', name: 'Michael', provider: 'claude', cwd: home, isBoss: true });
-  await hive.ensureAgent({ id: 'jim-1', name: 'Jim', provider: 'claude', cwd: home });
+  await hive.ensureAgent({ id: 'boss-1', name: 'Hakan', provider: 'claude', cwd: home, isBoss: true });
+  await hive.ensureAgent({ id: 'jim-1', name: 'Caner', provider: 'claude', cwd: home });
 
   const control = steer
     ? { takeSteer: (id) => (id === 'boss-1' ? steer : null), shouldHalt: () => false, toolDecision: () => ({ deny: false }) }
@@ -55,9 +55,9 @@ function snapshot(hive) {
   hive.writeFleetSnapshot({
     ts: Date.now() - 4000,
     agents: [
-      { id: 'boss-1', name: 'Michael', role: 'orchestrator', isBoss: true, breaker: 'ok', tokens: 812_400, usd: 4.2199, lastActiveSecAgo: 6, inboxBacklog: 2 },
-      { id: 'jim-1', name: 'Jim', role: 'agent', breaker: 'warn', tokens: 120_401, usd: 1.0231, lastActiveSecAgo: 240, inboxBacklog: 0 },
-      { id: 'pam-1', name: 'Pam', role: 'agent', breaker: 'ok', tokens: 0, usd: 0, lastActiveSecAgo: null, inboxBacklog: 0 }
+      { id: 'boss-1', name: 'Hakan', role: 'orchestrator', isBoss: true, breaker: 'ok', tokens: 812_400, usd: 4.2199, lastActiveSecAgo: 6, inboxBacklog: 2 },
+      { id: 'jim-1', name: 'Caner', role: 'agent', breaker: 'warn', tokens: 120_401, usd: 1.0231, lastActiveSecAgo: 240, inboxBacklog: 0 },
+      { id: 'pam-1', name: 'Selin', role: 'agent', breaker: 'ok', tokens: 0, usd: 0, lastActiveSecAgo: null, inboxBacklog: 0 }
     ]
   });
 }
@@ -112,22 +112,22 @@ test('renaming changes only the display name and reaches boss immediately', asyn
   const agentDir = path.join(home, 'hive', 'agents', 'jim-1');
   const before = hive.registry().agents['jim-1'];
 
-  const result = hive.renameAgent('jim-1', '  Kevin  ');
+  const result = hive.renameAgent('jim-1', '  Kartal  ');
 
-  assert.deepEqual(result, { ok: true, name: 'Kevin' });
-  assert.deepEqual(hive.registry().agents['jim-1'], { ...before, name: 'Kevin' },
+  assert.deepEqual(result, { ok: true, name: 'Kartal' });
+  assert.deepEqual(hive.registry().agents['jim-1'], { ...before, name: 'Kartal' },
     'registry metadata must be unchanged apart from the display name');
   assert.equal(fs.existsSync(agentDir), true, 'the id-derived agent directory must not move');
-  assert.match(hive.rosterContext(), /jim-1 "Kevin"/);
-  assert.doesNotMatch(hive.rosterContext(), /jim-1 "Jim"/);
+  assert.match(hive.rosterContext(), /jim-1 "Kartal"/);
+  assert.doesNotMatch(hive.rosterContext(), /jim-1 "Caner"/);
 });
 
 test('rename rejects empty and unknown agents without changing the registry', async (t) => {
   const { hive } = await floor(t);
 
   assert.equal(hive.renameAgent('jim-1', '   ').ok, false);
-  assert.equal(hive.renameAgent('missing', 'Kevin').ok, false);
-  assert.equal(hive.registry().agents['jim-1'].name, 'Jim');
+  assert.equal(hive.renameAgent('missing', 'Kartal').ok, false);
+  assert.equal(hive.registry().agents['jim-1'].name, 'Caner');
 });
 
 test('boss gets the roster on SessionStart and on every prompt — nobody else does', async (t) => {
@@ -167,11 +167,11 @@ test('a corrupt fleet.json degrades to no injection instead of throwing into a h
 
 // --- 1:1 hold ---------------------------------------------------------------
 // The human takes an agent aside. It keeps running and keeps its terminal, but
-// Michael has to stop routing to it — otherwise the human and the orchestrator
+// Hakan has to stop routing to it — otherwise the human and the orchestrator
 // are driving the same agent at once, which is how a 1:1 turns into a fight
 // over the same terminal.
 
-test('a held agent is marked in the roster and Michael is told to route around it', async (t) => {
+test('a held agent is marked in the roster and Hakan is told to route around it', async (t) => {
   const { hive } = await floor(t);
   snapshot(hive);
   assert.doesNotMatch(hive.rosterContext(), /ON HOLD/,
@@ -180,13 +180,13 @@ test('a held agent is marked in the roster and Michael is told to route around i
   assert.deepEqual(hive.setAgentHold('jim-1', true), { ok: true, onHold: true });
 
   const line = hive.rosterContext();
-  assert.match(line, /jim-1 "Jim" \([^)]*ON HOLD/, 'the mark belongs on that agent, not the line');
+  assert.match(line, /jim-1 "Caner" \([^)]*ON HOLD/, 'the mark belongs on that agent, not the line');
   assert.match(line, /Do NOT message them/);
   assert.match(line, /do NOT dispatch to them/);
   assert.ok(!line.includes('\n'), 'still one compact line');
 });
 
-test('the hold reaches Michael without waiting for the next fleet snapshot', async (t) => {
+test('the hold reaches Hakan without waiting for the next fleet snapshot', async (t) => {
   const { home, hive } = await floor(t);
   snapshot(hive);
   hive.setAgentHold('jim-1', true);
@@ -220,5 +220,5 @@ test('the hold survives a restart, because the registry is the record', async (t
   hive.setAgentHold('jim-1', true);
   const reg = JSON.parse(fs.readFileSync(path.join(home, 'hive', 'registry.json'), 'utf8'));
   assert.equal(reg.agents['jim-1'].onHold, true,
-    'a hold that evaporated on restart would hand the agent back to Michael silently');
+    'a hold that evaporated on restart would hand the agent back to Hakan silently');
 });

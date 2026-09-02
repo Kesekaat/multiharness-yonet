@@ -18,14 +18,14 @@ test('batch import keeps every valid manifest and reports invalid files independ
     const brokenJson = join(dir, '02-broken.json');
     const invalidManifest = join(dir, '03-missing-name.json');
     const pam = join(dir, '04-pam.json');
-    writeFileSync(jim, JSON.stringify(manifest('Jim')));
+    writeFileSync(jim, JSON.stringify(manifest('Caner')));
     writeFileSync(brokenJson, '{ definitely not json');
     writeFileSync(invalidManifest, JSON.stringify({ spec: 'munder-difflin/hire@1' }));
-    writeFileSync(pam, JSON.stringify(manifest('Pam')));
+    writeFileSync(pam, JSON.stringify(manifest('Selin')));
 
     const result = readHireManifestFiles([jim, brokenJson, invalidManifest, pam]);
 
-    assert.deepEqual(result.manifests.map((m) => m.name), ['Jim', 'Pam']);
+    assert.deepEqual(result.manifests.map((m) => m.name), ['Caner', 'Selin']);
     assert.equal(result.errors.length, 2);
     assert.match(result.errors[0], /02-broken\.json/);
     assert.match(result.errors[1], /03-missing-name\.json/);
