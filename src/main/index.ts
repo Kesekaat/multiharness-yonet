@@ -100,10 +100,10 @@ const isDev = !!process.env.ELECTRON_RENDERER_URL;
 // rather than letting the default handler exit the process.
 // (Restored during the #71 merge — the PR's rebase dropped these handlers.)
 process.on('uncaughtException', (err) => {
-  console.error('[main] uncaughtException (kept alive):', err);
+  console.error("[main] uncaughtException (süreç çalışmaya devam ediyor):", err);
 });
 process.on('unhandledRejection', (reason) => {
-  console.error('[main] unhandledRejection (kept alive):', reason);
+  console.error("[main] unhandledRejection (süreç çalışmaya devam ediyor):", reason);
 });
 
 const ptyManager = new PtyManager();
@@ -167,7 +167,7 @@ async function enableCodexRemoteForSpawn(
     // sun_path — the daemon would start and then die on bind, and the warning
     // below names the real reason instead of a generic readiness timeout.
     if (!codexRemoteSocketFits(alias)) {
-      console.warn('[codex-remote] socket path exceeds sun_path; starting local TUI:', alias);
+      console.warn("[codex-remote] soket yolu sun_path'ı aşıyor; yerel TUI başlatılıyor:", alias);
       return false;
     }
     const aliasRoot = dirname(alias);
@@ -175,7 +175,7 @@ async function enableCodexRemoteForSpawn(
     if (existsSync(alias)) {
       const st = lstatSync(alias);
       if (!st.isSymbolicLink() || resolve(dirname(alias), readlinkSync(alias)) !== resolve(realHome)) {
-        console.warn('[codex-remote] short home alias is occupied; starting local TUI:', alias);
+        console.warn("[codex-remote] kısa ev takma adı dolu; yerel TUI başlatılıyor:", alias);
         return false;
       }
     } else {
@@ -197,7 +197,7 @@ async function enableCodexRemoteForSpawn(
       env
     );
     if (!started.ok) {
-      console.warn('[codex-remote] daemon start failed; starting local TUI:', started.error);
+      console.warn("[codex-remote] arka plan programının başlatılması başarısız oldu; yerel TUI başlatılıyor:", started.error);
       return false;
     }
     const enabled = await runCodexDaemonCommand(
@@ -206,18 +206,18 @@ async function enableCodexRemoteForSpawn(
       env
     );
     if (!enabled.ok) {
-      console.warn('[codex-remote] enable failed; starting local TUI:', enabled.error);
+      console.warn("[codex-remote] etkinleştirme başarısız oldu; yerel TUI başlatılıyor:", enabled.error);
       return false;
     }
     if (!existsSync(socket)) {
-      console.warn('[codex-remote] daemon returned without a control socket; starting local TUI');
+      console.warn("[codex-remote] arka plan programı kontrol soketi olmadan geri döndü; yerel TUI başlatılıyor");
       return false;
     }
     opts.env = { ...(opts.env ?? {}), CODEX_HOME: alias };
     opts.args = withCodexRemoteArgs(opts.args ?? [], codexRemoteEndpoint(alias));
     return true;
   } catch (e) {
-    console.warn('[codex-remote] setup failed; starting local TUI:',
+    console.warn("[codex-remote] kurulumu başarısız oldu; yerel TUI başlatılıyor:",
       e instanceof Error ? e.message : e);
     return false;
   }
@@ -454,9 +454,9 @@ function teardownPty(id: string): void {
     try { telemetry.forgetAgent(agentId); } catch { /* best-effort */ }
     // W1 — kill this agent's proxy-bridge sidecar (qwen), if any, so a dead
     // PTY never leaves an orphan loopback listener. No-op for non-proxy agents.
-    try { hive.stopProxyBridge(agentId); } catch (e) { console.error('[hive] stopProxyBridge failed:', e); }
+    try { hive.stopProxyBridge(agentId); } catch (e) { console.error("[hive] stopProxyBridge başarısız oldu:", e); }
     if (hive.enabled()) {
-      try { hive.setArchived(agentId, true); } catch (e) { console.error('[hive] setArchived failed:', e); }
+      try { hive.setArchived(agentId, true); } catch (e) { console.error("[hive] setArchived başarısız oldu:", e); }
     }
   }
   // 2) Remove the isolated worktree, if any. Non-blocking; errors are logged.
@@ -475,8 +475,8 @@ function teardownPty(id: string): void {
       void finalizeWorkerWorktree(wtPath, origCwd, worker);
     } else {
       void removeWorktree(origCwd, wtPath)
-        .then(r => { if (!r.ok) console.error('[worktree] removeWorktree failed:', r.error); })
-        .catch(e => console.error('[worktree] removeWorktree threw:', e));
+        .then(r => { if (!r.ok) console.error("[worktree] removeWorktree başarısız oldu:", r.error); })
+        .catch(e => console.error("[worktree] removeWorktree hata fırlattı:", e));
     }
   }
   // A worker whose isolation failed (non-repo cwd) has no worktree to gate above —
@@ -506,7 +506,7 @@ function informManager(subject: string, body: string, slack?: { channel: string;
       : '';
     hive.send({ to: 'manager', act: 'inform', subject, body: body + slackLine }, 'ephemeral-worker');
   } catch (e) {
-    console.error('[worker] informManager failed:', e);
+    console.error("[worker] informManager başarısız oldu:", e);
   }
 }
 
@@ -518,7 +518,7 @@ async function finalizeWorkerWorktree(wtPath: string, origCwd: string, worker: W
   try {
     const work = await worktreeHasUnintegratedWork(wtPath, worker.baseBranch);
     if (work.keep) {
-      console.warn(`[worker] PRESERVING worktree with unintegrated work: ${wtPath} (${work.detail})`);
+      console.warn(`[worker] entegre edilmemiş çalışma içeren worktree KORUNUYOR: ${wtPath} (${work.detail})`);
       // Track it so the GC sweep can reclaim it (+ scratch dir) once integrated —
       // the worker is gone from liveWorkers by now, so its identity lives here.
       preservedWorktrees.set(wtPath, {
@@ -535,7 +535,7 @@ async function finalizeWorkerWorktree(wtPath: string, origCwd: string, worker: W
       return;
     }
     const r = await removeWorktree(origCwd, wtPath);
-    if (!r.ok) { console.error('[worker] removeWorktree failed:', r.error); return; }
+    if (!r.ok) { console.error("[worker] removeWorktree başarısız oldu:", r.error); return; }
     // Worktree is gone (clean/integrated at teardown), but DEFER its scratch-dir
     // cleanup to the throttled GC sweep rather than deleting it synchronously here:
     // HIVE_ROOT/agents/<id> holds the worker's memory.md and the MemPalace miner
@@ -548,7 +548,7 @@ async function finalizeWorkerWorktree(wtPath: string, origCwd: string, worker: W
       scratchDir: workerScratchDir(worker.workerId), slack: worker.slack, preservedAt: Date.now()
     });
   } catch (e) {
-    console.error('[worker] finalizeWorkerWorktree threw (worktree left in place):', e);
+    console.error("[worker] finalizeWorkerWorktree hata fırlattı (worktree yerinde bırakıldı):", e);
   }
 }
 
@@ -571,7 +571,7 @@ function removeWorkerScratch(workerId: string): void {
   // Path-safety: the resolved dir must sit directly under agents/ with basename == id.
   if (resolve(dir) !== join(resolve(agentsRoot), basename(dir)) || basename(dir) !== workerId) return;
   try { rmSync(dir, { recursive: true, force: true }); }
-  catch (e) { console.error('[worker] removeWorkerScratch failed:', e); }
+  catch (e) { console.error("[worker] removeWorkerScratch başarısız oldu:", e); }
 }
 // A natural PTY exit must run the same teardown as an explicit kill — EXCEPT when
 // the PTY was the missing-CLI installer: a clean exit there means the engine CLI was
@@ -632,9 +632,9 @@ function syncKeepAwake(): void {
   keepAwakeMode = desired;
   if (desired) {
     keepAwakeId = powerSaveBlocker.start(desired);
-    console.log(`[power] keep-awake ON (${desired}) — agents running`);
+    console.log(`[power] uyanık tutma AÇIK (${desired}) — agent'lar çalışıyor`);
   } else {
-    console.log('[power] keep-awake off — no agents');
+    console.log("[power] uyanık tutma kapalı — çalışan agent yok");
   }
 }
 
@@ -712,7 +712,7 @@ function syncMissions(): void {
         // Let the SCHEDULES panel refresh its "last fired" without a reload (#2.3).
         try { liveWebContents()?.send('missions:updated'); } catch { /* window gone */ }
       } catch (e) {
-        console.error('[scheduler] mission', m.id, e);
+        console.error("[scheduler] görev", m.id, e);
       }
     };
     const entry: MissionTimer = {};
@@ -849,7 +849,7 @@ function syncContextTriggers(): void {
         // timer was armed, and the renderer should act on what's current.
         emitContextTrigger(action, contextRule(action));
       } catch (e) {
-        console.error('[triggers] context', action, e);
+        console.error("[triggers] bağlamı", action, e);
       }
     };
     const remaining = Math.max(0, rule.everyMs - (Date.now() - contextLastRunAt(action)));
@@ -883,10 +883,10 @@ function archiveOrphanedAgents(): void {
       if (id === reg.managerId) continue;        // manager is never archived
       if (ptyForAgent(id)) continue;         // has a live PTY → genuinely active
       hive.setArchived(id, true);            // stale archived:false orphan → archive
-      console.log('[migration] archived orphaned agent (no live PTY):', id);
+      console.log("[migration] sahipsiz agent arşivlendi (canlı PTY yok):", id);
     }
   } catch (e) {
-    console.error('[migration] archiveOrphanedAgents failed:', e);
+      console.error("[migration] archiveOrphanedAgents başarısız oldu:", e);
   }
 }
 
@@ -957,7 +957,7 @@ function ensureDefaultMissions(): void {
       map.compact = retiring.lastFiredAt;
       try { persist.setKv(CONTEXT_LAST_RUN_KV_KEY, map); } catch { /* DB best-effort */ }
     }
-    console.log('[triggers] retired the compact-maintenance mission into contextTrigger.compact',
+    console.log("[triggers], kompakt bakım misyonunu contextTrigger.compact'ye devre dışı bıraktı",
       `(enabled: ${retiring.enabled}, everyMs: ${retiring.intervalMs})`);
   }
 
@@ -982,7 +982,7 @@ function ensureDefaultMissions(): void {
         return rest;
       })
     });
-    console.log('[triggers] dropped the legacy per-mission autoCompact flag —',
+    console.log("[triggers], eski görev başına autoCompact işaretini kaldırdı —",
       'contextTrigger.compact is now the only schedule that compacts');
   }
 }
@@ -1242,7 +1242,7 @@ function writeFleetSnapshot(): void {
       });
     hive.writeFleetSnapshot({ ts: now, agents });
   } catch (e) {
-    console.error('[fleet] snapshot failed:', e);
+    console.error("[fleet] anlık görüntüsü başarısız oldu:", e);
   }
 }
 
@@ -1272,7 +1272,7 @@ function armHeartbeat(m: ScheduledMission): void {
       writeConfig({ missions: cur.map((x) => (x.id === m.id ? { ...x, lastFiredAt: Date.now() } : x)) });
       try { liveWebContents()?.send('missions:updated'); } catch { /* window gone */ }
     } catch (e) {
-      console.error('[heartbeat]', e);
+      console.error("[heartbeat]", e);
     }
     const entry = missionTimers.get(m.id) ?? {};
     entry.timeout = setTimeout(beat, next);
@@ -1493,7 +1493,7 @@ function loadSlackDoneNotified(): Set<string> {
 
 function persistSlackDoneNotified(set: Set<string>): void {
   try { writeFileSync(slackDoneNotifiedPath(), JSON.stringify([...set])); }
-  catch (e) { console.error('[slack] could not persist done-notify ledger:', e); }
+  catch (e) { console.error("[slack] tamamlanan bildirim defterine devam edemedi:", e); }
 }
 
 /** Slack `chat.postMessage` errors that are permanent for this config — retrying
@@ -1564,12 +1564,12 @@ async function pollSlackDoneTasks(): Promise<void> {
         // log the reason once. Never log the token or message body.
         notified.add(t.id);
         persistSlackDoneNotified(notified);
-        console.error('[slack] done-summary post for task', t.id,
+        console.error("[slack] görev için tamamlanan özet gönderisi", t.id,
           '— giving up (terminal error:', res.error + '). Fix the Slack bot scope/permissions; later tasks post once resolved.');
       } else {
         // Transient (network / rate-limit / unknown) → leave unmarked so a later
         // tick retries. Log the id + error only; never the token or message body.
-        console.error('[slack] done-summary post failed for task', t.id, '-', res.error, '(will retry)');
+        console.error("[slack] tamamlanma özeti görev için gönderilemedi", t.id, '-', res.error, '(yeniden denenecek)');
       }
     }
   } finally {
@@ -1660,23 +1660,23 @@ async function startSlackReplyServer(): Promise<void> {
   });
   const r = await slackReplyServer.start();
   if (!r.ok || r.port === undefined) {
-    console.error('[slack] reply endpoint failed to start:', r.error);
+    console.error("[slack] yanıt uç noktası başlatılamadı:", r.error);
     slackReplyServer = null;
     return;
   }
   try {
     writeFileSync(slackReplyConfigPath(), JSON.stringify({ port: r.port, token }), { mode: 0o600 });
   } catch (e) {
-    console.error('[slack] could not write reply config:', e);
+    console.error("[slack] yanıt yapılandırmasını yazamadı:", e);
   }
 }
 
 /** Stop and forget the Slack server (+ reply endpoint). Best-effort; safe to call
  *  when not running. The last tunnel URL is retained so Settings keeps showing it. */
 function stopSlackServer(): void {
-  try { slackServer?.stop(); } catch (e) { console.error('[slack] stop failed:', e); }
+  try { slackServer?.stop(); } catch (e) { console.error("[slack] durdurma başarısız oldu:", e); }
   slackServer = null;
-  try { slackReplyServer?.stop(); } catch (e) { console.error('[slack] reply stop failed:', e); }
+  try { slackReplyServer?.stop(); } catch (e) { console.error("[slack] yanıtı durdurma başarısız oldu:", e); }
   slackReplyServer = null;
   stopSlackDoneObserver();
   try { if (existsSync(slackReplyConfigPath())) unlinkSync(slackReplyConfigPath()); } catch { /* noop */ }
@@ -1734,7 +1734,7 @@ function heldTokens(): Map<string, string> {
 
 function persistHeldTokens(): void {
   try { persist.setKv(HELD_TOKENS_KV_KEY, Object.fromEntries(heldTokens())); }
-  catch (e) { console.error('[webhook] could not persist held-token map:', e); }
+  catch (e) { console.error("[webhook] tutulan jeton haritasını sürdüremedi:", e); }
 }
 
 /** Drop mappings whose history entry has aged out of the (capped) ledger — the
@@ -1800,7 +1800,7 @@ function dispatchWebhookWork(arg: {
     // recreated exactly that race.) A fresh taskId never collides, so this always adds.
     hive.addTask(card);
   } catch (e) {
-    console.error('[webhook] could not create task card:', e instanceof Error ? e.message : e);
+    console.error("[webhook] görev kartını oluşturamadı:", e instanceof Error ? e.message : e);
     return false;
   }
   // Body carries ONLY the sender's message + the card id (so whoever finishes it
@@ -1815,7 +1815,7 @@ function dispatchWebhookWork(arg: {
       requires_reply: false
     }, 'webhook');
   } catch (e) {
-    console.error('[webhook] could not route to manager:', e instanceof Error ? e.message : e);
+    console.error("[webhook] yöneticiye yönlendirilemedi:", e instanceof Error ? e.message : e);
   }
   return true;
 }
@@ -1985,7 +1985,7 @@ function startWebhookDoneObserver(): void {
   if (webhookDoneTimer) return;
   webhookOutboundRecorded = seedWebhookOutbound();
   webhookDoneTimer = setInterval(() => {
-    try { pollWebhookDoneTasks(); } catch (e) { console.error('[webhook] done-observer:', e); }
+    try { pollWebhookDoneTasks(); } catch (e) { console.error("[webhook] tamamlanan gözlemci:", e); }
   }, 5000);
 }
 
@@ -2035,8 +2035,8 @@ function reconcileWebhookServer(): void {
   if (endpoints.length === 0) { stopWebhookServer(); return; }
   if (webhookServer) { webhookServer.setEndpoints(endpoints); return; }
   void startWebhookServer().then((r) => {
-    if (!r.ok) console.error('[webhook] start failed:', r.error);
-    else console.log('[webhook] listening', r.url ? `(tunnel: ${r.url})` : '(no tunnel)');
+    if (!r.ok) console.error("[webhook] başlatma başarısız oldu:", r.error);
+    else console.log("[webhook] dinliyor", r.url ? `(tunnel: ${r.url})` : '(no tunnel)');
   });
 }
 
@@ -2054,7 +2054,7 @@ function webhookEndpointUrls(): { id: string; url: string }[] {
 /** Stop and forget the webhook server. Best-effort; safe when not running. The
  *  last tunnel URL is retained so Settings keeps showing it. */
 function stopWebhookServer(): void {
-  try { webhookServer?.stop(); } catch (e) { console.error('[webhook] stop failed:', e); }
+  try { webhookServer?.stop(); } catch (e) { console.error("[webhook] durdurma başarısız oldu:", e); }
   webhookServer = null;
   // The done-observer deliberately OUTLIVES the server (it is a ledger concern,
   // not a transport one) — it is torn down with the process/hive, not here.
@@ -2131,10 +2131,10 @@ function deliverHire(manifest: HireManifest): void {
 
 async function handleHireLink(link: string): Promise<void> {
   const src = parseHireDeepLink(link);
-  if (!src) { console.warn('[hire] ignoring malformed deep link'); return; }
+  if (!src) { console.warn("[hire] hatalı biçimlendirilmiş derin bağlantıyı yok sayıyor"); return; }
   const res = await fetchHireManifest(src);
   if (!res.ok) {
-    console.error('[hire] deep link rejected:', res.error);
+    console.error("[hire] derin bağlantısı reddedildi:", res.error);
     if (mainWindow && !mainWindow.isDestroyed()) {
       mainWindow.webContents.send('hire:error', { error: res.error });
     }
@@ -2499,7 +2499,7 @@ function findCodexHomeForSession(sessionId: string, siblingsRoot: string): strin
     }
     return fallbackHome;
   } catch (e) {
-    console.error('[resume] findCodexHomeForSession failed:', e);
+    console.error("[resume] findCodexHomeForSession başarısız oldu:", e);
     return null;
   }
 }
@@ -2648,7 +2648,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
       const seg = (opts.hive?.id ?? opts.id).replace(/[^A-Za-z0-9._-]/g, '-');
       const wtPath = join(wtRoot, seg);
       if (!resolve(wtPath).startsWith(resolve(wtRoot) + sep)) {
-        console.error('[worktree] refusing unsafe worktree path for id:', opts.hive?.id ?? opts.id);
+        console.error("[worktree] kimlik için güvenli olmayan çalışma ağacı yolunu reddediyor:", opts.hive?.id ?? opts.id);
       } else {
         const br = await getBranch(origCwd);
         const baseBranch = 'current' in br && br.current ? br.current : 'main';
@@ -2658,11 +2658,11 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
           worktreePaths.set(opts.id, wtPath);
           worktreeOrigins.set(opts.id, origCwd);
         } else {
-          console.error('[worktree] addWorktree failed:', wt.error);
+          console.error("[worktree] addWorktree başarısız oldu:", wt.error);
         }
       }
     } catch (e) {
-      console.error('[worktree] isolation failed:', e);
+      console.error("[worktree] izolasyonu başarısız oldu:", e);
     }
   }
   // Proxy-tier CLIs (qwen/crush) route their LLM traffic through a loopback sidecar
@@ -2715,7 +2715,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
       opts.env = { ...(opts.env ?? {}), ...inj.env, ...memory.env(), ...knowledge.env() };
     } catch (e) {
       // Hive provisioning is best-effort; never block a spawn on it.
-      console.error('[hive] ensureAgent failed:', e);
+      console.error("[hive] ensureAgent başarısız oldu:", e);
     }
   }
   // Long-run guardrails + tiering (Lane A #6.4/#6.6). All additive to the args
@@ -2787,7 +2787,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
         // Claude project dir — we fall back to a FRESH session rather than a broken
         // `--resume`. Make that non-silent: warn on the floor and flag it back to
         // the renderer so the dialog can tell the user 'started fresh'.
-        console.warn(`[resume] session "${explicitSid}" not found in any Claude project dir — starting a fresh session`);
+        console.warn(`[resume] oturumu "${explicitSid}" hiçbir Claude proje dizininde bulunamadı — yeni bir oturum başlatılıyor`);
         resumeNotFound = true;
       }
     }
@@ -2825,7 +2825,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
       const agentsRoot = myHome ? dirname(dirname(myHome)) : '';
       const ownerHome = agentsRoot ? findCodexHomeForSession(sid, agentsRoot) : null;
       if (!ownerHome) {
-        console.warn(`[resume] codex session "${sid}" not found in any agent CODEX_HOME - starting fresh`);
+        console.warn(`[resume] Codex oturumu "${sid}" hiçbir agent CODEX_HOME dizininde bulunamadı — yeni oturum başlatılıyor`);
         if (typedSid) resumeNotFound = true;
       } else {
         if (ownerHome !== myHome) opts.env = { ...(opts.env ?? {}), CODEX_HOME: ownerHome };
@@ -2836,7 +2836,7 @@ async function spawnAgentCore(opts: AgentSpawnOptions, owner: Electron.WebConten
         // codex read the prompt as SESSION_ID ("No saved session found with ID
         // You are \"Dev2\"…") and the id as the prompt.
         if (args[0] !== rsub) { opts.args = [rsub, sid, ...args]; didResume = true; }
-        console.log('[resume] codex resume', sid, 'in', ownerHome);
+        console.log("[resume] Codex oturumu sürdürülüyor", sid, 'konum:', ownerHome);
       }
     }
   }
@@ -3139,8 +3139,8 @@ ipcMain.handle('config:update', (_evt, patch: Partial<HarnessConfig>) => {
   // built per spawn, so flipping the toggle reaches manager the next time he starts.
   if (typeof patch?.orchestratorMaySpawn === 'boolean') hive.setOrchestratorMaySpawn(patch.orchestratorMaySpawn);
   if (!hiveWasEnabled && hive.enabled()) {
-    console.log('[hive] harnessHome configured — bootstrapping hive services');
-    try { bootstrapHiveServices(); } catch (e) { console.error('[hive] bootstrap after onboarding:', e); }
+    console.log("[hive] HarnessHome yapılandırılmış — kovan hizmetlerini önyükleme");
+    try { bootstrapHiveServices(); } catch (e) { console.error("Katılımdan sonra [hive] önyüklemesi:", e); }
   }
   return next;
 });
@@ -3185,17 +3185,17 @@ ipcMain.handle('config:changeHome', async (_evt, payload: unknown) => {
   // Tear down everything bound to the OLD root before copying, so nothing writes
   // mid-copy — a live git commit into hive/.git would otherwise be copied as a
   // half-written object and corrupt the moved repo.
-  try { clearMissionTimers(); } catch (e) { console.error('[changeHome] clearMissionTimers:', e); }
-  try { clearContextTimers(); } catch (e) { console.error('[changeHome] clearContextTimers:', e); }
-  try { stopWebhookDoneObserver(); } catch (e) { console.error('[changeHome] stopWebhookDoneObserver:', e); }
-  try { stopEphemeralWorkerWatcher(); } catch (e) { console.error('[changeHome] stopWorkerWatcher:', e); }
-  try { integrationBroker.stop(); } catch (e) { console.error('[changeHome] broker.stop:', e); }
-  try { hive.stopRouter(); } catch (e) { console.error('[changeHome] stopRouter:', e); }
-  try { hookServer.stop(); } catch (e) { console.error('[changeHome] hookServer.stop:', e); }
-  try { stopSlackServer(); } catch (e) { console.error('[changeHome] slack.stop:', e); }
-  try { stopWebhookServer(); } catch (e) { console.error('[changeHome] webhook.stop:', e); }
-  try { memory.stop(); } catch (e) { console.error('[changeHome] memory.stop:', e); }
-  try { reflector.stop(); } catch (e) { console.error('[changeHome] reflector.stop:', e); }
+  try { clearMissionTimers(); } catch (e) { console.error("[changeHome] clearMissionTimers:", e); }
+  try { clearContextTimers(); } catch (e) { console.error("[changeHome] clearContextTimer'lar:", e); }
+  try { stopWebhookDoneObserver(); } catch (e) { console.error("[changeHome] stopWebhookDoneObserver:", e); }
+  try { stopEphemeralWorkerWatcher(); } catch (e) { console.error("[changeHome] stopWorkerWatcher:", e); }
+  try { integrationBroker.stop(); } catch (e) { console.error("[changeHome] broker.stop:", e); }
+  try { hive.stopRouter(); } catch (e) { console.error("[changeHome] stopRouter:", e); }
+  try { hookServer.stop(); } catch (e) { console.error("[changeHome] hookServer.stop:", e); }
+  try { stopSlackServer(); } catch (e) { console.error("[changeHome] slack.stop:", e); }
+  try { stopWebhookServer(); } catch (e) { console.error("[changeHome] webhook.stop:", e); }
+  try { memory.stop(); } catch (e) { console.error("[changeHome] memory.stop:", e); }
+  try { reflector.stop(); } catch (e) { console.error("[changeHome] reflector.stop:", e); }
 
   if (mode === 'move' && oldHome) {
     try {
@@ -3226,7 +3226,7 @@ ipcMain.handle('config:changeHome', async (_evt, payload: unknown) => {
   // (Identical recovery path to resetAll — relaunch is the clean re-bind.)
   allowQuit = true;
   writeConfig({ harnessHome: newHome });
-  try { ptyManager.killAll(); } catch (e) { console.error('[changeHome] killAll:', e); }
+  try { ptyManager.killAll(); } catch (e) { console.error("[changeHome] killAll:", e); }
   app.relaunch();
   app.exit(0);
   return { ok: true as const }; // unreachable (process exits) — typed for the renderer
@@ -3470,7 +3470,7 @@ ipcMain.handle('skills:local', (_evt, cwd: unknown): LocalSkill[] => {
   try {
     return listLocalSkills({ cwds, bundledDir: skillsResourceDir() });
   } catch (e) {
-    console.error('[skills] local scan failed:', e);
+    console.error("[skills] yerel tarama başarısız oldu:", e);
     return [];
   }
 });
@@ -3677,21 +3677,21 @@ function teardownAndQuit(): void {
   allowQuit = true;
   // Each teardown step is best-effort: a throw here (e.g. a dying child or a
   // half-torn-down socket) must never abort the quit or pop a crash dialog.
-  try { clearMissionTimers(); } catch (e) { console.error('[quit] clearMissionTimers:', e); }
-  try { clearContextTimers(); } catch (e) { console.error('[quit] clearContextTimers:', e); }
-  try { stopWebhookDoneObserver(); } catch (e) { console.error('[quit] stopWebhookDoneObserver:', e); }
-  try { stopEphemeralWorkerWatcher(); } catch (e) { console.error('[quit] stopWorkerWatcher:', e); }
-  try { integrationBroker.stop(); } catch (e) { console.error('[quit] broker.stop:', e); }
-  try { hive.stopRouter(); } catch (e) { console.error('[quit] stopRouter:', e); }
-  try { hookServer.stop(); } catch (e) { console.error('[quit] hookServer.stop:', e); }
-  try { telemetry.stop(); } catch (e) { console.error('[quit] telemetry.stop:', e); }
-  try { stopSlackServer(); } catch (e) { console.error('[quit] slack.stop:', e); }
-  try { stopWebhookServer(); } catch (e) { console.error('[quit] webhook.stop:', e); }
-  try { memory.stop(); } catch (e) { console.error('[quit] memory.stop:', e); }
-  try { reflector.stop(); } catch (e) { console.error('[quit] reflector.stop:', e); }
-  try { persist.close(); } catch (e) { console.error('[quit] persist.close:', e); }
-  try { hive.stopAllProxyBridges(); } catch (e) { console.error('[quit] stopAllProxyBridges:', e); }
-  try { ptyManager.killAll(); } catch (e) { console.error('[quit] killAll:', e); }
+  try { clearMissionTimers(); } catch (e) { console.error("[quit] clearMissionTimers:", e); }
+  try { clearContextTimers(); } catch (e) { console.error("[quit] clearContextTimer'lar:", e); }
+  try { stopWebhookDoneObserver(); } catch (e) { console.error("[quit] stopWebhookDoneObserver:", e); }
+  try { stopEphemeralWorkerWatcher(); } catch (e) { console.error("[quit] stopWorkerWatcher:", e); }
+  try { integrationBroker.stop(); } catch (e) { console.error("[quit] broker.stop:", e); }
+  try { hive.stopRouter(); } catch (e) { console.error("[quit] stopRouter:", e); }
+  try { hookServer.stop(); } catch (e) { console.error("[quit] hookServer.stop:", e); }
+  try { telemetry.stop(); } catch (e) { console.error("[quit] telemetry.stop:", e); }
+  try { stopSlackServer(); } catch (e) { console.error("[quit] slack.stop:", e); }
+  try { stopWebhookServer(); } catch (e) { console.error("[quit] webhook.stop:", e); }
+  try { memory.stop(); } catch (e) { console.error("[quit] memory.stop:", e); }
+  try { reflector.stop(); } catch (e) { console.error("[quit] reflector.stop:", e); }
+  try { persist.close(); } catch (e) { console.error("[quit] persist.close:", e); }
+  try { hive.stopAllProxyBridges(); } catch (e) { console.error("[quit] Tüm Proxy Köprülerini Durdur:", e); }
+  try { ptyManager.killAll(); } catch (e) { console.error("[quit] killAll:", e); }
   app.quit();
 }
 ipcMain.handle('app:confirmClose', () => {
@@ -3738,34 +3738,34 @@ ipcMain.handle('app:cancelClosingTime', () => closingTime.cancel());
 ipcMain.handle('app:resetAll', () => {
   allowQuit = true;
   // Tear everything down first so nothing writes back into the dirs we wipe.
-  try { clearMissionTimers(); } catch (e) { console.error('[reset] clearMissionTimers:', e); }
-  try { clearContextTimers(); } catch (e) { console.error('[reset] clearContextTimers:', e); }
-  try { stopWebhookDoneObserver(); } catch (e) { console.error('[reset] stopWebhookDoneObserver:', e); }
-  try { stopEphemeralWorkerWatcher(); } catch (e) { console.error('[reset] stopWorkerWatcher:', e); }
-  try { integrationBroker.stop(); } catch (e) { console.error('[reset] broker.stop:', e); }
-  try { hive.stopRouter(); } catch (e) { console.error('[reset] stopRouter:', e); }
-  try { hookServer.stop(); } catch (e) { console.error('[reset] hookServer.stop:', e); }
-  try { telemetry.stop(); } catch (e) { console.error('[reset] telemetry.stop:', e); }
-  try { stopSlackServer(); } catch (e) { console.error('[reset] slack.stop:', e); }
-  try { memory.stop(); } catch (e) { console.error('[reset] memory.stop:', e); }
-  try { reflector.stop(); } catch (e) { console.error('[reset] reflector.stop:', e); }
-  try { persist.close(); } catch (e) { console.error('[reset] persist.close:', e); }
-  try { ptyManager.killAll(); } catch (e) { console.error('[reset] killAll:', e); }
-  try { hive.removeExposedCodexData(); } catch (e) { console.error('[reset] removeExposedCodexData:', e); }
+  try { clearMissionTimers(); } catch (e) { console.error("[reset] clearMissionTimers:", e); }
+  try { clearContextTimers(); } catch (e) { console.error("[reset] clearContextTimer'lar:", e); }
+  try { stopWebhookDoneObserver(); } catch (e) { console.error("[reset] stopWebhookDoneObserver:", e); }
+  try { stopEphemeralWorkerWatcher(); } catch (e) { console.error("[reset] stopWorkerWatcher:", e); }
+  try { integrationBroker.stop(); } catch (e) { console.error("[reset] broker.stop:", e); }
+  try { hive.stopRouter(); } catch (e) { console.error("[reset] stopRouter:", e); }
+  try { hookServer.stop(); } catch (e) { console.error("[reset] hookServer.stop:", e); }
+  try { telemetry.stop(); } catch (e) { console.error("[reset] telemetry.stop:", e); }
+  try { stopSlackServer(); } catch (e) { console.error("[reset] slack.stop:", e); }
+  try { memory.stop(); } catch (e) { console.error("[reset] memory.stop:", e); }
+  try { reflector.stop(); } catch (e) { console.error("[reset] reflector.stop:", e); }
+  try { persist.close(); } catch (e) { console.error("[reset] persist.close:", e); }
+  try { ptyManager.killAll(); } catch (e) { console.error("[reset] killAll:", e); }
+  try { hive.removeExposedCodexData(); } catch (e) { console.error("[reset],ExposedCodexData'yı kaldır:", e); }
   // Erase the hive (Michael's + every agent's memory, inboxes, tasks, board,
   // git history) and the semantic-memory palace. Only these harness-created
   // subdirs are removed — never the user's whole harnessHome folder.
   for (const dir of [hive.root(), memory.palacePath()]) {
     if (!dir) continue;
     try { rmSync(dir, { recursive: true, force: true }); }
-    catch (e) { console.error('[reset] rm', dir, e); }
+    catch (e) { console.error("[reset] rm", dir, e); }
   }
   // The roster is the renderer's half of the same state, so it retires with the
   // hive — archived into roster-backups/ rather than deleted, and cleared as the
   // active file so re-selecting this folder later doesn't resurrect agents whose
   // sessions and memory are gone.
   try { roster.archive(); }
-  catch (e) { console.error('[reset] roster.archive:', e); }
+  catch (e) { console.error("[reset] roster.archive:", e); }
   // Back to first-run defaults, then relaunch clean so all in-memory services
   // re-bootstrap from scratch and the renderer lands on onboarding.
   resetConfig();
@@ -4516,7 +4516,7 @@ function archiveRequest(filePath: string, sub: '.done' | '.failed'): void {
   } catch (e) {
     // Last resort: delete it so a poison file can't loop forever.
     try { unlinkSync(filePath); } catch { /* noop */ }
-    console.error('[worker] archiveRequest failed:', e);
+    console.error("[worker] arşiv İsteği başarısız oldu:", e);
   }
 }
 
@@ -4567,7 +4567,7 @@ async function processSpawnRequest(filePath: string): Promise<void> {
   try {
     raw = JSON.parse(readFileSync(filePath, 'utf8')) as SpawnRequest;
   } catch (e) {
-    console.error('[worker] unparseable spawn-request:', filePath, e);
+    console.error("[worker] ayrıştırılamaz ortaya çıkma isteği:", filePath, e);
     informManager('[worker spawn rejected] unparseable request', `Could not parse spawn-request ${basename(filePath)} — ${String(e)}`);
     archiveRequest(filePath, '.failed');
     return;
@@ -4694,10 +4694,10 @@ async function processSpawnRequest(filePath: string): Promise<void> {
     const suffix = `\n\n[CAPABILITIES] Before you start, consult your capability catalog — run the \`/capabilities\` skill (or read \`$AGENT_DIR/.claude/skills/capabilities/SKILL.md\`). It lists your temporal date-range skills (\`/today\`, \`/last30Days\`, \`/lastQuarter\`, …) and the integrations available to you (reached via the loopback broker) and how to call each. For any time-scoped work, resolve the dates with those skills instead of computing them by hand.\n\n[WORKER COMPLETION] When finished, signal done by sending ONE outbox message to manager with "act":"done" and a short result summary — that releases this ephemeral worker (terminal closed; your branch is handed to manager). Do NOT push to any remote; manager is the sole integrator.`;
     hive.send({ to: workerId, conversation: `worker-${reqId}`, act: 'request', subject: meta.name, body: `${prefix}${objective}${suffix}` }, 'manager');
   } catch (e) {
-    console.error('[worker] dispatch send failed:', e);
+    console.error("[worker] gönderim gönderimi başarısız oldu:", e);
   }
 
-  console.log(`[worker] spawned ${workerId} (cwd=${cwd}, base=${baseBranch}${slack ? ', slack' : ''})`);
+  console.log(`[worker], ${workerId}'yi doğurdu (cwd=${cwd}, temel=${baseBranch}${slack ? ', slack' : ''})`);
   archiveRequest(filePath, '.done');
 }
 
@@ -4733,19 +4733,19 @@ async function gcPreservedWorktrees(): Promise<void> {
       if (!existsSync(e.wtPath)) {
         removeWorkerScratch(e.workerId);
         preservedWorktrees.delete(key);
-        console.log(`[worker gc] ${e.workerId}: worktree already gone — reclaimed scratch`);
+        console.log(`[worker gc] ${e.workerId}: çalışma ağacı zaten gitti — geri kazanılan çizik`);
         continue;
       }
       // (b) Still on disk → reclaim ONLY when provably integrated + clean.
       let safe: { gc: boolean; detail: string };
       try { safe = await worktreeIsGcSafe(e.wtPath, e.baseBranch); }
-      catch (err) { console.error('[worker gc] gc-safe check threw (keeping):', err); continue; }
+      catch (err) { console.error("[worker gc] gc-safe kontrolü atıldı (tutuldu):", err); continue; }
       if (!safe.gc) continue; // keep — fail-safe
       const r = await removeWorktree(e.origCwd, e.wtPath);
-      if (!r.ok) { console.error(`[worker gc] removeWorktree failed (keeping ${e.workerId}):`, r.error); continue; }
+      if (!r.ok) { console.error(`[worker gc] removeWorktree başarısız oldu (${e.workerId} korunuyor):`, r.error); continue; }
       removeWorkerScratch(e.workerId);
       preservedWorktrees.delete(key);
-      console.log(`[worker gc] reclaimed ${e.workerId} (${safe.detail})`);
+      console.log(`[worker gc], ${e.workerId}'yi (${safe.detail}) geri aldı`);
       informManager(
         `[worker worktree reclaimed] ${e.workerId}`,
         `The preserved worktree for ${e.workerId} is now integrated (${safe.detail}), so it and its scratch dir were garbage-collected.\nWorktree: ${e.wtPath}`,
@@ -4785,7 +4785,7 @@ async function ephemeralWorkerTick(): Promise<void> {
       if (workerSignaledDone(workerId, rec.spawnedAt)) {
         // Success: the worker already replied in-thread; just release it.
         rec.releasing = true;
-        console.log(`[worker] ${workerId} signaled done — releasing`);
+        console.log(`[worker] ${workerId} tamam sinyali verdi — serbest bırakıldı`);
         ptyManager.kill(workerId);
         teardownPty(workerId);
         continue;
@@ -4797,7 +4797,7 @@ async function ephemeralWorkerTick(): Promise<void> {
         const used = workerTokensUsed(workerId);
         if (used > tokenCap) {
           rec.releasing = true;
-          console.warn(`[worker] reaping ${workerId} — token cap (${used.toLocaleString()} > ${tokenCap.toLocaleString()})`);
+          console.warn(`[worker], ${workerId} toplama — jeton sınırı (${used.toLocaleString()} > ${tokenCap.toLocaleString()})`);
           informManager(
             `[worker reaped — token cap] ${workerId}`,
             `Worker ${workerId} used ${used.toLocaleString()} tokens (> its cap of ${tokenCap.toLocaleString()}) and was reaped. Any committed work on its branch is preserved for you.`,
@@ -4812,7 +4812,7 @@ async function ephemeralWorkerTick(): Promise<void> {
       if (idleMs === undefined) continue; // PTY already gone; teardownPty cleans up
       if (idleMs > idleTimeoutMs) {
         rec.releasing = true;
-        console.warn(`[worker] reaping idle ${workerId} (${Math.round(idleMs / 60000)}min idle)`);
+        console.warn(`[worker] boşta hasat yapıyor ${workerId} (${Math.round(idleMs / 60000)}min boşta)`);
         informManager(
           `[worker reaped — idle] ${workerId}`,
           `Worker ${workerId} produced no output for ${Math.round(idleMs / 60000)} min (> the ${Math.round(idleTimeoutMs / 60000)} min cap) and never signaled done, so it was reaped. Any committed work on its branch is preserved for you.`,
@@ -4854,7 +4854,7 @@ async function ephemeralWorkerTick(): Promise<void> {
       await gcPreservedWorktrees();
     }
   } catch (e) {
-    console.error('[worker] tick error:', e);
+    console.error("[worker] onay hatası:", e);
   } finally {
     workerTickRunning = false;
   }
@@ -4938,7 +4938,7 @@ ipcMain.handle('workers:stop', (_evt, workerId: string): { ok: boolean; error?: 
   if (!rec) return { ok: false, error: 'no such live worker' };
   if (rec.releasing) return { ok: true }; // already stopping
   rec.releasing = true;
-  console.log(`[worker] manual stop requested for ${workerId}`);
+  console.log(`${workerId} için [worker] manuel durdurma talep edildi`);
   try { ptyManager.kill(workerId); } catch (e) { return { ok: false, error: String(e) }; }
   teardownPty(workerId);
   return { ok: true };
@@ -4981,8 +4981,8 @@ function bootstrapHiveServices(): void {
   // Phase 2: the loopback secret broker. Bind it BEFORE workers spawn so each spawn can
   // be granted a capability token + the broker URL in its env. Loopback-only, idempotent.
   void integrationBroker.start().then((r) => {
-    if (r.ok) console.log('[broker] integration broker listening on', integrationBroker.url());
-    else console.error('[broker] failed to start:', r.error);
+    if (r.ok) console.log("[broker] entegrasyon komisyoncusu dinlemeye devam ediyor", integrationBroker.url());
+    else console.error("[broker] başlatılamadı:", r.error);
   });
   ensureDefaultMissions(); // one-time: seed the built-in hourly ops standup
   syncMissions(); // arm recurring auto-dispatch missions now the router is live
@@ -4998,8 +4998,8 @@ function bootstrapHiveServices(): void {
   // failure just leaves telemetry off (transcript reconciler stays). No breaker.start():
   // the breaker is POLICY-only, ticked by the heartbeat beat (#1, ships disabled).
   void telemetry.start().then((r) => {
-    if (r.ok && r.endpoint) { hive.setOtelEndpoint(r.endpoint); console.log('[telemetry] collector listening', r.endpoint); }
-    else console.error('[telemetry] collector failed to start:', r.error);
+    if (r.ok && r.endpoint) { hive.setOtelEndpoint(r.endpoint); console.log("[telemetry] koleksiyoncu dinleme", r.endpoint); }
+    else console.error("[telemetry] toplayıcı başlatılamadı:", r.error);
   });
   memory.start(); // init shared palace + mine loop (no-op without mempalace)
   reflector.start(); // bound oversized memory.md files on a timer (no-op until threshold)
@@ -5021,12 +5021,12 @@ function nudgeWorker(ptyId: string, ids: string[] = []): void {
   // via isInboxNudge, and a watchdog nudge names its ids so the agent can still
   // tell "I filed this last turn" from "woken for nothing".
   const wrote = ptyManager.write(ptyId, inboxNudgeText(ids));
-  if (!wrote.ok) { console.warn(`[worker-wake] write failed for ${ptyId}: ${wrote.error}`); return; }
+  if (!wrote.ok) { console.warn(`${ptyId} için [worker-wake] yazma işlemi başarısız oldu: ${wrote.error}`); return; }
   setTimeout(() => {
     try {
       const submitted = ptyManager.write(ptyId, '\r');
-      if (!submitted.ok) console.warn(`[worker-wake] submit failed for ${ptyId}: ${submitted.error}`);
-    } catch (e) { console.error('[worker-wake] submit threw:', e); }
+      if (!submitted.ok) console.warn(`[worker-wake] gönderimi ${ptyId} için başarısız oldu: ${submitted.error}`);
+    } catch (e) { console.error("[worker-wake] gönderimi attı:", e); }
   }, 140);
 }
 
@@ -5068,8 +5068,8 @@ function runWorkerWakeBeat(): void {
     // drained the mail during the beat, and a nudge naming ids it already filed
     // is the exact staleness #187 exists to stop.
     const ids = hive.inbox(agentId).map((m) => m.id).filter(Boolean);
-    if (!ids.length) { console.log(`[worker-wake] ${agentId} drained before delivery, skipping`); continue; }
-    console.log(`[worker-wake] nudging ${agentId} on ${ptyId} (${ids.length} pending)`);
+    if (!ids.length) { console.log(`[worker-wake] ${agentId} teslimattan önce boşaltıldı, atlanıyor`); continue; }
+    console.log(`[worker-wake], ${ptyId} üzerinde ${agentId}'yi dürtüyor (${ids.length} beklemede)`);
     nudgeWorker(ptyId, ids);
   }
 }
@@ -5084,9 +5084,9 @@ function armAlwaysOnBeats(): void {
   writeFleetSnapshot();
   fleetTimer = setInterval(writeFleetSnapshot, 8_000);
   if (breakerBeatTimer) clearInterval(breakerBeatTimer);
-  breakerBeatTimer = setInterval(() => { try { runBreakerBeat(300_000); } catch (e) { console.error('[breaker beat]', e); } }, 30_000);
+  breakerBeatTimer = setInterval(() => { try { runBreakerBeat(300_000); } catch (e) { console.error("[breaker beat]", e); } }, 30_000);
   if (workerWakeTimer) clearInterval(workerWakeTimer);
-  workerWakeTimer = setInterval(() => { try { runWorkerWakeBeat(); } catch (e) { console.error('[worker-wake beat]', e); } }, WORKER_WAKE_POLL_MS);
+  workerWakeTimer = setInterval(() => { try { runWorkerWakeBeat(); } catch (e) { console.error("[worker-wake beat]", e); } }, WORKER_WAKE_POLL_MS);
   runWorkerWakeBeat(); // catch-up on arm — power-resume re-arms and drains the backlog
 }
 
@@ -5117,10 +5117,10 @@ function healthCheckPtys(reason: string, awayMs: number | null): void {
   }
   const away = awayMs != null ? ` (away ~${Math.round(awayMs / 1000)}s)` : '';
   if (dead.length) {
-    console.warn(`[power] ${reason}${away}: ${dead.length}/${ptys.length} PTY(s) look wedged (process gone):`, dead.join(', '));
+    console.warn(`[power] ${reason}${away}: ${dead.length}/${ptys.length} PTY(ler) sıkışmış görünüyor (süreç bitti):`, dead.join(', '));
     breakerToast('Agents need a restart', `${dead.length} agent terminal(s) didn't survive sleep — re-open them to resume.`);
   } else {
-    console.log(`[power] ${reason}${away}: ${ptys.length} PTY(s) healthy`);
+    console.log(`[power] ${reason}${away}: ${ptys.length} PTY(ler) sağlıklı`);
   }
   // Single integration point for the (separate) renderer auto-revive card: it can
   // listen for 'power:resume' and respawn the `dead` PTYs with --resume.
@@ -5138,13 +5138,13 @@ function healthCheckPtys(reason: string, awayMs: number | null): void {
  *  health-check the terminals. Idempotent: overlapping resume+unlock events
  *  collapse safely (clear-then-arm everywhere; at most one catch-up fire). */
 function onSystemResume(reason: string): void {
-  console.log(`[power] ${reason} — re-arming scheduler, beats, router, keep-awake`);
-  try { syncMissions(); } catch (e) { console.error('[power] syncMissions on resume', e); }
+  console.log(`[power] ${reason} — programlayıcıyı, vuruşları, yönlendiriciyi yeniden etkinleştirme, uyanık tutma`);
+  try { syncMissions(); } catch (e) { console.error("Özgeçmişte [power] senkronizasyon Görevleri", e); }
   // Same freeze, same catch-up: the context timers honour elapsed-time-since-last-
   // run, so a compact/clear that came due while the machine slept fires ONCE here
   // rather than being lost or replayed N times.
-  try { syncContextTriggers(); } catch (e) { console.error('[power] syncContextTriggers on resume', e); }
-  try { armAlwaysOnBeats(); } catch (e) { console.error('[power] armAlwaysOnBeats on resume', e); }
+  try { syncContextTriggers(); } catch (e) { console.error("Özgeçmişte [power] sinkContextTriggers", e); }
+  try { armAlwaysOnBeats(); } catch (e) { console.error("[power] armAlwaysOnBeats devam ediyor", e); }
   // The hive message router (outbox→inbox drain) is a setInterval that freezes
   // during true system sleep exactly like the beats above — but it was the one
   // always-on timer never re-armed on wake. Symptom: after a long sleep the
@@ -5158,9 +5158,9 @@ function onSystemResume(reason: string): void {
     hive.stopRouter();
     hive.startRouter();
     const drained = hive.routeOnce();
-    if (drained > 0) console.log(`[power] ${reason} — flushed ${drained} queued hive message(s)`);
-  } catch (e) { console.error('[power] router re-arm on resume', e); }
-  try { syncKeepAwake(); } catch (e) { console.error('[power] syncKeepAwake on resume', e); }
+    if (drained > 0) console.log(`[power] ${reason} — ${drained} sıraya alınmış kovan iletileri temizlendi`);
+  } catch (e) { console.error("[power] yönlendirici devam ettirildiğinde yeniden devreye giriyor", e); }
+  try { syncKeepAwake(); } catch (e) { console.error("Özgeçmişte [power] senkronizasyonKeepAwake", e); }
   const awayMs = lastSuspendAt != null ? Date.now() - lastSuspendAt : null;
   // Give PTYs a beat to resume their pipes before judging them wedged; reset any
   // pending check so a resume quickly followed by unlock runs the probe just once.
@@ -5201,7 +5201,7 @@ app.whenReady().then(() => {
   // Open the durable store first — createWindow() reads the saved window bounds.
   // Guarded: a DB failure (e.g. a bad native build) must degrade to defaults,
   // never block app startup.
-  try { persist.open(); } catch (e) { console.error('[db] open failed:', e); }
+  try { persist.open(); } catch (e) { console.error("[db] açma işlemi başarısız oldu:", e); }
   // Auto-update from GitHub releases (packaged builds only; gated on the
   // `autoUpdate` config flag). Download-in-background + restart-to-apply toast;
   // never restarts on its own. Falls back to a notify-only releases/latest
@@ -5216,8 +5216,8 @@ app.whenReady().then(() => {
   // every window, so there is nothing to tear down on quit.
   powerMonitor.on('resume', () => onSystemResume('resume'));
   powerMonitor.on('unlock-screen', () => onSystemResume('unlock-screen'));
-  powerMonitor.on('suspend', () => { lastSuspendAt = Date.now(); console.log('[power] suspend — system sleeping'); });
-  powerMonitor.on('lock-screen', () => { lastSuspendAt = Date.now(); console.log('[power] lock-screen'); });
+  powerMonitor.on('suspend', () => { lastSuspendAt = Date.now(); console.log("[power] askıya alma — sistem uykuda"); });
+  powerMonitor.on('lock-screen', () => { lastSuspendAt = Date.now(); console.log("[power] kilit ekranı"); });
   // Multi-window floors (opt-in): install the menu carrying "New Floor". When
   // off, the app keeps Electron's default menu — zero behavior change.
   if (readConfig().multiWindow) installAppMenu();
@@ -5228,8 +5228,8 @@ app.whenReady().then(() => {
   const slackCfg = readConfig();
   if (slackCfg.slackEnabled && slackCfg.slackSigningSecret) {
     void startSlackServer().then((r) => {
-      if (!r.ok) console.error('[slack] auto-start failed:', r.error);
-      else console.log('[slack] webhook listening', r.url ? `(tunnel: ${r.url})` : '(no tunnel)');
+      if (!r.ok) console.error("[slack] otomatik başlatma başarısız oldu:", r.error);
+      else console.log("[slack] web kancası dinleme", r.url ? `(tunnel: ${r.url})` : '(no tunnel)');
     });
   }
   // Auto-start the generic webhook only for endpoints the user has explicitly
@@ -5237,8 +5237,8 @@ app.whenReady().then(() => {
   // Opt-in, like Slack; an install with no enabled endpoint opens no tunnel.
   if (enabledWebhookEndpoints().length > 0) {
     void startWebhookServer().then((r) => {
-      if (!r.ok) console.error('[webhook] auto-start failed:', r.error);
-      else console.log('[webhook] listening', r.url ? `(tunnel: ${r.url})` : '(no tunnel)');
+      if (!r.ok) console.error("[webhook] otomatik başlatma başarısız oldu:", r.error);
+      else console.log("[webhook] dinliyor", r.url ? `(tunnel: ${r.url})` : '(no tunnel)');
     });
   }
   app.on('activate', () => {

@@ -98,7 +98,7 @@ export class HookServer {
       });
       conn.on('error', () => { /* shim hung up — ignore */ });
     });
-    this.server.on('error', (e) => console.error('[hive] hook server error:', e));
+    this.server.on('error', (e) => console.error("[hive] hook sunucusu hatası:", e));
     this.server.listen(sock);
   }
 
@@ -337,7 +337,7 @@ export class HookServer {
       blocked
     };
     if (!validateHookEvent(payload)) {
-      console.warn('[hive] rejected invalid hook event:', event);
+      console.warn("[hive] geçersiz hook olayı reddedildi:", event);
       return;
     }
     this.getWebContents()?.send('hive:hookEvent', payload);

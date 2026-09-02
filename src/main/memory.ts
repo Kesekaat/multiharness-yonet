@@ -355,7 +355,7 @@ export class MemoryManager {
       try { rmSync(join(palace, name), { recursive: true, force: true }); removed += 1; }
       catch { /* locked, gone, or not ours — leave it and try again next pass */ }
     }
-    if (removed) console.log(`[memory] reaped ${removed} quarantined palace segment(s)`);
+    if (removed) console.log(`[memory] karantinaya alınmış ${removed} palace segmenti temizlendi`);
     return fresh;
   }
 
@@ -374,7 +374,7 @@ export class MemoryManager {
       // `mining` stuck true, silently stopping all future passes. Generous cap
       // because the first run may lazily download the embedding model.
       const timer = setTimeout(() => {
-        console.error(`[memory] mine ${id} timed out after ${MINE_TIMEOUT_MS / 60000}min — killing`);
+        console.error(`[memory] ${id} taraması ${MINE_TIMEOUT_MS / 60000} dk. sonra zaman aşımına uğradı — sonlandırılıyor`);
         try { proc.kill('SIGTERM'); } catch { /* gone */ }
         ensureKilled(proc.pid); // SIGKILL sweep if SIGTERM is ignored
       }, MINE_TIMEOUT_MS);
@@ -382,7 +382,7 @@ export class MemoryManager {
       proc.on('close', (code) => {
         clearTimeout(timer);
         if (code !== 0) {
-          console.error(`[memory] mine ${id} exited ${code}: ${err.slice(-300)}`);
+          console.error(`[memory] ${id} taraması ${code} koduyla kapandı: ${err.slice(-300)}`);
           this.lastMined.delete(id); // let the next tick retry
         }
         resolve();

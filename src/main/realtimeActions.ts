@@ -803,7 +803,7 @@ function runAction(deps: RealtimeActionDeps, verb: string, a: Record<string, unk
  *  a friendly 'spoken' string, which hides the true failure). Best-effort. */
 function logActionFailure(deps: RealtimeActionDeps, channel: string, verb: string, e: unknown): void {
   const err = e instanceof Error ? e : new Error(String(e));
-  console.error(`[realtime-action] ${channel} verb=${verb} FAILED:`, err.stack || err.message);
+  console.error(`[realtime-action] ${channel} eylem=${verb} BAŞARISIZ:`, err.stack || err.message);
   try {
     deps.hiveLog({
       kind: 'voice_action_error',
@@ -835,7 +835,7 @@ export function registerRealtimeActionIpc(deps: RealtimeActionDeps): void {
       const res = runAction(deps, verb, p);
       // A non-ok result is an EXPECTED friendly rejection (bad target, hive off, etc.) —
       // log it quietly so a live repro can still be correlated, but it is not an error.
-      if (!res.ok) console.warn(`[realtime-action] verb=${verb} rejected: ${res.spoken}`);
+      if (!res.ok) console.warn(`[realtime-action] eylem=${verb} reddedildi: ${res.spoken}`);
       return res;
     } catch (e) {
       logActionFailure(deps, 'realtime:action', verb, e);

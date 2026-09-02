@@ -204,7 +204,7 @@ export class Analytics {
         disableGeoip: true
       });
     } catch (e) {
-      console.error('[analytics] init failed (telemetry disabled):', e);
+      console.error("[analytics] başlatma başarısız oldu (telemetri devre dışı):", e);
       this.client = null;
       return;
     }
@@ -259,7 +259,7 @@ export class Analytics {
     try {
       this.client.capture({ distinctId: this.distinctId, event, properties });
     } catch (e) {
-      console.error('[analytics] capture failed:', e);
+      console.error("[analytics] yakalama başarısız oldu:", e);
     }
   }
 
@@ -287,7 +287,7 @@ export class Analytics {
     try {
       await this.client.shutdown();
     } catch (e) {
-      console.error('[analytics] shutdown flush failed:', e);
+      console.error("[analytics] kapatma işlemi başarısız oldu:", e);
     }
     this.client = null;
   }
@@ -311,7 +311,7 @@ export class Analytics {
     } catch (e) {
       // Unwritable state dir: use an ephemeral id for this session rather than
       // failing closed on analytics (still anonymous, just not stable).
-      console.error('[analytics] install-id persist failed (ephemeral id):', e);
+      console.error("[analytics] kurulum kimliği kalıcılığı başarısız oldu (geçici kimlik):", e);
       return randomUUID();
     }
   }
@@ -379,7 +379,7 @@ export function writeVersionStamp(stateDir: string, version: string): void {
     mkdirSync(stateDir, { recursive: true });
     writeFileSync(join(stateDir, VERSION_STAMP_FILE), version + '\n', 'utf8');
   } catch (e) {
-    console.error('[analytics] version stamp persist failed:', e);
+    console.error("[analytics] sürüm damgasının kalıcılığı başarısız oldu:", e);
   }
 }
 

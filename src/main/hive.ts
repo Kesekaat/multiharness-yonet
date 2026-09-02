@@ -425,7 +425,7 @@ export class HiveManager {
         chmodSync(p, 0o755);
       }
     } catch (e) {
-      console.error('[hive] writeNodeLauncher failed:', e);
+      console.error("[hive] writeNodeLauncher başarısız oldu:", e);
     }
   }
 
@@ -496,7 +496,7 @@ export class HiveManager {
         chmodSync(p, 0o755);
       }
     } catch (e) {
-      console.error('[hive] writeRuntimeShims failed:', e);
+      console.error("[hive] writeRuntimeShims başarısız oldu:", e);
     }
   }
 
@@ -856,12 +856,12 @@ export class HiveManager {
             }
             else {
               degraded = `${meta.name} is running without hive events: its proxy bridge did not bind after ${PROXY_BIND_ATTEMPTS} attempts. Live status, cost and inbox wake will not work for this session. Respawn the agent to try again.`;
-              console.error(`[hive] proxy bridge for ${meta.id} did not bind — spawning without hive events`);
+              console.error(`[hive] ${meta.id} proxy köprüsü bağlanmadı — hive olayları olmadan başlatılıyor`);
               this.appendLog({ kind: 'proxy-degraded', agentId: meta.id, name: meta.name, provider: meta.provider, attempts: PROXY_BIND_ATTEMPTS });
               this.emit?.('hive:degraded', { agentId: meta.id, name: meta.name, reason: 'proxy-bind', message: degraded });
             }
           }
-        } catch (e) { console.error(`[hive] install ${desc.kind} bridge failed:`, e); }
+        } catch (e) { console.error(`[hive] ${desc.kind} köprüsü kurulamadı:`, e); }
       }
       // Inject the protocol text whichever way the CLI accepts it.
       // type-into-tui (Crush): the bare TUI reads a positional as a Cobra subcommand
@@ -1202,7 +1202,7 @@ export class HiveManager {
         }
       };
       copyTree(srcDir, destDir);
-    } catch (e) { console.error('[hive] copyBundledSkills failed:', e); }
+    } catch (e) { console.error("[hive] copyBundledSkills başarısız oldu:", e); }
   }
 
   /**
@@ -1224,7 +1224,7 @@ export class HiveManager {
       const port = await this.startProxyBridge(agentId, cfg);
       if (port > 0) return port;
       if (attempt < PROXY_BIND_ATTEMPTS) {
-        console.warn(`[hive] proxy bridge for ${agentId} did not bind (attempt ${attempt}/${PROXY_BIND_ATTEMPTS}), retrying`);
+        console.warn(`[hive] ${agentId} proxy köprüsü bağlanmadı (${attempt}/${PROXY_BIND_ATTEMPTS}. deneme), yeniden deneniyor`);
         await new Promise((r) => setTimeout(r, PROXY_BIND_BACKOFF_MS[attempt - 1] ?? 1000));
       }
     }
@@ -1259,7 +1259,7 @@ export class HiveManager {
           stdio: ['ignore', 'pipe', 'ignore']
         });
       } catch (e) {
-        console.error(`[hive] startProxyBridge spawn failed for ${agentId}:`, e);
+        console.error(`[hive] ${agentId} için startProxyBridge başlatılamadı:`, e);
         return settle(0);
       }
       this.proxyChildren.set(agentId, child);
@@ -1944,7 +1944,7 @@ export class HiveManager {
         }
       };
       writeFileSync(settingsPath, JSON.stringify(settings, null, 2), 'utf8');
-    } catch (e) { console.error('[hive] installGeminiHooks failed:', e); }
+    } catch (e) { console.error("[hive] installGeminiHooks başarısız oldu:", e); }
     return settingsPath;
   }
 
@@ -2035,14 +2035,14 @@ export class HiveManager {
       // below Codex's standard scan roots. External usage tools can then discover
       // the sessions without understanding the hive's private directory layout.
       this.exposeCodexDataDirs(home, userHome, agentId);
-    } catch (e) { console.error('[hive] installCodexHooks failed:', e); }
+    } catch (e) { console.error("[hive] installCodexHooks başarısız oldu:", e); }
     return home;
   }
 
   private exposeCodexDataDirs(home: string, userHome: string, agentId: string): void {
     for (const kind of ['sessions', 'archived_sessions'] as const) {
       try { this.exposeCodexDataDir(home, userHome, agentId, kind); }
-      catch (e) { console.error(`[hive] exposeCodexDataDir(${kind}) failed:`, e); }
+      catch (e) { console.error(`[hive] exposeCodexDataDir(${kind}) başarısız oldu:`, e); }
     }
   }
 
@@ -2139,7 +2139,7 @@ export class HiveManager {
           rmSync(target, { recursive: true, force: true });
         } catch (e) {
           if ((e as NodeJS.ErrnoException).code !== 'ENOENT') {
-            console.error('[hive] removeExposedCodexData failed:', e);
+            console.error("[hive] removeExposedCodexData başarısız oldu:", e);
           }
         }
       }
@@ -2170,7 +2170,7 @@ export class HiveManager {
       // Pi ignores it). Kept minimal and hive-authored.
       const manifest = { name: 'munder-hive-bridge', version: '0.3.1', main: 'extensions/hive-bridge.js', auto: true };
       writeFileSync(join(home, 'extensions.json'), JSON.stringify(manifest, null, 2), 'utf8');
-    } catch (e) { console.error('[hive] installPiHooks failed:', e); }
+    } catch (e) { console.error("[hive] installPiHooks başarısız oldu:", e); }
     return home;
   }
 
@@ -2213,7 +2213,7 @@ export class HiveManager {
         mkdirSync(pluginDir, { recursive: true });
         writeFileSync(join(pluginDir, 'hive-bridge.js'), OPENCODE_PLUGIN, 'utf8');
       }
-    } catch (e) { console.error('[hive] installOpenCodePlugin failed:', e); }
+    } catch (e) { console.error("[hive] installOpenCodePlugin başarısız oldu:", e); }
     return home;
   }
 
@@ -2257,7 +2257,7 @@ export class HiveManager {
       // passes a theme, dark included, so both modes look the same way.
       const options = theme ? { tui: { transparent: true } } : undefined;
       writeFileSync(config, JSON.stringify(options ? { providers, options } : { providers }, null, 2), 'utf8');
-    } catch (e) { console.error('[hive] installCrushConfig failed:', e); }
+    } catch (e) { console.error("[hive] installCrushConfig başarısız oldu:", e); }
     return { config, data };
   }
 
@@ -2302,7 +2302,7 @@ export class HiveManager {
         JSON.stringify({ hooks }, null, 2),
         'utf8'
       );
-    } catch (e) { console.error('[hive] installGrokHooks failed:', e); }
+    } catch (e) { console.error("[hive] installGrokHooks başarısız oldu:", e); }
   }
 
   /** Write the live fleet snapshot Michael reads (`fleet.json`, gitignored).
@@ -2525,7 +2525,7 @@ export class HiveManager {
     const tracked = this.git(['ls-files', '--', 'cost-ledger.jsonl'], root);
     if (!tracked.ok || !tracked.out.trim()) return;
     this.git(['rm', '--cached', '-q', '--ignore-unmatch', '--', 'cost-ledger.jsonl'], root);
-    console.warn('[hive] untracked the cost ledger from the hive repo');
+    console.warn("[hive] maliyet defteri hive reposunda izlenmekten çıkarıldı");
   }
 
   /** Has the one-time Codex-home untrack pass run in this process yet? */
@@ -2557,7 +2557,7 @@ export class HiveManager {
     const tracked = this.git(['ls-files', '--', 'agents/*/.codex'], root);
     if (!tracked.ok || !tracked.out.trim()) return;
     this.git(['rm', '-r', '--cached', '-q', '--ignore-unmatch', '--', 'agents/*/.codex'], root);
-    console.warn('[hive] untracked previously-committed Codex homes from the hive repo');
+    console.warn("[hive] daha önce commit edilmiş Codex home dizinleri hive reposunda izlenmekten çıkarıldı");
   }
 
   /** Commit all hive changes. No-op if there is nothing staged. */
